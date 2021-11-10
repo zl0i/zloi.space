@@ -16,7 +16,7 @@ spec:
       - zloi.space
     secretName: app-cert
   rules:
-    - host: zloi.space
+    - host: "zloi.space"
       http:
         paths:
           - path: /
@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: registry.gitlab.com/zl0i/zloi-space/web:latest
+          image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
           ports:
           - containerPort: 80     
       

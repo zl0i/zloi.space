@@ -1,4 +1,3 @@
-
 build:
   stage: build
   image: docker:19.03.12
@@ -7,16 +6,17 @@ build:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - docker build -t ${CI_REGISTRY_IMAGE}/web:latest .
-    - docker push ${CI_REGISTRY_IMAGE}/web:latest
+    - docker build -t ${CI_REGISTRY_IMAGE}/web:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID .
+    - docker push ${CI_REGISTRY_IMAGE}/web:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
 
 deploy:
-  stage: deploy  
-  image: lwolf/kubectl_deployer:1.18.3
+  stage: deploy
+  image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
   before_script:
     - kubectl config set-cluster my-cluster --server="$K3S_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$K3S_TOKEN"
     - kubectl config set-context default-context --cluster=my-cluster --user=admin
     - kubectl config use-context default-context
-  script:    
-    - kubectl apply -f ./templates/web.yml
+  script:
+    - helm upgrade --install $CI_PROJECT_PATH_SLUG .helm 
+      --set image.tag=$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
