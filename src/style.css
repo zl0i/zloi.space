@@ -91,3 +91,90 @@ nav ul li a:hover {
     word-wrap: break-word;
     hyphens: auto;
 }
+
+.summary-box {
+    margin-top: 102px;
+}
+
+.summary-header {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-header img {
+    padding-top: 10px;
+    height: fit-content;
+}
+
+.all-column {
+    margin-top: 69px;
+    margin-bottom: 147px;
+}
+
+.left-column {
+    list-style-image: url("/images/list-bullet.svg");
+    list-style-position: outside;
+}
+
+.left-column br {
+    content: "";
+    margin: 3px;
+    display: block;
+    font-size: 24%;
+    outline: red;
+}
+
+.box-naming {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    font-size: 24px;
+}
+
+.box-list {
+    width: 420px;
+    font-size: 17px;
+    margin-top: 10px;
+    margin-left: 40px;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.box-list p {
+    margin: 7px 7px;
+}
+
+@media (min-width: 1100px) {
+    .right-column {
+        position: absolute;
+        left: 60%;
+        top: 815px;
+    }
+}
+
+.right-column p {
+    width: 75px;
+    word-break: keep-all;
+}
+
+.skill-flex {
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.skill-box {
+    width: 263px;
+    height: 8px;
+    border-radius: 4px;
+    background: #C5C5C5;
+}
+
+.skill-fill {
+    height: 8px;
+    border-radius: 4px 0 0 4px;
+    background: #515075;
+}
