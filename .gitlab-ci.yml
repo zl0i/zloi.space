@@ -8,6 +8,8 @@ build:
   script:
     - docker build -t ${CI_REGISTRY_IMAGE}/web:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID .
     - docker push ${CI_REGISTRY_IMAGE}/web:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
+  only:
+    - master
 
 deploy:
   stage: deploy
@@ -20,3 +22,5 @@ deploy:
   script:
     - helm upgrade --install $CI_PROJECT_PATH_SLUG .helm 
       --set image.tag=$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
+  only:
+    - master
