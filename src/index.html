@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
+<html lang="ru" prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="zloi.space">
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="zloi.space">
     <meta property="og:url" content="https://zloi.space">
     <meta property="og:description" content="My name is Dima. I'm NodeJS backend deleveloper.">
@@ -23,16 +23,17 @@
 </head>
 
 <body>
+<div class="first-screen">
     <div class="header">
         <nav>
             <a href="">
                 <h1>_zloi_</h1>
             </a>
-            <ul>
-                <li><a href="">Portfolio</a></li>
-                <li><a href="">My knowledge</a></li>
-                <li><a href="">Read</a></li>
-            </ul>
+            <div class="header-right">
+                <a href="#summary-id">Summary</a>
+                <a href="">Knowledge</a>
+                <a href="">Read</a>
+            </div>
         </nav>
     </div>
     <div class="input-div">
@@ -53,6 +54,70 @@
             <li><a href="https://t.me/zzloi"><img src="images/telegram.png"></a></li>
             <li><a href="https://habr.com/ru/users/zl0i"><img src="images/habr.png"></a></li>
         </ul>
+    </div>
+</div>
+    <div class="summary-box" id="summary-id">
+        <div class="summary-header">
+            <p>Summary</p>
+            <img alt="downloadSummary" src="images/download.svg">
+        </div>
+        <div class="all-column">
+            <ul class="left-column">
+                <p class="box-naming">Education</p>
+                <li class="box-list">
+                    <p>сентябрь 2014 - февраль 2020 </p>
+                    <p>Воронежский государственный технический университет специалист </p>
+                    <p>Кафедра радиоэлектронных систем управления и комплексов</p>
+                </li>
+                <p class="box-naming">Work</p>
+                <li class="box-list">
+                    <p>март 2019 - настоящее время</p>
+                    <p>FusionPOS - https://fusionpos.ru/</p>
+                    <p class="description">разработчик </p>
+                    <p class="description">Разрабатывал кросплатформенные
+                        мобильные приложения на Qt (с
+                        использованием Object-C и Java) </p>
+                </li>
+                <li class="box-list">
+                    <p>сентябрь 2020 - январь 2021</p>
+                    <p>CoffeeBon - https://www.coffeebon.ru/</p>
+                    <p class="description">разработчик</p>
+                    <p class="description">Дорабатывал мобильное приложение на Qt</p>
+                </li>
+            </ul>
+            <ul class="right-column">
+                <p class="box-naming">Skills</p>
+                <div class="box-list" style="margin-left: 0">
+                    <div class="skill-flex">
+                        <p>NodeJS</p>
+                        <div class="skill-box">
+                            <div class="skill-fill" style="width: 50%"></div>
+                            <div class="skill-lvl">Опытный</div>
+                        </div>
+                    </div>
+                    <div class="skill-flex">
+                        <p>SQL/ORM</p>
+                        <div class="skill-box">
+                            <div class="skill-fill" style="width: 50%"></div>
+                            <div class="skill-lvl">Опытный</div>
+                        </div>
+                    </div>
+                    <div class="skill-flex">
+                        <p>GIT</p>
+                        <div class="skill-box">
+                            <div class="skill-fill" style="width: 50%"></div>
+                            <div class="skill-lvl">Опытный</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="box-naming">Technologies</p>
+                <li class="box-list">NodeJS (ExpressJS), TypeScript, Jest</li>
+                <li class="box-list">Linux, Docker, k8s</li>
+                <li class="box-list">Qt, qml, C++, Andoid (Java), iOS (Object-C)</li>
+                <li class="box-list">PHP, Vue3</li>
+                <p class="box-naming"> Achievements</p>
+            </ul>
+        </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>

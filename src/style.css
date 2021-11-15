@@ -15,6 +15,29 @@
     height: 100%;
 }
 
+.header nav {
+    text-align: right;
+}
+
+.header-right {
+    flex: 1;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.header-right a {
+    margin-left: 20px;
+    color: #ffffff;
+}
+
+.header-right a:hover {
+    color: #94AADD;
+}
+
+.first-screen {
+    min-height: 100vh;
+}
+
 nav {
     display: flex;
     width: 100%;
@@ -31,29 +54,6 @@ nav a h1 {
     font-family: 'Permanent Marker';
     color: #fff;
     font-size: 40px;
-}
-
-nav ul {
-    flex: 1;
-    text-align: right;
-    padding: 10px;
-}
-
-nav ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 20px 30px;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    letter-spacing: 1px;
-    font-size: 17px;
-}
-
-nav ul li a:hover {
-    color: #94AADD;
 }
 
 .text-box {
@@ -90,4 +90,94 @@ nav ul li a:hover {
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
+}
+
+.summary-box {
+    /*margin-top: 37vh;*/
+    position: static;
+}
+
+.summary-header {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary-header img {
+    padding-top: 10px;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.all-column {
+    margin-top: 69px;
+    margin-bottom: 147px;
+}
+
+@media (min-width: 1100px) {
+    .all-column {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.left-column {
+    list-style-position: outside;
+}
+
+.box-naming {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    font-size: 24px;
+}
+
+.box-list {
+    width: 420px;
+    font-size: 17px;
+    margin-top: 20px;
+    margin-left: 40px;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.box-list p {
+    margin: 7px 0;
+}
+
+.description {
+    padding-left: 14px;
+}
+
+.right-column p {
+    width: 80px;
+    word-break: keep-all;
+    padding-right: 5px;
+}
+
+.skill-flex {
+    display: flex;
+    align-items: center;
+    text-align: right;
+    width: fit-content;
+}
+
+.skill-box {
+    width: 263px;
+    height: 8px;
+    border-radius: 4px;
+    background: #C5C5C5;
+}
+
+.skill-fill {
+    height: 8px;
+    border-radius: 4px 0 0 4px;
+    background: #515075;
+}
+
+.skill-lvl {
+    font-size: 17px;
+    width: inherit;
 }
