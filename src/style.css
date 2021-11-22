@@ -9,7 +9,6 @@
     background: #1c1e2a;
     opacity: 0.9;
     color: #ffffff;
-    padding: 0 8.5%;
     position: relative;
     width: 100%;
     height: 100%;
@@ -36,6 +35,7 @@
 
 .first-screen {
     min-height: 100vh;
+    padding: 0 8.5%;
 }
 
 nav {
@@ -94,7 +94,9 @@ nav a h1 {
 }
 
 .summary-box {
+    min-height: 100vh;
     position: static;
+    padding: 0 8.5%;
 }
 
 .summary-header {
@@ -135,7 +137,7 @@ nav a h1 {
 }
 
 .box-list {
-    width: 420px;
+    max-width: 420px;
     font-size: 17px;
     margin-top: 20px;
     margin-left: 40px;
@@ -204,3 +206,48 @@ nav a h1 {
     font-size: 17px;
     width: inherit;
 }
+
+.gallery-box {
+    min-height: 100vh;
+}
+
+.list-summary {
+    margin: 40px 0;
+    min-width: 100%;
+    height: 324px;
+    background: #404040;
+    display: flex;
+    padding: 0 72px;
+    gap: 50px;
+    list-style: none;
+    align-items: center;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.list-summary::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+.list-element {
+    width: 170px;
+    height: 263px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.element-img {
+    align-self: flex-start;
+    background: white;
+    width: 100%;
+    height: 90%;
+}
+
+.element-name {
+    align-self: flex-end;
+    text-align: center;
+    width: 100%;
+}
+
