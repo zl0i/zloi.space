@@ -60,6 +60,7 @@ nav a h1 {
     font-size: 17px;
     letter-spacing: 1px;
     line-height: 26px;
+    text-align: justify;
 }
 
 .text-box p {
@@ -127,9 +128,11 @@ nav a h1 {
 }
 
 .box-naming {
+    padding: 0;
     margin-top: 32px;
     margin-bottom: 12px;
     font-size: 24px;
+    max-height: max-content;
 }
 
 .box-list {
@@ -147,12 +150,26 @@ nav a h1 {
     margin: 7px 0;
 }
 
+.org-name {
+    margin-left: 7px;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: oblique;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.org-name:hover {
+    text-decoration: underline;
+    color: #515075;
+}
+
 .description {
     padding-left: 14px;
+    text-align: justify;
 }
 
 .right-column p {
-    width: 80px;
     word-break: keep-all;
     padding-right: 5px;
 }
@@ -162,6 +179,12 @@ nav a h1 {
     align-items: center;
     text-align: right;
     width: fit-content;
+    margin-bottom: 20px;
+}
+
+.skill-flex p{
+    text-align: right;
+    width: 120px;
 }
 
 .skill-box {
@@ -169,6 +192,7 @@ nav a h1 {
     height: 8px;
     border-radius: 4px;
     background: #C5C5C5;
+    margin-left: 7px;
 }
 
 .skill-fill {
