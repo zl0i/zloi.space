@@ -105,8 +105,8 @@ nav a h1 {
     align-items: center;
 }
 
-.summary-header img {
-    padding-top: 10px;
+.summary-header a {
+    padding-top: 20px;
     height: fit-content;
     cursor: pointer;
 }
