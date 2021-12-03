@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'poppins', 'sans-serif';
+    overscroll-behavior: contain;
 }
 
 * body {
@@ -262,3 +263,37 @@ nav a h1 {
     user-select: none;
 }
 
+.darkenBackground {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: content-box;
+    background: rgba(44, 44, 44, 0.56);
+    z-index: 3;
+    backdrop-filter: blur(10px);
+}
+
+.popupName {
+    position: fixed;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    font-size: 40px;
+}
+
+.showBox {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    min-height: 75%;
+    background: white;
+    text-align: center;
+    color: black;
+}
