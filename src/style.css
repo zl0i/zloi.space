@@ -209,7 +209,7 @@ nav a h1 {
 
 .list-summary {
     margin: 40px 0;
-    min-width: 100%;
+    width: calc(100vw - 144px);
     height: 324px;
     background: #404040;
     display: flex;
@@ -262,12 +262,13 @@ nav a h1 {
     overflow: auto;
     padding: 20px;
     border-radius: 5px;
-    transform: scale(0.16);
+    transform: scale(0.15);
     transform-origin: left top;
 }
 
 .element-inner * {
     pointer-events: none;
+    user-select: none;
 }
 
 .element-name {
