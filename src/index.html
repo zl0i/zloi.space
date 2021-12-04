@@ -188,7 +188,7 @@
         </div>
         <div class="darkenBackground" v-show="isOpenDialog" @click.stop="closeDialog" style="display: none;">
             <p class="popupName" @click.stop="">{{titleDialog}}</p>
-            <div class="showBox" style="display:block" @click.stop="">
+            <div class="showBox" @click.stop="">
                 <div v-html="textDialog"></div>
             </div>
         </div>
