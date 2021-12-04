@@ -23,11 +23,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <meta name="yandex-verification" content="9425b9578d21b568" />
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/default.min.css">
     <title>Дмитрий Попов</title>
 </head>
 
-<body style="overflow-y: hidden">
-<!--switch "overflow-y:" to "auto" when popup hide-->
+<body>
     <div id="app">
         <div class="first-screen">
             <div class="header">
@@ -46,13 +46,17 @@
                 <span class="auto-input"></span>
             </div>
             <main class="text-box">
-                <p>Hello. As written above, my name is Dima. I have been working professionally as a programmer since
+                <p>Hello. As written above, my name is Dima. I have been working professionally as a programmer
+                    since
                     2018.
-                    I have developed cross-platform mobile applications in Qt, but I discovered JS in 2020 and fell in
-                    love
-                    with it. I love developing the backend part and everything that connected with it. I have experience
+                    I have developed cross-platform mobile applications in Qt, but I discovered JS in 2020 and fell
                     in
-                    developing microservices, building CI/CD using GitLab and working with cloud providers (GCP).</p>
+                    love
+                    with it. I love developing the backend part and everything that connected with it. I have
+                    experience
+                    in
+                    developing microservices, building CI/CD using GitLab and working with cloud providers (GCP).
+                </p>
                 <ul>
                     <li><a href="https://gitlab.com/zl0i/"><img src="images/gitlab.png"></a></li>
                     <li><a href="https://github.com/zl0i"><img src="images/github.png"></a></li>
@@ -91,8 +95,10 @@
                                     <a class="org-name" href="https://fusionpos.ru/">FusionPOS</a>
                                 </p>
                                 <p class="description">Разработчик</p>
-                                <p class="description">Разработка новых и поддержка старых кросплатформенных мобильных
-                                    приложений на Qt (с использованием Object-C и Java). Проектирование и создание API
+                                <p class="description">Разработка новых и поддержка старых кросплатформенных
+                                    мобильных
+                                    приложений на Qt (с использованием Object-C и Java). Проектирование и создание
+                                    API
                                     на
                                     Yii2.</p>
                             </li>
@@ -160,7 +166,7 @@
             </div>
             <ul class="list-summary">
                 <li class="list-element" v-for="file in knowledge" :key="file.id">
-                    <div class="element-img"></div>
+                    <div class="element-img" @click.stop="openDialog(file)"></div>
                     <p class="element-name">{{file.name}}</p>
                 </li>
             </ul>
@@ -172,58 +178,16 @@
                     <div class="element-img"></div>
                     <p class="element-name">Android Feat</p>
                 </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
-                </li>
             </ul>
         </div>
-    </div>
-    <div class="darkenBackground" style="display: contents">
-        <!--switch "display:" to "none" when popup hide-->
-        <p class="popupName">Android Feat</p>
-        <div class="showBox" markdown="1">
-
-            1. All
-            1. Fixed
-            1. Up
-
+        <div class="darkenBackground" v-show="isOpenDialog" @click.stop="closeDialog" style="display: none;">
+            <p class="popupName" @click.stop="">{{titleDialog}}</p>
+            <div class="showBox" style="display:block" @click.stop="">
+                <div v-html="textDialog"></div>
+            </div>
         </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script>
-    var typed = new Typed(".auto-input", {
-        strings: ["My name is Dima", "I write code in JS and C++", "I'm backend developer"],
-        typeSpeed: 100,
-        backSpeed: 100,
-        loop: true
-    })
-</script>
 <script type="module">
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
@@ -241,13 +205,48 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
 </script>
+
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/highlight.min.js"></script>
 <script>
     const app = Vue.createApp({
         data() {
             return {
-                knowledge: []
+                knowledge: [],
+                isOpenDialog: false,
+                titleDialog: '',
+                textDialog: ''
+            }
+        },
+        methods: {
+            openDialog(item) {
+
+                marked.setOptions({
+                    renderer: new marked.Renderer(),
+                    highlight: function (code, lang) {
+                        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                        return hljs.highlight(code, { language }).value;
+                    },
+                    langPrefix: 'hljs language-',
+                    pedantic: false,
+                    gfm: true,
+                    breaks: true,
+                    sanitize: false,
+                    smartLists: true,
+                    smartypants: false,
+                    xhtml: false
+                });
+
+                this.textDialog = (marked.marked(item.data))
+                this.titleDialog = item.name
+                document.body.style['overflow-y'] = 'hidden'
+                this.isOpenDialog = true
+            },
+            closeDialog() {
+                document.body.style['overflow-y'] = 'auto'
+                this.isOpenDialog = false
             }
         },
         created() {
@@ -277,19 +276,30 @@
     const vm = app.mount('#app')
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script>
-  const sliders = document.getElementsByClassName('list-summary');
-  for (let i = 0; i < sliders.length; i++) {
-    let mouseDown, positionSlider, positionStart;
-    sliders.item(i).addEventListener('mousedown', (e) => {
-      mouseDown = true;
-      positionSlider = sliders.item(i).scrollLeft;
-      positionStart = e.clientX;
-    });
-    sliders.item(i).addEventListener('mouseup', () => mouseDown = false);
-    sliders.item(i).addEventListener('mousemove', (e) => {
-      if (mouseDown) sliders.item(i).scrollLeft = positionStart - e.clientX + positionSlider;
-    });
-  }
+    var typed = new Typed(".auto-input", {
+        strings: ["My name is Dima", "I write code in JS and C++", "I'm backend developer"],
+        typeSpeed: 100,
+        backSpeed: 100,
+        loop: true
+    })
 </script>
+<script>
+    const sliders = document.getElementsByClassName('list-summary');
+    for (let i = 0; i < sliders.length; i++) {
+        let mouseDown, positionSlider, positionStart;
+        sliders.item(i).addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            positionSlider = sliders.item(i).scrollLeft;
+            positionStart = e.clientX;
+        });
+        sliders.item(i).addEventListener('mouseup', () => mouseDown = false);
+        sliders.item(i).addEventListener('mousemove', (e) => {
+            if (mouseDown) sliders.item(i).scrollLeft = positionStart - e.clientX + positionSlider;
+        });
+    }
+</script>
+
 </html>
