@@ -283,42 +283,42 @@ nav a h1 {
 }
 
 .darkenBackground {
-    display: block;
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     right: 0;
     width: 100%;
-    height: content-box;
+    height: 100%;
     background: rgba(44, 44, 44, 0.56);
     z-index: 3;
     backdrop-filter: blur(10px);
+    overflow: auto;
+    justify-content: center;
 }
 
 .popupName {
-    position: fixed;
+    margin-top: 60px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     padding-bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 3;
     font-size: 40px;
 }
 
 .showBox {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-left: auto;
+    margin-right: auto;
     width: 75%;
-    margin-left: 20px;
+    height: fit-content;
     background: white;
     color: #1A1A1A;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    overflow: auto;
     padding: 20px;
-    height: 86%;
+    min-height: 86%;
     border-radius: 5px;
+    margin-bottom: 60px;
 }
 
 .overflowdialog {
