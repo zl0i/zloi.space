@@ -171,7 +171,7 @@
             <ul class="list-summary">
                 <li class="list-element" v-for="file in knowledge" :key="file.id">
                     <div class="element-img" @click.stop="openDialog(file)">
-                        <div class="element-inner"  v-html="marked(file.data)"></div>
+                        <div class="element-inner" v-html="marked(file.data)"></div>
                     </div>
                     <p class="element-name">{{file.name}}</p>
                 </li>
@@ -180,9 +180,10 @@
                 <p>Reads</p>
             </div>
             <ul class="list-summary">
-                <li class="list-element">
-                    <div class="element-img"></div>
-                    <p class="element-name">Android Feat</p>
+                <li class="list-element" v-for="book in books" :key="book.id">
+                    <img class="element-img" :src="book.image"></img>
+                    <!-- <img src="images/check.png" alt="read"> -->
+                    <p class="book-name">{{book.name}}</p>
                 </li>
             </ul>
         </div>
@@ -218,7 +219,8 @@
                 knowledge: [],
                 isOpenDialog: false,
                 titleDialog: '',
-                textDialog: ''
+                textDialog: '',
+                books: []
             }
         },
         methods: {
@@ -280,6 +282,27 @@
 
                                 })
                         }
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+            axios.get('https://zloi.space/reads.json')
+                .then((res, err) => {
+                    for (const book of res.data) {
+                        axios.get(book.link)
+                            .then((res2, err) => {
+                                this.books.push({
+                                    id: res2.data.id,
+                                    name: res2.data.volumeInfo.title,
+                                    image: res2.data.volumeInfo.imageLinks.thumbnail,
+                                    read: book.read
+                                })
+                            })
+                            .catch(err => {
+
+                            })
                     }
                 })
                 .catch(err => {
