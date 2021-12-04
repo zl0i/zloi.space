@@ -16,77 +16,77 @@
     },
     {
         "title": "Чистый Agile. Основы гибкости",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/0ZnsDwAAQBAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/0ZnsDwAAQBAJ",
         "read": true
     },
     {
         "title": "Архитектура корпоративных программных приложений",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/MdMM1ZrICnsC",
+        "link": "https://www.googleapis.com/books/v1/volumes/MdMM1ZrICnsC",
         "read": true
     },
     {
         "title": "Приемы объектно-ориентированного проектирования",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/PQayAAAACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/PQayAAAACAAJ",
         "read": true
     },
     {
         "title": "С++",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/ixxYPzpL3mYC",
+        "link": "https://www.googleapis.com/books/v1/volumes/ixxYPzpL3mYC",
         "read": true
     },
     {
         "title": "Qt 5.10. Профессиональное программирование на C++",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/J4N0DwAAQBAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/J4N0DwAAQBAJ",
         "read": true
     },
     {
         "title": "Паттерны Kubernetes: Шаблоны разработки собственных облачных приложений",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/2pTcDwAAQBAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/2pTcDwAAQBAJ",
         "read": false
     },
     {
         "title": "MongoDB",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/8SwQzgEACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/8SwQzgEACAAJ",
         "read": false
     },
     {
         "title": "Современные операционные системы. 4-е изд.",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/zA7ECwAAQBAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/zA7ECwAAQBAJ",
         "read": true
     },
     {
         "title": "Building Microservices",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/1uUDoQEACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/1uUDoQEACAAJ",
         "read": true
     },
     {
         "title": "Data Structures & Algorithms in Java",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/yIudQgAACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/yIudQgAACAAJ",
         "read": true
     },
     {
         "title": "Structured Computer Organization",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/m0HHygAACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/m0HHygAACAAJ",
         "read": false
     },
     {
         "title": "The Design of Web APIs",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/L7MtvgEACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/L7MtvgEACAAJ",
         "read": true
     },
     {
         "title": "Компьютерные сети",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/yeQyAAAACAAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/yeQyAAAACAAJ",
         "read": true
     },
     {
         "title": "Архитектура корпоративных программных приложений",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/MdMM1ZrICnsC",
+        "link": "https://www.googleapis.com/books/v1/volumes/MdMM1ZrICnsC",
         "read": true
     },
     {
         "title": "Не заставляйте меня думать. Веб-юзабилити и здравый смысл",
-        "selfLink": "https://www.googleapis.com/books/v1/volumes/NH4oDwAAQBAJ",
+        "link": "https://www.googleapis.com/books/v1/volumes/NH4oDwAAQBAJ",
         "read": false
     }
 ]
