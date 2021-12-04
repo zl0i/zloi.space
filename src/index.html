@@ -171,7 +171,7 @@
             <ul class="list-summary">
                 <li class="list-element" v-for="file in knowledge" :key="file.id">
                     <div class="element-img" @click.stop="openDialog(file)">
-                        <p  v-html="marked(file.data)"></p>
+                        <div class="element-inner"  v-html="marked(file.data)"></div>
                     </div>
                     <p class="element-name">{{file.name}}</p>
                 </li>
