@@ -107,9 +107,14 @@ nav a h1 {
 }
 
 .summary-header a {
-    padding-top: 20px;
+    padding-top: 10px;
     height: fit-content;
     cursor: pointer;
+}
+
+.summary-header a img {
+    width: 32px;
+    height: 32px;    
 }
 
 .all-column {
