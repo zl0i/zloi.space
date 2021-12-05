@@ -74,7 +74,8 @@
         <div class="summary-box" id="summary-id">
             <div class="summary-header">
                 <p>Summary</p>
-                <a href="summary.pdf" target="_blank" style="padding-top: 20px;"><img alt="downloadSummary" src="images/download.svg"></a>
+                <a href="summary.pdf" target="_blank" style="padding-top: 20px;">
+                    <img alt="downloadSummary" src="images/download.svg"></a>
             </div>
             <div class="all-column">
                 <ul class="left-column">
@@ -168,7 +169,8 @@
             <div class="summary-header" id="knowledge-id">
                 <p>Knowledge</p>
                 <a href="https://github.com/zl0i/KnowledgeBase" target="_blank">
-                <img alt="knowledge" src="images/link.svg" style="width: 32px; height: 32px; padding-left: 10px;"></a>
+                    <img alt="knowledge" src="images/link.svg" style="width: 32px; height: 32px; padding-left: 10px;">
+                </a>
             </div>
             <ul class="list-summary">
                 <li class="list-element" v-for="file in knowledge" :key="file.id">
@@ -295,12 +297,21 @@
                     for (const book of res.data) {
                         axios.get(book.link)
                             .then((res2, err) => {
-                                this.books.push({
-                                    id: res2.data.id,
-                                    name: res2.data.volumeInfo.title,
-                                    image: res2.data.volumeInfo.imageLinks.thumbnail,
-                                    read: book.read
-                                })
+                                if (book.read) {
+                                    this.books.unshift({
+                                        id: res2.data.id,
+                                        name: res2.data.volumeInfo.title,
+                                        image: res2.data.volumeInfo.imageLinks.thumbnail,
+                                        read: book.read
+                                    })
+                                } else {
+                                    this.books.push({
+                                        id: res2.data.id,
+                                        name: res2.data.volumeInfo.title,
+                                        image: res2.data.volumeInfo.imageLinks.thumbnail,
+                                        read: book.read
+                                    })
+                                }
                             })
                             .catch(err => {
 
