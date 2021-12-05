@@ -185,9 +185,12 @@
             </div>
             <ul class="list-summary">
                 <li class="list-element" v-for="book in books" :key="book.id">
-                    <img class="element-img" :src="book.image"></img>
-                    <!-- <img src="images/check.png" alt="read"> -->
-                    <p class="book-name">{{book.name}}</p>
+                    <img style="padding: 0; object-fit: cover" alt="book" class="element-img" :src="book.image"/>
+                    <div class="read-div">
+                        <img src="images/check.png" alt="read"/>
+                        <p>Прочитано</p>
+                    </div>
+                    <p class="book-name" style="height: 72px">{{book.name}}</p>
                 </li>
             </ul>
         </div>
