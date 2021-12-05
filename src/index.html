@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <meta name="yandex-verification" content="9425b9578d21b568" />
     <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/default.min.css">
-    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/vue@3.2.23/dist/vue.global.prod.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/highlight.min.js"></script>
@@ -73,7 +73,7 @@
         </div>
         <div class="summary-box" id="summary-id">
             <div class="summary-header">
-                <p style="margin: 0px;" >Summary</p>
+                <p style="margin: 0px;">Summary</p>
                 <a href="summary.pdf" target="_blank" style="padding-top: 20px;">
                     <img alt="downloadSummary" src="images/download.svg"></a>
             </div>
@@ -185,9 +185,10 @@
             </div>
             <ul class="list-summary">
                 <li class="list-element" v-for="book in books" :key="book.id">
-                    <img style="padding: 0; object-fit: cover" alt="book" class="element-img" :src="book.image"/>
+                    <img style="padding: 0; object-fit: cover" alt="book" class="element-img" :src="book.image"
+                        loading="lazy" />
                     <div class="read-div" v-show="book.read">
-                        <img src="images/check.png" alt="read"/>
+                        <img src="images/check.png" alt="read" />
                         <p>Прочитано</p>
                     </div>
                     <p class="book-name" style="height: 72px">{{book.name}}</p>
@@ -202,6 +203,8 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="js/index.js"> </script>
 <script type="module">
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
@@ -218,141 +221,6 @@
     };
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-</script>
-<script>
-    const app = Vue.createApp({
-        data() {
-            return {
-                knowledge: [],
-                isOpenDialog: false,
-                titleDialog: '',
-                textDialog: '',
-                books: []
-            }
-        },
-        methods: {
-            marked(text) {
-                marked.setOptions({
-                    renderer: new marked.Renderer(),
-                    pedantic: false,
-                    gfm: true,
-                    breaks: true,
-                    sanitize: false,
-                    smartLists: true,
-                    smartypants: false,
-                    xhtml: false
-                });
-                return marked.marked(text)
-            },
-            openDialog(item) {
-
-                marked.setOptions({
-                    renderer: new marked.Renderer(),
-                    highlight: function (code, lang) {
-                        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-                        return hljs.highlight(code, { language }).value;
-                    },
-                    langPrefix: 'hljs language-',
-                    pedantic: false,
-                    gfm: true,
-                    breaks: true,
-                    sanitize: false,
-                    smartLists: true,
-                    smartypants: false,
-                    xhtml: false
-                });
-
-                this.textDialog = (marked.marked(item.data))
-                this.titleDialog = item.name
-                document.body.style['overflow-y'] = 'hidden'
-                this.isOpenDialog = true
-            },
-            closeDialog() {
-                document.body.style['overflow-y'] = 'auto'
-                this.isOpenDialog = false
-            }
-        },
-        created() {
-            axios.get('https://api.github.com/repos/zl0i/KnowledgeBase/contents')
-                .then((res, err) => {
-                    for (const file of res.data) {
-                        if (file.name.includes('.md')) {
-                            axios.get(file.download_url)
-                                .then((res2, err) => {
-                                    this.knowledge.push({
-                                        id: file.sha,
-                                        name: file.name,
-                                        data: res2.data
-                                    })
-                                })
-                                .catch(err => {
-
-                                })
-                        }
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-
-            axios.get('https://zloi.space/reads.json')
-                .then((res, err) => {
-                    for (const book of res.data) {
-                        axios.get(book.link)
-                            .then((res2, err) => {
-                                if (book.read) {
-                                    this.books.unshift({
-                                        id: res2.data.id,
-                                        name: res2.data.volumeInfo.title,
-                                        image: res2.data.volumeInfo.imageLinks.thumbnail,
-                                        read: book.read
-                                    })
-                                } else {
-                                    this.books.push({
-                                        id: res2.data.id,
-                                        name: res2.data.volumeInfo.title,
-                                        image: res2.data.volumeInfo.imageLinks.thumbnail,
-                                        read: book.read
-                                    })
-                                }
-                            })
-                            .catch(err => {
-
-                            })
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }
-    })
-    const vm = app.mount('#app')
-
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script>
-    var typed = new Typed(".auto-input", {
-        strings: ["My name is Dima", "I write code in JS and C++", "I'm backend developer"],
-        typeSpeed: 100,
-        backSpeed: 100,
-        loop: true
-    })
-</script>
-<script>
-    const sliders = document.getElementsByClassName('list-summary');
-    for (let i = 0; i < sliders.length; i++) {
-        let mouseDown, positionSlider, positionStart;
-        sliders.item(i).addEventListener('mousedown', (e) => {
-            mouseDown = true;
-            positionSlider = sliders.item(i).scrollLeft;
-            positionStart = e.clientX;
-        });
-        sliders.item(i).addEventListener('mouseup', () => mouseDown = false);
-        sliders.item(i).addEventListener('mousemove', (e) => {
-            if (mouseDown) sliders.item(i).scrollLeft = positionStart - e.clientX + positionSlider;
-        });
-    }
 </script>
 
 </html>
