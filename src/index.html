@@ -186,7 +186,7 @@
             <ul class="list-summary">
                 <li class="list-element" v-for="book in books" :key="book.id">
                     <img style="padding: 0; object-fit: cover" alt="book" class="element-img" :src="book.image"/>
-                    <div class="read-div">
+                    <div class="read-div" v-show="book.read">
                         <img src="images/check.png" alt="read"/>
                         <p>Прочитано</p>
                     </div>
