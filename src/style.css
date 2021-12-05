@@ -25,7 +25,7 @@ img {
 }
 
 .header-right a {
-    margin-left: 20px;
+    margin-left: 40px;
     color: #ffffff;
 }
 
@@ -43,7 +43,7 @@ nav {
     width: 100%;
     align-items: center;
     flex-wrap: wrap;
-    padding: 30px 0 10px;
+    padding: 0px 0 10px;
 }
 
 nav a {
