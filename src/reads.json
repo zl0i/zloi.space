@@ -83,5 +83,35 @@
         "title": "Не заставляйте меня думать. Веб-юзабилити и здравый смысл",
         "link": "https://www.googleapis.com/books/v1/volumes/NH4oDwAAQBAJ",
         "read": false
+    },
+    {
+        "title": "You Don't Know JS: Scope & Closures",
+        "link": "https://www.googleapis.com/books/v1/volumes/IS0EAwAAQBAJ",
+        "read": true
+    },
+    {
+        "title": "You Don't Know JS: this & Object Prototypes",
+        "link": "https://www.googleapis.com/books/v1/volumes/cE4BBAAAQBAJ",
+        "read": true
+    },
+    {
+        "title": "You Don't Know JS: ES6 & Beyond",
+        "link": "https://www.googleapis.com/books/v1/volumes/rec6CwAAQBAJ",
+        "read": false
+    },
+    {
+        "title": "You Don't Know JS: Up & Going",
+        "link": "https://www.googleapis.com/books/v1/volumes/3iWABwAAQBAJ",
+        "read": true
+    },
+    {
+        "title": "You Don't Know JS: Async & Performance",
+        "link": "https://www.googleapis.com/books/v1/volumes/f2vIBgAAQBAJ",
+        "read": false
+    },
+    {
+        "title": "You Don't Know JS: Types & Grammar",
+        "link": "https://www.googleapis.com/books/v1/volumes/WeFwBgAAQBAJ",
+        "read": true
     }
 ]
