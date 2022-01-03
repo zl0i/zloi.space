@@ -405,3 +405,10 @@ code {
 .showBox::-webkit-scrollbar {
     width: 0;
 }
+
+.formula {
+    font-family: "Cambria";
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20px;
+}
