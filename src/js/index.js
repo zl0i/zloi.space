@@ -43,61 +43,56 @@ const app = Vue.createApp({
               });
           }
         }
+
       })
       .catch((err) => {
         console.log(err);
       });
 
-    axios;
-    // .get("https://zloi.space/reads.json")
-    // .then((res, _err) => {
-    //   for (const book of res.data) {
-    //     axios
-    //       .get(book.link)
-    //       .then((res2, err) => {
-    //         const obj = {
-    //           id: res2.data.id,
-    //           name: res2.data.volumeInfo.title,
-    //           image: res2.data.volumeInfo.imageLinks.thumbnail,
-    //           read: book.read,
-    //         };
-    //         if (book.read) {
-    //           this.books.unshift(obj);
-    //         } else {
-    //           this.books.push(obj);
-    //         }
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    axios
+    .get("https://zloi.space/reads.json")
+    .then((res, _err) => {
+      for (const book of res.data) {
+        axios
+          .get(book.link)
+          .then((res2, err) => {
+            const obj = {
+              id: res2.data.id,
+              name: res2.data.volumeInfo.title,
+              image: res2.data.volumeInfo.imageLinks.thumbnail,
+              read: book.read,
+            };
+            if (book.read) {
+              this.books.unshift(obj);
+            } else {
+              this.books.push(obj);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
     const formula = {
       name: "formula",
-      level: "inline", // Is this a block-level or inline-level tokenizer?
+      level: "inline", 
       start(src) {
         return src.match(/\$\$\n.*?\s{0,}\$\$/)?.index;
-        // return src.match(/\$\$\n/)?.index;
       },
       tokenizer(src, tokens) {
-        const rule = /\$\$\n.*?\s{0,}\$\$/; // Regex for the complete token
-        
-        //const rule = /\$\$\n/;
+        const rule = /\$\$\n.*?\s{0,}\$\$/; 
         const match = rule.exec(src);
         if (match) {
           const token = {
-            type: "formula", // Should match "name" above
+            type: "formula", 
             raw: src.replace(rule, `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`), //.replace(/\$/g, ""), // Text to consume from the source
-            tokens: [], // Array where child inline tokens will be generated
-            //text: src
+            tokens: [],
           };
           console.log(src, match.index, token);
-          //console.log(tokens)
-          //this.lexer.inline(token.raw, token.tokens); // Queue this data to be processed for inline tokens
           return token;
         }
       },
