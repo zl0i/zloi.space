@@ -22,6 +22,19 @@ const app = Vue.createApp({
       document.body.style["overflow-y"] = "auto";
       this.isOpenDialog = false;
     },
+    sortByName(a, b) {
+      return a.name.localeCompare(b.name);
+    },
+  },
+  computed: {
+    sortKnowledge() {
+      return this.knowledge.sort(this.sortByName);
+    },
+    sortBooks() {
+      const read = this.books.filter((item) => item.read);
+      const unread = this.books.filter((item) => !item.read);
+      return [...read.sort(this.sortByName), ...unread.sort(this.sortByName)];
+    },
   },
   created() {
     axios
@@ -43,62 +56,60 @@ const app = Vue.createApp({
               });
           }
         }
-
       })
       .catch((err) => {
         console.log(err);
       });
 
     axios
-    .get("https://zloi.space/reads.json")
-    .then((res, _err) => {
-      for (const book of res.data) {
-        axios
-          .get(book.link)
-          .then((res2, err) => {
-            const obj = {
-              id: res2.data.id,
-              name: res2.data.volumeInfo.title,
-              image: res2.data.volumeInfo.imageLinks.thumbnail,
-              read: book.read,
-            };
-            if (book.read) {
-              this.books.unshift(obj);
-            } else {
-              this.books.push(obj);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get("https://zloi.space/reads.json")
+      .then((res, _err) => {
+        for (const book of res.data) {
+          axios
+            .get(book.link)
+            .then((res2, err) => {
+              this.books.push( {
+                id: res2.data.id,
+                name: res2.data.volumeInfo.title,
+                image:
+                  res2.data.volumeInfo?.imageLinks?.thumbnail ??
+                  "images/default-image-book.png",
+                read: book.read,
+              });              
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const formula = {
       name: "formula",
-      level: "inline", 
+      level: "inline",
       start(src) {
         return src.match(/\$\$\n.*?\s{0,}\$\$/)?.index;
       },
       tokenizer(src, tokens) {
-        const rule = /\$\$\n.*?\s{0,}\$\$/; 
+        const rule = /\$\$\n.*?\s{0,}\$\$/;
         const match = rule.exec(src);
         if (match) {
           const token = {
-            type: "formula", 
-            raw: src.replace(rule, `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`), //.replace(/\$/g, ""), // Text to consume from the source
+            type: "formula",
+            raw: src.replace(
+              rule,
+              `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`
+            ), //.replace(/\$/g, ""), // Text to consume from the source
             tokens: [],
           };
-          console.log(src, match.index, token);
           return token;
         }
       },
       renderer(token) {
         // return `<div class="formula">${token.raw}</div>`;
-        return token.raw
+        return token.raw;
       },
     };
 
@@ -118,7 +129,6 @@ const app = Vue.createApp({
       xhtml: false,
     });
     marked.use({ extensions: [formula] });
-
   },
 });
 const vm = app.mount("#app");

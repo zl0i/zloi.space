@@ -173,7 +173,7 @@
                 </a>
             </div>
             <ul class="list-summary">
-                <li class="list-element" v-for="file in knowledge" :key="file.id">
+                <li class="list-element" v-for="file in sortKnowledge" :key="file.id">
                     <div class="element-img" @click.stop="openDialog(file)">
                         <div class="element-inner" v-html="marked(file.data)"></div>
                     </div>
@@ -184,7 +184,7 @@
                 <p>Reads</p>
             </div>
             <ul class="list-summary">
-                <li class="list-element" v-for="book in books" :key="book.id">
+                <li class="list-element" v-for="book in sortBooks" :key="book.id">
                     <img style="padding: 0; object-fit: cover" alt="book" class="element-img" :src="book.image"
                         loading="lazy" />
                     <div class="read-div" v-show="book.read">
