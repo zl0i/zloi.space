@@ -68,14 +68,14 @@ const app = Vue.createApp({
           axios
             .get(book.link)
             .then((res2, err) => {
-              this.books.push( {
+              this.books.push({
                 id: res2.data.id,
                 name: res2.data.volumeInfo.title,
                 image:
                   res2.data.volumeInfo?.imageLinks?.thumbnail ??
                   "images/default-image-book.png",
                 read: book.read,
-              });              
+              });
             })
             .catch((err) => {
               console.log(err);
@@ -101,14 +101,13 @@ const app = Vue.createApp({
             raw: src.replace(
               rule,
               `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`
-            ), //.replace(/\$/g, ""), // Text to consume from the source
+            ),
             tokens: [],
           };
           return token;
         }
       },
       renderer(token) {
-        // return `<div class="formula">${token.raw}</div>`;
         return token.raw;
       },
     };
