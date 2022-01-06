@@ -142,18 +142,3 @@ new Typed(".auto-input", {
   backSpeed: 100,
   loop: true,
 });
-
-const sliders = document.getElementsByClassName("list-summary");
-for (let i = 0; i < sliders.length; i++) {
-  let mouseDown, positionSlider, positionStart;
-  sliders.item(i).addEventListener("mousedown", (e) => {
-    mouseDown = true;
-    positionSlider = sliders.item(i).scrollLeft;
-    positionStart = e.clientX;
-  });
-  sliders.item(i).addEventListener("mouseup", () => (mouseDown = false));
-  sliders.item(i).addEventListener("mousemove", (e) => {
-    if (mouseDown)
-      sliders.item(i).scrollLeft = positionStart - e.clientX + positionSlider;
-  });
-}
