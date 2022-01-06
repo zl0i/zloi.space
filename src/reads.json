@@ -107,7 +107,7 @@
     {
         "title": "You Don't Know JS: Async & Performance",
         "link": "https://www.googleapis.com/books/v1/volumes/f2vIBgAAQBAJ",
-        "read": false
+        "read": true
     },
     {
         "title": "You Don't Know JS: Types & Grammar",
