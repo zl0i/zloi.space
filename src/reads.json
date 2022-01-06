@@ -113,5 +113,10 @@
         "title": "You Don't Know JS: Types & Grammar",
         "link": "https://www.googleapis.com/books/v1/volumes/WeFwBgAAQBAJ",
         "read": true
+    },
+    {
+        "title": "Эффективный TypeScript: 62 способа улучшить код",
+        "link": "https://www.googleapis.com/books/v1/volumes/DCb6DwAAQBAJ",
+        "read": false
     }
 ]
