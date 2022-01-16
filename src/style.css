@@ -315,7 +315,7 @@ nav a h1 {
 
 .read-div {
   position: absolute;
-  bottom: 100px;
+  bottom: 90px;
   user-select: none;
   display: flex;
   width: 100%;
