@@ -8,6 +8,7 @@
   box-sizing: border-box;
   overscroll-behavior: contain;
   overflow-x: hidden;
+  margin: 0;
 }
 
 img {
@@ -18,7 +19,6 @@ img {
   html, body {
     max-width: 100%;
     overflow-x: hidden;
-    margin: 0;
   }
 }
 
@@ -250,6 +250,11 @@ nav a h1 {
 .description {
   padding-left: 14px;
   text-align: justify;
+  word-break: break-all;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .right-column p {
@@ -284,11 +289,17 @@ nav a h1 {
 }
 
 .skill-box {
-  width: 263px;
+  width: 20vw;
   height: 8px;
   border-radius: 4px;
   background: #c5c5c5;
   margin-left: 7px;
+}
+
+@media (max-device-width: 736px) {
+  .skill-box {
+    width: 300px;
+  }
 }
 
 .skill-fill {
@@ -300,6 +311,12 @@ nav a h1 {
 .skill-lvl {
   font-size: 17px;
   width: inherit;
+}
+
+@media (max-device-width: 736px) {
+  .skill-lvl {
+    font-size: 14px;
+  }
 }
 
 .gallery-box {
@@ -378,7 +395,7 @@ nav a h1 {
 }
 
 .element-inner {
-  width: 75vw;
+  width: calc(100% * 6.6);
   height: fit-content;
   margin-left: 0;
   background: white;
