@@ -44,16 +44,16 @@ deploy_dev:
   environment:
     name: ${CI_COMMIT_BRANCH}
     url: https://${CI_COMMIT_BRANCH}.zloi.space
-  except:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "master"'
 
 deploy_production:
   extends: .deploy
   environment:
     name: production
     url: https://zloi.space
-  only:
-    - master
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 release_job:
   stage: release
