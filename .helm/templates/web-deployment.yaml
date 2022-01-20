@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "_"}}-web
+  name: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "-"}}-web
   labels:
-    app: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "_"}}-web
+    app: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "-"}}-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "_"}}-web
+      app: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "-"}}-web
   template:
     metadata:
       labels:
-        app: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "_"}}-web
+        app: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "-"}}-web
     spec:
       containers:
         - name: web
