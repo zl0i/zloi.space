@@ -29,5 +29,6 @@ deploy:
       --atomic
       --timeout 120s
       --namespace ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}
+      --create-namespace
   only:
     - master
