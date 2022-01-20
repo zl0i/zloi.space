@@ -16,7 +16,8 @@ img {
 }
 
 @media (max-device-width: 736px) {
-  html, body {
+  html,
+  body {
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -136,7 +137,7 @@ nav a h1 {
     height: 160px;
   }
   .input-div span {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
@@ -195,7 +196,7 @@ nav a h1 {
     margin: 0;
     padding: 0;
   }
-  .all-column{
+  .all-column {
     margin: 0;
   }
 }
@@ -298,7 +299,7 @@ nav a h1 {
 
 @media (max-device-width: 736px) {
   .skill-box {
-    width: 300px;
+    width: 250px;
   }
 }
 
@@ -361,7 +362,6 @@ nav a h1 {
 .list-summary ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
 
 @media (max-device-width: 736px) {
   .list-summary {
