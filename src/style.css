@@ -327,7 +327,7 @@ nav a h1 {
 .list-summary {
   margin: 40px 0;
   width: calc(100vw - 144px);
-  height: 350px;
+  height: 370px;
   background: #404040;
   display: flex;
   padding-left: 72px;
@@ -339,8 +339,6 @@ nav a h1 {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
-  cursor: grab;
 }
 
 .list-summary:active {
@@ -426,7 +424,7 @@ nav a h1 {
 
 .read-div {
   position: absolute;
-  bottom: 90px;
+  bottom: 110px;
   user-select: none;
   display: flex;
   width: 100%;
@@ -448,7 +446,7 @@ nav a h1 {
 }
 
 .book-name {
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: 0;
   text-align: center;
   width: 100%;
