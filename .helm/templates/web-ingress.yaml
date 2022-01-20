@@ -4,7 +4,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{lower .Chart.Name}}-web
+  name: {{ regexReplaceAll "\\W+" (lower .Chart.Name)}}-web
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -25,6 +25,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{lower .Chart.Name}}-web
+                name: {{ regexReplaceAll "\\W+" (lower .Chart.Name)}}-web
                 port:
                   number: 80
