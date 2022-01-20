@@ -42,3 +42,18 @@ deploy_production:
     url: https://zloi.space
   only:
     - master
+
+release_job:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG 
+  script:
+    - echo "Running release for $CI_COMMIT_TAG tag"
+  release:
+    name: "Release $CI_COMMIT_TAG"
+    description: "Created using the release-cli $CI_COMMIT_DESCRIPTION"
+    tag_name: "$CI_COMMIT_TAG" # elsewhere in the pipeline.
+    ref: "$CI_COMMIT_TAG"
+  only:
+    - master
