@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deployment
+  name: {{lower .Chart.Name}}-web
   labels:
-    app: web
+    app: {{lower .Chart.Name}}-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web
+      app: {{lower .Chart.Name}}-web
   template:
     metadata:
       labels:
-        app: web
+        app: {{lower .Chart.Name}}-web
     spec:
       containers:
         - name: web

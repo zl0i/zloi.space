@@ -11,12 +11,9 @@ build:
   only:
     - master
 
-deploy:
+.deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
-  environment:
-    name: production
-    url: https://zloi.space
   before_script:
     - kubectl config set-cluster my-cluster --server="$K3S_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$K3S_TOKEN"
@@ -25,10 +22,25 @@ deploy:
   script:
     - helm upgrade --install $CI_PROJECT_NAME .helm
       --set image.tag=$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
+      --set branch=${CI_COMMIT_BRANCH}
       --debug
       --atomic
       --timeout 120s
       --namespace ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}
       --create-namespace
+
+deploy_dev:
+  extends: .deploy
+  environment:
+    name: ${CI_COMMIT_BRANCH}
+    url: https://${CI_COMMIT_BRANCH}.zloi.space
+  except:
+    - master
+
+deploy_production:
+  extends: .deploy
+  environment:
+    name: production
+    url: https://zloi.space
   only:
     - master
