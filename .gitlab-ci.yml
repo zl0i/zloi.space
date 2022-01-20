@@ -1,13 +1,16 @@
 stages:
-    - build    
-    - release
-    - deploy
+  - build
+  - release
+  - deploy
 
 build:
   stage: build
   image: docker:19.03.12
   services:
     - docker:19.03.12-dind
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
@@ -18,6 +21,9 @@ build:
 .deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
   before_script:
     - kubectl config set-cluster my-cluster --server="$K3S_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$K3S_TOKEN"
@@ -53,7 +59,7 @@ release_job:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
-    - if: $CI_COMMIT_TAG 
+    - if: $CI_COMMIT_TAG
   script:
     - echo "Running release for $CI_COMMIT_TAG tag"
   release:
