@@ -62,7 +62,7 @@ const app = Vue.createApp({
       });
 
     axios
-      .get("https://zloi.space/reads.json")
+      .get(window.location.href + "/reads.json")
       .then((res, _err) => {
         for (const book of res.data) {
           axios
