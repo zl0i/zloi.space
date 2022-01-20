@@ -1,4 +1,5 @@
+branch: master
 image:
   repository: registry.gitlab.com/zl0i/zloi-space
-  name: web
+  name: zloi-web
   tag: v1.0
