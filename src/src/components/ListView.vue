@@ -35,6 +35,11 @@ import { Vue, Options } from "vue-class-component";
 export default class ListView extends Vue {
   title: string;
   link!: string;
+
+  constructor(title: string) {
+      super()
+      this.title = title
+  }
 }
 </script>
 
