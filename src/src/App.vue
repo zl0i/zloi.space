@@ -1,22 +1,34 @@
 <template>
-  <Welcome
-    text="Hello. As written above, my name is Dima. I have been working
+  <div>
+    <Welcome
+      text="Hello. As written above, my name is Dima. I have been working
         professionally as a programmer since 2018. I have developed
         cross-platform mobile applications in Qt, but I discovered JS in 2020
         and fell in love with it. I love developing the backend part and
         everything that connected with it. I have experience in developing
         microservices, building CI/CD using GitLab and working with cloud
         providers (GCP)."
-  />
+    />
+    <Summary />
+    <ListView
+      title="Knowledge"
+      link="https://github.com/zl0i/KnowledgeBase"
+    />
+    <ListView title="Reads" />
+  </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Welcome from "./components/Welcome.vue";
+import Summary from "./components/Summary.vue";
+import ListView from "./components/ListView.vue";
 
 @Options({
   components: {
     Welcome,
+    Summary,
+    ListView,
   },
 })
 export default class App extends Vue {
