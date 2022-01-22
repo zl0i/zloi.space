@@ -10,7 +10,7 @@
         providers (GCP)."
     />
     <Summary />
-    <ListView title="Knowledge" link="https://github.com/zl0i/KnowledgeBase" />
+    <KnoweledgeView title="Knowledge" link="https://github.com/zl0i/KnowledgeBase" />
     <BookView />
   </div>
 </template>
@@ -19,7 +19,7 @@
 import { Options, Vue } from "vue-class-component";
 import Welcome from "./components/Welcome.vue";
 import Summary from "./components/Summary.vue";
-import ListView from "./components/ListView.vue";
+import KnoweledgeView from "./components/Knowledge.vue";
 import BookView from "./components/BooksView.vue";
 import axios from "axios";
 
@@ -34,7 +34,7 @@ interface IBook {
   components: {
     Welcome,
     Summary,
-    ListView,
+    KnoweledgeView,
     BookView,
   },
 })
