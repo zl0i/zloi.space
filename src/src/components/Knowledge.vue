@@ -1,13 +1,20 @@
 <template>
-  <ListView
-    title="Knowledge"
-    link="https://github.com/zl0i/KnowledgeBase"
-    :model="sortKnowledge()"
-  >
-    <template v-slot:default="props">
-      <Instruction :name="props?.item?.name" :text="props?.item?.text" />
-    </template>
-  </ListView>
+  <div>
+    <ListView
+      title="Knowledge"
+      link="https://github.com/zl0i/KnowledgeBase"
+      :model="sortKnowledge()"
+    >
+      <template v-slot:default="props">
+        <Instruction
+          :name="props?.item?.name"
+          :text="props?.item?.text"
+          @open="openDialog"
+        />
+      </template>
+    </ListView>
+    <InstructionDialog ref="dialog" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,6 +22,7 @@ import { Options, Vue } from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import ListView from "./ListView.vue";
 import Instruction from "../elements/Instruction.vue";
+import InstructionDialog from "../elements/InstructionDialog.vue";
 import axios from "axios";
 
 interface IInstruction {
@@ -27,6 +35,7 @@ interface IInstruction {
   components: {
     ListView,
     Instruction,
+    InstructionDialog,
   },
 })
 export default class KnoweledgeView extends Vue {
@@ -69,6 +78,11 @@ export default class KnoweledgeView extends Vue {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  openDialog(name: string, html: string) {
+    //document.body.style["overflow-y"] = "hidden";
+    (this.$refs.dialog as InstructionDialog).open(name, html);
   }
 }
 </script>

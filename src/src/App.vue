@@ -13,7 +13,7 @@
     <div class="gallery-box">
       <KnoweledgeView
         title="Knowledge"
-        link="https://github.com/zl0i/KnowledgeBase"        
+        link="https://github.com/zl0i/KnowledgeBase"
       />
       <BookView />
     </div>
@@ -35,9 +35,7 @@ import BookView from "./components/BooksView.vue";
     BookView,
   },
 })
-export default class App extends Vue {
-  
-}
+export default class App extends Vue {}
 </script>
 
 <style>

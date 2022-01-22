@@ -1,6 +1,6 @@
 <template>
   <div class="list-element">
-    <div class="element-img" @click.stop="openDialog(name, text)">
+    <div class="element-img" @click.stop="this.$emit('open', name, html)">
       <div class="element-inner" v-html="markedText(text)"></div>
     </div>
     <p class="element-name">{{ name }}</p>
@@ -29,7 +29,6 @@ marked.setOptions({
   xhtml: false,
 });
 
-
 @Options({
   props: {
     name: String,
@@ -39,11 +38,11 @@ marked.setOptions({
 export default class Instruction extends Vue {
   name: string;
   text: string;
-
-  openDialog(name: string, text: string) {}
+  html: string;
 
   markedText(text: string) {
-    return marked(text);
+    this.html = marked(text);
+    return this.html;
   }
 }
 </script>
@@ -132,5 +131,39 @@ export default class Instruction extends Vue {
   text-align: center;
   width: 100%;
   user-select: none;
+}
+
+strong {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+pre {
+  padding: 10px;
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  max-width: max-content;
+  overflow-x: auto;
+  word-wrap: break-word;
+}
+
+code {
+  padding: 10px;
+  display: contents;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  word-wrap: break-word;
+  max-width: max-content;
+  height: auto;
+  overflow-x: auto;
+}
+
+.formula {
+  font-family: "Cambria";
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 20px;
 }
 </style>
