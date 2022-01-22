@@ -16,13 +16,13 @@
 import { Vue } from "vue-class-component";
 
 export default class MarkDownDialog extends Vue {
-  name!: string;
-  text!: string;
+  name: string;
+  text: string;
   isOpen = false;
 
-  open(name: string, text: string) {    
-    this.name = name
-    this.text = text
+  open(name: string, text: string) {
+    this.name = name;
+    this.text = text;
     this.isOpen = true;
   }
 
@@ -85,40 +85,8 @@ export default class MarkDownDialog extends Vue {
   }
 }
 
-strong {
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 700;
-}
-
-pre {
-  padding: 10px;
-  display: flex;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  max-width: max-content;
-  overflow-x: auto;
-}
-
-code {
-  padding: 10px;
-  display: contents;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  word-wrap: break-word;
-  max-width: max-content;
-  height: auto;
-  overflow-x: auto;
-}
-
-.formula {
-  font-family: "Cambria";
-  font-style: italic;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.showBox::-webkit-scrollbar {
+/* .showBox::-webkit-scrollbar {
   width: 0;
-}
+} */
 </style>
+

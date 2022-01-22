@@ -13,6 +13,32 @@ import { Vue, Options } from "vue-class-component";
 import { marked } from "marked";
 import hljs from "highlight.js";
 
+const formula = {
+  name: "formula",
+  level: "inline",
+  start(src: string) {
+    return src.match(/\$\$\n.*?\s{0,}\$\$/)?.index;
+  },
+  tokenizer(src: string, _tokens: any) {
+    const rule = /\$\$\n.*?\s{0,}\$\$/;
+    const match = rule.exec(src);
+    if (match) {
+      const token = {
+        type: "formula",
+        raw: src.replace(
+          rule,
+          `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`
+        ),
+        tokens: [],
+      };
+      return token;
+    }
+  },
+  renderer(token: any) {
+    return token.raw;
+  },
+};
+
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code: string, lang: string) {
@@ -28,6 +54,7 @@ marked.setOptions({
   smartypants: false,
   xhtml: false,
 });
+marked.use({ extensions: [formula] });
 
 @Options({
   props: {
@@ -132,7 +159,9 @@ export default class Instruction extends Vue {
   width: 100%;
   user-select: none;
 }
+</style>
 
+<style>
 strong {
   font-size: 16px;
   line-height: 26px;
@@ -146,7 +175,6 @@ pre {
   border-radius: 5px;
   max-width: max-content;
   overflow-x: auto;
-  word-wrap: break-word;
 }
 
 code {
