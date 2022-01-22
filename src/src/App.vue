@@ -10,11 +10,8 @@
         providers (GCP)."
     />
     <Summary />
-    <ListView
-      title="Knowledge"
-      link="https://github.com/zl0i/KnowledgeBase"
-    />
-    <ListView title="Reads" />
+    <ListView title="Knowledge" link="https://github.com/zl0i/KnowledgeBase" />
+    <BookView />
   </div>
 </template>
 
@@ -23,16 +20,56 @@ import { Options, Vue } from "vue-class-component";
 import Welcome from "./components/Welcome.vue";
 import Summary from "./components/Summary.vue";
 import ListView from "./components/ListView.vue";
+import BookView from "./components/BooksView.vue";
+import axios from "axios";
+
+interface IBook {
+  id: string;
+  name: string;
+  image: string;
+  isRead: boolean;
+}
 
 @Options({
   components: {
     Welcome,
     Summary,
     ListView,
+    BookView,
   },
 })
 export default class App extends Vue {
-  title = [""];
+  books: IBook[] = [];
+
+  created() {      
+    this.getBook()
+  }
+
+  async getBook() {
+    axios
+      .get(window.location.href + "/reads.json")
+      .then((res) => {
+        for (const book of res.data) {
+          axios
+            .get(book.link)
+            .then((res2) => {
+              const obj: IBook = {
+                id: res2.data.id,
+                name: res2.data.volumeInfo.title,
+                image: res2.data.volumeInfo?.imageLinks?.thumbnail,
+                isRead: book.read,
+              };
+              this.books.push(obj);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 </script>
 
