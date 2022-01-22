@@ -1,5 +1,5 @@
 <template>
-  <ListView title="Reads" :model="books">
+  <ListView title="Reads" :model="sortBooks()">
     <template v-slot:default="props">
       <Book
         :name="props?.item?.name"
@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { Watch } from "vue-property-decorator"
 import ListView from "./ListView.vue";
 import Book from "../elements/Book.vue";
 import axios from "axios";
@@ -40,6 +41,7 @@ export default class BooksView extends Vue {
     return a.name.localeCompare(b.name);
   }
 
+  @Watch("books")
   sortBooks() {
     const read = this.books.filter((item) => item.isRead);
     const unread = this.books.filter((item) => !item.isRead);
