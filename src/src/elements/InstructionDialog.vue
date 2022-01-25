@@ -1,51 +1,51 @@
 <template>
-  <div
-    class="darkenBackground"
-    v-show="isOpen"
-    @click.stop="close"
-    style="display: none"
-  >
-    <p class="popupName" @click.stop="">{{ name }}</p>
-    <div class="showBox" @click.stop="">
-      <div v-html="text"></div>
-    </div>
-  </div>
+  <teleport to="body">
+      <div class="modal-mask">
+        <div class="modal-wrapper" @click.stop="$emit('close')">
+          <p class="popupName" @click.stop="">{{ name }}</p>
+          <div class="showBox" @click.stop="">
+            <div v-html="text"></div>
+          </div>
+        </div>
+      </div>
+  </teleport>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
-
+import { Options, Vue } from "vue-class-component";
+@Options({
+  props: {
+    name: String,
+    text: String,
+  },
+})
 export default class MarkDownDialog extends Vue {
   name: string;
   text: string;
-  isOpen = false;
-
-  open(name: string, text: string) {
-    this.name = name;
-    this.text = text;
-    this.isOpen = true;
-  }
 
   close() {
-    this.isOpen = false;
+    this.$emit("close");
   }
 }
 </script>
 
 <style scoped>
-.darkenBackground {
+.modal-mask {
   position: fixed;
-  left: 0;
+  z-index: 9998;
   top: 0;
-  bottom: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(44, 44, 44, 0.56);
-  z-index: 3;
   backdrop-filter: blur(10px);
-  overflow: auto;
+  overflow: scroll;
+  transition: opacity 0.3s ease;
   justify-content: center;
+}
+
+.modal-wrapper {
+  vertical-align: middle;
 }
 
 .popupName {
@@ -72,6 +72,10 @@ export default class MarkDownDialog extends Vue {
   margin-bottom: 60px;
 }
 
+.modal-mask::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-device-width: 736px) {
   .popupName {
     font-size: 24px;
@@ -84,9 +88,4 @@ export default class MarkDownDialog extends Vue {
     word-wrap: break-word;
   }
 }
-
-/* .showBox::-webkit-scrollbar {
-  width: 0;
-} */
 </style>
-

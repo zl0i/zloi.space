@@ -39,7 +39,7 @@ export default class App extends Vue {}
 </script>
 
 <style>
-* body {
+body {
   background: #1c1e2a;
   opacity: 0.9;
   color: #ffffff;
@@ -58,6 +58,15 @@ export default class App extends Vue {}
     max-width: 100%;
     overflow-x: hidden;
   }
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #454545;
+  border-radius: 20px;
 }
 
 .gallery-box {

@@ -9,11 +9,16 @@
         <Instruction
           :name="props?.item?.name"
           :text="props?.item?.text"
-          @open="openDialog"
+          @open="showDialog"
         />
       </template>
     </ListView>
-    <InstructionDialog ref="dialog" />
+    <InstructionDialog      
+      v-if="showModal"
+      @close="closeDialog"
+      :name="modelName"
+      :text="modelText"
+    />
   </div>
 </template>
 
@@ -40,6 +45,9 @@ interface IInstruction {
 })
 export default class KnoweledgeView extends Vue {
   instructions: IInstruction[] = [];
+  showModal = false;
+  modelName = "";
+  modelText = "";
 
   created() {
     this.getInstructions();
@@ -80,9 +88,16 @@ export default class KnoweledgeView extends Vue {
       });
   }
 
-  openDialog(name: string, html: string) {
-    //document.body.style["overflow-y"] = "hidden";
-    (this.$refs.dialog as InstructionDialog).open(name, html);
+  showDialog(name: string, text: string) {
+    document.body.style.overflow = "hidden";
+    this.modelName = name;
+    this.modelText = text;
+    this.showModal = true;
+  }
+
+  closeDialog() {
+    document.body.style.overflow = "auto";
+    this.showModal = false;
   }
 }
 </script>
