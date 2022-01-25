@@ -13,9 +13,7 @@
       </nav>
     </div>
     <div class="input-div">
-      <!-- <vue-typed-js :strings="['My name is Dima', 'I write code in JS and C++', 'I\'m backend developer']">
-        <span class="auto-input"></span>
-      </vue-typed-js>       -->
+      <span class="auto-input"></span>
     </div>
     <main class="text-box">
       <p>{{ text }}</p>
@@ -54,20 +52,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-// import * as Typed from "typed";
-// const postType = Typed.object({
-//   strings: [
-//     "My name is Dima",
-//     "I write code in JS and C++",
-//     "I'm backend developer",
-//   ],
-//   typeSpeed: 100,
-//   backSpeed: 100,
-//   loop: true,
-// });
-// new Typed(".auto-input", {
-
-// });
+import Typed from "typed.js";
 
 @Options({
   props: {
@@ -78,6 +63,20 @@ import { Options, Vue } from "vue-class-component";
 export default class Welcome extends Vue {
   text!: string;
   titles!: string[];
+
+  mounted() {
+    var options = {
+      strings: [
+        "My name is Dima",
+        "I write code in JS and C++",
+        "I'm backend developer",
+      ],
+      typeSpeed: 100,
+      backSpeed: 100,
+      loop: true,
+    };
+    new Typed(".auto-input", options);
+  }
 }
 </script>
 
