@@ -1,5 +1,5 @@
 <template>
-  <div class="summary-box" id="summary-id">
+  <div class="summary-box" id="summary">
     <div class="summary-header">
       <p style="margin: 0px">Summary</p>
       <a href="./summary.pdf" target="_blank" style="padding-top: 20px">

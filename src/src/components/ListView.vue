@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header" id="knowledge-id">
+    <div class="header" :id="String(title).toLowerCase()">
       <p>{{ title }}</p>
       <a :href="link" target="_blank">
         <img

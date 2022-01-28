@@ -6,9 +6,9 @@
           <h1>_zloi_</h1>
         </a>
         <div class="header-right">
-          <a href="#summary-id">Summary</a>
-          <a href="#knowledge-id">Knowledge</a>
-          <a href="#reads-id">Read</a>
+          <a href="#summary">Summary</a>
+          <a href="#knowledge">Knowledge</a>
+          <a href="#reads">Read</a>
         </div>
       </nav>
     </div>
