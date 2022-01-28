@@ -2,8 +2,8 @@
   <teleport to="body">
       <div class="modal-mask">
         <div class="modal-wrapper" @click.stop="$emit('close')">
-          <p class="popupName" @click.stop="">{{ name }}</p>
-          <div class="showBox" @click.stop="">
+          <p class="popup-name" @click.stop="">{{ name }}</p>
+          <div class="show-box" @click.stop="">
             <div v-html="text"></div>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default class MarkDownDialog extends Vue {
   vertical-align: middle;
 }
 
-.popupName {
+.popup-name {
   margin-top: 60px;
   width: fit-content;
   margin-left: auto;
@@ -58,7 +58,7 @@ export default class MarkDownDialog extends Vue {
   font-size: 40px;
 }
 
-.showBox {
+.show-box {
   margin-left: auto;
   margin-right: auto;
   width: 75%;
@@ -77,14 +77,14 @@ export default class MarkDownDialog extends Vue {
 }
 
 @media (max-device-width: 736px) {
-  .popupName {
+  .popup-name {
     font-size: 24px;
   }
-  .showBox {
+  .show-box {
     width: calc(100% - 30px);
     padding: 20px 15px;
   }
-  .showBox a {
+  .show-box a {
     word-wrap: break-word;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="first-screen">
+  <div class="screen">
     <div class="header">
       <nav>
         <a href="">
@@ -12,7 +12,7 @@
         </div>
       </nav>
     </div>
-    <div class="input-div">
+    <div class="input">
       <span class="auto-input"></span>
     </div>
     <main class="text-box">
@@ -66,11 +66,7 @@ export default class Welcome extends Vue {
 
   mounted() {
     var options = {
-      strings: [
-        "My name is Dima",
-        "I write code in JS and C++",
-        "I'm backend developer",
-      ],
+      strings: this.titles,
       typeSpeed: 100,
       backSpeed: 100,
       loop: true,
@@ -110,13 +106,13 @@ img {
   color: #94aadd;
 }
 
-.first-screen {
+.screen {
   min-height: 100vh;
   padding: 0 8.5%;
 }
 
 @media (max-device-width: 736px) {
-  .first-screen {
+  .screen {
     min-height: initial;
     margin-bottom: 50px;
   }
@@ -177,13 +173,13 @@ nav a h1 {
   height: 32px;
 }
 
-.input-div {
+.input {
   height: 300px;
   display: flex;
   align-items: flex-end;
 }
 
-.input-div span {
+.input span {
   font-size: 65px;
   font-weight: bold;
   overflow-wrap: break-word;
@@ -192,10 +188,10 @@ nav a h1 {
 }
 
 @media (max-device-width: 736px) {
-  .input-div {
+  .input {
     height: 160px;
   }
-  .input-div span {
+  .input span {
     font-size: 22px;
   }
 }

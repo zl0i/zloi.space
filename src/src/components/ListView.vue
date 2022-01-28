@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div class="summary-header" id="knowledge-id">
+    <div class="header" id="knowledge-id">
       <p>{{ title }}</p>
       <a :href="link" target="_blank">
         <img
+          class="link-image"
           v-if="link"
           :alt="title"
-          src="../assets/link.svg"
-          style="width: 32px; height: 32px; padding-left: 10px"
+          src="../assets/link.svg"         
         />
       </a>
     </div>
-    <ul class="list-summary">
-      <li class="list-element" v-for="item in model" :key="item.id">
+    <ul class="list">
+      <li v-for="item in model" :key="item.id">
         <slot :item="item"></slot>
       </li>
     </ul>
@@ -38,7 +38,7 @@ export default class ListView extends Vue {
 </script>
 
 <style scoped>
-.summary-header {
+.header {
   font-size: 40px;
   display: flex;
   justify-content: center;
@@ -47,7 +47,14 @@ export default class ListView extends Vue {
   height: 48px;
 }
 
-.list-summary {
+.link-image {
+  width: 32px;
+  height: 32px;
+  padding-left: 10px;
+  padding-top: 15px;
+}
+
+.list {
   margin: 40px 0;
   width: calc(100vw - 144px);
   height: 370px;
@@ -64,28 +71,28 @@ export default class ListView extends Vue {
   scrollbar-width: none;
 }
 
-.list-summary:active {
+.list:active {
   cursor: grabbing;
 }
 
-.list-summary::-webkit-scrollbar {
+.list::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 /* Handle */
-.list-summary::-webkit-scrollbar-thumb {
+.list::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 5px;
 }
 
 /* Handle on hover */
-.list-summary ::-webkit-scrollbar-thumb:hover {
+.list ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
 @media (max-device-width: 736px) {
-  .list-summary {
+  .list {
     margin-top: 0;
   }
 }

@@ -2,7 +2,7 @@
   <div class="summary-box" id="summary-id">
     <div class="summary-header">
       <p style="margin: 0px">Summary</p>
-      <a href="summary.pdf" target="_blank" style="padding-top: 20px">
+      <a href="./summary.pdf" target="_blank" style="padding-top: 20px">
         <img alt="downloadSummary" src="../assets/download.svg" />
       </a>
     </div>
@@ -52,30 +52,30 @@
       </ul>
       <ul class="right-column">
         <p class="box-naming">Скиллы:</p>
-        <div class="skill-flex">
+        <div class="box-skill">
           <p>NodeJS/Typescript</p>
-          <div class="skill-box">
+          <div class="skill-progress">
             <div class="skill-fill" style="width: 70%"></div>
             <div class="skill-lvl">Знаю нюансы</div>
           </div>
         </div>
-        <div class="skill-flex">
+        <div class="box-skill">
           <p>SQL/ORM</p>
-          <div class="skill-box">
+          <div class="skill-progress">
             <div class="skill-fill" style="width: 50%"></div>
             <div class="skill-lvl">Умею писать сложные запросы</div>
           </div>
         </div>
-        <div class="skill-flex">
+        <div class="box-skill">
           <p>GIT</p>
-          <div class="skill-box">
+          <div class="skill-progress">
             <div class="skill-fill" style="width: 70%"></div>
             <div class="skill-lvl">Могу работать из консоли</div>
           </div>
         </div>
-        <div class="skill-flex">
+        <div class="box-skill">
           <p>Figma</p>
-          <div class="skill-box">
+          <div class="skill-progress">
             <div class="skill-fill" style="width: 40%"></div>
             <div class="skill-lvl">Обладаю базовыми навыками</div>
           </div>
@@ -238,7 +238,7 @@ export default class Summary extends Vue {}
   padding-right: 5px;
 }
 
-.skill-flex {
+.box-skill {
   display: flex;
   align-items: center;
   text-align: right;
@@ -246,25 +246,25 @@ export default class Summary extends Vue {}
   margin-bottom: 0px;
 }
 
-.skill-flex p {
+.box-skill p {
   text-align: right;
   width: 120px;
 }
 
 @media (max-device-width: 736px) {
-  .skill-flex {
+  .box-skill {
     flex-direction: column;
     align-items: flex-start;
     padding-left: 20px;
   }
-  .skill-flex p {
+  .box-skill p {
     width: fit-content;
     padding-left: 10px;
     margin: 26px 0 3px 0;
   }
 }
 
-.skill-box {
+.skill-progress {
   width: 20vw;
   height: 8px;
   border-radius: 4px;
@@ -273,7 +273,7 @@ export default class Summary extends Vue {}
 }
 
 @media (max-device-width: 736px) {
-  .skill-box {
+  .skill-progress {
     width: 250px;
   }
 }

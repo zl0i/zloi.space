@@ -3,7 +3,7 @@
     <ListView
       title="Knowledge"
       link="https://github.com/zl0i/KnowledgeBase"
-      :model="sortKnowledge()"
+      :model="sorted()"
     >
       <template v-slot:default="props">
         <Instruction
@@ -53,13 +53,9 @@ export default class KnoweledgeView extends Vue {
     this.getInstructions();
   }
 
-  sortByName<T extends { name: string }>(a: T, b: T) {
-    return a.name.localeCompare(b.name);
-  }
-
   @Watch("instructions")
-  sortKnowledge() {
-    return this.instructions.sort(this.sortByName);
+  sorted() {
+    return this.instructions.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   getInstructions() {

@@ -1,9 +1,9 @@
 <template>
-  <div class="list-element">
-    <div class="element-img" @click.stop="this.$emit('open', name, html)">
-      <div class="element-inner" v-html="markedText(text)"></div>
+  <div class="instruction">
+    <div class="image" @click.stop.prevent="this.$emit('open', name, html)">
+      <div class="content" v-html="markedText(text)"></div>
     </div>
-    <p class="element-name">{{ name }}</p>
+    <p class="name">{{ name }}</p>
   </div>
 </template>
 
@@ -75,7 +75,7 @@ export default class Instruction extends Vue {
 </script>
 
 <style scoped>
-.list-element {
+.instruction {
   width: 170px;
   flex-shrink: 0;
   display: flex;
@@ -88,7 +88,7 @@ export default class Instruction extends Vue {
   position: relative;
 }
 
-.element-img {
+.image {
   align-self: flex-start;
   background: white;
   width: 100%;
@@ -99,7 +99,7 @@ export default class Instruction extends Vue {
   user-select: none;
 }
 
-.element-inner {
+.content {
   width: calc(100% * 6.6);
   height: fit-content;
   margin-left: 0;
@@ -113,12 +113,12 @@ export default class Instruction extends Vue {
   transform-origin: left top;
 }
 
-.element-inner * {
+.content * {
   pointer-events: none;
   user-select: none;
 }
 
-.element-name {
+.name {
   margin-top: 10px;
   margin-bottom: 0;
   align-self: flex-end;

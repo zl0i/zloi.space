@@ -1,18 +1,16 @@
 <template>
-  <div class="list-element">
-    <img
-      style="padding: 0; object-fit: cover"
+  <div class="book">
+    <img      
       alt=""
-      class="element-img"
+      class="image"
       v-if="image"
       :src="image"
       loading="lazy"
     />
     <img
-      style="padding: 0; object-fit: cover"
       alt=""
-       v-if="!image"
-      class="element-img"
+      v-if="!image"
+      class="image"
       src="../assets/default-image-book.png"
       loading="lazy"
     />
@@ -20,7 +18,7 @@
       <img src="../assets/check.png" alt="read" />
       <p>Прочитано</p>
     </div>
-    <p class="book-name" style="height: 72px">{{ name }}</p>
+    <p class="name" style="">{{ name }}</p>
   </div>
 </template>
 
@@ -44,7 +42,7 @@ export default class Book extends Vue {
 </script>
 
 <style scoped>
-.list-element {
+.book {
   width: 170px;
   flex-shrink: 0;
   display: flex;
@@ -57,7 +55,7 @@ export default class Book extends Vue {
   position: relative;
 }
 
-.element-img {
+.image {
   align-self: flex-start;
   background: white;
   width: 100%;
@@ -66,36 +64,8 @@ export default class Book extends Vue {
   padding: 5px;
   overflow: hidden;
   user-select: none;
-}
-
-.element-inner {
-  width: calc(100% * 6.6);
-  height: fit-content;
-  margin-left: 0;
-  background: white;
-  color: #1a1a1a;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  overflow: auto;
-  padding: 20px;
-  border-radius: 5px;
-  transform: scale(0.15);
-  transform-origin: left top;
-}
-
-.element-inner * {
-  pointer-events: none;
-  user-select: none;
-}
-
-.element-name {
-  margin-top: 10px;
-  margin-bottom: 0;
-  align-self: flex-end;
-  text-align: center;
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  user-select: none;
+  padding: 0; 
+  object-fit: cover
 }
 
 .read-div {
@@ -121,7 +91,8 @@ export default class Book extends Vue {
   font-size: 14px;
 }
 
-.book-name {
+.name {
+  height: 72px;
   margin-top: 7px;
   margin-bottom: 0;
   text-align: center;

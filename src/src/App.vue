@@ -8,13 +8,15 @@
         everything that connected with it. I have experience in developing
         microservices, building CI/CD using GitLab and working with cloud
         providers (GCP)."
+      :titles="[
+        'My name is Dima',
+        'I write code in JS and C++',
+        'I\'m backend developer',
+      ]"
     />
     <Summary />
     <div class="gallery-box">
-      <KnoweledgeView
-        title="Knowledge"
-        link="https://github.com/zl0i/KnowledgeBase"
-      />
+      <KnoweledgeView />
       <BookView />
     </div>
   </div>
