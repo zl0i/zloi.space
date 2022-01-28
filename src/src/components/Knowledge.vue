@@ -13,7 +13,7 @@
         />
       </template>
     </ListView>
-    <InstructionDialog      
+    <InstructionDialog
       v-if="showModal"
       @close="closeDialog"
       :name="modelName"

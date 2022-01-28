@@ -1,19 +1,6 @@
 <template>
   <div>
-    <Welcome
-      text="Hello. As written above, my name is Dima. I have been working
-        professionally as a programmer since 2018. I have developed
-        cross-platform mobile applications in Qt, but I discovered JS in 2020
-        and fell in love with it. I love developing the backend part and
-        everything that connected with it. I have experience in developing
-        microservices, building CI/CD using GitLab and working with cloud
-        providers (GCP)."
-      :titles="[
-        'My name is Dima',
-        'I write code in JS and C++',
-        'I\'m backend developer',
-      ]"
-    />
+    <Welcome :text="about" :titles="titles" :links="links" />
     <Summary />
     <div class="gallery-box">
       <KnoweledgeView />
@@ -24,7 +11,8 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import Welcome from "./components/Welcome.vue";
+import axios from "axios";
+import Welcome, { ILink } from "./components/Welcome.vue";
 import Summary from "./components/Summary.vue";
 import KnoweledgeView from "./components/Knowledge.vue";
 import BookView from "./components/BooksView.vue";
@@ -37,7 +25,29 @@ import BookView from "./components/BooksView.vue";
     BookView,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  about: string = "";
+  titles: string[] = [];
+  links: ILink[] = [];
+
+  parse(data: any) {
+    this.about = data.about;
+    this.titles.push(...data.titles);
+    this.links.push(...data.links);
+    console.log(this.titles);
+  }
+
+  created() {
+    axios
+      .get("summary.ru.json")
+      .then((res) => {
+        this.parse(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+}
 </script>
 
 <style>

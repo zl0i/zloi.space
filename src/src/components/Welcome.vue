@@ -18,32 +18,9 @@
     <main class="text-box">
       <p>{{ text }}</p>
       <ul>
-        <li>
-          <a href="https://gitlab.com/zl0i/"
-            ><img src="../assets/gitlab.png"
-          /></a>
-        </li>
-        <li>
-          <a href="https://github.com/zl0i"
-            ><img src="../assets/github.png"
-          /></a>
-        </li>
-        <li>
-          <a href="mailto: pdmitri07@gmail.com"
-            ><img src="../assets/gmail.png"
-          /></a>
-        </li>
-        <li>
-          <a href="https://vk.com/dev_zloi"><img src="../assets/vk.png" /></a>
-        </li>
-        <li>
-          <a href="https://t.me/zzloi"><img src="../assets/telegram.png" /></a>
-        </li>
-        <li>
-          <a href="https://habr.com/ru/users/zl0i"
-            ><img src="../assets/habr.png"
-          /></a>
-        </li>
+        <li v-for="item in links" :key="item.link">
+          <a :href="item.link"> <img :src="item.image" /></a>
+        </li>        
       </ul>
     </main>
   </div>
@@ -52,26 +29,47 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { Watch } from "vue-property-decorator";
 import Typed from "typed.js";
+
+export interface ILink {
+  image: string;
+  link: string;
+}
 
 @Options({
   props: {
     text: String,
     titles: Array,
+    links: Array,
   },
 })
 export default class Welcome extends Vue {
-  text!: string;
-  titles!: string[];
+  text: string;
+  titles: string[] = [];
+  links: ILink[] = [];
 
-  mounted() {
-    var options = {
+  private typed: Typed;
+
+  @Watch("titles")
+  onTitlesChanged(_value: string[], _oldValue: string[]) {
+    console.log("tффффффффффффффффффффффффt");
+    this.typed.destroy();
+    this.typed = new Typed(".auto-input", {
       strings: this.titles,
       typeSpeed: 100,
       backSpeed: 100,
       loop: true,
-    };
-    new Typed(".auto-input", options);
+    });
+  }
+
+  mounted() {
+    // this.typed = new Typed(".auto-input", {
+    //   strings: this.titles,
+    //   typeSpeed: 100,
+    //   backSpeed: 100,
+    //   loop: true,
+    // });
   }
 }
 </script>
