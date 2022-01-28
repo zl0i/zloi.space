@@ -97,7 +97,7 @@
     {
         "title": "You Don't Know JS: ES6 & Beyond",
         "link": "https://www.googleapis.com/books/v1/volumes/rec6CwAAQBAJ",
-        "read": false
+        "read": true
     },
     {
         "title": "You Don't Know JS: Up & Going",
