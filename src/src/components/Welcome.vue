@@ -52,24 +52,13 @@ export default class Welcome extends Vue {
   private typed: Typed;
 
   @Watch("titles")
-  onTitlesChanged(_value: string[], _oldValue: string[]) {
-    console.log("tффффффффффффффффффффффффt");
-    this.typed.destroy();
+  onTitlesChanged() {    
     this.typed = new Typed(".auto-input", {
       strings: this.titles,
       typeSpeed: 100,
       backSpeed: 100,
       loop: true,
     });
-  }
-
-  mounted() {
-    // this.typed = new Typed(".auto-input", {
-    //   strings: this.titles,
-    //   typeSpeed: 100,
-    //   backSpeed: 100,
-    //   loop: true,
-    // });
   }
 }
 </script>

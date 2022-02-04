@@ -33,10 +33,9 @@ export default class App extends Vue {
 
   parse(data: any) {
     this.about = data.about;
-    this.titles.push(...data.titles);
+    this.titles = data.titles;
     this.links.push(...data.links);
     this.summary = data.summary
-    console.log(this.titles);
   }
 
   created() {
