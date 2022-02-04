@@ -1,7 +1,7 @@
 <template>
   <div>
     <Welcome :text="about" :titles="titles" :links="links" />
-    <Summary />
+    <Summary :summary="summary"/>
     <div class="gallery-box">
       <KnoweledgeView />
       <BookView />
@@ -29,11 +29,13 @@ export default class App extends Vue {
   about: string = "";
   titles: string[] = [];
   links: ILink[] = [];
+  summary: unknown = [];
 
   parse(data: any) {
     this.about = data.about;
     this.titles.push(...data.titles);
     this.links.push(...data.links);
+    this.summary = data.summary
     console.log(this.titles);
   }
 

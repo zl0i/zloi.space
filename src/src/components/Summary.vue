@@ -10,96 +10,62 @@
       <ul class="left-column">
         <div>
           <p class="box-naming">Образование:</p>
-          <li class="box-list">
-            <p>сентябрь 2014 - февраль 2020</p>
-            <p>
-              Воронежский государственный технический университет специалист
-            </p>
-            <p>Кафедра радиоэлектронных систем управления и комплексов</p>
+          <li
+            class="box-list"
+            v-for="item of summary.education"
+            :key="item.title"
+          >
+            <p>{{ item.range.from }} - {{ item.range.to }}</p>
+            <p>{{ item.title }}</p>
+            <p>{{ item.speciality }}</p>
           </li>
 
           <p class="box-naming">Дополнительное образование:</p>
-          <li class="box-list">
-            <p>сентябрь 2014 - февраль 2020</p>
-            <p>Слёрм</p>
-            <p>Вечерняя школа по Kubernetes</p>
+          <li
+            class="box-list"
+            v-for="item of summary.courses"
+            :key="item.title"
+          >
+            <p>{{ item.range.from }} - {{ item.range.to }}</p>
+            <p>{{ item.title }}</p>
+            <p>{{ item.speciality }}</p>
           </li>
 
           <p class="box-naming">Опыт работы:</p>
-          <li class="box-list">
+          <li
+            class="box-list"
+            v-for="item of summary.experience"
+            :key="item.title"
+          >
             <p>
-              март 2019 - настоящее время
-              <a class="org-name" href="https://fusionpos.ru/">FusionPOS</a>
+              {{ item.range.from }} - {{ item.range.to }}
+              <a class="org-name" :href="item.link_org">{{ item.org }}</a>
             </p>
-            <p class="description">Разработчик</p>
-            <p class="description">
-              Разработка новых и поддержка старых кросплатформенных мобильных
-              приложений на Qt (с использованием Object-C и Java).
-              Проектирование и создание API на Yii2.
-            </p>
-          </li>
-          <li class="box-list">
-            <p>
-              сентябрь 2020 - январь 2021
-              <a class="org-name" href="https://www.coffeebon.ru/">
-                CoffeeBon
-              </a>
-            </p>
-            <p class="description">Разработчик</p>
-            <p class="description">Доработка мобильного приложения на Qt.</p>
+            <p class="description">{{ item.position }}</p>
+            <p class="description">{{ item.duties }}</p>
           </li>
         </div>
       </ul>
       <ul class="right-column">
         <p class="box-naming">Скиллы:</p>
-        <div class="box-skill">
-          <p>NodeJS/Typescript</p>
+        <div class="box-skill" v-for="item of summary.skills" :key="item.name">
+          <p>{{ item.name }}</p>
           <div class="skill-progress">
-            <div class="skill-fill" style="width: 70%"></div>
-            <div class="skill-lvl">Знаю нюансы</div>
-          </div>
-        </div>
-        <div class="box-skill">
-          <p>SQL/ORM</p>
-          <div class="skill-progress">
-            <div class="skill-fill" style="width: 50%"></div>
-            <div class="skill-lvl">Умею писать сложные запросы</div>
-          </div>
-        </div>
-        <div class="box-skill">
-          <p>GIT</p>
-          <div class="skill-progress">
-            <div class="skill-fill" style="width: 70%"></div>
-            <div class="skill-lvl">Могу работать из консоли</div>
-          </div>
-        </div>
-        <div class="box-skill">
-          <p>Figma</p>
-          <div class="skill-progress">
-            <div class="skill-fill" style="width: 40%"></div>
-            <div class="skill-lvl">Обладаю базовыми навыками</div>
+            <div
+              class="skill-fill"
+              :style="{ width: `${item.value * 100}%` }"
+            ></div>
+            <div class="skill-lvl">{{ item.description }}</div>
           </div>
         </div>
         <p class="box-naming">Технический стэк:</p>
-        <li class="box-list">NodeJS (ExpressJS), TypeScript, TypeORM, Jest</li>
-        <li class="box-list">MySQL, PostgreSQL, MongoDB, Redis</li>
-        <li class="box-list">RabbitMQ, Kafka</li>
-        <li class="box-list">
-          Linux, Docker, k8s, Helm, CI/CD, GitLab, DevOps, GitOps
+        <li class="box-list" v-for="item of summary.tech_stack" :key="item">
+          {{ item }}
         </li>
-        <li class="box-list">Qt, qml, C++, Andoid (Java), iOS (Object-C)</li>
-        <li class="box-list">PHP, Yii2</li>
-        <li class="box-list">Vue3, HTML, CSS</li>
-
         <p class="box-naming">Достижения:</p>
-        <li class="box-list">Внедрил CI/CD для Android приложений</li>
-        <li class="box-list">
-          Внедрил мониторинг и логирование в backend-часть
+        <li class="box-list" v-for="item of summary.achievements" :key="item">
+          {{ item }}
         </li>
-        <li class="box-list">
-          Внедрил различные сервисы Firebase в мобильное приложение на Qt
-        </li>
-        <li class="box-list">Умею работать с JNI в Qt</li>
       </ul>
     </div>
   </div>
@@ -110,9 +76,13 @@
 import { Vue, Options } from "vue-class-component";
 
 @Options({
-  props: {},
+  props: {
+    summary: Object,
+  },
 })
-export default class Summary extends Vue {}
+export default class Summary extends Vue {
+  summary: any = {};
+}
 </script>
 
 <style scoped>
@@ -207,6 +177,7 @@ export default class Summary extends Vue {}
 }
 
 .box-list p {
+  /* width: min-content; */
   margin: 7px 0;
 }
 
