@@ -86,6 +86,7 @@ export default class KnoweledgeView extends Vue {
 
   showDialog(name: string, text: string) {
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
     this.modelName = name;
     this.modelText = text;
     this.showModal = true;
@@ -93,6 +94,11 @@ export default class KnoweledgeView extends Vue {
 
   closeDialog() {
     document.body.style.overflow = "auto";
+    document.body.style.position = "static";
+    const knowledgeView = document.getElementById("knowledge");
+    if (knowledgeView) {
+      scrollTo(0, knowledgeView.offsetTop - knowledgeView.scrollTop)
+    }
     this.showModal = false;
   }
 }
