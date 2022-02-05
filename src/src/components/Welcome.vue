@@ -7,7 +7,7 @@
       <p>{{ text }}</p>
       <ul>
         <li v-for="item in links" :key="item.link">
-          <a :href="item.link"> <img :src="item.image" /></a>
+          <a class="SNLink" :href="item.link"> <img :src="item.image" /></a>
         </li>
       </ul>
     </main>
@@ -88,6 +88,11 @@ img {
   display: inline-block;
   list-style: none;
   margin-right: 20px;
+}
+
+.SNLink {
+  display: block;
+  height: 40px;
 }
 
 @media (max-device-width: 736px) {
