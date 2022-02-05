@@ -69,7 +69,6 @@ img {
   }
 }
 
-
 .text-box {
   font-size: 17px;
   letter-spacing: 1px;
@@ -111,9 +110,6 @@ img {
   height: 300px;
   display: flex;
   align-items: flex-end;
-}
-
-.input span {
   font-size: 65px;
   font-weight: bold;
   overflow-wrap: break-word;
@@ -124,8 +120,6 @@ img {
 @media (max-device-width: 736px) {
   .input {
     height: 160px;
-  }
-  .input span {
     font-size: 22px;
   }
 }
