@@ -91,9 +91,4 @@ export default class ListView extends Vue {
   background: #555;
 }
 
-@media (max-device-width: 736px) {
-  .list {
-    margin-top: 0;
-  }
-}
 </style>
