@@ -1,10 +1,10 @@
 {
   "titles": [
-    "My name is Dima",
-    "I write code in JS and C++",
-    "I'm backend developer"
+    "Меня зовут Дима",
+    "Я пишу код на TypeScript и C++",
+    "Я backend разработчик"
   ],
-  "about": "Hello. As written above, my name is Dima. I have been working professionally as a programmer since 2018. I have developed cross-platform mobile applications in Qt, but I discovered JS in 2020 and fell in love with it. I love developing the backend part and everything that connected with it. I have experience in developing microservices, building CI/CD using GitLab and working with cloud providers (GCP).",
+  "about": "Привет. Как написано выше, меня зовут Дима. Профессионально работаю программистом с 2018 года. Разрабатывал кроссплатформенные мобильные приложения на Qt, но JS открыл для себя в 2020 году и влюбился в него. Я люблю разрабатывать бэкенд часть и все что с ней связано. У меня есть опыт разработки микросервисов, создания CI/CD с использованием GitLab и работы с облачными провайдерами (GCP).",
   "links": [
     {
       "image": "/img/gitlab.png",
