@@ -20,7 +20,7 @@
       <ul>
         <li v-for="item in links" :key="item.link">
           <a :href="item.link"> <img :src="item.image" /></a>
-        </li>        
+        </li>
       </ul>
     </main>
   </div>
@@ -52,7 +52,7 @@ export default class Welcome extends Vue {
   private typed: Typed;
 
   @Watch("titles")
-  onTitlesChanged() {    
+  onTitlesChanged() {
     this.typed = new Typed(".auto-input", {
       strings: this.titles,
       typeSpeed: 100,
@@ -64,6 +64,8 @@ export default class Welcome extends Vue {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
 .header nav {
   text-align: right;
 }
