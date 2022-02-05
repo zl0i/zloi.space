@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="header" :id="String(title).toLowerCase()">
+    <div class="header">
       <p>{{ title }}</p>
       <a :href="link" target="_blank">
         <img
           class="link-image"
           v-if="link"
           :alt="title"
-          src="../assets/link.svg"         
+          src="../assets/link.svg"
         />
       </a>
     </div>

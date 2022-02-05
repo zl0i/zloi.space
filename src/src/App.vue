@@ -1,10 +1,22 @@
 <template>
   <div>
+    <div class="header">
+      <nav>
+        <a href="#">
+          <h1>_zloi_</h1>
+        </a>
+        <div class="header-links">
+          <a href="#summary">Summary</a>
+          <a href="#knowledge">Knowledge</a>
+          <a href="#reads">Read</a>
+        </div>
+      </nav>
+    </div>
     <Welcome :text="about" :titles="titles" :links="links" />
-    <Summary :summary="summary"/>
+    <Summary id="summary" :summary="summary" />
     <div class="gallery-box">
-      <KnoweledgeView />
-      <BookView />
+      <KnoweledgeView id="knowledge" />
+      <BookView id="reads" />
     </div>
   </div>
 </template>
@@ -35,7 +47,7 @@ export default class App extends Vue {
     this.about = data.about;
     this.titles = data.titles;
     this.links.push(...data.links);
-    this.summary = data.summary
+    this.summary = data.summary;
   }
 
   created() {
@@ -52,6 +64,8 @@ export default class App extends Vue {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
 body {
   background: #1c1e2a;
   opacity: 0.9;
@@ -84,5 +98,52 @@ body::-webkit-scrollbar-thumb {
 
 .gallery-box {
   min-height: 100vh;
+}
+.header {
+  padding: 0 8.5%;
+}
+
+.header nav {
+  text-align: right;
+}
+.header-links {
+  flex: 1;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+@media (max-device-width: 736px) {
+  .header-links {
+    display: none;
+  }
+  .header nav a h1 {
+    margin-bottom: 0;
+  }
+}
+
+.header-links a {
+  margin-left: 40px;
+  color: #ffffff;
+}
+
+.header-links a:hover {
+  color: #94aadd;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0px 0 10px;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a h1 {
+  font-family: "Permanent Marker";
+  color: #fff;
+  font-size: 40px;
 }
 </style>

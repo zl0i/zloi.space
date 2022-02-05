@@ -1,17 +1,5 @@
 <template>
-  <div class="screen">
-    <div class="header">
-      <nav>
-        <a href="">
-          <h1>_zloi_</h1>
-        </a>
-        <div class="header-right">
-          <a href="#summary">Summary</a>
-          <a href="#knowledge">Knowledge</a>
-          <a href="#reads">Read</a>
-        </div>
-      </nav>
-    </div>
+  <div class="screen">   
     <div class="input">
       <span class="auto-input"></span>
     </div>
@@ -64,35 +52,9 @@ export default class Welcome extends Vue {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
-.header nav {
-  text-align: right;
-}
-.header-right {
-  flex: 1;
-  font-size: 24px;
-  letter-spacing: 1px;
-}
-@media (max-device-width: 736px) {
-  .header-right {
-    display: none;
-  }
-  .header nav a h1 {
-    margin-bottom: 0;
-  }
-}
 img {
   pointer-events: none;
-}
-
-.header-right a {
-  margin-left: 40px;
-  color: #ffffff;
-}
-
-.header-right a:hover {
-  color: #94aadd;
 }
 
 .screen {
@@ -107,23 +69,6 @@ img {
   }
 }
 
-nav {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 0px 0 10px;
-}
-
-nav a {
-  text-decoration: none;
-}
-
-nav a h1 {
-  font-family: "Permanent Marker";
-  color: #fff;
-  font-size: 40px;
-}
 
 .text-box {
   font-size: 17px;
