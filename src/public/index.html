@@ -24,8 +24,8 @@
     />
     <meta property="og:image:width" content="968" />
     <meta property="og:image:height" content="504" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="yandex-verification" content="9425b9578d21b568" />
     <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/default.min.css">
     <title><%= htmlWebpackPlugin.options.title %></title>
@@ -41,4 +41,20 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCTvLfpI-aVfTbU6eWgvNX2EOSi_4K3GrU",
+      authDomain: "zloi-space.firebaseapp.com",
+      projectId: "zloi-space",
+      storageBucket: "zloi-space.appspot.com",
+      messagingSenderId: "719482627707",
+      appId: "1:719482627707:web:17692fd7541146ef9e24de",
+      measurementId: "G-J8NSS1G2LL",
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </html>
