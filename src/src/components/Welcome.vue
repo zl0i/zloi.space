@@ -7,7 +7,7 @@
       <p>{{ text }}</p>
       <ul>
         <li v-for="item in links" :key="item.link">
-          <a class="SNLink" :href="item.link"> <img :src="item.image" /></a>
+          <a class="contacts" :href="item.link"> <img :src="item.image" /></a>
         </li>
       </ul>
     </main>
@@ -90,7 +90,7 @@ img {
   margin-right: 20px;
 }
 
-.SNLink {
+.contacts {
   display: block;
   height: 40px;
 }
