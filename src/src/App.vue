@@ -9,6 +9,10 @@
           <a href="#summary">{{ $t("headers.summary") }}</a>
           <a href="#knowledge">{{ $t("headers.knoweledge") }}</a>
           <a href="#reads">{{ $t("headers.reads") }}</a>
+          <div class="language">
+            <span>English</span>
+            <img alt="arrow" src="img/arrow-down.svg">
+          </div>
         </div>
       </nav>
     </div>
@@ -106,8 +110,12 @@ body::-webkit-scrollbar-thumb {
 .header nav {
   text-align: right;
 }
+
 .header-links {
-  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-grow: 1;
   font-size: 24px;
   letter-spacing: 1px;
 }
@@ -120,13 +128,18 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-.header-links a {
+.header-links > * {
   margin-left: 40px;
   color: #ffffff;
 }
 
-.header-links a:hover {
+.header-links > *:hover {
   color: #94aadd;
+}
+
+.language {
+  width: fit-content;
+  margin-left: 40px;
 }
 
 nav {
