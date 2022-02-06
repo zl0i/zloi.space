@@ -1,5 +1,5 @@
 <template>
-  <ListView title="Reads" :model="sortBooks()">
+  <ListView :title="$t('headers.reads')" :model="sortBooks()">
     <template v-slot:default="props">
       <Book
         :name="props?.item?.name"

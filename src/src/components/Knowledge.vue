@@ -1,7 +1,7 @@
 <template>
   <div>
     <ListView
-      title="Knowledge"
+      :title="$t('headers.knoweledge')"
       link="https://github.com/zl0i/KnowledgeBase"
       :model="sorted()"
     >
@@ -97,7 +97,7 @@ export default class KnoweledgeView extends Vue {
     document.body.style.position = "static";
     const knowledgeView = document.getElementById("knowledge");
     if (knowledgeView) {
-      scrollTo(0, knowledgeView.offsetTop - knowledgeView.scrollTop)
+      scrollTo(0, knowledgeView.offsetTop - knowledgeView.scrollTop);
     }
     this.showModal = false;
   }

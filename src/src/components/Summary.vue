@@ -1,7 +1,7 @@
 <template>
   <div class="summary-box">
     <div class="summary-header">
-      <p style="margin: 0px">Summary</p>
+      <p style="margin: 0px">{{ $t("summary.title") }}</p>
       <a href="./summary.pdf" target="_blank" style="padding-top: 20px">
         <img alt="downloadSummary" src="../assets/download.svg" />
       </a>
@@ -9,7 +9,7 @@
     <div class="all-column">
       <ul class="left-column">
         <div>
-          <p class="box-naming">Образование:</p>
+          <p class="box-naming">{{ `${$t("summary.education")}:` }}:</p>
           <li
             class="box-list"
             v-for="item of summary.education"
@@ -20,7 +20,7 @@
             <p>{{ item.speciality }}</p>
           </li>
 
-          <p class="box-naming">Дополнительное образование:</p>
+          <p class="box-naming">{{`${$t("summary.courses")}:`}}</p>
           <li
             class="box-list"
             v-for="item of summary.courses"
@@ -31,7 +31,7 @@
             <p>{{ item.speciality }}</p>
           </li>
 
-          <p class="box-naming">Опыт работы:</p>
+          <p class="box-naming">{{`${$t("summary.experience")}:`}}</p>
           <li
             class="box-list"
             v-for="item of summary.experience"
@@ -47,7 +47,7 @@
         </div>
       </ul>
       <ul class="right-column">
-        <p class="box-naming">Скиллы:</p>
+        <p class="box-naming">{{`${$t("summary.skills")}:`}}</p>
         <div class="box-skill" v-for="item of summary.skills" :key="item.name">
           <p>{{ item.name }}</p>
           <div class="skill-progress">
@@ -58,11 +58,11 @@
             <div class="skill-lvl">{{ item.description }}</div>
           </div>
         </div>
-        <p class="box-naming">Технический стэк:</p>
+        <p class="box-naming">{{`${$t("summary.tech_stack")}:`}}</p>
         <li class="box-list" v-for="item of summary.tech_stack" :key="item">
           {{ item }}
         </li>
-        <p class="box-naming">Достижения:</p>
+        <p class="box-naming">{{`${$t("summary.achievements")}:`}}</p>
         <li class="box-list" v-for="item of summary.achievements" :key="item">
           {{ item }}
         </li>

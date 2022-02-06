@@ -6,9 +6,9 @@
           <h1>_zloi_</h1>
         </a>
         <div class="header-links">
-          <a href="#summary">Summary</a>
-          <a href="#knowledge">Knowledge</a>
-          <a href="#reads">Read</a>
+          <a href="#summary">{{ $t("headers.summary") }}</a>
+          <a href="#knowledge">{{ $t("headers.knoweledge") }}</a>
+          <a href="#reads">{{ $t("headers.reads") }}</a>
         </div>
       </nav>
     </div>
