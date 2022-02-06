@@ -92,7 +92,7 @@ img {
 
 .contacts {
   display: block;
-  height: 40px;
+  height: 32px;
 }
 
 @media (max-device-width: 736px) {
