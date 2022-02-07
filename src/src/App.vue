@@ -9,6 +9,14 @@
           <a href="#summary">{{ $t("headers.summary") }}</a>
           <a href="#knowledge">{{ $t("headers.knoweledge") }}</a>
           <a href="#reads">{{ $t("headers.reads") }}</a>
+          <div class="language" @click="openPopup">
+            <span>English</span>
+            <img alt="arrow" src="img/arrow-down.svg">
+          </div>
+          <div class="language-popup" v-if="isShowLanguage">
+            <span>Русский</span>
+            <span>English</span>
+          </div>
         </div>
       </nav>
     </div>
@@ -42,6 +50,7 @@ export default class App extends Vue {
   titles: string[] = [];
   links: ILink[] = [];
   summary: unknown = [];
+  isShowLanguage: boolean = false;
 
   parse(data: any) {
     this.about = data.about;
@@ -59,6 +68,10 @@ export default class App extends Vue {
       .catch((err) => {
         console.log(err);
       });
+  }
+  openPopup() {
+    this.isShowLanguage = !this.isShowLanguage
+    console.log(this.isShowLanguage)
   }
 }
 </script>
@@ -106,8 +119,12 @@ body::-webkit-scrollbar-thumb {
 .header nav {
   text-align: right;
 }
+
 .header-links {
-  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-grow: 1;
   font-size: 24px;
   letter-spacing: 1px;
 }
@@ -120,13 +137,42 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-.header-links a {
+.header-links > * {
   margin-left: 40px;
   color: #ffffff;
 }
 
-.header-links a:hover {
+.header-links a:hover, span:hover {
   color: #94aadd;
+}
+
+.header-links * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.language {
+  width: fit-content;
+  margin-left: 40px;
+}
+
+.language-popup {
+  position: absolute;
+  background: #1C1E2A;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
+  border-radius: 2px;
+  top: 99px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 0.6rem 1.5rem 0.6rem 1.25rem;
 }
 
 nav {
