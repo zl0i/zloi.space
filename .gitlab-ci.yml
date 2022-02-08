@@ -20,8 +20,6 @@ build:
 .deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
-  environment:
-    on_stop: uninstall
   before_script:
     - kubectl config set-cluster my-cluster --server="$K3S_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$K3S_TOKEN"
@@ -43,6 +41,7 @@ deploy_dev:
     name: ${CI_COMMIT_BRANCH}
     url: https://${CI_COMMIT_BRANCH}.zloi.space
     deployment_tier: development
+    on_stop: stop_dev_deploy
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
 
@@ -55,7 +54,7 @@ deploy_production:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
 
-uninstall:
+stop_dev_deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
   environment:
