@@ -66,8 +66,11 @@ stop_dev_deploy:
     - kubectl config set-context default-context --cluster=my-cluster --user=admin
     - kubectl config use-context default-context
   script:
-    - helm uninstall $CI_PROJECT_NAME 
+    - helm uninstall $CI_PROJECT_NAME
+      --timeout 120s
+      --debug
       --namespace ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}
+    - kubectl delete ns ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}
   when: manual
 
 release_job:
