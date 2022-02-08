@@ -20,6 +20,8 @@ build:
 .deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
+  environment:
+    on_stop: uninstall
   before_script:
     - kubectl config set-cluster my-cluster --server="$K3S_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$K3S_TOKEN"
