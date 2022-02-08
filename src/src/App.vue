@@ -12,9 +12,11 @@
           <div class="language">
             <span>Translate</span>
             <img alt="arrow" src="./assets/arrow-down.svg" />
-            <div class="language-popup">
-              <span @click="setLanguage('ru')">Русский</span>
-              <span @click="setLanguage('en')">English</span>
+            <div class="language-background">
+              <div class="language-popup">
+                <span @click="setLanguage('ru')">Русский</span>
+                <span @click="setLanguage('en')">English</span>
+              </div>
             </div>
           </div>
         </div>
@@ -163,15 +165,23 @@ body::-webkit-scrollbar-thumb {
   margin-left: 40px;
 }
 
-.language-popup {
+.language-background {
   display: none;
   position: absolute;
+  padding-top: 10px;
+}
+
+.language:hover .language-background {
+  display: block;
+}
+
+.language-popup {
   background: #1C1E2A;
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
   border-radius: 2px;
-  margin-top: 10px;
+  display: flex;
   flex-direction: column;
   gap: 14px;
   align-items: flex-start;
