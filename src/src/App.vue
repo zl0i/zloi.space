@@ -164,6 +164,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .language-popup {
+  display: none;
   position: absolute;
   background: #1C1E2A;
   border: 1px solid rgba(255, 255, 255, 0.5);
