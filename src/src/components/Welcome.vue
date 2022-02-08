@@ -41,6 +41,7 @@ export default class Welcome extends Vue {
 
   @Watch("titles")
   onTitlesChanged() {
+    if (this.typed) this.typed.destroy();
     this.typed = new Typed(".auto-input", {
       strings: this.titles,
       typeSpeed: 100,

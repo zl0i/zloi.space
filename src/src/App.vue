@@ -38,7 +38,7 @@ import Welcome, { ILink } from "./components/Welcome.vue";
 import Summary from "./components/Summary.vue";
 import KnoweledgeView from "./components/Knowledge.vue";
 import BookView from "./components/BooksView.vue";
-import { i18n} from "./i18n";
+import { i18n } from "./i18n";
 
 @Options({
   components: {
@@ -58,13 +58,13 @@ export default class App extends Vue {
   parse(data: any) {
     this.about = data.about;
     this.titles = data.titles;
-    this.links.push(...data.links);
+    this.links = data.links;
     this.summary = data.summary;
   }
 
   created() {
     axios
-      .get("summary.ru.json")
+      .get("summary.en.json")
       .then((res) => {
         this.parse(res.data);
       })
@@ -74,7 +74,15 @@ export default class App extends Vue {
   }
 
   setLanguage(locale: typeof i18n.global.locale) {
-    i18n.global.locale = locale
+    i18n.global.locale = locale;
+    axios
+      .get(`summary.${locale}.json`)
+      .then((res) => {
+        this.parse(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 </script>
@@ -147,7 +155,8 @@ body::-webkit-scrollbar-thumb {
   color: #ffffff;
 }
 
-.header-links a:hover, span:hover {
+.header-links a:hover,
+span:hover {
   color: #94aadd;
 }
 
@@ -181,7 +190,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .language-popup {
-  background: #1C1E2A;
+  background: #1c1e2a;
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
