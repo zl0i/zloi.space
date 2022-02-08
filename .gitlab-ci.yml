@@ -23,6 +23,10 @@ build:
 .deploy:
   stage: deploy
   image: lwolf/helm-kubectl-docker:v1.21.1-v3.6.0
+  rulese:
+    changes:
+      - "src/**/*"
+      - Dockerfile
   before_script:
     - kubectl config set-cluster my-cluster --server="$K3S_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$K3S_TOKEN"
@@ -37,8 +41,6 @@ build:
       --timeout 120s
       --namespace ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}
       --create-namespace
-  needs:
-    - build
 
 deploy_dev:
   extends: .deploy
