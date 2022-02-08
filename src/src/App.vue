@@ -9,13 +9,13 @@
           <a href="#summary">{{ $t("headers.summary") }}</a>
           <a href="#knowledge">{{ $t("headers.knoweledge") }}</a>
           <a href="#reads">{{ $t("headers.reads") }}</a>
-          <div class="language" @click="openPopup">
-            <span>English</span>
-            <img alt="arrow" src="img/arrow-down.svg">
-          </div>
-          <div class="language-popup" v-if="isShowLanguage">
-            <span>Русский</span>
-            <span>English</span>
+          <div class="language">
+            <span>Translate</span>
+            <img alt="arrow" src="./assets/arrow-down.svg" />
+            <div class="language-popup">
+              <span @click="setLanguage('ru')">Русский</span>
+              <span @click="setLanguage('en')">English</span>
+            </div>
           </div>
         </div>
       </nav>
@@ -36,6 +36,7 @@ import Welcome, { ILink } from "./components/Welcome.vue";
 import Summary from "./components/Summary.vue";
 import KnoweledgeView from "./components/Knowledge.vue";
 import BookView from "./components/BooksView.vue";
+import { i18n} from "./i18n";
 
 @Options({
   components: {
@@ -69,9 +70,9 @@ export default class App extends Vue {
         console.log(err);
       });
   }
-  openPopup() {
-    this.isShowLanguage = !this.isShowLanguage
-    console.log(this.isShowLanguage)
+
+  setLanguage(locale: typeof i18n.global.locale) {
+    i18n.global.locale = locale
   }
 }
 </script>
@@ -108,7 +109,9 @@ body::-webkit-scrollbar-thumb {
   background-color: #454545;
   border-radius: 20px;
 }
+</style>
 
+<style scoped>
 .gallery-box {
   min-height: 100vh;
 }
@@ -167,8 +170,7 @@ body::-webkit-scrollbar-thumb {
   box-sizing: border-box;
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.75);
   border-radius: 2px;
-  top: 99px;
-  display: flex;
+  margin-top: 10px;
   flex-direction: column;
   gap: 14px;
   align-items: flex-start;
