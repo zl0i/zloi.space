@@ -162,7 +162,12 @@ body::-webkit-scrollbar-thumb {
 
 .language {
   width: fit-content;
-  margin-left: 40px;
+  margin-left: 100px;
+  cursor: pointer;
+}
+
+.language img {
+  margin-left: 5px;
 }
 
 .language-background {
