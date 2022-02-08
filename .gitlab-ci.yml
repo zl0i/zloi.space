@@ -16,6 +16,9 @@ build:
     - export
     - docker build -t ${CI_REGISTRY_IMAGE}/zloi-web:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID .
     - docker push ${CI_REGISTRY_IMAGE}/zloi-web:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
+  only:
+    changes:
+      - "src/**/*"
 
 .deploy:
   stage: deploy
@@ -34,6 +37,8 @@ build:
       --timeout 120s
       --namespace ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}
       --create-namespace
+  needs:
+    - build
 
 deploy_dev:
   extends: .deploy
