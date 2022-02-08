@@ -1,5 +1,5 @@
 <template>
-  <div class="screen">   
+  <div class="screen">
     <div class="input">
       <span class="auto-input"></span>
     </div>
@@ -52,7 +52,6 @@ export default class Welcome extends Vue {
 </script>
 
 <style scoped>
-
 img {
   pointer-events: none;
 }
