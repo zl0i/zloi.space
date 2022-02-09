@@ -60,10 +60,10 @@ export default class Book extends Vue {
   background: white;
   width: 100%;
   height: 250px;
-  cursor: pointer;
   padding: 5px;
   overflow: hidden;
   user-select: none;
+  -webkit-user-drag: none;
   padding: 0; 
   object-fit: cover
 }
@@ -74,7 +74,7 @@ export default class Book extends Vue {
   user-select: none;
   display: flex;
   width: 100%;
-  background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #535353 90%);
+  background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #535353 100%);
   align-items: center;
   padding-bottom: 10px;
 }
