@@ -4,7 +4,7 @@
       <Book
         :name="props?.item?.name"
         :image="props?.item?.image"
-        :isRead="props?.item?.isRead"
+        :status="props?.item?.status"
       />
     </template>
   </ListView>
@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Watch } from "vue-property-decorator"
+import { Watch } from "vue-property-decorator";
 import ListView from "./ListView.vue";
 import Book from "../elements/Book.vue";
 import axios from "axios";
@@ -21,7 +21,7 @@ interface IBook {
   id: string;
   name: string;
   image: string;
-  isRead: boolean;
+  status: string;
 }
 
 @Options({
@@ -43,9 +43,14 @@ export default class BooksView extends Vue {
 
   @Watch("books")
   sortBooks() {
-    const read = this.books.filter((item) => item.isRead);
-    const unread = this.books.filter((item) => !item.isRead);
-    return [...read.sort(this.sortByName), ...unread.sort(this.sortByName)];
+    const read = this.books.filter((item) => item.status == "read");
+    const reading = this.books.filter((item) => item.status == "reading");
+    const unread = this.books.filter((item) => item.status == "unread");
+    return [
+      ...read.sort(this.sortByName),
+      ...reading.sort(this.sortByName),
+      ...unread.sort(this.sortByName),
+    ];
   }
 
   getBook() {
@@ -60,7 +65,7 @@ export default class BooksView extends Vue {
                 id: res2.data.id,
                 name: res2.data.volumeInfo.title,
                 image: res2.data.volumeInfo?.imageLinks?.thumbnail,
-                isRead: book.read,
+                status: book.read,
               };
               this.books.push(obj);
             })

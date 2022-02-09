@@ -14,9 +14,13 @@
       src="../assets/default-image-book.png"
       loading="lazy"
     />
-    <div class="read-div" v-show="isRead">
-      <img src="../assets/check.png" alt="read" />
+    <div class="read-div" v-show="status == 'read'">
+      <img src="../assets/read.svg" alt="read" />
       <p>Прочитано</p>
+    </div>
+    <div class="read-div" v-show="status == 'reading'">
+      <img src="../assets/reading.svg" alt="read" />
+      <p>В процессе</p>
     </div>
     <p class="name" style="">{{ name }}</p>
   </div>
@@ -29,13 +33,13 @@ import { Vue, Options } from "vue-class-component";
 @Options({
   props: {
     name: String,
-    isRead: Boolean,
+    status: String,
     image: String,
   },
 })
 export default class Book extends Vue {
   name: string;
-  isRead: boolean;
+  status: string;
   image!: string;
   defaultImage = "../assets/default-image-book.png";
 }
@@ -74,7 +78,7 @@ export default class Book extends Vue {
   user-select: none;
   display: flex;
   width: 100%;
-  background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #535353 100%);
+  background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #353535 100%);
   align-items: center;
   padding-bottom: 10px;
 }
