@@ -1,12 +1,6 @@
 <template>
   <div class="book">
-    <img      
-      alt=""
-      class="image"
-      v-if="image"
-      :src="image"
-      loading="lazy"
-    />
+    <img alt="" class="image" v-if="image" :src="image" loading="lazy" />
     <img
       alt=""
       v-if="!image"
@@ -16,11 +10,11 @@
     />
     <div class="read-div" v-show="status == 'read'">
       <img src="../assets/read.svg" alt="read" />
-      <p>Прочитано</p>
+      <p>{{ $t("books.read") }}</p>
     </div>
     <div class="read-div" v-show="status == 'reading'">
       <img src="../assets/reading.svg" alt="read" />
-      <p>В процессе</p>
+      <p>{{ $t("books.reading") }}</p>
     </div>
     <p class="name" style="">{{ name }}</p>
   </div>
@@ -68,8 +62,8 @@ export default class Book extends Vue {
   overflow: hidden;
   user-select: none;
   -webkit-user-drag: none;
-  padding: 0; 
-  object-fit: cover
+  padding: 0;
+  object-fit: cover;
 }
 
 .read-div {

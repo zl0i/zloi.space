@@ -19,7 +19,11 @@ export const i18n = createI18n({
                 skills: "Skills",
                 tech_stack: "Tech stack",
                 achievements: "Achievements"
-            },            
+            },
+            books: {
+                read: "Read",
+                reading: "While reading"
+            }
         },
         ru: {
             headers: {
@@ -35,6 +39,10 @@ export const i18n = createI18n({
                 skills: "Скиллы",
                 tech_stack: "Технический стeк",
                 achievements: "Достижения"
+            },
+            books: {
+                read: "Прочитано",
+                reading: "В процессе"
             }
         }
     }
