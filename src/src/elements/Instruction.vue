@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import { marked } from "marked";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/common";
 
 const formula = {
   name: "formula",
