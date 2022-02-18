@@ -29,7 +29,7 @@ import ListView from "./ListView.vue";
 import Instruction from "../elements/Instruction.vue";
 import InstructionDialog from "../elements/InstructionDialog.vue";
 import axios from "axios";
-import { RouteRecordName } from "vue-router";
+import "vue-router";
 
 interface IInstruction {
   id: string;
@@ -49,15 +49,16 @@ export default class KnoweledgeView extends Vue {
   showModal = false;
   modelName = "";
   modelText = "";
+  private opening: string = "";
 
   created() {
     this.getInstructions();
     this.$router.beforeEach((to, _from, next) => {
-      console.log(to.path, to.hash)
       if (to.hash == "" || to.hash == "#knowledge") {
         this.showModal = false;
       } else {
-        console.log(to.path);
+        this.opening = to.hash.replace(/-/g, " ");
+        this.opening = this.opening.replace(/#/, "");
       }
       next();
     });
@@ -82,6 +83,10 @@ export default class KnoweledgeView extends Vue {
                   name: file.name,
                   text: res2.data,
                 });
+                if (this.opening == file.name) {
+                  this.showDialog(file.name, res2.data);
+                  this.opening = "";
+                }
               })
               .catch((err) => {
                 console.log(err);
@@ -100,8 +105,8 @@ export default class KnoweledgeView extends Vue {
     this.modelText = text;
     this.showModal = true;
     this.$router.push({
-      name: this.$route.name as RouteRecordName,
-      hash: name.replace(/ /g, "-"),
+      path: "/",
+      hash: "#" + name.replace(/ /g, "-"),
     });
   }
 
@@ -109,7 +114,6 @@ export default class KnoweledgeView extends Vue {
     document.body.style.overflow = "auto";
     this.showModal = false;
     this.$router.push({
-      name: this.$route.name as RouteRecordName,
       path: "/",
       hash: "#knowledge",
     });
