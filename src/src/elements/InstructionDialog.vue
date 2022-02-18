@@ -18,6 +18,9 @@ import { Options, Vue } from "vue-class-component";
     name: String,
     text: String,
   },
+  emits: [
+    "close"
+  ]
 })
 export default class MarkDownDialog extends Vue {
   name: string;
