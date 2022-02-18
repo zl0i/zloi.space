@@ -29,6 +29,7 @@ import ListView from "./ListView.vue";
 import Instruction from "../elements/Instruction.vue";
 import InstructionDialog from "../elements/InstructionDialog.vue";
 import axios from "axios";
+import { RouteRecordName } from "vue-router";
 
 interface IInstruction {
   id: string;
@@ -51,6 +52,15 @@ export default class KnoweledgeView extends Vue {
 
   created() {
     this.getInstructions();
+    this.$router.beforeEach((to, _from, next) => {
+      console.log(to.path, to.hash)
+      if (to.hash == "" || to.hash == "#knowledge") {
+        this.showModal = false;
+      } else {
+        console.log(to.path);
+      }
+      next();
+    });
   }
 
   @Watch("instructions")
@@ -86,20 +96,27 @@ export default class KnoweledgeView extends Vue {
 
   showDialog(name: string, text: string) {
     document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
     this.modelName = name;
     this.modelText = text;
     this.showModal = true;
+    this.$router.push({
+      name: this.$route.name as RouteRecordName,
+      hash: name.replace(/ /g, "-"),
+    });
   }
 
   closeDialog() {
     document.body.style.overflow = "auto";
-    document.body.style.position = "static";
-    const knowledgeView = document.getElementById("knowledge");
-    if (knowledgeView) {
-      scrollTo(0, knowledgeView.offsetTop - knowledgeView.scrollTop);
-    }
     this.showModal = false;
+    this.$router.push({
+      name: this.$route.name as RouteRecordName,
+      path: "/",
+      hash: "#knowledge",
+    });
+    window.scrollTo({
+      top: (document.getElementById("knowledge") as HTMLElement).offsetTop,
+      left: 0,
+    });
   }
 }
 </script>
