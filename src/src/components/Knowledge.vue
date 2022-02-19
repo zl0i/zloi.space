@@ -103,7 +103,7 @@ export default class KnoweledgeView extends Vue {
       next();
     });
     import(
-      /* webpackChunkName: "highlight.js" */ /* webpackPrefetch: -1 */ "highlight.js"
+      /* webpackChunkName: "highlight.js" */ /* webpackPrefetch: -1 */ "highlight.js/lib/common"
     ).then((lib) => {
       const hljs = lib.default;
       marked.setOptions({
