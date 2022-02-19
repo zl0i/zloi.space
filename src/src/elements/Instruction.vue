@@ -10,78 +10,16 @@
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import { Watch } from "vue-property-decorator";
 
 @Options({
   props: {
     name: String,
-    text: String,
+    html: String,
   },
 })
 export default class Instruction extends Vue {
   name: string;
-  text: string;
   html: string;
-  marked = (text: string) => text;
-
-  @Watch("marked")
-  onMarkedChanged() {
-    this.html = this.marked(this.text)
-    this.$forceUpdate()
-  }
-
-  created() {
-    this.html = this.text;
-    Promise.all([
-      import(/* webpackPrefetch: -1 */ "highlight.js/lib/common"),
-      import(/* webpackPrefetch: -1 */ "marked"),
-    ]).then((libs) => {
-      const hljs = libs[0].default;
-      const marked = libs[1].marked;
-      const formula = {
-        name: "formula",
-        level: "inline",
-        start(src: string) {
-          return src.match(/\$\$\n.*?\s{0,}\$\$/)?.index;
-        },
-        tokenizer(src: string, _tokens: any) {
-          const rule = /\$\$\n.*?\s{0,}\$\$/;
-          const match = rule.exec(src);
-          if (match) {
-            const token = {
-              type: "formula",
-              raw: src.replace(
-                rule,
-                `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`
-              ),
-              tokens: [],
-            };
-            return token;
-          }
-        },
-        renderer(token: any) {
-          return token.raw;
-        },
-      };
-      marked.setOptions({
-        renderer: new marked.Renderer(),
-        highlight: function (code: string, lang: string) {
-          const language = hljs.getLanguage(lang) ? lang : "plaintext";
-          return hljs.highlight(code, { language }).value;
-        },
-        langPrefix: "hljs language-",
-        pedantic: false,
-        gfm: true,
-        breaks: true,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-        xhtml: false,
-      });
-      marked.use({ extensions: [formula] });
-      this.marked = marked;
-    });
-  }
 }
 </script>
 

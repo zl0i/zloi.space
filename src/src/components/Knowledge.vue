@@ -8,7 +8,7 @@
       <template v-slot:default="props">
         <Instruction
           :name="props?.item?.name"
-          :text="props?.item?.text"
+          :html="props?.item?.html"
           @open="showDialog"
         />
       </template>
@@ -17,7 +17,7 @@
       v-if="showModal"
       @close="closeDialog"
       :name="modelName"
-      :text="modelText"
+      :text="modelHtml"
     />
   </div>
 </template>
@@ -29,12 +29,52 @@ import ListView from "./ListView.vue";
 import Instruction from "../elements/Instruction.vue";
 import InstructionDialog from "../elements/InstructionDialog.vue";
 import axios from "axios";
+import { marked } from "marked";
 import "vue-router";
+
+const formula = {
+  name: "formula",
+  level: "inline",
+  start(src: string) {
+    return src.match(/\$\$\n.*?\s{0,}\$\$/)?.index;
+  },
+  tokenizer(src: string, _tokens: any) {
+    const rule = /\$\$\n.*?\s{0,}\$\$/;
+    const match = rule.exec(src);
+    if (match) {
+      const token = {
+        type: "formula",
+        raw: src.replace(
+          rule,
+          `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`
+        ),
+        tokens: [],
+      };
+      return token;
+    }
+  },
+  renderer(token: any) {
+    return token.raw;
+  },
+};
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  langPrefix: "hljs language-",
+  pedantic: false,
+  gfm: true,
+  breaks: true,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false,
+});
+marked.use({ extensions: [formula] });
 
 interface IInstruction {
   id: string;
   name: string;
   text: string;
+  html: string;
 }
 
 @Options({
@@ -48,7 +88,7 @@ export default class KnoweledgeView extends Vue {
   instructions: IInstruction[] = [];
   showModal = false;
   modelName = "";
-  modelText = "";
+  modelHtml = "";
   private opening: string = "";
 
   created() {
@@ -61,6 +101,24 @@ export default class KnoweledgeView extends Vue {
         this.opening = this.opening.replace(/#/, "");
       }
       next();
+    });
+    import(
+      /* webpackChunkName: "highlight.js" */ /* webpackPrefetch: -1 */ "highlight.js"
+    ).then((lib) => {
+      const hljs = lib.default;
+      marked.setOptions({
+        ...marked.options,
+        highlight: function (code: string, lang: string) {
+          const language = hljs.getLanguage(lang) ? lang : "plaintext";
+          return hljs.highlight(code, { language }).value;
+        },
+      });
+      this.instructions.forEach((item) => {
+        item.html = marked(item.text);
+        if (item.name == this.modelName) {
+          this.modelHtml = item.html;
+        }
+      });
     });
   }
 
@@ -78,13 +136,15 @@ export default class KnoweledgeView extends Vue {
             axios
               .get(file.download_url)
               .then((res2) => {
-                this.instructions.push({
+                const obj: IInstruction = {
                   id: file.sha,
                   name: file.name,
                   text: res2.data,
-                });
-                if (this.opening == file.name) {
-                  this.showDialog(file.name, res2.data);
+                  html: marked(res2.data),
+                };
+                this.instructions.push(obj);
+                if (this.opening == obj.name) {
+                  this.openDialogByHash(obj.name, obj.html);
                   this.opening = "";
                 }
               })
@@ -99,10 +159,17 @@ export default class KnoweledgeView extends Vue {
       });
   }
 
-  showDialog(name: string, text: string) {
+  openDialogByHash(name: string, html: string) {
     document.body.style.overflow = "hidden";
     this.modelName = name;
-    this.modelText = text;
+    this.modelHtml = html;
+    this.showModal = true;
+  }
+
+  showDialog(name: string, html: string) {
+    document.body.style.overflow = "hidden";
+    this.modelName = name;
+    this.modelHtml = html;
     this.showModal = true;
     this.$router.push({
       path: "/",
