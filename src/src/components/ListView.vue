@@ -70,6 +70,7 @@ export default class ListView extends Vue {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
+  overflow-y: hidden;
 }
 
 .list:active {
