@@ -29,46 +29,8 @@ import ListView from "./ListView.vue";
 import Instruction from "../elements/Instruction.vue";
 import InstructionDialog from "../elements/InstructionDialog.vue";
 import axios from "axios";
-import { marked } from "marked";
+import marked from "../libs/marked";
 import "vue-router";
-
-const formula = {
-  name: "formula",
-  level: "inline",
-  start(src: string) {
-    return src.match(/\$\$\n.*?\s{0,}\$\$/)?.index;
-  },
-  tokenizer(src: string, _tokens: any) {
-    const rule = /\$\$\n.*?\s{0,}\$\$/;
-    const match = rule.exec(src);
-    if (match) {
-      const token = {
-        type: "formula",
-        raw: src.replace(
-          rule,
-          `<div class="formula">${match[0].replace(/\$/gm, "")}</div>`
-        ),
-        tokens: [],
-      };
-      return token;
-    }
-  },
-  renderer(token: any) {
-    return token.raw;
-  },
-};
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  langPrefix: "hljs language-",
-  pedantic: false,
-  gfm: true,
-  breaks: true,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false,
-});
-marked.use({ extensions: [formula] });
 
 interface IInstruction {
   id: string;
@@ -102,19 +64,10 @@ export default class KnoweledgeView extends Vue {
       }
       next();
     });
-    import(
-      /* webpackChunkName: "highlight.js" */ /* webpackPrefetch: -1 */ "highlight.js/lib/common"
-    ).then((lib) => {
-      const hljs = lib.default;
-      marked.setOptions({
-        ...marked.options,
-        highlight: function (code: string, lang: string) {
-          const language = hljs.getLanguage(lang) ? lang : "plaintext";
-          return hljs.highlight(code, { language }).value;
-        },
-      });
+
+    marked.loaded.then(() => {
       this.instructions.forEach((item) => {
-        item.html = marked(item.text);
+        item.html = marked.marked(item.text);
         if (item.name == this.modelName) {
           this.modelHtml = item.html;
         }
@@ -140,7 +93,7 @@ export default class KnoweledgeView extends Vue {
                   id: file.sha,
                   name: file.name,
                   text: res2.data,
-                  html: marked(res2.data),
+                  html: marked.marked(res2.data),
                 };
                 this.instructions.push(obj);
                 if (this.opening == obj.name) {
