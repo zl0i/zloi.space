@@ -40,6 +40,7 @@ export default class ListView extends Vue {
 <style scoped>
 .header {
   font-size: 40px;
+  padding-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
