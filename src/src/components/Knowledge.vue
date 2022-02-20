@@ -57,7 +57,7 @@ export default class KnoweledgeView extends Vue {
     this.getInstructions();
     this.$router.beforeEach((to, _from, next) => {
       if (to.hash == "" || to.hash == "#knowledge") {
-        this.showModal = false;
+        this.closeDialogByHash();
       } else {
         this.opening = to.hash.replace(/-/g, " ");
         this.opening = this.opening.replace(/#/, "");
@@ -114,13 +114,21 @@ export default class KnoweledgeView extends Vue {
 
   openDialogByHash(name: string, html: string) {
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
     this.modelName = name;
     this.modelHtml = html;
     this.showModal = true;
   }
 
+  closeDialogByHash() {
+    document.body.style.overflow = "auto";
+    document.body.style.position = "static";
+    this.showModal = false;
+  }
+
   showDialog(name: string, html: string) {
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
     this.modelName = name;
     this.modelHtml = html;
     this.showModal = true;
@@ -132,6 +140,7 @@ export default class KnoweledgeView extends Vue {
 
   closeDialog() {
     document.body.style.overflow = "auto";
+    document.body.style.position = "static";
     this.showModal = false;
     this.$router.push({
       path: "/",
