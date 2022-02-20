@@ -39,9 +39,6 @@ export default class Header extends Vue {
 
 
 <style scoped>
-.gallery-box {
-  min-height: 100vh;
-}
 .header {
   padding: 0 8.5%;
 }

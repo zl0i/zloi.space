@@ -3,10 +3,8 @@
     <Header @changeLanguage="setLanguage"></Header>
     <Welcome :text="about" :titles="titles" :links="links" />
     <Summary id="summary" :summary="summary" />
-    <div class="gallery-box">
-      <KnoweledgeView id="knowledge" />
-      <BookView id="reads" />
-    </div>
+    <KnoweledgeView id="knowledge" />
+    <BookView id="reads" />
   </div>
 </template>
 
