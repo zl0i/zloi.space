@@ -54,6 +54,7 @@ export default class App extends Vue {
 
   setLanguage(locale: typeof i18n.global.locale) {
     i18n.global.locale = locale;
+    document.getElementsByTagName("html")[0].lang = locale;
     axios
       .get(`summary.${locale}.json`)
       .then((res) => {
