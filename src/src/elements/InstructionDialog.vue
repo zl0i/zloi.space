@@ -1,13 +1,13 @@
 <template>
   <teleport to="body">
-      <div class="modal-mask">
-        <div class="modal-wrapper" @click.stop="$emit('close')">
-          <p class="popup-name" @click.stop="">{{ name }}</p>
-          <div class="show-box" @click.stop="">
-            <div v-html="text"></div>
-          </div>
+    <div class="modal-mask">
+      <div class="modal-wrapper" @click.stop="$emit('close')">
+        <p class="popup-name" @click.stop="">{{ name }}</p>
+        <div class="show-box" @click.stop="">
+          <div v-html="text"></div>
         </div>
       </div>
+    </div>
   </teleport>
 </template>
 
@@ -18,9 +18,7 @@ import { Options, Vue } from "vue-class-component";
     name: String,
     text: String,
   },
-  emits: [
-    "close"
-  ]
+  emits: ["close"],
 })
 export default class MarkDownDialog extends Vue {
   name: string;
