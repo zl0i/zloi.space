@@ -84,6 +84,7 @@ export default class MarkDownDialog extends Vue {
   .show-box {
     width: calc(100% - 30px);
     padding: 20px 15px;
+    margin-bottom: 0px;
   }
 }
 </style>
