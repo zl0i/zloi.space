@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { Emit } from "vue-property-decorator";
-import { i18n } from "../i18n";
+import { i18n } from "../libs/i18n";
 
 @Options({})
 export default class Header extends Vue {

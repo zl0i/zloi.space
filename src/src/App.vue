@@ -18,7 +18,7 @@ import Header from "./components/Header.vue";
 import Summary from "./components/Summary.vue";
 import KnoweledgeView from "./components/Knowledge.vue";
 import BookView from "./components/BooksView.vue";
-import { i18n } from "./i18n";
+import { i18n } from "./libs/i18n";
 
 @Options({
   components: {

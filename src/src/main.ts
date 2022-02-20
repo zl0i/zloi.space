@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from "./App.vue"
 import Knowledge from './components/Knowledge.vue'
-import { i18n } from './i18n'
+import { i18n } from './libs/i18n'
 import * as Router from "vue-router"
 
 const router = Router.createRouter({
