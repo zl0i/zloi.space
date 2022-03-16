@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "nuxt_first",
+    title: "Дмитрий Попов",
     htmlAttrs: {
       lang: "en",
     },
@@ -10,12 +10,12 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      { name: "keywords", content: "Дмитрий,Попов,zloi,программист" },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
       {
-        rel: "prefetch",
-        as: "style",
+        rel: "stylesheet prefetch",
         href: "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/default.min.css",
       },
     ],

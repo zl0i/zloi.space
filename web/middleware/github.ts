@@ -27,6 +27,7 @@ const serverMiddleware: ServerMiddleware = function (req, res, next) {
 export default serverMiddleware
 
 async function updateInstructions() {
+    console.log("start updateInstructions")
     const contents = await axios.get("https://api.github.com/repos/zl0i/KnowledgeBase/contents")
     const arr: IInstruction[] = []
     for (const file of contents.data) {
