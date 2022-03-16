@@ -9,13 +9,17 @@ export interface IInstruction {
 }
 
 let instructions: IInstruction[] = []
+updateInstructions()
 
 const serverMiddleware: ServerMiddleware = function (req, res, next) {
-    console.log(req.url, req.headers)
+    console.log(req.url)
     if (req.url == '/knowledgebase/push') {
         console.log("updateInstructions")
         updateInstructions()
         return res.end()
+    } else if (req.url == '/knowledgebase') {
+        res.setHeader("Content-Type", "application/json")
+        return res.end(JSON.stringify(instructions))
     }
     next()
 }
@@ -26,6 +30,9 @@ async function updateInstructions() {
     const contents = await axios.get("https://api.github.com/repos/zl0i/KnowledgeBase/contents")
     const arr: IInstruction[] = []
     for (const file of contents.data) {
+        if (!file.name.includes(".md")) {
+            continue
+        }
         const res = await axios.get(file.download_url)
         arr.push({
             id: file.sha,
@@ -33,11 +40,7 @@ async function updateInstructions() {
             html: marked(res.data),
         })
     }
-    console.log(arr)
-    instructions = arr
-}
-
-export function getInstructions() {
-    return instructions;
+    console.log("end")
+    instructions = arr.sort((a, b) => a.name.localeCompare(b.name));
 }
 

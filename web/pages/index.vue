@@ -3,6 +3,7 @@
     <Header @changeLanguage="setLanguage"></Header>
     <Welcome :text="about" :titles="titles" :links="links"></Welcome>
     <Summary id="summary" :summary="summary"></Summary>
+    <KnoweledgeView :instructions="instructions"></KnoweledgeView>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import Vue from "vue";
 import Header from "../components/Header.vue";
 import Welcome from "../components/Welcome.vue";
 import Summary from "../components/Summary.vue";
+import KnoweledgeView from "../components/Knowledge.vue";
 
 export default Vue.extend({
   name: "test",
@@ -20,6 +22,7 @@ export default Vue.extend({
       links: [],
       about: {},
       titles: [],
+      instructions: [],
     };
   },
   head() {
@@ -37,17 +40,22 @@ export default Vue.extend({
     Header,
     Welcome,
     Summary,
+    KnoweledgeView,
   },
   methods: {
     setLanguage(_locale: string) {},
   },
   async asyncData({ $axios }) {
-    const res = await $axios.get("http://localhost:3000/summary.en.json"); //TODO: rewrite to ./summary.{{locale}}.json
+    const responce = await Promise.all([
+      $axios.get("http://localhost:3000/summary.en.json"), //TODO: rewrite to ./summary.{{locale}}.json
+      $axios.get("http://localhost:3000/knowledgebase"),
+    ]);
     return {
-      about: res.data.about,
-      titles: res.data.titles,
-      links: res.data.links,
-      summary: res.data.summary,
+      about: responce[0].data.about,
+      titles: responce[0].data.titles,
+      links: responce[0].data.links,
+      summary: responce[0].data.summary,
+      instructions: responce[1].data,
     };
   },
 });
