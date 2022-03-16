@@ -11,7 +11,13 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.png" }],
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
+      {
+        rel: "stylesheet prefect preload",
+        href: "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/default.min.css",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
