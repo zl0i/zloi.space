@@ -104,7 +104,7 @@ export default {
       },
     },
   },
-  serverMiddleware: ["~/middleware/github.ts"],
+  serverMiddleware: ["~/middleware/knowledgebase.ts"],
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
