@@ -16,8 +16,7 @@
 
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { Watch } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import Typed from "typed.js";
 
 export interface ILink {
@@ -25,25 +24,26 @@ export interface ILink {
   link: string;
 }
 
-@Options({
-  props: {
-    text: String,
-    titles: Array,
-    links: Array,
-  },
-})
+@Component
 export default class Welcome extends Vue {
-  text: string;
-  titles: string[] = [];
-  links: ILink[] = [];
-
+  @Prop({ required: true }) titles: string[];
+  @Prop({ required: true }) text: string;
+  @Prop({ required: true }) links: ILink[];
   private typed: Typed;
+
+  mounted() {
+    this.startTitles(this.titles);
+  }
 
   @Watch("titles")
   onTitlesChanged() {
     if (this.typed) this.typed.destroy();
+    this.startTitles(this.titles);
+  }
+
+  startTitles(strings: string[]) {
     this.typed = new Typed(".auto-input", {
-      strings: this.titles,
+      strings: strings,
       typeSpeed: 100,
       backSpeed: 100,
       loop: true,

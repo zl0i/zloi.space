@@ -3,7 +3,7 @@
     <div class="summary-header">
       <p style="margin: 0px">{{ $t("summary.title") }}</p>
       <a href="./summary.pdf" target="_blank" style="padding-top: 20px">
-        <img alt="downloadSummary" src="../assets/download.svg" />
+        <img alt="downloadSummary" src="../static/download.svg" />
       </a>
     </div>
     <div class="all-column">
@@ -20,7 +20,7 @@
             <p>{{ item.speciality }}</p>
           </li>
 
-          <p class="box-naming">{{`${$t("summary.courses")}:`}}</p>
+          <p class="box-naming">{{ `${$t("summary.courses")}:` }}</p>
           <li
             class="box-list"
             v-for="item of summary.courses"
@@ -31,7 +31,7 @@
             <p>{{ item.speciality }}</p>
           </li>
 
-          <p class="box-naming">{{`${$t("summary.experience")}:`}}</p>
+          <p class="box-naming">{{ `${$t("summary.experience")}:` }}</p>
           <li
             class="box-list"
             v-for="item of summary.experience"
@@ -47,7 +47,7 @@
         </div>
       </ul>
       <ul class="right-column">
-        <p class="box-naming">{{`${$t("summary.skills")}:`}}</p>
+        <p class="box-naming">{{ `${$t("summary.skills")}:` }}</p>
         <div class="box-skill" v-for="item of summary.skills" :key="item.name">
           <p>{{ item.name }}</p>
           <div class="skill-progress">
@@ -58,11 +58,11 @@
             <div class="skill-lvl">{{ item.description }}</div>
           </div>
         </div>
-        <p class="box-naming">{{`${$t("summary.tech_stack")}:`}}</p>
+        <p class="box-naming">{{ `${$t("summary.tech_stack")}:` }}</p>
         <li class="box-list" v-for="item of summary.tech_stack" :key="item">
           {{ item }}
         </li>
-        <p class="box-naming">{{`${$t("summary.achievements")}:`}}</p>
+        <p class="box-naming">{{ `${$t("summary.achievements")}:` }}</p>
         <li class="box-list" v-for="item of summary.achievements" :key="item">
           {{ item }}
         </li>
@@ -73,15 +73,11 @@
 
 
 <script lang="ts">
-import { Vue, Options } from "vue-class-component";
+import { Vue, Prop, Component } from "vue-property-decorator";
 
-@Options({
-  props: {
-    summary: Object,
-  },
-})
+@Component
 export default class Summary extends Vue {
-  summary: any = {};
+  @Prop({ type: Object, required: true, default: {} }) summary: any;
 }
 </script>
 

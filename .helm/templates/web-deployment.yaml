@@ -18,5 +18,5 @@ spec:
         - name: web
           image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
           ports:
-          - containerPort: 80     
+          - containerPort: 3000     
       

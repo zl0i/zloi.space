@@ -10,7 +10,7 @@
         <a href="#reads">{{ $t("headers.reads") }}</a>
         <div class="language">
           <span>Translate</span>
-          <img alt="arrow" src="../assets/arrow-down.svg" />
+          <img alt="arrow" src="../static/arrow-down.svg" />
           <div class="language-background">
             <div class="language-popup">
               <span @click="changeLanguage('ru')">Русский</span>
@@ -24,21 +24,20 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { Emit } from "vue-property-decorator";
-import { i18n } from "../libs/i18n";
+import { Vue, Emit, Component } from "vue-property-decorator";
 
-@Options({})
+@Component
 export default class Header extends Vue {
+
   @Emit("changeLanguage")
-  changeLanguage(locale: typeof i18n.global.locale) {
+  changeLanguage(locale: string) {
     this.$emit("changeLanguage", locale);
-  }
-}
+  }  
+};
 </script>
 
-
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 .header {
   padding: 0 8.5%;
 }
