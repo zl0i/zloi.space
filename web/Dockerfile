@@ -1,8 +1,8 @@
 FROM node:16.13.2-alpine as build
 WORKDIR /app
-COPY ./web/package*.json ./
+COPY ./package*.json ./app
 RUN npm install
-COPY ./web .
+COPY ./ ./app/
 RUN npm run build
 
 
