@@ -24,7 +24,6 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
-import { IInstruction } from "../middleware/github";
 import ListView from "./ListView.vue";
 import Instruction from "./controls/Instruction.vue";
 import InstructionDialog from "./controls/InstructionDialog.vue";
@@ -37,7 +36,7 @@ import InstructionDialog from "./controls/InstructionDialog.vue";
   },
 })
 export default class KnoweledgeView extends Vue {
-  @Prop() instructions: IInstruction[];
+  @Prop() instructions: Array<unknown>;
   showDialog = false;
   dialogName = "";
   dialogHtml = "";
