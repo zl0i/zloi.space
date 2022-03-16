@@ -14,7 +14,8 @@ export default {
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
       {
-        rel: "stylesheet prefect preload",
+        rel: "prefetch",
+        as: "style",
         href: "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/default.min.css",
       },
     ],
