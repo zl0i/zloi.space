@@ -1,3 +1,4 @@
+import firebase from "./src/firebase";
 import i18n from "./src/i18n";
 
 export default {
@@ -43,6 +44,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/i18n",
+    "@nuxtjs/firebase",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -54,6 +56,8 @@ export default {
   serverMiddleware: [
     { path: "/api", handler: "~/server-middleware/knowledgebase.ts" },
   ],
+
+  firebase: firebase,
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
