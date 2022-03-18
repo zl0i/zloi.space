@@ -3,7 +3,11 @@
     <Header @changeLanguage="setLanguage"></Header>
     <Welcome :text="about" :titles="titles" :links="links"></Welcome>
     <Summary id="summary" :summary="summary"></Summary>
-    <KnoweledgeView :instructions="instructions"></KnoweledgeView>
+    <KnoweledgeView
+      id="knowledge"
+      :instructions="instructions"
+    ></KnoweledgeView>
+    <BooksView id="reads" :books="books"></BooksView>
   </div>
 </template>
 
@@ -13,6 +17,7 @@ import Header from "../components/Header.vue";
 import Welcome from "../components/Welcome.vue";
 import Summary from "../components/Summary.vue";
 import KnoweledgeView from "../components/Knowledge.vue";
+import BooksView from "../components/BooksView.vue";
 
 export default Vue.extend({
   name: "test",
@@ -23,6 +28,7 @@ export default Vue.extend({
       about: {},
       titles: [],
       instructions: [],
+      books: [],
     };
   },
   head() {
@@ -41,6 +47,7 @@ export default Vue.extend({
     Welcome,
     Summary,
     KnoweledgeView,
+    BooksView,
   },
   methods: {
     setLanguage(_locale: string) {},
@@ -48,7 +55,8 @@ export default Vue.extend({
   async asyncData({ $axios }) {
     const responce = await Promise.all([
       $axios.get("http://localhost:3000/summary.en.json"), //TODO: rewrite to ./summary.{{locale}}.json
-      $axios.get("http://localhost:3000/knowledgebase"),
+      $axios.get("http://localhost:3000/api/knowledgebase"),
+      $axios.get("http://localhost:3000/api/reads"),
     ]);
     return {
       about: responce[0].data.about,
@@ -56,6 +64,7 @@ export default Vue.extend({
       links: responce[0].data.links,
       summary: responce[0].data.summary,
       instructions: responce[1].data,
+      books: responce[2].data,
     };
   },
 });

@@ -104,7 +104,9 @@ export default {
       },
     },
   },
-  serverMiddleware: ["~/middleware/knowledgebase.ts"],
+  serverMiddleware: [
+    { path: "/api", handler: "~/server-middleware/knowledgebase.ts" },
+  ],
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };

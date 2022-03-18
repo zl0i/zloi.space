@@ -25,6 +25,7 @@
   "devDependencies": {
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
-    "@types/marked": "^4.0.2"
+    "@types/marked": "^4.0.2",
+    "cross-env": "^7.0.3"
   }
 }
