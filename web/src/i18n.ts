@@ -1,11 +1,11 @@
-export default {
+import { Options } from "@nuxtjs/i18n"
+
+const config: Options = {
     locales: ["en", "ru"],
     defaultLocale: "en",
     detectBrowserLanguage: {
         useCookie: true,
         cookieKey: "locale",
-        // redirectOn: "root",
-        // alwaysRedirect: true,
     },
     skipSettingLocaleOnNavigate: true,
     vueI18n: {
@@ -54,3 +54,5 @@ export default {
         },
     },
 }
+
+export default config
