@@ -54,7 +54,14 @@ export default {
   },
   i18n: i18n,
   serverMiddleware: [
-    { path: "/api", handler: "~/server-middleware/knowledgebase.ts" },
+    {
+      path: "/api/knowledgebase",
+      handler: "~/server-middleware/knowledgebase.ts",
+    },
+    {
+      path: "/api/reads",
+      handler: "~/server-middleware/reads.ts",
+    },
   ],
 
   firebase: firebase,
