@@ -5,11 +5,11 @@ const config: Options = {
     locales: [
         {
             code: 'en',
-            file: 'en-US'
+            file: 'en-US.js'
         },
         {
             code: 'ru',
-            file: 'ru-RU'
+            file: 'ru-RU.js'
         }
     ],
     defaultLocale: "en",
