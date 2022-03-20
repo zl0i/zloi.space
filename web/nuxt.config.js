@@ -1,5 +1,5 @@
-import firebase from "./src/firebase";
-import i18n from "./src/i18n";
+import firebase from "./configs/firebase";
+import i18n from "./configs/i18n";
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
