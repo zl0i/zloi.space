@@ -1,5 +1,6 @@
 import firebase from "./configs/firebase";
-import i18n from "./configs/i18n";
+// import i18n from "./configs/i18n";
+import enUS from "./locales/en-US";
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -52,7 +53,32 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: "/",
   },
-  i18n: i18n,
+  i18n: {
+    locales: [
+      {
+        code: "en",
+        file: "en-US.js",
+      },
+      {
+        code: "ru",
+        file: "ru-RU.js",
+      },
+    ],
+    defaultLocale: "en",
+    lazy: true,
+    langDir: "locales",
+    strategy: "no_prefix",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "locale",
+    },
+    vueI18n: {
+      fallbackLocale: "ru",
+      messages: {
+        en: enUS,
+      },
+    },
+  },
   serverMiddleware: [
     {
       path: "/api/knowledgebase",
