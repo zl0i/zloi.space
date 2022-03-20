@@ -20,12 +20,11 @@ import KnoweledgeView from "../components/Knowledge.vue";
 import BooksView from "../components/BooksView.vue";
 
 export default Vue.extend({
-  name: "test",
   data() {
     return {
       summary: {},
       links: [],
-      about: {},
+      about: "",
       titles: [],
       instructions: [],
       books: [],
@@ -34,12 +33,6 @@ export default Vue.extend({
   head() {
     return {
       title: "Дмитрий Попов",
-      meta: [
-        {
-          name: "description",
-          content: "My custom description",
-        },
-      ],
     };
   },
   components: {
@@ -50,11 +43,23 @@ export default Vue.extend({
     BooksView,
   },
   methods: {
-    setLanguage(_locale: string) {},
+    async setLanguage(locale: string) {
+      this.$i18n.setLocale(locale);
+      this.$axios
+        .get(`http://localhost:3000/summary.${locale}.json`)
+        .then((res: any) => {
+          this.about = res.data.about;
+          this.titles = res.data.titles;
+          this.links = res.data.links;
+          this.summary = res.data.summary;
+        });
+    },
   },
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, i18n }) {
     const responce = await Promise.all([
-      $axios.get("http://localhost:3000/summary.en.json"), //TODO: rewrite to ./summary.{{locale}}.json
+      $axios.get(
+        `http://localhost:3000/summary.${i18n.getLocaleCookie() ?? "en"}.json`
+      ),
       $axios.get("http://localhost:3000/api/knowledgebase"),
       $axios.get("http://localhost:3000/api/reads"),
     ]);

@@ -24,12 +24,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Emit, Component } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
 
 @Component
 export default class Header extends Vue {
 
-  @Emit("changeLanguage")
   changeLanguage(locale: string) {
     this.$emit("changeLanguage", locale);
   }  

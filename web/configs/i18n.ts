@@ -1,57 +1,30 @@
 import { Options } from "@nuxtjs/i18n"
+import en from "../locales/en-US"
 
 const config: Options = {
-    locales: ["en", "ru"],
+    locales: [
+        {
+            code: 'en',
+            file: 'en-US'
+        },
+        {
+            code: 'ru',
+            file: 'ru-RU'
+        }
+    ],
     defaultLocale: "en",
+    lazy: true,
+    langDir: "./locales/",
+    strategy: "no_prefix",
     detectBrowserLanguage: {
         useCookie: true,
         cookieKey: "locale",
     },
-    skipSettingLocaleOnNavigate: true,
     vueI18n: {
         fallbackLocale: "ru",
         messages: {
-            en: {
-                headers: {
-                    summary: "Summary",
-                    knoweledge: "Knoweledge",
-                    reads: "Reads",
-                },
-                summary: {
-                    title: "Summary",
-                    education: "Education",
-                    courses: "Сourses",
-                    experience: "Experience",
-                    skills: "Skills",
-                    tech_stack: "Tech stack",
-                    achievements: "Achievements",
-                },
-                books: {
-                    read: "Read",
-                    reading: "While reading",
-                },
-            },
-            ru: {
-                headers: {
-                    summary: "Резюме",
-                    knoweledge: "База знаний",
-                    reads: "Книги",
-                },
-                summary: {
-                    title: "Резюме",
-                    education: "Образование",
-                    courses: "Курсы",
-                    experience: "Опыт работы",
-                    skills: "Скиллы",
-                    tech_stack: "Технический стeк",
-                    achievements: "Достижения",
-                },
-                books: {
-                    read: "Прочитано",
-                    reading: "В процессе",
-                },
-            },
-        },
+            en
+        }
     },
 }
 
