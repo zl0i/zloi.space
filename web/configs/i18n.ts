@@ -1,20 +1,22 @@
 import { Options } from "@nuxtjs/i18n"
-import en from "../locales/en-US"
+import en from "../lang/en"
 
 const config: Options = {
     locales: [
         {
-            code: 'en',
-            file: 'en-US.js'
+            code: 'ru',
+            iso: 'ru-Ru',
+            file: 'ru.js'
         },
         {
-            code: 'ru',
-            file: 'ru-RU.js'
+            code: 'en',
+            iso: 'en-US',
+            file: 'en.js'
         }
     ],
     defaultLocale: "en",
     lazy: true,
-    langDir: "locales",
+    langDir: "~/lang/",
     strategy: "no_prefix",
     detectBrowserLanguage: {
         useCookie: true,
