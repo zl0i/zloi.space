@@ -1,9 +1,8 @@
 import firebase from "./configs/firebase";
 // import i18n from "./configs/i18n";
 import enUS from "./locales/en-US";
-import { NuxtConfig } from "@nuxt/types"
 
-const config: NuxtConfig = {
+export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "Дмитрий Попов",
@@ -58,11 +57,11 @@ const config: NuxtConfig = {
     locales: [
       {
         code: "en",
-        file: "en-US.ts",
+        file: "en-US.js",
       },
       {
         code: "ru",
-        file: "ru-RU.ts",
+        file: "ru-RU.js",
       },
     ],
     defaultLocale: "en",
@@ -95,5 +94,3 @@ const config: NuxtConfig = {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
-
-export default NuxtConfig
