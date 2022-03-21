@@ -45,14 +45,12 @@ export default Vue.extend({
   methods: {
     async setLanguage(locale: string) {
       this.$i18n.setLocale(locale);
-      this.$axios
-        .get(`http://localhost:3000/summary.${locale}.json`)
-        .then((res: any) => {
-          this.about = res.data.about;
-          this.titles = res.data.titles;
-          this.links = res.data.links;
-          this.summary = res.data.summary;
-        });
+      this.$axios.get(`/summary.${locale}.json`).then((res: any) => {
+        this.about = res.data.about;
+        this.titles = res.data.titles;
+        this.links = res.data.links;
+        this.summary = res.data.summary;
+      });
     },
   },
   async asyncData({ $axios, i18n }) {
