@@ -6,20 +6,23 @@
     <KnoweledgeView
       id="knowledge"
       :instructions="instructions"
-      :showDialog="true"
-      :dialogName="name"
-      :dialogHtml="html"
     ></KnoweledgeView>
     <BooksView id="reads" :books="books"></BooksView>
+    <InstructionDialog @close="closeDialog" :name="name" :html="html" />
   </div>
 </template>
 
 <script lang="ts">
 import Index from "../index.vue";
+import InstructionDialog from "../../components/controls/InstructionDialog.vue";
 import { Component } from "vue-property-decorator";
 import "vuex";
 
-@Component
+@Component({
+  components: {
+    InstructionDialog,
+  },
+})
 export default class Instruction extends Index {
   name = "";
   html = "";
@@ -27,6 +30,10 @@ export default class Instruction extends Index {
     return {
       title: this.name,
     };
+  }
+
+  closeDialog() {
+    this.$router.push({ path: "/" });
   }
 
   created() {

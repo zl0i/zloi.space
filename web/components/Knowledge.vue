@@ -6,20 +6,22 @@
       :model="instructions"
     >
       <template v-slot:default="props">
-        <Instruction
-          :id="props.data.id"
-          :name="props.data.name"
-          :html="props.data.html"
-          @click="openDialog"
-        />
+        <NuxtLink
+          class="link"
+          :to="`/instructions/${props.data.name
+            .replace(/ /g, '_')
+            .replace('.md', '')}`"
+          prefetch
+        >
+          <Instruction
+            :id="props.data.id"
+            :name="props.data.name"
+            :html="props.data.html"
+            @click="openInstruction(props.data.id)"
+          />
+        </NuxtLink>
       </template>
     </ListView>
-    <InstructionDialog
-      v-if="showDialog"
-      @close="closeDialog"
-      :name="dialogName"
-      :html="dialogHtml"
-    />
   </div>
 </template>
 
@@ -27,29 +29,25 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 import ListView from "./ListView.vue";
 import Instruction from "./controls/Instruction.vue";
-import InstructionDialog from "./controls/InstructionDialog.vue";
 
 @Component({
   components: {
     ListView,
     Instruction,
-    InstructionDialog,
   },
 })
 export default class KnoweledgeView extends Vue {
   @Prop() instructions: Array<unknown>;
-  @Prop() showDialog: boolean;
-  @Prop() dialogName: string;
-  @Prop() dialogHtml: string;
 
-  openDialog(name: string, html: string) {
-    this.dialogName = name;
-    this.dialogHtml = html;
-    this.showDialog = true;
-  }
-
-  closeDialog() {    
-    this.$router.push({ path: "/" });
+  openInstruction(id: string) {
+    this.$store.commit("instructions/setCurrentId", id);
   }
 }
 </script>
+
+<style scoped>
+.link {
+  color: #ffffff;
+  text-decoration-line: none;
+}
+</style>

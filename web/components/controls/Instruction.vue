@@ -1,12 +1,10 @@
 <template>
-  <NuxtLink class="link" :to="`/instructions/${linkName}`" prefetch>
-    <div class="instruction" @click="clicked">
-      <div class="image">
-        <div class="content" v-html="html"></div>
-      </div>
-      <p class="name">{{ name }}</p>
+  <div class="instruction">
+    <div class="image">
+      <div class="content" v-html="html"></div>
     </div>
-  </NuxtLink>
+    <p class="name">{{ name }}</p>
+  </div>
 </template>
 
 
@@ -18,26 +16,11 @@ export default class Instruction extends Vue {
   @Prop() id: string;
   @Prop() name: string;
   @Prop() html: string;
-  linkName: string = "";
-
-  created() {
-    this.linkName = this.name.replace(/ /g, "_").replace(".md", "");
-  }
-  clicked() {
-    this.$store.commit("instructions/setCurrentId", this.id);
-  }
 }
 </script>
 
 <style scoped>
-.nuxt-link-active {
-  color: rgb(144, 24, 199);
-}
 
-.link {
-  color: #ffffff;
-  text-decoration-line: none;
-}
 
 .instruction {
   width: 170px;
