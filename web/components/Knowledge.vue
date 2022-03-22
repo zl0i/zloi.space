@@ -7,6 +7,7 @@
     >
       <template v-slot:default="props">
         <Instruction
+          :id="props.data.id"
           :name="props.data.name"
           :html="props.data.html"
           @click="openDialog"
@@ -37,9 +38,9 @@ import InstructionDialog from "./controls/InstructionDialog.vue";
 })
 export default class KnoweledgeView extends Vue {
   @Prop() instructions: Array<unknown>;
-  showDialog = false;
-  dialogName = "";
-  dialogHtml = "";
+  @Prop() showDialog: boolean;
+  @Prop() dialogName: string;
+  @Prop() dialogHtml: string;
 
   openDialog(name: string, html: string) {
     this.dialogName = name;
@@ -47,8 +48,8 @@ export default class KnoweledgeView extends Vue {
     this.showDialog = true;
   }
 
-  closeDialog() {
-    this.showDialog = false;
+  closeDialog() {    
+    this.$router.push({ path: "/" });
   }
 }
 </script>

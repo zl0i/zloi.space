@@ -1,10 +1,12 @@
 <template>
-  <div class="instruction">
-    <div class="image" @click.stop.prevent="clicked">
-      <div class="content" v-html="html"></div>
+  <NuxtLink class="link" :to="`/instructions/${linkName}`" prefetch>
+    <div class="instruction" @click="clicked">
+      <div class="image">
+        <div class="content" v-html="html"></div>
+      </div>
+      <p class="name">{{ name }}</p>
     </div>
-    <p class="name">{{ name }}</p>
-  </div>
+  </NuxtLink>
 </template>
 
 
@@ -13,16 +15,30 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class Instruction extends Vue {
+  @Prop() id: string;
   @Prop() name: string;
   @Prop() html: string;
+  linkName: string = "";
 
+  created() {
+    this.linkName = this.name.replace(/ /g, "_").replace(".md", "");
+  }
   clicked() {
-    this.$emit("click", this.name, this.html);
+    this.$store.commit("instructions/setCurrentId", this.id);
   }
 }
 </script>
 
 <style scoped>
+.nuxt-link-active {
+  color: rgb(144, 24, 199);
+}
+
+.link {
+  color: #ffffff;
+  text-decoration-line: none;
+}
+
 .instruction {
   width: 170px;
   flex-shrink: 0;
@@ -75,37 +91,7 @@ export default class Instruction extends Vue {
   text-overflow: ellipsis;
   overflow: hidden;
   user-select: none;
-}
-
-.read-div {
-  position: absolute;
-  bottom: 78px;
-  user-select: none;
-  display: flex;
-  width: 100%;
-  background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #535353 90%);
-  align-items: center;
-  padding-bottom: 10px;
-}
-
-.read-div img {
-  width: 30px;
-  height: 30px;
-  margin: 0 0 0 7px;
-}
-
-.read-div p {
-  margin: 0 0 0 10px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.book-name {
-  margin-top: 7px;
-  margin-bottom: 0;
-  text-align: center;
-  width: 100%;
-  user-select: none;
+  color: #ffffff;
 }
 </style>
 

@@ -44,6 +44,7 @@ export default Vue.extend({
   },
   methods: {
     async setLanguage(locale: string) {
+      this.$store.commit("instructions/setInstruction", "test");
       this.$i18n.setLocale(locale);
       this.$axios.get(`/summary.${locale}.json`).then((res: any) => {
         this.about = res.data.about;
@@ -53,7 +54,7 @@ export default Vue.extend({
       });
     },
   },
-  async asyncData({ $axios, i18n }) {
+  async asyncData({ $axios, i18n, store }) {
     const responce = await Promise.all([
       $axios.get(
         `http://localhost:3000/summary.${i18n.getLocaleCookie() ?? "en"}.json`
@@ -61,6 +62,7 @@ export default Vue.extend({
       $axios.get("http://localhost:3000/api/knowledgebase"),
       $axios.get("http://localhost:3000/api/reads"),
     ]);
+    store.commit("instructions/of", responce[1].data);
     return {
       about: responce[0].data.about,
       titles: responce[0].data.titles,

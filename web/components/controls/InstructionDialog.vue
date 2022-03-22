@@ -16,10 +16,6 @@ import { Vue, Prop, Component } from "vue-property-decorator";
 export default class MarkDownDialog extends Vue {
   @Prop() name: string;
   @Prop() html: string;
-
-  close() {
-    this.$emit("close");
-  }
 }
 </script>
 
