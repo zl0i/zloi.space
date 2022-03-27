@@ -9,7 +9,8 @@ export const i18n = createI18n({
             headers: {
                 summary: "Summary",
                 knoweledge: "Knoweledge",
-                reads: "Reads"
+                reads: "Reads",
+                languages: "Languages"
             },
             summary: {
                 title: "Summary",
@@ -29,7 +30,8 @@ export const i18n = createI18n({
             headers: {
                 summary: "Резюме",
                 knoweledge: "База знаний",
-                reads: "Книги"
+                reads: "Книги",
+                languages: "Языки"
             },
             summary: {
                 title: "Резюме",
