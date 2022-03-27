@@ -9,8 +9,7 @@
         <a href="#knowledge">{{ $t("headers.knoweledge") }}</a>
         <a href="#reads">{{ $t("headers.reads") }}</a>
         <div class="language">
-          <span>Translate</span>
-          <img alt="arrow" src="../assets/arrow-down.svg" />
+          <img alt="translate" src="../../public/img/translation-icon.svg" />
           <div class="language-background">
             <div class="language-popup">
               <span @click="changeLanguage('ru')">Русский</span>
@@ -85,7 +84,6 @@ span:hover {
 
 .language {
   width: fit-content;
-  margin-left: 100px;
   cursor: pointer;
 }
 
@@ -97,6 +95,7 @@ span:hover {
   display: none;
   position: absolute;
   padding-top: 10px;
+  margin-left: -80px;
 }
 
 .language:hover .language-background {
@@ -112,8 +111,8 @@ span:hover {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  align-items: flex-start;
-  padding: 0.6rem 1.5rem 0.6rem 1.25rem;
+  align-items: flex-end;
+  padding: 0.6rem 1rem 0.6rem 1rem;
 }
 
 nav {
