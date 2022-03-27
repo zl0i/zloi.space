@@ -6,12 +6,12 @@ const config: Options = {
         {
             code: 'ru',
             iso: 'ru-Ru',
-            file: 'ru.js'
+            file: 'ru.ts'
         },
         {
             code: 'en',
             iso: 'en-US',
-            file: 'en.js'
+            file: 'en.ts'
         }
     ],
     defaultLocale: "en",

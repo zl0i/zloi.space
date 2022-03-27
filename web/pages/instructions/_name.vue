@@ -16,30 +16,21 @@
 import Index from "../index.vue";
 import InstructionDialog from "../../components/controls/InstructionDialog.vue";
 import { Component } from "vue-property-decorator";
-import "vuex";
 
 @Component({
   components: {
-    InstructionDialog,
+    InstructionDialog
   },
-})
-export default class Instruction extends Index {
-  name = "";
-  html = "";
-  head() {
-    return {
-      title: this.name,
-    };
-  }
-
-  closeDialog() {
-    this.$router.push({ path: "/" });
-  }
-
-  created() {
-    const name = this.$route.params.name.replace(/_/g, " ") + ".md";
-    const id = this.$store.state.instructions.currentId;
-    const instructions = Array(...this.$store.state.instructions.instructions);
+  async asyncData({ $axios, store, params }) {
+    const name = params.name.replace(/_/g, " ") + ".md";
+    const id = store.state.instructions.currentId;
+    const instructions = Array(...store.state.instructions.instructions);
+    console.log(instructions.length);
+    if (instructions.length == 0) {
+      const res = await $axios.get("http://localhost:3000/api/knowledgebase");
+      store.commit("instructions/of", res.data);
+      instructions.push(...res.data);
+    }
     let current: any;
     if (id) {
       current = instructions.find((ins: any) => ins.id == id);
@@ -48,8 +39,28 @@ export default class Instruction extends Index {
         return ins.name == name;
       });
     }
-    this.name = current.name;
-    this.html = current.html;
+    return {
+      name: current.name,
+      html: current.html,
+    };
+  },
+})
+export default class Instruction extends Index {
+  name: string = "";
+  html: string = "";
+  head() {
+    return {
+      title: this.name,
+    };
+  }
+
+  closeDialog() {
+    //TODO: rewrite
+    if (document.referrer.length) {
+      this.$router.back();
+    } else {
+      this.$router.push({ path: "/" });
+    }
   }
 }
 </script>

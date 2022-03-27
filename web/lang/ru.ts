@@ -1,4 +1,4 @@
-export default async (context, locale) => {
+export default async (_context: any, _locale: any) => {
   return await Promise.resolve({
     headers: {
       summary: "Резюме",

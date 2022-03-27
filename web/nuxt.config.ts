@@ -1,8 +1,8 @@
 import firebaseConfig from "./configs/firebase";
 import i18nConfig from "./configs/i18n";
+import type { NuxtConfig } from '@nuxt/types'
 
-export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+const config: NuxtConfig = {
   head: {
     title: "Дмитрий Попов",
     htmlAttrs: {
@@ -23,52 +23,36 @@ export default {
       },
     ],
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
-
   router: {
     prefetchLinks: true,
   },
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  build: {},
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
+    '@nuxtjs/composition-api/module',
+    '@nuxt/typescript-build'
   ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
+  css: [],
+  env: {},
+  loading: { color: '#0c64c1' },
   modules: [
-    // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     "@nuxtjs/i18n",
     "@nuxtjs/firebase",
   ],
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: "/",
-  },
   i18n: i18nConfig,
+  firebase: firebaseConfig,
   serverMiddleware: [
     {
       path: "/api/knowledgebase",
-      handler: "~/server-middleware/knowledgebase.ts",
+      handler: "./server-middleware/knowledgebase",
     },
     {
       path: "/api/reads",
-      handler: "~/server-middleware/reads.ts",
+      handler: "./server-middleware/reads",
     },
   ],
+  plugins: []
+}
 
-  firebase: firebaseConfig,
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
-};
+export default config

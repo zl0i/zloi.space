@@ -1,29 +1,7 @@
-import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 
-@Module({
-    name: 'instructions',
-    stateFactory: true,
-    namespaced: true,
-})
-export default class MyModule extends VuexModule {
-    currentId: string
-    instructions: IInstruction[]
+import type { MutationTree } from 'vuex'
 
-    @Mutation
-    push(data: IInstruction) {
-        this.instructions.push(data)
-    }
-
-    @Mutation
-    of(data: IInstruction[]) {
-        this.instructions = data
-    }
-
-    @Mutation
-    setCurrentId(id: string) {
-        this.currentId = id
-    }
-}
+export const namespace = 'instructions'
 
 //TODO: export from "types"
 export interface IInstruction {
@@ -31,4 +9,25 @@ export interface IInstruction {
     name: string;
     html: string;
 }
+
+export interface InstructionsState {
+    currentId: string
+    instructions: IInstruction[]
+}
+
+export const state = (): InstructionsState => ({
+    currentId: "",
+    instructions: []
+})
+
+export const MutationType = {
+    OF: 'of',
+    SET_CURRENT_ID: "setCurrentId"
+}
+
+export const mutations: MutationTree<InstructionsState> = {
+    [MutationType.OF]: (state, data: IInstruction[]) => { state.instructions = data },
+    [MutationType.SET_CURRENT_ID]: (state, id: string) => { state.currentId = id }
+}
+
 

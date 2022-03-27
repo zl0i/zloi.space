@@ -1,7 +1,6 @@
 <template>
   <section class="container">
     <div>
-      <Logo />
       <h1 class="title">
         {{ error.statusCode }}
       </h1>
@@ -16,7 +15,7 @@
 </template>
 
 <script>
-import { Vue, Prop, Component } from "vue-property-decorator";
+import { Vue, Prop, Component } from "nuxt-property-decorator";
 
 @Component
 export default class ErrorView extends Vue {

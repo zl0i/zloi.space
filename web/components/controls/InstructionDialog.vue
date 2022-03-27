@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Prop, Component } from "vue-property-decorator";
+import { Vue, Prop, Component } from "nuxt-property-decorator";
 
 @Component
 export default class MarkDownDialog extends Vue {

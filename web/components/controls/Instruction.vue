@@ -9,7 +9,7 @@
 
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class Instruction extends Vue {
@@ -20,8 +20,6 @@ export default class Instruction extends Vue {
 </script>
 
 <style scoped>
-
-
 .instruction {
   width: 170px;
   flex-shrink: 0;

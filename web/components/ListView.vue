@@ -21,7 +21,7 @@
 
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class ListView extends Vue {
@@ -86,5 +86,4 @@ export default class ListView extends Vue {
 .list ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
 </style>

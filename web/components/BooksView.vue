@@ -1,7 +1,7 @@
 <template>
   <ListView :title="$t('headers.reads')" :model="books">
     <template v-slot:default="props">
-      <Book      
+      <Book
         :name="props.data.name"
         :image="props.data.image"
         :status="props.data.status"
@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
 import ListView from "./ListView.vue";
 import Book from "./controls/Book.vue";
 

@@ -12,47 +12,17 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Header from "../components/Header.vue";
-import Welcome from "../components/Welcome.vue";
-import Summary from "../components/Summary.vue";
-import KnoweledgeView from "../components/Knowledge.vue";
-import BooksView from "../components/BooksView.vue";
+import { Component, Vue, namespace, State } from "nuxt-property-decorator";
+import {
+  namespace as instructionsStoreNamespace,
+  InstructionsState,
+} from "~/store/instructions";
 
-export default Vue.extend({
-  data() {
-    return {
-      summary: {},
-      links: [],
-      about: "",
-      titles: [],
-      instructions: [],
-      books: [],
-    };
-  },
+@Component({
   head() {
     return {
       title: "Дмитрий Попов",
     };
-  },
-  components: {
-    Header,
-    Welcome,
-    Summary,
-    KnoweledgeView,
-    BooksView,
-  },
-  methods: {
-    async setLanguage(locale: string) {
-      this.$store.commit("instructions/setInstruction", "test");
-      this.$i18n.setLocale(locale);
-      this.$axios.get(`/summary.${locale}.json`).then((res: any) => {
-        this.about = res.data.about;
-        this.titles = res.data.titles;
-        this.links = res.data.links;
-        this.summary = res.data.summary;
-      });
-    },
   },
   async asyncData({ $axios, i18n, store }) {
     const responce = await Promise.all([
@@ -72,7 +42,25 @@ export default Vue.extend({
       books: responce[2].data,
     };
   },
-});
+})
+export default class Index extends Vue {
+  summary: any = {};
+  links: any = [];
+  about: string = "";
+  titles: string[] = [];
+  instructions: any = [];
+  books: any = [];
+
+  async setLanguage(locale: string) {
+    this.$i18n.setLocale(locale);
+    this.$axios.get(`/summary.${locale}.json`).then((res: any) => {
+      this.about = res.data.about;
+      this.titles = res.data.titles;
+      this.links = res.data.links;
+      this.summary = res.data.summary;
+    });
+  }
+}
 </script>
 
 <style>
