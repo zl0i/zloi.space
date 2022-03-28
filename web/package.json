@@ -19,6 +19,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "analyze": "nuxt build --analyze",
     "lint": "eslint --max-warnings 0 --ext .ts,.vue ."
   },
   "devDependencies": {

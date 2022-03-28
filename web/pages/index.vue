@@ -13,13 +13,10 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, State } from "nuxt-property-decorator";
-import {
-  namespace as instructionsStoreNamespace,
-  InstructionsState,
-} from "~/store/instructions";
+import { MetaInfo } from "vue-meta";
 
 @Component({
-  head() {
+  head(this: Index): MetaInfo {
     return {
       title: "Дмитрий Попов",
     };

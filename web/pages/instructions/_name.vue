@@ -15,17 +15,16 @@
 <script lang="ts">
 import Index from "../index.vue";
 import InstructionDialog from "../../components/controls/InstructionDialog.vue";
-import { Component } from "vue-property-decorator";
+import { Component } from "nuxt-property-decorator";
 
 @Component({
   components: {
-    InstructionDialog
+    InstructionDialog,
   },
   async asyncData({ $axios, store, params }) {
     const name = params.name.replace(/_/g, " ") + ".md";
     const id = store.state.instructions.currentId;
     const instructions = Array(...store.state.instructions.instructions);
-    console.log(instructions.length);
     if (instructions.length == 0) {
       const res = await $axios.get("http://localhost:3000/api/knowledgebase");
       store.commit("instructions/of", res.data);
