@@ -14,10 +14,20 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
+import {
+  Vue,
+  Component,
+  Watch,
+  namespace,
+} from "nuxt-property-decorator";
 import Typed from "typed.js";
+import {
+  namespace as summaryStoreNamespace,
+  SummaryState,
+} from "../store/summary";
+
+const SummaryStore = namespace(summaryStoreNamespace);
 
 export interface ILink {
   image: string;
@@ -26,10 +36,11 @@ export interface ILink {
 
 @Component
 export default class Welcome extends Vue {
-  @Prop({ required: true }) titles: string[];
-  @Prop({ required: true }) text: string;
-  @Prop({ required: true }) links: ILink[];
   private typed: Typed;
+
+  @SummaryStore.State("titles") titles: SummaryState["titles"];
+  @SummaryStore.State("about") text: SummaryState["about"];
+  @SummaryStore.State("links") links: SummaryState["links"];
 
   mounted() {
     this.startTitles(this.titles);

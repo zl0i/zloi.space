@@ -12,7 +12,7 @@
           <p class="box-naming">{{ `${$t("summary.education")}:` }}:</p>
           <li
             class="box-list"
-            v-for="item of summary.education"
+            v-for="item of education"
             :key="item.title"
           >
             <p>{{ item.range.from }} - {{ item.range.to }}</p>
@@ -23,7 +23,7 @@
           <p class="box-naming">{{ `${$t("summary.courses")}:` }}</p>
           <li
             class="box-list"
-            v-for="item of summary.courses"
+            v-for="item of courses"
             :key="item.title"
           >
             <p>{{ item.range.from }} - {{ item.range.to }}</p>
@@ -34,7 +34,7 @@
           <p class="box-naming">{{ `${$t("summary.experience")}:` }}</p>
           <li
             class="box-list"
-            v-for="item of summary.experience"
+            v-for="item of experience"
             :key="item.title"
           >
             <p>
@@ -48,7 +48,7 @@
       </ul>
       <ul class="right-column">
         <p class="box-naming">{{ `${$t("summary.skills")}:` }}</p>
-        <div class="box-skill" v-for="item of summary.skills" :key="item.name">
+        <div class="box-skill" v-for="item of skills" :key="item.name">
           <p>{{ item.name }}</p>
           <div class="skill-progress">
             <div
@@ -59,11 +59,11 @@
           </div>
         </div>
         <p class="box-naming">{{ `${$t("summary.tech_stack")}:` }}</p>
-        <li class="box-list" v-for="item of summary.tech_stack" :key="item">
+        <li class="box-list" v-for="item of tech_stack" :key="item">
           {{ item }}
         </li>
         <p class="box-naming">{{ `${$t("summary.achievements")}:` }}</p>
-        <li class="box-list" v-for="item of summary.achievements" :key="item">
+        <li class="box-list" v-for="item of achievements" :key="item">
           {{ item }}
         </li>
       </ul>
@@ -71,13 +71,24 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import { Vue, Prop, Component } from "nuxt-property-decorator";
+import { Vue, Component, namespace } from "nuxt-property-decorator";
+import {
+  namespace as summaryStoreNamespace,
+  SummaryState,
+} from "../store/summary";
+
+const SummaryStore = namespace(summaryStoreNamespace);
 
 @Component
 export default class Summary extends Vue {
-  @Prop({ type: Object, required: true, default: {} }) summary: any;
+  @SummaryStore.State("education") education: SummaryState["education"];
+  @SummaryStore.State("courses") courses: SummaryState["courses"];
+  @SummaryStore.State("experience") experience: SummaryState["experience"];
+  @SummaryStore.State("skills") skills: SummaryState["skills"];
+  @SummaryStore.State("tech_stack") tech_stack: SummaryState["tech_stack"];
+  @SummaryStore.State("achievements")
+  achievements: SummaryState["achievements"];
 }
 </script>
 

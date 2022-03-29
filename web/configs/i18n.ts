@@ -1,3 +1,4 @@
+import { Context } from "@nuxt/types"
 import { Options } from "@nuxtjs/i18n"
 import en from "../lang/en"
 
@@ -28,6 +29,11 @@ const config: Options = {
             en
         }
     },
+    onBeforeLanguageSwitch: (oldLocale, newLocale, _isInitialSetup, { store }) => {
+        if (oldLocale) {
+            store.dispatch("summary/requestSummary", newLocale)
+        }
+    }
 }
 
 export default config

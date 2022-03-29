@@ -1,8 +1,8 @@
 <template>
   <div>
     <Header @changeLanguage="setLanguage"></Header>
-    <Welcome :text="about" :titles="titles" :links="links"></Welcome>
-    <Summary id="summary" :summary="summary"></Summary>
+    <Welcome></Welcome>
+    <Summary id="summary"></Summary>
     <KnoweledgeView
       id="knowledge"
       :instructions="instructions"
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, State } from "nuxt-property-decorator";
+import { Component, Vue } from "nuxt-property-decorator";
 import { MetaInfo } from "vue-meta";
 
 @Component({
@@ -22,40 +22,24 @@ import { MetaInfo } from "vue-meta";
     };
   },
   async asyncData({ $axios, i18n, store }) {
-    const responce = await Promise.all([
-      $axios.get(
-        `http://localhost:3000/summary.${i18n.getLocaleCookie() ?? "en"}.json`
-      ),
+    const responce = await Promise.all([      
       $axios.get("http://localhost:3000/api/knowledgebase"),
       $axios.get("http://localhost:3000/api/reads"),
     ]);
-    store.commit("instructions/of", responce[1].data);
-    return {
-      about: responce[0].data.about,
-      titles: responce[0].data.titles,
-      links: responce[0].data.links,
-      summary: responce[0].data.summary,
-      instructions: responce[1].data,
-      books: responce[2].data,
+    await store.dispatch("summary/requestSummary", 'en')
+    store.commit("instructions/of", responce[0].data);
+    return {      
+      instructions: responce[0].data,
+      books: responce[1].data,
     };
   },
 })
-export default class Index extends Vue {
-  summary: any = {};
-  links: any = [];
-  about: string = "";
-  titles: string[] = [];
+export default class Index extends Vue {  
   instructions: any = [];
   books: any = [];
 
   async setLanguage(locale: string) {
     this.$i18n.setLocale(locale);
-    this.$axios.get(`/summary.${locale}.json`).then((res: any) => {
-      this.about = res.data.about;
-      this.titles = res.data.titles;
-      this.links = res.data.links;
-      this.summary = res.data.summary;
-    });
   }
 }
 </script>
