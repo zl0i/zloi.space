@@ -2,6 +2,8 @@ import firebaseConfig from "./configs/firebase";
 import i18nConfig from "./configs/i18n";
 import type { NuxtConfig } from '@nuxt/types'
 
+const isDev = process.env['NODE_ENV'] != 'production'
+
 const config: NuxtConfig = {
   head: {
     title: "Дмитрий Попов",
@@ -52,6 +54,10 @@ const config: NuxtConfig = {
       handler: "./server-middleware/reads",
     },
   ],
+  server: {
+    host: isDev ? "localhost" : '0.0.0.0',
+    port: 3000
+  },
   plugins: []
 }
 
