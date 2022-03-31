@@ -1,10 +1,6 @@
 import type { Context } from '@nuxt/types'
 import type { GetterTree, ActionTree, MutationTree } from 'vuex'
 
-const NUXT_HOST = process.env["NUXT_HOST"] ?? 'localhost'
-const NUXT_PORT = process.env["NUXT_PORT"] ?? '3000'
-const BASE_URL = `http://${NUXT_HOST}:${NUXT_PORT}`
-
 export const namespace = 'summary'
 
 export interface IRange {
@@ -78,10 +74,9 @@ export const mutations: MutationTree<SummaryState> = {
 
 export const actions: ActionTree<SummaryState, SummaryState> = {
     async requestSummary({ commit }, context: string) {
-        console.log(process)
-        console.log(this)
+        console.log(process.env)
         const locale = context || this.$i18n.getLocaleCookie() || 'en'
-        const res = await fetch(`${BASE_URL}/summary.${locale}.json`)
+        const res = await fetch(`/summary.${locale}.json`)
         commit("setSummary", await res.json())
     }
 }

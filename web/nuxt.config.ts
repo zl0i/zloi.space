@@ -54,8 +54,13 @@ const config: NuxtConfig = {
       handler: "./server-middleware/reads",
     },
   ],
+  axios: {
+    baseURL: isDev ? "http://localhost:3000" : "https://0.0.0.0:3000",
+    https: !isDev
+
+  },
   server: {
-    host: '0.0.0.0',
+    host: isDev ? "localhost" : "0.0.0.0",
     port: 3000
   },
   plugins: []
