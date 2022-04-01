@@ -74,9 +74,9 @@ export const mutations: MutationTree<SummaryState> = {
 
 export const actions: ActionTree<SummaryState, SummaryState> = {
     async requestSummary({ commit }, context: string) {
-        console.log(process.env)
+        console.log(process.env.NUXT_HOST)
         const locale = context || this.$i18n.getLocaleCookie() || 'en'
-        const res = await fetch(`${process.env["_AXIOS_BASE_URL_"]}/summary.${locale}.json`)
+        const res = await fetch(`//summary.${locale}.json`)
         commit("setSummary", await res.json())
     }
 }
