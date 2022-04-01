@@ -23,8 +23,8 @@ import { MetaInfo } from "vue-meta";
   },
   async asyncData({ $axios, i18n, store }) {
     const responce = await Promise.all([      
-      $axios.get("http://localhost:3000/api/knowledgebase"),
-      $axios.get("http://localhost:3000/api/reads"),
+      $axios.get("/api/knowledgebase"),
+      $axios.get("/api/reads"),
     ]);
     await store.dispatch("summary/requestSummary", 'en')
     store.commit("instructions/of", responce[0].data);
