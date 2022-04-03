@@ -55,7 +55,7 @@ const config: NuxtConfig = {
     },
   ],
   axios: {
-    baseURL: process.env.NUXT_HOST, //isDev ? "http://localhost:3000" : "http://0.0.0.0:3000",
+    baseURL: isDev ? "http://localhost:3000" : "http://0.0.0.0:3000",
     https: false
 
   },
