@@ -10,33 +10,21 @@
       <ul class="left-column">
         <div>
           <p class="box-naming">{{ `${$t("summary.education")}:` }}:</p>
-          <li
-            class="box-list"
-            v-for="item of education"
-            :key="item.title"
-          >
+          <li class="box-list" v-for="item of education" :key="item.title">
             <p>{{ item.range.from }} - {{ item.range.to }}</p>
             <p>{{ item.title }}</p>
             <p>{{ item.speciality }}</p>
           </li>
 
           <p class="box-naming">{{ `${$t("summary.courses")}:` }}</p>
-          <li
-            class="box-list"
-            v-for="item of courses"
-            :key="item.title"
-          >
+          <li class="box-list" v-for="item of courses" :key="item.title">
             <p>{{ item.range.from }} - {{ item.range.to }}</p>
             <p>{{ item.title }}</p>
             <p>{{ item.speciality }}</p>
           </li>
 
           <p class="box-naming">{{ `${$t("summary.experience")}:` }}</p>
-          <li
-            class="box-list"
-            v-for="item of experience"
-            :key="item.title"
-          >
+          <li class="box-list" v-for="item of experience" :key="item.title">
             <p>
               {{ item.range.from }} - {{ item.range.to }}
               <a class="org-name" :href="item.link_org">{{ item.org }}</a>

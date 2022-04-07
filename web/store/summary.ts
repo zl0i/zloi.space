@@ -18,6 +18,7 @@ export interface IExperience {
     title: string
     range: IRange
     org: string
+    link_org: string
     position: string
     duties: string
 }
