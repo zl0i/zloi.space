@@ -51,12 +51,14 @@ export default class Instruction extends Index {
   }
 
   closeDialog() {
+    this.$router.back();
+    // this.$nuxt.$router.back()
     //TODO: rewrite
-    if (document.referrer.length) {
-      this.$router.back();
-    } else {
-      this.$router.push({ path: "/" });
-    }
+    // if (document.referrer.length) {
+    //   this.$router.back();
+    // } else {
+    //   this.$router.push({ path: "/" });
+    // }
   }
 }
 </script>

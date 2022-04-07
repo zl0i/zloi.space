@@ -1,13 +1,13 @@
 import { ServerMiddleware } from '@nuxt/types'
 import axios from 'axios'
 
-interface IBook {
+export interface IBook {
     id: string;
     name: string;
     image: string;
     status: string;
 }
-let books: IBook[] = []
+export let books: IBook[] = []
 
 setTimeout(() => {
     updateBooks()

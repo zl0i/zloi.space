@@ -8,7 +8,7 @@ export interface IInstruction {
     html: string;
 }
 
-let instructions: IInstruction[] = []
+export let instructions: IInstruction[] = []
 
 setTimeout(() => {
     updateInstructions()
