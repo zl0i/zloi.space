@@ -1,5 +1,5 @@
-
-import type { MutationTree } from 'vuex'
+import type { Context } from '@nuxt/types'
+import type { MutationTree, ActionTree } from 'vuex'
 
 export const namespace = 'instructions'
 
@@ -29,5 +29,14 @@ export const mutations: MutationTree<InstructionsState> = {
     [MutationType.OF]: (state, data: IInstruction[]) => { state.instructions = data },
     [MutationType.SET_CURRENT_ID]: (state, id: string) => { state.currentId = id }
 }
+
+export const actions: ActionTree<InstructionsState, InstructionsState> = {
+    async requestInstructions({ commit }, context: string) {
+        const res = await this.$axios.get(`/api/knowledgebase`)        
+        commit("of", res.data)
+    }
+}
+
+
 
 

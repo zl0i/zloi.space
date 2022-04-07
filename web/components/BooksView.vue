@@ -11,9 +11,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from "nuxt-property-decorator";
+import { Vue, Component, namespace } from "nuxt-property-decorator";
 import ListView from "./ListView.vue";
 import Book from "./controls/Book.vue";
+
+import { namespace as booksStoreNamespace, BooksState } from "../store/books";
+
+const BooksStore = namespace(booksStoreNamespace);
 
 @Component({
   components: {
@@ -22,6 +26,6 @@ import Book from "./controls/Book.vue";
   },
 })
 export default class BooksView extends Vue {
-  @Prop() books: Array<unknown>;
+  @BooksStore.State("books") books: BooksState["books"];
 }
 </script>

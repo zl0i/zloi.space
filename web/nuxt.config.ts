@@ -55,15 +55,17 @@ const config: NuxtConfig = {
     },
   ],
   axios: {
-    baseURL: isDev ? "http://localhost:3000" : "http://0.0.0.0:3000",
+    baseURL: isDev ? "http://localhost:3000" : "http://nuxt.zloi.space",
     https: false
-
   },
   server: {
-    host: isDev ? "localhost" : "0.0.0.0",
+    host: isDev ? "localhost" : "nuxt.zloi.space",
     port: 3000
   },
-  plugins: []
+  plugins: [
+    "./plugins/api.server.ts",
+    "./plugins/api.client.ts",
+  ]
 }
 
 export default config

@@ -29,9 +29,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "nuxt-property-decorator";
+import { Vue, Component, namespace } from "nuxt-property-decorator";
 import ListView from "./ListView.vue";
 import Instruction from "./controls/Instruction.vue";
+import { namespace as instructionStoreNamespace, InstructionsState } from "../store/instructions";
+
+const InstrictionsStore = namespace(instructionStoreNamespace);
 
 @Component({
   components: {
@@ -40,7 +43,7 @@ import Instruction from "./controls/Instruction.vue";
   },
 })
 export default class KnoweledgeView extends Vue {
-  @Prop() instructions: Array<unknown>;
+  @InstrictionsStore.State("instructions") instructions: InstructionsState["instructions"];
 
   openInstruction(id: string) {
     this.$store.commit("instructions/setCurrentId", id);

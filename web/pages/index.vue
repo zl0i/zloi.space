@@ -4,10 +4,9 @@
     <Welcome></Welcome>
     <Summary id="summary"></Summary>
     <KnoweledgeView
-      id="knowledge"
-      :instructions="instructions"
+      id="knowledge"     
     ></KnoweledgeView>
-    <BooksView id="reads" :books="books"></BooksView>
+    <BooksView id="reads"></BooksView>
   </div>
 </template>
 
@@ -21,23 +20,13 @@ import { MetaInfo } from "vue-meta";
       title: "Дмитрий Попов",
     };
   },
-  async asyncData({ $axios, i18n, store }) {
-    const responce = await Promise.all([      
-      $axios.get("/api/knowledgebase"),
-      $axios.get("/api/reads"),
-    ]);
-    await store.dispatch("summary/requestSummary", 'en')
-    store.commit("instructions/of", responce[0].data);
-    return {      
-      instructions: responce[0].data,
-      books: responce[1].data,
-    };
+  async asyncData({ i18n, store }) {
+    await store.dispatch("summary/requestSummary", i18n.getLocaleCookie());
+    await store.dispatch("instructions/requestInstructions");
+    await store.dispatch("books/requestBooks");
   },
 })
-export default class Index extends Vue {  
-  instructions: any = [];
-  books: any = [];
-
+export default class Index extends Vue {
   async setLanguage(locale: string) {
     this.$i18n.setLocale(locale);
   }

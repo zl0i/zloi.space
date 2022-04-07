@@ -46,7 +46,7 @@ export interface SummaryState {
 }
 
 export const state = (): SummaryState => ({
-    titles: [],
+    titles: [""],
     about: "",
     links: [],
     education: [],
@@ -74,9 +74,8 @@ export const mutations: MutationTree<SummaryState> = {
 
 export const actions: ActionTree<SummaryState, SummaryState> = {
     async requestSummary({ commit }, context: string) {
-        console.log(process.env)
         const locale = context || this.$i18n.getLocaleCookie() || 'en'
-        const res = await fetch(`${process.env["_AXIOS_BASE_URL_"]}/summary.${locale}.json`)
-        commit("setSummary", await res.json())
+        const res = await this.$axios.get(`/summary.${locale}.json`)
+        commit("setSummary", res.data)
     }
 }
