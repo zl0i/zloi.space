@@ -17,6 +17,14 @@ spec:
       containers:
         - name: web
           image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
           ports:
           - containerPort: 3000     
       
