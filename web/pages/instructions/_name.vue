@@ -18,15 +18,16 @@ import { Component } from "nuxt-property-decorator";
   components: {
     InstructionDialog,
   },
-  async asyncData({ $axios, store, params }) {
+  async asyncData({ store, params, i18n }) {
     const name = params.name.replace(/_/g, " ") + ".md";
+
+    await store.dispatch("summary/requestSummary", i18n.getLocaleCookie());
+    await store.dispatch("books/requestBooks");
+    await store.dispatch("instructions/requestInstructions");
+
     const id = store.state.instructions.currentId;
     const instructions = Array(...store.state.instructions.instructions);
-    if (instructions.length == 0) {
-      const res = await $axios.get("http://localhost:3000/api/knowledgebase");
-      store.commit("instructions/of", res.data);
-      instructions.push(...res.data);
-    }
+
     let current: any;
     if (id) {
       current = instructions.find((ins: any) => ins.id == id);
