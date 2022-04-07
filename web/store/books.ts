@@ -10,7 +10,7 @@ export interface IBook {
     html: string;
 }
 
-export interface BooksState {   
+export interface BooksState {
     books: IBook[]
 }
 
@@ -23,13 +23,15 @@ export const MutationType = {
 }
 
 export const mutations: MutationTree<BooksState> = {
-    [MutationType.OF]: (state, data: IBook[]) => { state.books = data },    
+    [MutationType.OF]: (state, data: IBook[]) => { state.books = data },
 }
 
 export const actions: ActionTree<BooksState, BooksState> = {
-    async requestBooks({ commit }, context: string) {
-        const res = await this.$axios.get(`/api/reads`)        
-        commit("of", res.data)
+    async requestBooks({ commit, state }, _context: string) {
+        if (state.books.length == 0) {
+            const res = await this.$axios.get(`/api/reads`)
+            commit("of", res.data)
+        }
     }
 }
 
