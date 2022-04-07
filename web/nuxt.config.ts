@@ -58,8 +58,7 @@ const config: NuxtConfig = {
     baseURL: isDev ? "http://localhost:3000" : "http://nuxt.zloi.space",
     https: false
   },
-  server: {
-    host: isDev ? "localhost" : "nuxt.zloi.space",
+  server: {    
     port: 3000
   },
   plugins: [
