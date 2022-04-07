@@ -1,13 +1,10 @@
 <template>
   <div>
     <Header></Header>
-    <Welcome :text="about" :titles="titles" :links="links"></Welcome>
-    <Summary id="summary" :summary="summary"></Summary>
-    <KnoweledgeView
-      id="knowledge"
-      :instructions="instructions"
-    ></KnoweledgeView>
-    <BooksView id="reads" :books="books"></BooksView>
+    <Welcome></Welcome>
+    <Summary id="summary"></Summary>
+    <KnoweledgeView id="knowledge"></KnoweledgeView>
+    <BooksView id="reads"></BooksView>
     <InstructionDialog @close="closeDialog" :name="name" :html="html" />
   </div>
 </template>
