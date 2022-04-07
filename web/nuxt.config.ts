@@ -55,8 +55,8 @@ const config: NuxtConfig = {
     },
   ],
   axios: {
-    baseURL: isDev ? "http://localhost:3000" : "http://nuxt.zloi.space",
-    https: false
+    baseURL: isDev ? "http://localhost:3000" : "https://nuxt.zloi.space",
+    https: isDev ? false : true
   },
   server: {    
     port: 3000
