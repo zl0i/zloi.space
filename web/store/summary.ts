@@ -75,8 +75,6 @@ export const mutations: MutationTree<SummaryState> = {
 
 export const actions: ActionTree<SummaryState, SummaryState> = {
     async requestSummary({ commit }, context: string) {
-        console.log(process.env)
-        console.log(this)
         const locale = context || this.$i18n.getLocaleCookie() || 'en'
         const res = await this.$axios.get(`/summary.${locale}.json`)
         commit("setSummary", res.data)
