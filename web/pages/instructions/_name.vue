@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixed">
     <Header></Header>
     <Welcome></Welcome>
     <Summary id="summary"></Summary>
@@ -63,3 +63,12 @@ export default class Instruction extends Index {
   }
 }
 </script>
+
+<style >
+.fixed {
+  position: fixed;
+  overflow: hidden;
+}
+</style>
+
+
