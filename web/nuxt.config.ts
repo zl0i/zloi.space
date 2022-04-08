@@ -9,13 +9,22 @@ const config: NuxtConfig = {
     title: "Дмитрий Попов",
     htmlAttrs: {
       lang: "en",
+      prefix: "og: http://ogp.me/ns#"
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { hid: "description", name: "description", content: "Привет! Меня зовут Дмитрий, я backend программист, интересуюсь всем, что связано с железом и ПО начиная с STM32, администрированием серверов, разработкой backend-приложений и заканчивая дизайном." },
       { name: "format-detection", content: "telephone=no" },
       { name: "keywords", content: "Дмитрий,Попов,zloi,программист" },
+      { name: "og:title", content: "zloi.space" },
+      { name: "og:type", content: "website" },
+      { name: "og:site_name", content: "zloi.space" },
+      { name: "og:url", content: "https://zloi.space" },
+      { name: "og:image", content: "https://zloi.space/img/og-image.jpg" },
+      { name: "og:image:width", content: "968" },
+      { name: "og:image:height", content: "504" },
+      { name: "yandex-verification", content: "9425b9578d21b568" },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
@@ -58,7 +67,7 @@ const config: NuxtConfig = {
     baseURL: isDev ? "http://localhost:3000" : "https://nuxt.zloi.space",
     https: isDev ? false : true
   },
-  server: {    
+  server: {
     port: 3000
   },
   plugins: [
