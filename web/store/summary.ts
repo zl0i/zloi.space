@@ -1,5 +1,5 @@
-import type { Context } from '@nuxt/types'
-import type { GetterTree, ActionTree, MutationTree } from 'vuex'
+import type { ActionTree, MutationTree } from 'vuex'
+import { RootState } from '.'
 
 export const namespace = 'summary'
 
@@ -73,12 +73,17 @@ export const mutations: MutationTree<SummaryState> = {
 }
 
 
-export const actions: ActionTree<SummaryState, SummaryState> = {
-    async requestSummary({ commit, state }, context: string) {
-        if (state.about.length == 0) {
-            const locale = context || this.$i18n.getLocaleCookie() || 'en'
-            const res = await this.$axios.get(`/summary.${locale}.json`)
+export const actions: ActionTree<SummaryState, RootState> = {
+    async requestSummary({ state, commit }, locale: string) {
+        if (!this.$axios) {
+            return
+        }
+        const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
+        try {
+            const res = await this.$axios.get(`/summary.${postfix}.json`)
             commit("setSummary", res.data)
+        } catch (e) {
+            console.log(e)          
         }
     }
 }
