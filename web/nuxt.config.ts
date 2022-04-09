@@ -40,7 +40,6 @@ const config: NuxtConfig = {
   components: true,
   build: {},
   buildModules: [
-    '@nuxtjs/composition-api/module',
     '@nuxt/typescript-build'
   ],
   css: [],
