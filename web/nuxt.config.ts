@@ -63,7 +63,7 @@ const config: NuxtConfig = {
     },
   ],
   axios: {
-    baseURL: isDev ? "http://localhost:3000" : "https://nuxt.zloi.space",
+    baseURL: isDev ? "http://localhost:3000" : "https://zloi.space",
     https: isDev ? false : true
   },
   server: {
