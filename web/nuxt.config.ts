@@ -73,7 +73,10 @@ const config: NuxtConfig = {
   plugins: [
     "./plugins/api.server.ts",
     "./plugins/api.client.ts",
-  ]
+  ],
+  telemetry: {
+    enabled: false
+  }
 }
 
 export default config
