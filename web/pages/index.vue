@@ -3,9 +3,7 @@
     <Header @changeLanguage="setLanguage"></Header>
     <Welcome></Welcome>
     <Summary id="summary"></Summary>
-    <KnoweledgeView
-      id="knowledge"     
-    ></KnoweledgeView>
+    <KnoweledgeView id="knowledge"></KnoweledgeView>
     <BooksView id="reads"></BooksView>
   </div>
 </template>
@@ -17,6 +15,9 @@ import { MetaInfo } from "vue-meta";
 @Component({
   head(this: Index): MetaInfo {
     return {
+      htmlAttrs: {
+        lang: this.$i18n.locale,
+      },
       title: "Дмитрий Попов",
     };
   },

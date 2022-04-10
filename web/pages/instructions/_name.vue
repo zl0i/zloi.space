@@ -47,6 +47,9 @@ export default class Instruction extends Index {
   html: string = "";
   head() {
     return {
+      htmlAttrs: {
+        lang: this.$i18n.locale,
+      },
       title: this.name,
     };
   }
@@ -64,11 +67,9 @@ export default class Instruction extends Index {
 }
 </script>
 
-<style >
+<style>
 .fixed {
   position: fixed;
   overflow: hidden;
 }
 </style>
-
-
