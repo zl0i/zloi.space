@@ -3,6 +3,7 @@ import i18nConfig from "./configs/i18n";
 import type { NuxtConfig } from '@nuxt/types'
 
 const isDev = process.env['NODE_ENV'] != 'production'
+const domain = process.env['DOMAIN'] ?? "localhost"
 
 const config: NuxtConfig = {
   head: {
@@ -17,11 +18,11 @@ const config: NuxtConfig = {
       { hid: "description", name: "description", content: "Привет! Меня зовут Дмитрий, я backend программист, интересуюсь всем, что связано с железом и ПО начиная с STM32, администрированием серверов, разработкой backend-приложений и заканчивая дизайном." },
       { name: "format-detection", content: "telephone=no" },
       { name: "keywords", content: "Дмитрий,Попов,zloi,программист" },
-      { name: "og:title", content: "zloi.space" },
+      { name: "og:title", content: `${domain}` },
       { name: "og:type", content: "website" },
-      { name: "og:site_name", content: "zloi.space" },
-      { name: "og:url", content: "https://zloi.space" },
-      { name: "og:image", content: "https://zloi.space/img/og-image.jpg" },
+      { name: "og:site_name", content: `${domain}` },
+      { name: "og:url", content: `https://${domain}` },
+      { name: "og:image", content: `https://${domain}/img/og-image.jpg` },
       { name: "og:image:width", content: "968" },
       { name: "og:image:height", content: "504" },
       { name: "yandex-verification", content: "9425b9578d21b568" },
@@ -63,11 +64,11 @@ const config: NuxtConfig = {
     },
   ],
   axios: {
-    baseURL: isDev ? "http://localhost:3000" : "https://zloi.space",
+    baseURL: isDev ? "http://localhost:3000" : `https://${domain}`,
     https: isDev ? false : true
   },
   server: {
-    host: "localhost",
+    host: isDev ? "localhost": "0.0.0.0",
     port: 3000
   },
   plugins: [
