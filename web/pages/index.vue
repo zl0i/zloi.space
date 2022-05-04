@@ -2,15 +2,19 @@
   <div>
     <Header @changeLanguage="setLanguage"></Header>
     <Welcome></Welcome>
-    <Summary id="summary"></Summary>
-    <KnoweledgeView id="knowledge"></KnoweledgeView>
-    <BooksView id="reads"></BooksView>
+    <LazyHydrate>
+      <Summary id="summary"></Summary>
+      <KnoweledgeView id="knowledge"></KnoweledgeView>
+      <BooksView id="reads"></BooksView>
+    </LazyHydrate>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import { MetaInfo } from "vue-meta";
+import Header from "~/components/Header.vue";
+import Welcome from "~/components/Welcome.vue";
 
 @Component({
   head(this: Index): MetaInfo {
@@ -20,6 +24,13 @@ import { MetaInfo } from "vue-meta";
       },
       title: "Дмитрий Попов",
     };
+  },
+  components: {
+    Header,
+    Welcome,
+    Summary: () => import("~/components/Summary.vue"),
+    KnoweledgeView: () => import("~/components/KnoweledgeView.vue"),
+    BooksView: () => import("~/components/BooksView.vue"),
   },
   async asyncData({ i18n, store }) {
     await store.dispatch("summary/requestSummary", i18n.getLocaleCookie());

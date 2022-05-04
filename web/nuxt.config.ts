@@ -36,9 +36,9 @@ const config: NuxtConfig = {
     ],
   },
   router: {
-    prefetchLinks: true,
+    prefetchLinks: false,
   },
-  components: true,
+  components: false,
   build: {
     html: {
       minify: {
@@ -57,12 +57,16 @@ const config: NuxtConfig = {
         removeComments: true,
         removeEmptyElements: true
       }
-    }
+    },
+    optimization: {
+      minimize: !isDev,
+    },
   },
   buildModules: [
     '@nuxt/typescript-build',
     'nuxt-purgecss'
   ],
+  transpile: ['vue-lazy-hydration'],
   css: [],
   env: {},
   loading: { color: '#0c64c1' },
