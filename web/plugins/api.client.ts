@@ -1,9 +1,7 @@
 import type { Context, Plugin } from '@nuxt/types'
-import type { IInstruction } from "../server-middleware/knowledgebase"
-import type { IBook } from "../server-middleware/reads"
+import type { IInstruction, IBook } from "~/src/db"
 
-interface API {
-    truncate?: (text: string) => string
+declare interface API {
     getReads: () => Promise<IBook[]>
     getKnoweldge: () => Promise<IInstruction[]>
 }
@@ -14,7 +12,22 @@ declare module 'vue/types/vue' {
     }
 }
 
-function test({ $axios }: Context) {
+declare module '@nuxt/types' {
+    interface Context {
+        $api: API
+    }
+    interface Context {
+        $api: API
+    }
+}
+
+declare module 'vuex/types/index' {
+    interface Store<S> {
+        $api: API
+    }
+}
+
+function fromContext({ $axios }: Context) {
     const api: API = {
         async getReads() {
             const res = await $axios.get("/api/reads")
@@ -30,7 +43,7 @@ function test({ $axios }: Context) {
 
 
 const apiPlugin: Plugin = (context, inject) => {
-    inject('api', test(context))
+    inject('api', fromContext(context))
 }
 
 export default apiPlugin

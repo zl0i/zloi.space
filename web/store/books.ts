@@ -29,8 +29,9 @@ export const mutations: MutationTree<BooksState> = {
 export const actions: ActionTree<BooksState, BooksState> = {
     async requestBooks({ commit, state }, _context: string) {
         if (state.books.length == 0) {
-            const res = await this.$axios.get(`/api/reads`)
-            commit("of", res.data)
+            // const data = await this.$api.getReads() //await this.$axios.get(`/api/reads`)
+            // console.log(data)
+            // commit("of", data)
         }
     }
 }
