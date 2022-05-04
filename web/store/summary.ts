@@ -30,6 +30,7 @@ export interface ISkills {
 }
 
 export interface ISocialLink {
+    name: string
     image: string
     link: string
 }
@@ -83,7 +84,7 @@ export const actions: ActionTree<SummaryState, RootState> = {
             const res = await this.$axios.get(`/summary.${postfix}.json`)
             commit("setSummary", res.data)
         } catch (e) {
-            console.log(e)          
+            console.log(e)
         }
     }
 }

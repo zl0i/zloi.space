@@ -7,26 +7,32 @@
   "about": "Привет. Как написано выше, меня зовут Дима. Профессионально работаю программистом с 2018 года. Разрабатывал кроссплатформенные мобильные приложения на Qt, но JS открыл для себя в 2020 году и влюбился в него. Я люблю разрабатывать бэкенд часть и все что с ней связано. У меня есть опыт разработки микросервисов, создания CI/CD с использованием GitLab и работы с облачными провайдерами (GCP).",
   "links": [
     {
+      "name": "gitlab",
       "image": "/img/gitlab.png",
       "link": "https://gitlab.com/zl0i/"
     },
     {
+      "name": "github",
       "image": "/img/github.png",
       "link": "https://github.com/zl0i"
     },
     {
+      "name": "gmail",
       "image": "/img/gmail.png",
       "link": "mailto: pdmitri07@gmail.com"
     },
     {
+      "name": "vk",
       "image": "/img/vk.png",
       "link": "https://vk.com/dev_zloi"
     },
     {
+      "name": "telegram",
       "image": "/img/telegram.png",
       "link": "https://t.me/zzloi"
     },
     {
+      "name": "habr",
       "image": "/img/habr.png",
       "link": "https://habr.com/ru/users/zl0i"
     }

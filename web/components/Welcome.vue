@@ -7,7 +7,7 @@
       <p>{{ text }}</p>
       <ul>
         <li v-for="item in links" :key="item.link">
-          <a class="contacts" :href="item.link"> <img :src="item.image" /></a>
+          <a class="contacts" :href="item.link"> <img :src="item.image" :alt="item.name" /></a>
         </li>
       </ul>
     </main>
@@ -103,6 +103,7 @@ img {
 
 .contacts {
   display: block;
+  width: 32px;
   height: 32px;
 }
 

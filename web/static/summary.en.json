@@ -7,26 +7,32 @@
   "about": "Hello. As written above, my name is Dima. I have been working professionally as a programmer since 2018. I have developed cross-platform mobile applications in Qt, but I discovered JS in 2020 and fell in love with it. I love developing the backend part and everything that connected with it. I have experience in developing microservices, building CI/CD using GitLab and working with cloud providers (GCP).",
   "links": [
     {
+      "name": "gitlab",
       "image": "/img/gitlab.png",
       "link": "https://gitlab.com/zl0i/"
     },
     {
+      "name": "github",
       "image": "/img/github.png",
       "link": "https://github.com/zl0i"
     },
     {
+      "name": "gmail",
       "image": "/img/gmail.png",
       "link": "mailto: pdmitri07@gmail.com"
     },
     {
+      "name": "vk",
       "image": "/img/vk.png",
       "link": "https://vk.com/dev_zloi"
     },
     {
+      "name": "telegram",
       "image": "/img/telegram.png",
       "link": "https://t.me/zzloi"
     },
     {
+      "name": "habr",
       "image": "/img/habr.png",
       "link": "https://habr.com/ru/users/zl0i"
     }

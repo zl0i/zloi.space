@@ -2,7 +2,7 @@
   <div class="summary-box">
     <div class="summary-header">
       <p style="margin: 0px">{{ $t("summary.title") }}</p>
-      <a href="./summary.pdf" target="_blank" style="padding-top: 20px">
+      <a href="/summary.pdf" target="_blank" style="padding-top: 20px">
         <img alt="downloadSummary" src="../static/download.svg" />
       </a>
     </div>
