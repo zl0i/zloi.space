@@ -1,9 +1,8 @@
 import type { Plugin } from '@nuxt/types'
-import { instructions, IInstruction } from "../server-middleware/knowledgebase"
-import { books, IBook } from "../server-middleware/reads"
+import { getInstructions, IInstruction, IBook, getBooks } from "~/src/db"
+
 
 interface API {
-    truncate?: (text: string) => string
     getReads: () => Promise<IBook[]>
     getKnoweldge: () => Promise<IInstruction[]>
 }
@@ -13,12 +12,28 @@ declare module 'vue/types/vue' {
         $api: API
     }
 }
+
+declare module '@nuxt/types' {
+    interface Context {
+        $api: API
+    }
+    interface Context {
+        $api: API
+    }
+}
+
+declare module 'vuex/types/index' {
+    interface Store<S> {
+        $api: API
+    }
+}
+
 const api: API = {
     async getReads() {
-        return books
+        return await getBooks()
     },
     async getKnoweldge() {
-        return instructions
+        return await getInstructions()
     }
 }
 

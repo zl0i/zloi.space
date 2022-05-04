@@ -79,14 +79,14 @@ const config: NuxtConfig = {
   i18n: i18nConfig,
   firebase: firebaseConfig,
   serverMiddleware: [
-    {
-      path: "/api/knowledgebase",
-      handler: "./server-middleware/knowledgebase",
-    },
-    {
-      path: "/api/reads",
-      handler: "./server-middleware/reads",
-    },
+    // {
+    //   path: "/api/knowledgebase",
+    //   handler: "./server-middleware/knowledgebase",
+    // },
+    // {
+    //   path: "/api/reads",
+    //   handler: "./server-middleware/reads",
+    // },
   ],
   axios: {
     baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
@@ -98,11 +98,12 @@ const config: NuxtConfig = {
   },
   plugins: [
     "./plugins/api.server.ts",
-    "./plugins/api.client.ts",
+    // "./plugins/api.client.ts",
   ],
   telemetry: {
     enabled: false
   }
+
 }
 
 export default config
