@@ -39,9 +39,29 @@ const config: NuxtConfig = {
     prefetchLinks: true,
   },
   components: true,
-  build: {},
+  build: {
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+        preserveLineBreaks: false,
+        collapseWhitespace: true,
+        minifyURLs: true,
+        removeComments: true,
+        removeEmptyElements: true
+      }
+    }
+  },
   buildModules: [
-    '@nuxt/typescript-build'
+    '@nuxt/typescript-build',
+    'nuxt-purgecss'
   ],
   css: [],
   env: {},
@@ -68,7 +88,7 @@ const config: NuxtConfig = {
     https: isDev ? false : true
   },
   server: {
-    host: isDev ? "localhost": "0.0.0.0",
+    host: isDev ? "localhost" : "0.0.0.0",
     port: 3000
   },
   plugins: [
