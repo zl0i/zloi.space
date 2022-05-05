@@ -2,11 +2,9 @@
   <div>
     <Header @changeLanguage="setLanguage"></Header>
     <Welcome></Welcome>
-    <LazyHydrate>
-      <Summary id="summary"></Summary>
-      <KnoweledgeView id="knowledge"></KnoweledgeView>
-      <BooksView id="reads"></BooksView>
-    </LazyHydrate>
+    <Summary id="summary"></Summary>
+    <KnoweledgeView id="knowledge"></KnoweledgeView>
+    <BooksView id="reads"></BooksView>
   </div>
 </template>
 
