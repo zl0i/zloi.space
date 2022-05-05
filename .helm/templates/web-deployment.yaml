@@ -19,11 +19,11 @@ spec:
           image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
           livenessProbe:
             httpGet:
-              path: /
+              path: /kubernetes/health-check
               port: 3000
           readinessProbe:
             httpGet:
-              path: /
+              path: /kubernetes/health-check
               port: 3000
           ports:
           - containerPort: 3000     
