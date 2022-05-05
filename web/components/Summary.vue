@@ -7,34 +7,40 @@
       </a>
     </div>
     <div class="all-column">
-      <ul class="left-column">
+      <div class="left-column">
         <div>
           <p class="box-naming">{{ `${$t("summary.education")}:` }}:</p>
-          <li class="box-list" v-for="item of education" :key="item.title">
-            <p>{{ item.range.from }} - {{ item.range.to }}</p>
-            <p>{{ item.title }}</p>
-            <p>{{ item.speciality }}</p>
-          </li>
+          <ul style="padding: 0">
+            <li class="box-list" v-for="item of education" :key="item.title">
+              <p>{{ item.range.from }} - {{ item.range.to }}</p>
+              <p>{{ item.title }}</p>
+              <p>{{ item.speciality }}</p>
+            </li>
+          </ul>
 
           <p class="box-naming">{{ `${$t("summary.courses")}:` }}</p>
-          <li class="box-list" v-for="item of courses" :key="item.title">
-            <p>{{ item.range.from }} - {{ item.range.to }}</p>
-            <p>{{ item.title }}</p>
-            <p>{{ item.speciality }}</p>
-          </li>
+          <ul style="padding: 0">
+            <li class="box-list" v-for="item of courses" :key="item.title">
+              <p>{{ item.range.from }} - {{ item.range.to }}</p>
+              <p>{{ item.title }}</p>
+              <p>{{ item.speciality }}</p>
+            </li>
+          </ul>
 
           <p class="box-naming">{{ `${$t("summary.experience")}:` }}</p>
-          <li class="box-list" v-for="item of experience" :key="item.title">
-            <p>
-              {{ item.range.from }} - {{ item.range.to }}
-              <a class="org-name" :href="item.link_org">{{ item.org }}</a>
-            </p>
-            <p class="description">{{ item.position }}</p>
-            <p class="description">{{ item.duties }}</p>
-          </li>
+          <ul style="padding: 0">
+            <li class="box-list" v-for="item of experience" :key="item.title">
+              <p>
+                {{ item.range.from }} - {{ item.range.to }}
+                <a class="org-name" :href="item.link_org">{{ item.org }}</a>
+              </p>
+              <p class="description">{{ item.position }}</p>
+              <p class="description">{{ item.duties }}</p>
+            </li>
+          </ul>
         </div>
-      </ul>
-      <ul class="right-column">
+      </div>
+      <div class="right-column">
         <p class="box-naming">{{ `${$t("summary.skills")}:` }}</p>
         <div class="box-skill" v-for="item of skills" :key="item.name">
           <p>{{ item.name }}</p>
@@ -47,14 +53,18 @@
           </div>
         </div>
         <p class="box-naming">{{ `${$t("summary.tech_stack")}:` }}</p>
-        <li class="box-list" v-for="item of tech_stack" :key="item">
-          {{ item }}
-        </li>
+        <ul style="padding: 0">
+          <li class="box-list" v-for="item of tech_stack" :key="item">
+            {{ item }}
+          </li>
+        </ul>
         <p class="box-naming">{{ `${$t("summary.achievements")}:` }}</p>
-        <li class="box-list" v-for="item of achievements" :key="item">
-          {{ item }}
-        </li>
-      </ul>
+        <ul style="padding: 0">
+          <li class="box-list" v-for="item of achievements" :key="item">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
