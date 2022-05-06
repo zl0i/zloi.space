@@ -5,15 +5,15 @@
       alt=""
       v-if="!image"
       class="image"
-      src="../../static/default-image-book.png"
+      src="~/static/img/default-image-book.png"
       loading="lazy"
     />
     <div class="read-div" v-show="status == 'read'">
-      <img src="../../static/read.svg" alt="read" />
+      <img src="~/static/img/read.svg" alt="read" />
       <p>{{ $t("books.read") }}</p>
     </div>
     <div class="read-div" v-show="status == 'reading'">
-      <img src="../../static/reading.svg" alt="read" />
+      <img src="~/static/img/reading.svg" alt="read" />
       <p>{{ $t("books.reading") }}</p>
     </div>
     <p class="name" style="">{{ name }}</p>

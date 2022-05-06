@@ -3,7 +3,7 @@
     <div class="summary-header">
       <p style="margin: 0px">{{ $t("summary.title") }}</p>
       <a href="/summary.pdf" target="_blank" style="padding-top: 20px">
-        <img alt="downloadSummary" src="../static/download.svg" />
+        <img alt="downloadSummary" src="~/static/img/download.svg" />
       </a>
     </div>
     <div class="all-column">

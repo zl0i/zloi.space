@@ -10,7 +10,7 @@
         <a href="#reads">{{ $t("headers.reads") }}</a>
         <div class="language">
           <span>Translate</span>
-          <img alt="arrow" src="../static/arrow-down.svg" />
+          <img alt="arrow" src="~/static/img/arrow-down.svg" />
           <div class="language-background">
             <div class="language-popup">
               <span @click="changeLanguage('ru')">Русский</span>

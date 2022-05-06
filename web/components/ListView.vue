@@ -7,7 +7,7 @@
           class="link-image"
           v-if="link"
           :alt="title"
-          src="../static/link.svg"
+          src="~/static/img/link.svg"
         />
       </a>
     </div>
