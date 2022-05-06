@@ -75,12 +75,13 @@ export const mutations: MutationTree<SummaryState> = {
 
 
 export const actions: ActionTree<SummaryState, RootState> = {
-    async requestSummary({ state, commit }, locale: string) {
+    async requestSummary({ commit }, locale: string) {
         if (!this.$axios) {
             return
         }
         const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
         try {
+            console.log(this.$axios)
             const res = await this.$axios.get(`/summary.${postfix}.json`)
             commit("setSummary", res.data)
         } catch (e) {
