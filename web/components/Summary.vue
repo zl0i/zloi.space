@@ -9,7 +9,7 @@
     <div class="all-column">
       <div class="left-column">
         <div>
-          <p class="box-naming">{{ `${$t("summary.education")}:` }}:</p>
+          <p class="box-naming">{{ `${$t("summary.education")}:` }}</p>
           <ul style="padding: 0">
             <li class="box-list" v-for="item of education" :key="item.title">
               <p>{{ item.range.from }} - {{ item.range.to }}</p>
