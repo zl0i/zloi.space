@@ -3,7 +3,7 @@ import i18nConfig from "./configs/i18n";
 import type { NuxtConfig } from '@nuxt/types'
 
 const isDev = process.env['NODE_ENV'] != 'production'
-const domain = process.env['DOMAIN'] ?? "localhost"
+const API_URL = process.env['API_URL'] ?? "localhost"
 
 const config: NuxtConfig = {
   head: {
@@ -18,11 +18,11 @@ const config: NuxtConfig = {
       { hid: "description", name: "description", content: "Привет! Меня зовут Дмитрий, я backend программист, интересуюсь всем, что связано с железом и ПО начиная с STM32, администрированием серверов, разработкой backend-приложений и заканчивая дизайном." },
       { name: "format-detection", content: "telephone=no" },
       { name: "keywords", content: "Дмитрий,Попов,zloi,программист" },
-      { name: "og:title", content: `${domain}` },
+      { name: "og:title", content: `${API_URL}` },
       { name: "og:type", content: "website" },
-      { name: "og:site_name", content: `${domain}` },
-      { name: "og:url", content: `https://${domain}` },
-      { name: "og:image", content: `https://${domain}/img/og-image.jpg` },
+      { name: "og:site_name", content: `${API_URL}` },
+      { name: "og:url", content: `https://${API_URL}` },
+      { name: "og:image", content: `https://${API_URL}/img/og-image.jpg` },
       { name: "og:image:width", content: "968" },
       { name: "og:image:height", content: "504" },
       { name: "yandex-verification", content: "9425b9578d21b568" },
@@ -88,9 +88,8 @@ const config: NuxtConfig = {
     },
   ],
   axios: {
-    baseURL: isDev ? "http://localhost:3000" : `https://${domain}`,
+    baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
     https: isDev ? false : true,
-    browserBaseURL: isDev ? "http://localhost:3000" : `https://${domain}`,
   },
   server: {
     host: isDev ? "localhost" : "0.0.0.0",
