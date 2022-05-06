@@ -81,7 +81,6 @@ export const actions: ActionTree<SummaryState, RootState> = {
         }
         const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
         try {
-            console.log(this.$axios.defaults)
             const res = await this.$axios.get(`/summary.${postfix}.json`)
             commit("setSummary", res.data)
         } catch (e) {
