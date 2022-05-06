@@ -3,6 +3,7 @@ export default {
         summary: "Summary",
         knoweledge: "Knoweledge",
         reads: "Reads",
+        languages: "Languages",
     },
     summary: {
         title: "Summary",

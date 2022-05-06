@@ -4,6 +4,7 @@ export default async (_context: any, _locale: any) => {
       summary: "Резюме",
       knoweledge: "База знаний",
       reads: "Книги",
+      languages: "Языки",
     },
     summary: {
       title: "Резюме",
