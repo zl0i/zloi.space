@@ -36,6 +36,7 @@ export interface ISocialLink {
 }
 
 export interface SummaryState {
+    lang: string
     titles: string[]
     about: string
     links: ISocialLink[]
@@ -48,6 +49,7 @@ export interface SummaryState {
 }
 
 export const state = (): SummaryState => ({
+    lang: "",
     titles: [""],
     about: "",
     links: [],
@@ -79,10 +81,10 @@ export const actions: ActionTree<SummaryState, RootState> = {
         if (!this.$axios) {
             return
         }
-        if (state.about.length > 0) {
+        const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
+        if (state.lang == postfix && state.about.length > 0) {
             return
         }
-        const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
         try {
             const res = await this.$axios.get(`/summary.${postfix}.json`)
             commit("setSummary", res.data)
