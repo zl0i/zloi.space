@@ -42,10 +42,10 @@
   {
     "title": "Паттерны Kubernetes: Шаблоны разработки собственных облачных приложений",
     "link": "https://www.googleapis.com/books/v1/volumes/2pTcDwAAQBAJ",
-    "read": "unread"
+    "read": "reading"
   },
   {
-    "title": "MongoDB",
+    "title": "MongoDB. Полное руководство",
     "link": "https://www.googleapis.com/books/v1/volumes/8SwQzgEACAAJ",
     "read": "unread"
   },
@@ -117,6 +117,11 @@
   {
     "title": "Эффективный TypeScript: 62 способа улучшить код",
     "link": "https://www.googleapis.com/books/v1/volumes/DCb6DwAAQBAJ",
-    "read": "reading"
+    "read": "read"
+  },
+  {
+    "title": "Chaos Engineering",
+    "link": "https://www.googleapis.com/books/v1/volumes/jVjbDwAAQBAJ",
+    "read": "unread"
   }
 ]
