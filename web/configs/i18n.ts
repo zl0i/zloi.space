@@ -1,4 +1,3 @@
-import { Context } from "@nuxt/types"
 import { Options } from "@nuxtjs/i18n"
 import en from "../lang/en"
 

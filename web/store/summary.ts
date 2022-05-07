@@ -36,6 +36,7 @@ export interface ISocialLink {
 }
 
 export interface SummaryState {
+    lang: string
     titles: string[]
     about: string
     links: ISocialLink[]
@@ -48,6 +49,7 @@ export interface SummaryState {
 }
 
 export const state = (): SummaryState => ({
+    lang: "",
     titles: [""],
     about: "",
     links: [],
@@ -61,6 +63,7 @@ export const state = (): SummaryState => ({
 
 export const mutations: MutationTree<SummaryState> = {
     setSummary(state, data: any) {
+        state.lang = data.lang
         state.titles = data.titles
         state.about = data.about
         state.links = data.links
@@ -75,14 +78,17 @@ export const mutations: MutationTree<SummaryState> = {
 
 
 export const actions: ActionTree<SummaryState, RootState> = {
-    async requestSummary({ commit }, locale: string) {
+    async requestSummary({ state, commit }, locale: string) {
         if (!this.$axios) {
             return
         }
         const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
+        if (state.lang == postfix && state.about.length > 0) {
+            return
+        }
         try {
             const res = await this.$axios.get(`/summary.${postfix}.json`)
-            commit("setSummary", res.data)
+            commit("setSummary", { lang: postfix, ...res.data })
         } catch (e) {
             console.log(e)
         }
