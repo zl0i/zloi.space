@@ -26,5 +26,3 @@ export const actions: ActionTree<RootState, RootState> = {
     commit(MutationType.CHANGE_DESCRIPTION, "I'm defined by server side")
   }
 }
-
-

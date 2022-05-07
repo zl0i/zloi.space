@@ -34,7 +34,3 @@ export const actions: ActionTree<BooksState, BooksState> = {
         }
     }
 }
-
-
-
-

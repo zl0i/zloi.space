@@ -38,7 +38,3 @@ export const actions: ActionTree<InstructionsState, InstructionsState> = {
         }
     }
 }
-
-
-
-
