@@ -75,8 +75,11 @@ export const mutations: MutationTree<SummaryState> = {
 
 
 export const actions: ActionTree<SummaryState, RootState> = {
-    async requestSummary({ commit }, locale: string) {
+    async requestSummary({ state, commit }, locale: string) {
         if (!this.$axios) {
+            return
+        }
+        if (state.about.length > 0) {
             return
         }
         const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
