@@ -63,6 +63,7 @@ export const state = (): SummaryState => ({
 
 export const mutations: MutationTree<SummaryState> = {
     setSummary(state, data: any) {
+        state.lang = data.lang
         state.titles = data.titles
         state.about = data.about
         state.links = data.links
@@ -87,7 +88,7 @@ export const actions: ActionTree<SummaryState, RootState> = {
         }
         try {
             const res = await this.$axios.get(`/summary.${postfix}.json`)
-            commit("setSummary", res.data)
+            commit("setSummary", { lang: postfix, ...res.data })
         } catch (e) {
             console.log(e)
         }
