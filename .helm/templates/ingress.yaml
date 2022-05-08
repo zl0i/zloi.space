@@ -1,6 +1,4 @@
-{{ $host := ternary "zloi.space"
-            (print .Values.branch ".zloi.space")
-            (or (eq .Values.branch "master") (eq .Values.branch "main")) }}
+{{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -15,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        -  {{$host}}
-      secretName: "{{$host}}-certificate"
+        -  {{ .Values.ingress.hostname }}
+      secretName: {{ .Values.ingress.hostname }}-tls
   rules:
-    - host: {{$host}}
+    - host: {{ .Values.ingress.hostname }}
       http:
         paths:
           - path: /
@@ -28,3 +26,4 @@ spec:
                 name: {{ regexReplaceAll "\\W+" (lower .Chart.Name) "-"}}-web
                 port:
                   number: 80
+{{- end }}

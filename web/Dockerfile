@@ -9,11 +9,9 @@ RUN npm run build
 
 
 FROM node:16.13.2-alpine
-ARG API_URL
 WORKDIR /app
 EXPOSE 3000
 ENV NODE_ENV=production
-ENV API_URL=${API_URL}
 COPY --from=build /app/package*.json ./
 RUN npm ci
 COPY --from=build /app/ ./
