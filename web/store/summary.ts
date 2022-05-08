@@ -87,6 +87,7 @@ export const actions: ActionTree<SummaryState, RootState> = {
             return
         }
         try {
+            console.log(this.$axios.defaults.baseURL)
             const res = await this.$axios.get(`/summary.${postfix}.json`)
             commit("setSummary", { lang: postfix, ...res.data })
         } catch (e) {
