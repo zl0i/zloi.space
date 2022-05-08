@@ -6,6 +6,7 @@ const isDev = process.env['NODE_ENV'] != 'production'
 const API_URL = process.env['API_URL'] ?? "localhost"
 
 const config: NuxtConfig = {
+  modern: "server",
   head: {
     title: "Дмитрий Попов",
     htmlAttrs: {
