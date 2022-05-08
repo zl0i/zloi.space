@@ -134,10 +134,17 @@ img {
   hyphens: auto;
 }
 
+.auto-input {
+  min-height: 75px;
+}
+
 @media (max-device-width: 736px) {
   .input {
     height: 160px;
     font-size: 22px;
+  }
+  .auto-input {
+    min-height: 26px;
   }
 }
 </style>
