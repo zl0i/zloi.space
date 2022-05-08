@@ -12,7 +12,7 @@ stages:
   - deploy
 
 build:
-  extends: .docker
+  extends: .kaniko
   rules:
     - if: $CI_COMMIT_TAG == null
     - if: $CI_COMMIT_BRANCH == "master"
@@ -33,7 +33,7 @@ deploy:branch:
     deployment_tier: development
     on_stop: stop:branch:deploy
   variables:
-    HELM_OPTIONS: "--set branch=${CI_COMMIT_BRANCH}"
+    HELM_OPTIONS: "--set ingress.hostname=${CI_COMMIT_BRANCH}.zloi.space"
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
 
@@ -46,7 +46,7 @@ deploy:production:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
   variables:
-    HELM_OPTIONS: "--set branch=${CI_COMMIT_BRANCH}"
+    HELM_OPTIONS: "--set ingress.hostname=zloi.space"
 
 stop:branch:deploy:
   extends: .helm_uninstall
