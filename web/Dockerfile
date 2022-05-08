@@ -9,6 +9,7 @@ RUN npm run build
 
 
 FROM node:16.13.2-alpine
+ARG API_URL
 WORKDIR /app
 EXPOSE 3000
 ENV NODE_ENV=production
