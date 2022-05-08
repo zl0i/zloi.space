@@ -1,3 +1,5 @@
+replicaCount: 1
+
 image:
   repository: registry.gitlab.com/zl0i/zloi-space
   name: zloi-web
@@ -7,3 +9,9 @@ ingress:
   enabled: true
   hostname: "zloi.space"
   tls: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($request_uri ~* \.(js|css|gif|jpe?g|png|json)) {
+        add_header Cache-Control "public, max-age=7200";
+      }
