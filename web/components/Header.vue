@@ -193,7 +193,7 @@ nav a {
 }
 
 nav a h1 {
-  font-family: "Permanent Marker";
+  font-family: "Permanent Marker", cursive;
   color: #fff;
   font-size: 40px;
 }
