@@ -15,3 +15,18 @@ ingress:
       if ($request_uri ~* \.(js|css|gif|jpe?g|png|json)) {
         add_header Cache-Control "public, max-age=7200";
       }
+
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 200m
+  limits:
+    memory: 256Mi
+    cpu: 1000m
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: null
