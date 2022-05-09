@@ -5,7 +5,9 @@ metadata:
   labels:
     {{- include "zloi-space.labels" . | nindent 4 }}
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "zloi-space.selectorLabels" . | nindent 6 }}
@@ -30,3 +32,8 @@ spec:
           env:
           - name: API_URL
             value: http{{ if .Values.ingress.tls }}s{{ end }}://{{.Values.ingress.hostname }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          
