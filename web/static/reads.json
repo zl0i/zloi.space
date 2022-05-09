@@ -123,5 +123,25 @@
     "title": "Chaos Engineering",
     "link": "https://www.googleapis.com/books/v1/volumes/jVjbDwAAQBAJ",
     "read": "unread"
+  },
+  {
+    "title": "Microservices Patterns",
+    "link": "https://www.googleapis.com/books/v1/volumes/QTgzEAAAQBAJ",
+    "read": "unread"
+  },
+  {
+    "title": "Высоконагруженные приложения. Программирование, масштабирование, поддержка",
+    "link": "https://www.googleapis.com/books/v1/volumes/ehpKDwAAQBAJ",
+    "read": "unread"
+  },  
+  {
+    "title": "Fundamentals of Software Architecture",
+    "link": "https://www.googleapis.com/books/v1/volumes/xa7MDwAAQBAJ",
+    "read": "unread"
+  },
+  {
+    "title": "Цель. Процесс непрерывного совершенствования",
+    "link": "https://www.googleapis.com/books/v1/volumes/LA4ACwAAQBAJ",
+    "read": "unread"
   }
 ]
