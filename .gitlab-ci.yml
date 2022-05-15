@@ -27,6 +27,9 @@ build:
     BUILD_DIR: './web'
     IMAGE_NAME: zloi-web
 
+code_quality:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 deploy:branch:
   extends: .helm_install
