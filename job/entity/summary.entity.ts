@@ -2,36 +2,42 @@
 import { sequelize } from "../src/db";
 import { DataTypes, Model } from 'sequelize';
 
-export class Instructions extends Model {
+
+export class Summary extends Model {
     declare id: number
-    declare name: string
-    declare markdown: string
-    declare html: string
+    declare key: string
+    declare position: string
+    declare language: string
+    declare value: unknown
 }
 
-Instructions.init(
+Summary.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: false,
+            autoIncrement: true,
             primaryKey: true
         },
-        name: {
-            type: DataTypes.STRING,
-            unique: true
-        },
-        markdown: {
+        key: {
             type: DataTypes.STRING,
             unique: false
         },
-        html: {
+        position: {
             type: DataTypes.STRING,
+            unique: false
+        },
+        language: {
+            type: DataTypes.STRING,
+            unique: false
+        },
+        value: {
+            type: DataTypes.JSON,
             unique: false
         },
     },
     {
         sequelize,
-        modelName: 'Instructions',
+        modelName: 'Summary',
         freezeTableName: true,
         createdAt: false,
         updatedAt: false

@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "zloi-space.fullname" . }}
+  labels:
+    {{- include "zloi-space.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: 0
+    helm.sh/hook-delete-policy: hook-succeeded
+spec:
+  template:
+    metadata:
+      name: {{ include "zloi-space.fullname" . }}
+      labels:
+        {{- include "zloi-space.labels" . | nindent 8 }}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: initDB
+        image: {{.Values.image.repository }}/zloi-updater:{{.Values.image.tag}}
+        env:
+        - name: DB_HOST
+          value: {{ .Release.Name }}-postgresql
+        - name: DB_NAME
+          value: {{ .Values.postgresql.auth.database }}
+        - name: DB_USERNAME
+          value: {{ .Values.postgresql.auth.username }}
+        - name: DB_PASSWORD
+          value: {{ .Values.postgresql.auth.password }}

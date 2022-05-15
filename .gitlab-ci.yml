@@ -13,7 +13,7 @@ stages:
   - release
   - deploy
 
-build:
+build:web:
   extends: .kaniko
   rules:
     - if: $CI_COMMIT_TAG == null
@@ -26,6 +26,16 @@ build:
   variables:
     BUILD_DIR: "./web"
     IMAGE_NAME: zloi-web
+
+build:updater:
+  extends: .kaniko
+  rules:
+    - if: $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_BRANCH == "master"      
+    - if: $CI_COMMIT_BRANCH     
+  variables:
+    BUILD_DIR: "./job"
+    IMAGE_NAME: zloi-updater
 
 code_quality:
   rules:
