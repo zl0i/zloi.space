@@ -16,6 +16,12 @@ spec:
         {{- include "zloi-space.labels" . | nindent 8 }}
     spec:
       restartPolicy: OnFailure
+      activeDeadlineSeconds: 60
+      backoffLimit: 0
+      initContainers:
+      - name: wait-db
+        image: alpine:3.6
+        сommand: ["/bin/sh", "-c", "while ! nc -z {{ .Release.Name }}-postgresql 5432; do sleep 1; done;"]
       containers:
       - name: initDB
         image: {{.Values.image.repository }}/zloi-updater:{{.Values.image.tag}}
