@@ -1,9 +1,11 @@
 import type { Context, Plugin } from '@nuxt/types'
-import type { IInstruction, IBook } from "~/src/db"
+import { Books } from '~/api/entity/books.entity'
+import { Instructions } from '~/api/entity/instructions.entity'
+import type { IInstruction} from "~/src/db"
 
-declare interface API {
-    getReads: () => Promise<IBook[]>
-    getKnoweldge: () => Promise<IInstruction[]>
+interface API {
+    getReads: () => Promise<Books[]>
+    getKnoweldge: () => Promise<Instructions[]>
 }
 
 declare module 'vue/types/vue' {
@@ -30,11 +32,11 @@ declare module 'vuex/types/index' {
 function fromContext({ $axios }: Context) {
     const api: API = {
         async getReads() {
-            const res = await $axios.get("/api/reads")
-            return res.data
+            const { data } = await $axios.get("/api/books")
+            return data
         },
         async getKnoweldge() {
-            const res = await $axios.get("/api/knowledgebase")
+            const res = await $axios.get("/api/intructions")
             return res.data
         }
     }

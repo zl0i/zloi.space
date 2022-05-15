@@ -15,3 +15,14 @@ ingress:
       if ($request_uri ~* \.(js|css|gif|jpe?g|png|json)) {
         add_header Cache-Control "public, max-age=7200";
       }
+
+
+postgresql:
+  auth:
+    postgresPassword: postgres
+    username: zloi
+    password: zloi
+    database: zloi-space
+  primary:
+    persistence:
+       size: 1Gi
