@@ -2,38 +2,49 @@
 import { sequelize } from "../src/db";
 import { DataTypes, Model } from 'sequelize';
 
-export class Instructions extends Model {
-    declare id: number
-    declare name: string
-    declare markdown: string
-    declare html: string
+export enum BookStatus {
+    UNREAD,
+    READ,
+    INPORGRESS
 }
 
-Instructions.init(
+export class Books extends Model {
+    declare id: number
+    declare name: string
+    declare icon: string
+    declare status: BookStatus
+    declare description: string
+}
+
+Books.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: false,
+            autoIncrement: true,
             primaryKey: true
         },
         name: {
             type: DataTypes.STRING,
             unique: true
         },
-        markdown: {
+        icon: {
             type: DataTypes.STRING,
             unique: false
         },
-        html: {
+        status: {
+            type: DataTypes.STRING,
+            unique: false
+        },
+        description: {
             type: DataTypes.STRING,
             unique: false
         },
     },
-    {
+    {        
         sequelize,
-        modelName: 'Instructions',
+        modelName: 'Books',
         freezeTableName: true,
         createdAt: false,
-        updatedAt: false
+        updatedAt: false,
     }
 );

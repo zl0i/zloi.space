@@ -14,22 +14,22 @@ Instructions.init(
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: false,
-            primaryKey: true
+            primaryKey: true,
         },
         name: {
             type: DataTypes.STRING,
             unique: true
         },
         markdown: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50000),
             unique: false
         },
         html: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50000),
             unique: false
         },
     },
-    {
+    {        
         sequelize,
         modelName: 'Instructions',
         freezeTableName: true,
