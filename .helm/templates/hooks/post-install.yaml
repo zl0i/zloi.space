@@ -22,7 +22,7 @@ spec:
         image: alpine:3.6
         command: ["/bin/sh", "-c", "while ! nc -z {{ .Release.Name }}-postgresql 5432; do sleep 1; done;"]
       containers:
-      - name: initDB
+      - name: init-db
         image: {{.Values.image.repository }}/zloi-updater:{{.Values.image.tag}}
         env:
         - name: DB_HOST
