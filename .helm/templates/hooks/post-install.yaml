@@ -9,15 +9,15 @@ metadata:
     helm.sh/hook-weight: 0
     helm.sh/hook-delete-policy: hook-succeeded
 spec:
+  activeDeadlineSeconds: 60
+  backoffLimit: 0
   template:
     metadata:
       name: {{ include "zloi-space.fullname" . }}
       labels:
         {{- include "zloi-space.labels" . | nindent 8 }}
     spec:
-      restartPolicy: OnFailure
-      activeDeadlineSeconds: 60
-      backoffLimit: 0
+      restartPolicy: OnFailure      
       initContainers:
       - name: wait-db
         image: alpine:3.6
