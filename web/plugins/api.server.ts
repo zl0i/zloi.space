@@ -1,13 +1,11 @@
 import type { Plugin } from '@nuxt/types'
-import { Books } from '~/api/entity/books.entity'
-import { Instructions } from '~/api/entity/instructions.entity'
 import { BooksService } from '~/api/services/books.service'
 import { InstructionsService } from '~/api/services/instruction.service'
 
 
 interface API {
-    getReads: () => Promise<Books[]>
-    getKnoweldge: () => Promise<Instructions[]>
+    getReads: () => Promise<any>
+    getKnoweldge: () => Promise<any>
 }
 
 declare module 'vue/types/vue' {
