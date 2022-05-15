@@ -33,9 +33,8 @@ export const mutations: MutationTree<InstructionsState> = {
 export const actions: ActionTree<InstructionsState, InstructionsState> = {
     async requestInstructions({ commit, state }, _context: string) {
         if (state.instructions.length == 0) {
-            const data = await this.$api.getKnoweldge() //await this.$axios.get(`/api/knowledgebase`)
-            console.log(data)
-            // commit("of", data)
+            const data = await this.$api.getKnoweldge()
+            commit("of", data)
         }
     }
 }

@@ -1,10 +1,13 @@
 import type { Plugin } from '@nuxt/types'
-import { getInstructions, IInstruction, IBook, getBooks } from "~/src/db"
+import { Books } from '~/api/entity/books.entity'
+import { Instructions } from '~/api/entity/instructions.entity'
+import { BooksService } from '~/api/services/books.service'
+import { InstructionsService } from '~/api/services/instruction.service'
 
 
 interface API {
-    getReads: () => Promise<IBook[]>
-    getKnoweldge: () => Promise<IInstruction[]>
+    getReads: () => Promise<Books[]>
+    getKnoweldge: () => Promise<Instructions[]>
 }
 
 declare module 'vue/types/vue' {
@@ -30,10 +33,10 @@ declare module 'vuex/types/index' {
 
 const api: API = {
     async getReads() {
-        return await getBooks()
+        return await BooksService.get()
     },
     async getKnoweldge() {
-        return await getInstructions()
+        return await InstructionsService.get()
     }
 }
 

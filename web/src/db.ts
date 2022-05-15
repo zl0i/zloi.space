@@ -1,16 +1,11 @@
 import axios from 'axios'
 import marked from "../src/marked"
 
-let initDb = false
-if (!initDb) {
-    console.log("init....")
-    initDb = true;
-}
 
 export interface IBook {
     id: string;
     name: string;
-    image: string;
+    icon: string;
     status: string;
 }
 
@@ -20,26 +15,14 @@ export interface IInstruction {
     html: string;
 }
 
-console.log("tut")
 let books: IBook[] = []
 let instructions: IInstruction[] = []
 
-export async function getBooks() {
-    return books;
-}
 
 export async function getInstructions() {
     return instructions;
 }
 
-async function initUpdate() {
-    try {
-        await updateBooks()
-        await updateInstructions()
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 //TODO: rewrite as plugin
 export async function updateBooks() {
@@ -51,7 +34,7 @@ export async function updateBooks() {
         arr.push({
             id: gBook.data.id,
             name: gBook.data.volumeInfo.title,
-            image: gBook.data.volumeInfo?.imageLinks?.thumbnail,
+            icon: gBook.data.volumeInfo?.imageLinks?.thumbnail,
             status: book.read,
         })
     }
