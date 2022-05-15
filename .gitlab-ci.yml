@@ -5,8 +5,11 @@ include:
   - project: 'zl0i/gitlab-ci-template'
     ref: main
     file: 'deploy.template.yaml'
+  - template: Code-Quality.gitlab-ci.yml
+
 
 stages:
+  - test
   - build
   - release
   - deploy
@@ -23,6 +26,7 @@ build:
   variables:
     BUILD_DIR: './web'
     IMAGE_NAME: zloi-web
+
 
 deploy:branch:
   extends: .helm_install
