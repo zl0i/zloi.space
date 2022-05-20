@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "zloi-space.fullname" . }}
+data:
+  books.json: |-
+    {{- toJson .Values.books | nindent 4}}
+
+  summary.json: |-
+    {{- toJson .Values.summary | nindent 4}}
