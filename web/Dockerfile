@@ -1,4 +1,4 @@
-FROM node:16.13.2-alpine as builder
+FROM node:16.13.2-alpine3.15 as builder
 ARG API_URL
 ENV API_URL=${API_URL}
 WORKDIR /app
@@ -8,7 +8,7 @@ COPY ./ ./
 RUN npm run build
 
 
-FROM node:16.13.2-alpine as runner
+FROM node:16.13.2-alpine3.15 as runner
 WORKDIR /app
 EXPOSE 3000
 ENV NODE_ENV=production
