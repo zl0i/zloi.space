@@ -3,9 +3,9 @@ import { sequelize } from "../src/db";
 import { DataTypes, Model } from 'sequelize';
 
 export enum BookStatus {
-    UNREAD,
-    READ,
-    INPORGRESS
+    UNREAD = "unread",
+    READ = "read",
+    INPORGRESS = "inprogress"
 }
 
 export class Books extends Model {
@@ -20,15 +20,15 @@ Books.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+            autoIncrement: false,
+            primaryKey: true,
         },
         name: {
             type: DataTypes.STRING,
             unique: true
         },
         icon: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(500),
             unique: false
         },
         status: {
@@ -36,11 +36,11 @@ Books.init(
             unique: false
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(5000),
             unique: false
         },
     },
-    {        
+    {
         sequelize,
         modelName: 'Books',
         freezeTableName: true,

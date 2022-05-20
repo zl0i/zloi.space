@@ -33,3 +33,12 @@ spec:
           value: {{ .Values.postgresql.auth.username }}
         - name: DB_PASSWORD
           value: {{ .Values.postgresql.auth.password }}
+        - name: INIT_DB
+          value: true
+        volumeMounts:
+        - name: init-db
+          mountPath: /app
+      volumes:
+      - name: init-db
+        configMap:
+          name: {{ include "zloi-space.fullname" . }}

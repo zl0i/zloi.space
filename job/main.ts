@@ -1,5 +1,9 @@
+import { initBooks } from "./src/books";
 import { sequelize } from "./src/db";
 import { updateInstructions } from "./src/instructions";
+import { initSummary } from "./src/summary";
+
+const INITDB = process.env["INIT_DB"]
 
 sequelize.authenticate()
     .then(async _ => {
@@ -7,6 +11,10 @@ sequelize.authenticate()
         try {
             await sequelize.sync({ alter: true })
             await updateInstructions()
+            if (INITDB) {
+                await initBooks()
+                await initSummary()
+            }
             console.log("[OK] Job finished")
             process.exit(0)
         } catch (error) {
