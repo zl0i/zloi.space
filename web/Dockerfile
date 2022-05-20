@@ -2,9 +2,8 @@ FROM node:16.13.2-alpine3.15 as builder
 ARG API_URL
 ENV API_URL=${API_URL}
 WORKDIR /app
-COPY ./package*.json ./
-RUN npm ci
 COPY ./ ./
+RUN npm ci
 RUN npm run build
 
 
