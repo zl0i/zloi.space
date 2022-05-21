@@ -37,7 +37,7 @@ spec:
           value: "true"
         volumeMounts:
         - name: init-db
-          mountPath: /app
+          mountPath: /app/configs
       volumes:
       - name: init-db
         configMap:

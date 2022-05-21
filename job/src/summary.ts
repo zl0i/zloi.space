@@ -1,4 +1,3 @@
-import axios from "axios"
 import fs from "fs"
 import { join, sep, resolve } from "path"
 import { Summary } from "../entity/summary.entity"
@@ -7,7 +6,7 @@ import { sequelize } from "./db"
 
 
 export async function initSummary() {
-    const file = fs.readFileSync(join(resolve(".") + sep + "summary.json"))
+    const file = fs.readFileSync(join(resolve(".") + sep + "configs" + sep + "summary.json"))
     const summary = JSON.parse(file.toString())
     const t = await sequelize.transaction();
     try {

@@ -7,7 +7,7 @@ import { sequelize } from "./db"
 
 
 export async function initBooks() {
-    const file = fs.readFileSync(join(resolve(".") + sep + "books.json"))
+    const file = fs.readFileSync(join(resolve(".") + sep + "configs" + sep + "books.json"))
     const books = JSON.parse(file.toString())
     const t = await sequelize.transaction();
     try {
