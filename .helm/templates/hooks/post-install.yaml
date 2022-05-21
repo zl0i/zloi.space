@@ -9,7 +9,7 @@ metadata:
     helm.sh/hook-delete-policy: hook-succeeded
 spec:
   activeDeadlineSeconds: 60
-  backoffLimit: 0
+  backoffLimit: 3
   template:
     metadata:
       name: {{ include "zloi-space.fullname" . }}
