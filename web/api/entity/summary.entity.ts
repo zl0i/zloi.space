@@ -15,7 +15,7 @@ Summary.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
+            autoIncrement: false,
             primaryKey: true
         },
         key: {

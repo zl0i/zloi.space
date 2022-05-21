@@ -52,7 +52,7 @@ export default class Welcome extends Vue {
     this.startTitles(this.titles);
   }
 
-  startTitles(strings: string[]) {
+  startTitles(strings: string[] = []) {
     this.typed = new Typed(".auto-input", {
       strings: strings,
       typeSpeed: 100,

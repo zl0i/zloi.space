@@ -8,6 +8,7 @@ router.get('/', async (_req, res) => {
     const inst = await InstructionsService.get()
     res.json(inst)
   } catch (error) {
+    console.log(error)
     res.status(500).end("internal error")
   }
 })

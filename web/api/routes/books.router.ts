@@ -9,6 +9,7 @@ router.get('/', async (_req, res) => {
     const books = await BooksService.get()
     res.json(books)
   } catch (error) {
+    console.log(error)
     res.status(500).end("internal error")
   }
 })
