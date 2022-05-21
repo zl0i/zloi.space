@@ -11,8 +11,8 @@ FROM node:16.13.2-alpine3.15 as runner
 WORKDIR /app
 EXPOSE 3000
 ENV NODE_ENV=production
-COPY --from=build /app/package*.json ./
+COPY --from=builder /app/package*.json ./
 RUN npm ci
-COPY --from=build /app/ ./
+COPY --from=builder /app/ ./
 CMD npm start
 
