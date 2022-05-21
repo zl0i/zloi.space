@@ -18,7 +18,7 @@ export async function initBooks() {
             await Books.create({
                 id: i,
                 name: book.name,
-                icon: data.volumeInfo.imageLinks.medium,
+                icon: data.volumeInfo.imageLinks.thumbnail,
                 status: book.status,
                 description: data.volumeInfo.description
             }, { transaction: t })
