@@ -67,19 +67,19 @@ export const mutations: MutationTree<SummaryState> = {
         state.titles = data.titles
         state.about = data.about
         state.links = data.links
-        state.education = data.summary.education
-        state.courses = data.summary.courses
-        state.experience = data.summary.experience
-        state.skills = data.summary.skills
-        state.tech_stack = data.summary.tech_stack
-        state.achievements = data.summary.achievements
+        state.education = data.education
+        state.courses = data.courses
+        state.experience = data.experience
+        state.skills = data.skills
+        state.tech_stack = data.tech_stack
+        state.achievements = data.achievements
     }
 }
 
 
 export const actions: ActionTree<SummaryState, RootState> = {
     async requestSummary({ state, commit }, locale: string) {
-        if (!this.$axios) {
+        if (!this.$api) {
             return
         }
         const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
@@ -87,8 +87,9 @@ export const actions: ActionTree<SummaryState, RootState> = {
             return
         }
         try {
-            const res = await this.$axios.get(`/summary.${postfix}.json`)
-            commit("setSummary", { lang: postfix, ...res.data })
+            const data = await this.$api.getSummary("Backend", postfix)
+            data.lang = postfix
+            commit("setSummary", data)
         } catch (e) {
             console.log(e)
         }

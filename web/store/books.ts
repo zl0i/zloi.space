@@ -1,13 +1,12 @@
-import type { Context } from '@nuxt/types'
 import type { MutationTree, ActionTree } from 'vuex'
 
 export const namespace = 'books'
 
-//TODO: export from "types"
 export interface IBook {
-    id: string;
-    name: string;
-    html: string;
+    id: string
+    name: string
+    icon: string
+    description: string
 }
 
 export interface BooksState {

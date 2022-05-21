@@ -4,6 +4,7 @@ import type { Context, Plugin } from '@nuxt/types'
 interface API {
     getReads: () => Promise<any>
     getKnoweldge: () => Promise<any>
+    getSummary: (position: string, language: string) => Promise<any>
 }
 
 declare module 'vue/types/vue' {
@@ -35,6 +36,14 @@ function fromContext({ $axios }: Context) {
         },
         async getKnoweldge() {
             const res = await $axios.get("/api/intructions")
+            return res.data
+        },
+        async getSummary(position: string, language: string) {
+            const res = await $axios.get("/api/summary", {
+                params: {
+                    position, language
+                }
+            })
             return res.data
         }
     }
