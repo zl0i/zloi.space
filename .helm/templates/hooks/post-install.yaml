@@ -34,7 +34,7 @@ spec:
         - name: DB_PASSWORD
           value: {{ .Values.postgresql.auth.password }}
         - name: INIT_DB
-          value: true
+          value: "true"
         volumeMounts:
         - name: init-db
           mountPath: /app
