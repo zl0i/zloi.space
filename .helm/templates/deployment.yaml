@@ -20,13 +20,13 @@ spec:
           livenessProbe:
             httpGet:
               path: /kubernetes/health-check
-              port: 3000
+              port: 8080
           readinessProbe:
             httpGet:
               path: /kubernetes/health-check
-              port: 3000
+              port: 8080
           ports:
-          - containerPort: 3000
+          - containerPort: 8080
           env:
           - name: API_URL
             value: http{{ if .Values.ingress.tls }}s{{ end }}://{{.Values.ingress.hostname }}

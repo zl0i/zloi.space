@@ -90,7 +90,7 @@ const config: NuxtConfig = {
   },
   server: {
     host: isDev ? "localhost" : "0.0.0.0",
-    port: 3000
+    port: 8080
   },
   plugins: [
     "./plugins/api.server.ts",

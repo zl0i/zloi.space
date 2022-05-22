@@ -31,15 +31,15 @@ declare module 'vuex/types/index' {
 function fromContext({ $axios }: Context) {
     const api: API = {
         async getReads() {
-            const { data } = await $axios.get("/api/books")
+            const { data } = await $axios.get("/books")
             return data
         },
         async getKnoweldge() {
-            const res = await $axios.get("/api/intructions")
+            const res = await $axios.get("/intructions")
             return res.data
         },
         async getSummary(position: string, language: string) {
-            const res = await $axios.get("/api/summary", {
+            const res = await $axios.get("/summary", {
                 params: {
                     position, language
                 }

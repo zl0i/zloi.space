@@ -1,8 +1,8 @@
 import { sequelize } from './src/db'
 import app from "./src/server"
 
-app.listen(() => {
-    console.log("[OK] Server is started!")
+app.listen(app.get('port'), () => {
+    console.log(`[OK] Server is started on ${app.get('port')}!`)
 })
 
 sequelize.authenticate()
