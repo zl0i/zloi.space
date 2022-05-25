@@ -1,11 +1,16 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "zloi-space.fullname" . }}
+  name: {{ printf "%s-%s" .Release.Name "updater" | trunc 63 | trimSuffix "-" }}
   labels:
-    {{- include "zloi-space.labels" . | nindent 4 }}
+    helm.sh/chart: {{ printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+    app.kubernetes.io/name: {{ default .Chart.Name .Values.web.nameOverride | trunc 63 | trimSuffix "-" }}-updater
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: updater
 spec:
-  schedule: "0 0 * * *"
+  schedule: {{ .Values.updater.schedule }}
   jobTemplate:
     spec:
       template:

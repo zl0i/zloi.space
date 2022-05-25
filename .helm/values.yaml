@@ -5,6 +5,17 @@ image:
   name: zloi-web
   tag: v1.0
 
+web:
+  nameOverride: "web"
+  replicaCount: 1
+
+updater:
+  schedule: "0 0 * * *"
+
+admin:
+  nameOverride: "admin"
+  replicaCount: 1
+
 ingress:
   enabled: true
   hostname: "zloi.space"
