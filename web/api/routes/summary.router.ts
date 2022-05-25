@@ -4,7 +4,7 @@ import { SummaryService } from '../services/summary.service'
 const router = Router()
 
 
-router.use('/', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const { position, language } = req.query as any
     const data = await SummaryService.get(position, language)
