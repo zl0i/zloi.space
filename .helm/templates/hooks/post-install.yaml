@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "zloi-web.labels" . | nindent 4 }}
   annotations:
-    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook: post-install
     helm.sh/hook-delete-policy: hook-succeeded
 spec:
   activeDeadlineSeconds: 60
