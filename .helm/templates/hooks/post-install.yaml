@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "zloi-space.fullname" . }}
+  name: {{ include "zloi-web.fullname" . }}
   labels:
-    {{- include "zloi-space.labels" . | nindent 4 }}
+    {{- include "zloi-web.labels" . | nindent 4 }}
   annotations:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-delete-policy: hook-succeeded
@@ -12,9 +12,9 @@ spec:
   backoffLimit: 3
   template:
     metadata:
-      name: {{ include "zloi-space.fullname" . }}
+      name: {{ include "zloi-web.fullname" . }}
       labels:
-        {{- include "zloi-space.labels" . | nindent 8 }}
+        {{- include "zloi-web.labels" . | nindent 8 }}
     spec:
       restartPolicy: OnFailure      
       initContainers:
@@ -41,4 +41,4 @@ spec:
       volumes:
       - name: init-db
         configMap:
-          name: {{ include "zloi-space.fullname" . }}
+          name: {{ include "zloi-web.fullname" . }}

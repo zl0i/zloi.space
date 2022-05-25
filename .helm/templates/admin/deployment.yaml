@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "zloi-admin.fullname" . }}
+  labels:
+    {{- include "zloi-admin.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.admin.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "zloi-admin.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "zloi-admin.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: admin
+          image: {{ .Values.image.repository }}/zloi-admin:{{.Values.image.tag}}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          ports:
+          - containerPort: 3000
+          env:
+          - name: API_URL
+            value: http{{ if .Values.ingress.tls }}s{{ end }}://{{ include "zloi-admin.hostname" . }}

@@ -27,6 +27,20 @@ build:web:
     BUILD_DIR: './web'
     IMAGE_NAME: zloi-web
 
+build:admin:
+  extends: .kaniko
+  rules:
+    - if: $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_BRANCH == "master"
+      variables:
+        BUILD_ARGS: "--build-arg API_URL=https://admin.zloi.space"
+    - if: $CI_COMMIT_BRANCH
+      variables:
+        BUILD_ARGS: "--build-arg API_URL=https://admin.${CI_COMMIT_BRANCH}.zloi.space"
+  variables:
+    BUILD_DIR: "./admin"
+    IMAGE_NAME: zloi-admin
+
 build:updater:
   extends: .kaniko
   rules:

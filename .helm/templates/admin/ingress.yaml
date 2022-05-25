@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "zloi-space.fullname" . }}
+  name: {{ include "zloi-admin.fullname" . }}
   labels:
-    {{- include "zloi-space.labels" . | nindent 4 }}
+    {{- include "zloi-admin.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -14,18 +14,18 @@ spec:
 {{- if .Values.ingress.tls }}
   tls:
     - hosts:
-        -  {{ .Values.ingress.hostname }}
-      secretName: {{ .Values.ingress.hostname }}-tls
+        -  {{ include "zloi-admin.hostname" . }}
+      secretName: {{ include "zloi-admin.hostname" . }}-tls
 {{- end }}
   rules:
-    - host: {{ .Values.ingress.hostname }}
+    - host: {{ include "zloi-admin.hostname" . }}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: {{ include "zloi-space.fullname" . }}
+                name: {{ include "zloi-admin.fullname" . }}
                 port:
                   number: 80
 {{- end }}

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "zloi-space.fullname" . }}
+  name: {{ include "zloi-web.fullname" . }}
   labels:
-    {{- include "zloi-space.labels" . | nindent 4 }}
+    {{- include "zloi-web.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "zloi-space.selectorLabels" . | nindent 6 }}
+      {{- include "zloi-web.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "zloi-space.selectorLabels" . | nindent 8 }}
+        {{- include "zloi-web.selectorLabels" . | nindent 8 }}
     spec:
       {{- if .Values.priorityclass.enabled }}
       priorityClassName:  {{ include "zloi-space.fullname" . }}
