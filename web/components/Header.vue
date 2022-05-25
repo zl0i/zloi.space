@@ -22,7 +22,7 @@
         }}</a>
         <a href="#reads" @click="hideMenu()">{{ $t("headers.reads") }}</a>
         <div class="language" :class="isShowMenu && 'mobile-language'">
-          <a>Translate</a>
+          <a>{{ $t("headers.languages") }}</a>
           <img
             alt="arrow"
             src="~/static/img/arrow-down.svg"
@@ -38,22 +38,15 @@
               :class="isShowMenu && 'mobile-language-popup'"
             >
               <a
+                v-for="lang in availabelLanguages()"
+                :key="lang.code"
                 @click="
                   () => {
-                    changeLanguage('ru');
+                    changeLanguage(lang.code);
                     hideMenu();
                   }
                 "
-                >Русский</a
-              >
-              <a
-                @click="
-                  () => {
-                    changeLanguage('en');
-                    hideMenu();
-                  }
-                "
-                >English</a
+                >{{ lang.name }}</a
               >
             </div>
           </div>
@@ -72,6 +65,9 @@ export default class Header extends Vue {
 
   changeLanguage(locale: string) {
     this.$emit("changeLanguage", locale);
+  }
+  availabelLanguages() {
+    return this.$i18n.locales;
   }
   showMenu() {
     this.isShowMenu = true;

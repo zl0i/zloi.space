@@ -4,11 +4,13 @@ import en from "../lang/en"
 const config: Options = {
     locales: [
         {
+            name: "Русский",
             code: 'ru',
             iso: 'ru-Ru',
             file: 'ru.ts'
         },
         {
+            name: "English",
             code: 'en',
             iso: 'en-US',
             file: 'en.ts'
