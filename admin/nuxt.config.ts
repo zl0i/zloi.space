@@ -24,11 +24,11 @@ const config: NuxtConfig = {
   components: false,
   buildModules: [
     '@nuxt/typescript-build',
+    '@nuxtjs/vuetify',
   ],
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify',
   ],
   axios: {
     baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
