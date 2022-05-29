@@ -29,4 +29,4 @@ spec:
           - containerPort: 3000
           env:
           - name: API_URL
-            value: http{{ if .Values.ingress.tls }}s{{ end }}://{{ include "zloi-admin.hostname" . }}
+            value: http{{ if .Values.ingress.tls }}s{{ end }}://{{.Values.ingress.hostname }}

@@ -65,11 +65,13 @@ export default class Index extends Vue {
     try {
       const form = this.$refs.form as any;
       if (form.validate()) {
-        const { data, status } = await this.$axios.post("/api/auth/validate", {
+        const { status } = await this.$axios.post("/api/auth/validate", {
           key: this.key,
         });
-        this.$store.dispatch("setAdminKey", this.key);
-        this.$router.push("/panel/summary");
+        if (status == 200) {
+          this.$store.dispatch("setAdminKey", this.key);
+          this.$router.push("/panel/summary");
+        }
       }
     } catch (error) {
       if (error.response.status == 401) {
