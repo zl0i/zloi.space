@@ -8,6 +8,7 @@ image:
 web:
   nameOverride: "web"
   replicaCount: 1
+  adminKey: ""
 
 updater:
   schedule: "0 0 * * *"

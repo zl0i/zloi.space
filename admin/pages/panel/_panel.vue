@@ -32,8 +32,12 @@ import Summary from "~/components/Summary.vue";
 import Books from "~/components/Books.vue";
 
 @Component({
+  middleware: ["keyValidate"],
+  components: {
+    Summary,
+    Books,
+  },
   async asyncData({ params }) {
-    console.log(params.panel);
     return {
       item: params.panel,
     };
