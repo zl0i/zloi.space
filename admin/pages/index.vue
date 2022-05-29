@@ -65,8 +65,6 @@ export default class Index extends Vue {
     try {
       const form = this.$refs.form as any;
       if (form.validate()) {
-        console.log(process.env["API_URL"])
-        console.log(this.$axios.defaults);
         const { status } = await this.$axios.post("api/auth/validate", {
           key: this.key,
         });
