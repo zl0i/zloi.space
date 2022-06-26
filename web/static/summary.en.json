@@ -35,6 +35,11 @@
       "name": "habr",
       "image": "/img/habr.png",
       "link": "https://habr.com/ru/users/zl0i"
+    },
+    {
+      "name": "artifacthub.io",
+      "image": "/img/artifacthub.png",
+      "link": "https://artifacthub.io/packages/search?repo=zloi-space"
     }
   ],
   "summary": {
