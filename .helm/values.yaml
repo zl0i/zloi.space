@@ -6,16 +6,20 @@ image:
   tag: v1.0
 
 web:
-  nameOverride: "web"
+  nameOverride: 'web'
   replicaCount: 1
-  adminKey: ""
+  adminKey: ''
 
 updater:
   enabled: false
-  schedule: "0 0 * * *"
+  schedule: '0 0 * * *'
+
+api:
+  nameOverride: 'api'
+  replicaCount: 1
 
 admin:
-  nameOverride: "admin"
+  nameOverride: 'admin'
   replicaCount: 1
 
 ingress:
@@ -56,13 +60,8 @@ books:
 summary:
   - lang: ru
     position: Backend
-    titles:
-      [
-        "Меня зовут Дима",
-        "Я пишу код на TypeScript и C++",
-        "Я backend разработчик",
-      ]
-    about: "Привет. Как написано выше, меня зовут Дима. Профессионально работаю программистом с 2018 года. Разрабатывал кроссплатформенные мобильные приложения на Qt, но JS открыл для себя в 2020 году и влюбился в него. Я люблю разрабатывать бэкенд часть и все что с ней связано. У меня есть опыт разработки микросервисов, создания CI/CD с использованием GitLab и работы с облачными провайдерами (GCP и Azure)."
+    titles: ['Меня зовут Дима', 'Я пишу код на TypeScript и C++', 'Я backend разработчик']
+    about: 'Привет. Как написано выше, меня зовут Дима. Профессионально работаю программистом с 2018 года. Разрабатывал кроссплатформенные мобильные приложения на Qt, но JS открыл для себя в 2020 году и влюбился в него. Я люблю разрабатывать бэкенд часть и все что с ней связано. У меня есть опыт разработки микросервисов, создания CI/CD с использованием GitLab и работы с облачными провайдерами (GCP и Azure).'
     links:
       - name: gitlab
         image: /img/gitlab.png
@@ -72,7 +71,7 @@ summary:
         link: https://github.com/zl0i/
       - name: gmail
         image: /img/gmail.png
-        link: "mailto: pdmitri07@gmail.com"
+        link: 'mailto: pdmitri07@gmail.com'
       - name: telegram
         image: /img/telegram.png
         link: https://t.me/zzloi
@@ -107,23 +106,23 @@ summary:
         position: DevOps-инженер
         duties: Поддержка инфраструктуры
     skills:
-      - name: "NodeJS/Typescript"
+      - name: 'NodeJS/Typescript'
         value: 0.7
         description: Знаю нюансы
       - name: Kubernetes
         value: 0.5
         description: Умею развертывать приложения
     tech_stack:
-      - "NodeJS (ExpressJS), TypeScript, TypeORM, Jest"
-      - "K8s, Helm, CI/CD, Docker, GitLab, GitOps"
-      - "PostgreSQL, Redis, MySQL,  MongoDB"
-      - "Nuxt, Vue, HTML, CSS"
-      - "PHP, Yii2"
-      - "Qt, qml, C++, Andoid (Java), iOS (Object-C)"
+      - 'NodeJS (ExpressJS), TypeScript, TypeORM, Jest'
+      - 'K8s, Helm, CI/CD, Docker, GitLab, GitOps'
+      - 'PostgreSQL, Redis, MySQL,  MongoDB'
+      - 'Nuxt, Vue, HTML, CSS'
+      - 'PHP, Yii2'
+      - 'Qt, qml, C++, Andoid (Java), iOS (Object-C)'
     achievements:
       - "Поддерживал инфраструктуру 2 команд разработчиков в Azure"
       - "Внедрил CI/CD для Android приложений"
       - "Внедрил мониторинг и логирование в backend-часть"
       - "Внедрил различные сервисы Firebase в мобильное приложение на Qt"
       - "Умею работать с JNI в Qt"
->>>>>>> 0982cb8 (feat: init books and summary)
+
