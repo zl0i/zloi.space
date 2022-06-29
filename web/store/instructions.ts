@@ -32,9 +32,13 @@ export const mutations: MutationTree<InstructionsState> = {
 
 export const actions: ActionTree<InstructionsState, InstructionsState> = {
     async requestInstructions({ commit, state }, _context: string) {
-        if (state.instructions.length == 0) {
-            const data = await this.$api.getKnoweldge()
-            commit("of", data)
+        try {
+            if (state.instructions.length == 0) {
+                const data = await this.$api.getKnoweldge()
+                commit("of", data)
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 }

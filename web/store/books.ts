@@ -27,9 +27,14 @@ export const mutations: MutationTree<BooksState> = {
 
 export const actions: ActionTree<BooksState, BooksState> = {
     async requestBooks({ commit, state }, _context: string) {
-        if (state.books.length == 0) {
-            const data = await this.$api.getReads()
-            commit("of", data)
+        try {
+            if (state.books.length == 0) {
+                const data = await this.$api.getReads()
+                commit("of", data)
+            }
+        } catch (error) {
+            console.log(error)
         }
+
     }
 }
