@@ -18,10 +18,10 @@ build:web:
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       variables:
-        BUILD_ARGS: '--build-arg API_URL=https://zloi.space'
+        BUILD_ARGS: '--build-arg API_URL=https://api.zloi.space'
     - if: $CI_COMMIT_BRANCH
       variables:
-        BUILD_ARGS: '--build-arg API_URL=https://${CI_COMMIT_BRANCH}.zloi.space'
+        BUILD_ARGS: '--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space'
   variables:
     BUILD_DIR: './web'
     IMAGE_NAME: zloi-web
