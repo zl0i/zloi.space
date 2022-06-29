@@ -17,14 +17,14 @@ spec:
       containers:
         - name: api
           image: "{{.Values.image.repository }}/zloi-api:{{.Values.image.tag}}"
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health-check
-          #     port: 3000
-          # readinessProbe:
-          #   httpGet:
-          #     path: /health-check
-          #     port: 3000
+          livenessProbe:
+            httpGet:
+              path: /health-check
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /health-check
+              port: 3000
           ports:
           - containerPort: 3000
           env:
