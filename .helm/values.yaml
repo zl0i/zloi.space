@@ -13,6 +13,7 @@ web:
 updater:
   enabled: false
   schedule: '0 0 * * *'
+  hook: false
 
 api:
   nameOverride: 'api'

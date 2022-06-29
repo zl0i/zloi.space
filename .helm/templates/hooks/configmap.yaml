@@ -1,3 +1,4 @@
+{{- if .Values.updater.hook }}
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -8,3 +9,4 @@ data:
 
   summary.json: |-
     {{- toJson .Values.summary | nindent 4}}
+{{- end }}

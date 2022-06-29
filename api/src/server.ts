@@ -7,6 +7,11 @@ import authRouter from "../routes/auth.router"
 
 const app = express()
 app.set('port', 3000)
+
+app.get('/health-check', (_req, res) => {
+    res.end()
+})
+
 app.use(morgan(':date[iso] :remote-addr :method :url :status :response-time ms'));
 
 app.use((_req, res, next) => {
