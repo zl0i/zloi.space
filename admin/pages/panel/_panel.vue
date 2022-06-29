@@ -19,6 +19,8 @@
     </v-navigation-drawer>
     <v-main>
       <div style="height: 100%">
+        <About v-if="item == 'about'"> </About>
+        <Links v-if="item == 'links'"> </Links>
         <Summary v-if="item == 'summary'"></Summary>
         <Books v-if="item == 'books'"> </Books>
       </div>
@@ -30,21 +32,31 @@
 import { Component, Vue } from "nuxt-property-decorator";
 import Summary from "~/components/Summary.vue";
 import Books from "~/components/Books.vue";
+import About from "~/components/About.vue";
+import Links from "~/components/Links.vue";
 
 @Component({
-  middleware: ["keyValidate"],
+  // middleware: ["keyValidate"],
   components: {
     Summary,
     Books,
+    Links,
+    About,
   },
-  async asyncData({ params }) {
+  async asyncData({ params, store }) {
+    await store.dispatch("requestLangs");
     return {
       item: params.panel,
     };
   },
 })
 export default class Index extends Vue {
-  items = [{ title: "Summary" }, { title: "Books" }];
+  items = [
+    { title: "About" },
+    { title: "Links" },
+    { title: "Summary" },
+    { title: "Books" },
+  ];
   item = "";
   push(title: string) {
     this.$router.push(`/panel/${title.toLowerCase()}`);
