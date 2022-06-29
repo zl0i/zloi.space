@@ -14,11 +14,11 @@ spec:
 {{- if .Values.ingress.tls }}
   tls:
     - hosts:
-        -   {{ include "zloi-admin.hostname" . }}
-      secretName: {{ include "zloi-admin.hostname" . }}-tls
+        -   {{ include "zloi-api.hostname" . }}
+      secretName: {{ include "zloi-api.hostname" . }}-tls
 {{- end }}
   rules:
-    - host: {{ include "zloi-admin.hostname" . }}
+    - host: {{ include "zloi-api.hostname" . }}
       http:
         paths:
           - path: /
