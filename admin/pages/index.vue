@@ -27,7 +27,7 @@
                   @click="login"
                   class="align-left"
                 >
-                  Войти
+                  Login
                 </v-btn>
               </v-form>
             </v-card-text>
@@ -65,12 +65,12 @@ export default class Index extends Vue {
     try {
       const form = this.$refs.form as any;
       if (form.validate()) {
-        const { status } = await this.$axios.post("api/auth/validate", {
+        const { status } = await this.$axios.post("/auth/validate", {
           key: this.key,
         });
         if (status == 200) {
           this.$store.dispatch("setAdminKey", this.key);
-          this.$router.push("/panel/summary");
+          this.$router.push("/panel/about");
         }
       }
     } catch (error) {

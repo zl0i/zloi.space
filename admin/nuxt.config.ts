@@ -26,7 +26,6 @@ const config: NuxtConfig = {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
   ],
-
   modules: [
     '@nuxtjs/axios',
   ],
@@ -36,7 +35,7 @@ const config: NuxtConfig = {
   },
   server: {
     host: isDev ? "localhost" : "0.0.0.0",
-    port: 3000
+    port: isDev ? 8081: 3000
   },
   build: {
     html: {

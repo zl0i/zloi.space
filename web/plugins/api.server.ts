@@ -1,7 +1,4 @@
-import type { Plugin } from '@nuxt/types'
-import { BooksService } from '~/api/services/books.service'
-import { InstructionsService } from '~/api/services/instruction.service'
-import { SummaryService } from '~/api/services/summary.service'
+import type { Context, Plugin } from '@nuxt/types'
 
 
 interface API {
@@ -31,20 +28,31 @@ declare module 'vuex/types/index' {
     }
 }
 
-const api: API = {
-    async getReads() {
-        return await BooksService.get()
-    },
-    async getKnoweldge() {
-        return await InstructionsService.get()
-    },
-    async getSummary(position: string, language: string) {
-        return await SummaryService.get(position, language)
+function fromContext({ $axios }: Context) {
+    const api: API = {
+        async getReads() {
+            const { data } = await $axios.get("/books")
+            return data
+        },
+        async getKnoweldge() {
+            const res = await $axios.get("/intructions")
+            return res.data
+        },
+        async getSummary(position: string, language: string) {
+            const res = await $axios.get("/summary", {
+                params: {
+                    position, language
+                }
+            })
+            return res.data
+        }
     }
+    return api
 }
 
-const apiPlugin: Plugin = (_context, inject) => {
-    inject('api', api)
+
+const apiPlugin: Plugin = (context, inject) => {
+    inject('api', fromContext(context))
 }
 
 export default apiPlugin

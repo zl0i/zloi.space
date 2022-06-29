@@ -78,12 +78,6 @@ const config: NuxtConfig = {
   ],
   i18n: i18nConfig,
   firebase: firebaseConfig,
-  serverMiddleware: [
-    {
-      path: "/api",
-      handler: "~/api",
-    },
-  ],
   axios: {
     baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
     https: isDev ? false : true,
