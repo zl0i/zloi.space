@@ -1,7 +1,7 @@
 FROM node:16.13.2-alpine3.15 as builder
 WORKDIR /opt/server/
 COPY . .
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 FROM node:16.13.2-alpine3.15
@@ -10,4 +10,4 @@ WORKDIR /opt/server/
 COPY --from=builder /opt/server/package.json ./package.json
 RUN npm i --prod
 COPY --from=builder /opt/server/build/ ./
-CMD npm run start:prod
+CMD npm run start
