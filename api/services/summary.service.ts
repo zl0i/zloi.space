@@ -20,7 +20,7 @@ export class SummaryService {
             about: about?.value,
             links: links?.value
         }
-        return { data: result }
+        return result
     }
 
     static async getLangs() {
