@@ -43,7 +43,7 @@ export class SummaryService {
         return true
     }
 
-    static async getAbout(lang: string) {
+    static async getAbout(lang: string = 'en') {
         const titles = await Summary.findOne({ where: { key: 'titles', language: lang } })
         const about = await Summary.findOne({ where: { key: 'about', language: lang } })
         return {

@@ -1,4 +1,5 @@
-import { Router } from 'express'
+import express, { Router } from 'express'
+import { auth } from '../middleware/auth'
 import { SummaryService } from '../services/summary.service'
 
 const router = Router()
@@ -36,7 +37,7 @@ router.get('/about', async (req, res) => {
   }
 })
 
-router.post('/about', async (req, res) => {
+router.post('/about', [auth()], async (req: express.Request, res: express.Response) => {
   try {
     const { lang, titles, about } = req.body
     console.log(req.body)
