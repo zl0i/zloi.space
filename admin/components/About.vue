@@ -83,11 +83,19 @@ export default class About extends Vue {
   }
 
   async save() {
-    const res = await this.$axios.post("/summary/about", {
-      lang: this.lang,
-      titles: this.titles,
-      about: this.about,
-    });
+    const res = await this.$axios.post(
+      "/summary/about",
+      {
+        lang: this.lang,
+        titles: this.titles,
+        about: this.about,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.$store.state["adminKey"]}`,
+        },
+      }
+    );
   }
 }
 </script>
