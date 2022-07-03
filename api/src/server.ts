@@ -1,4 +1,5 @@
 import express from "express"
+import fileUpload from "express-fileupload"
 import morgan from 'morgan';
 import summaryRouter from "../routes/summary.router"
 import intructionsRouter from "../routes/instructions.router"
@@ -21,6 +22,9 @@ app.use((_req, res, next) => {
 })
 
 app.use(express.json());
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+}));
 app.use('/auth', authRouter)
 app.use('/summary', summaryRouter)
 app.use('/instructions', intructionsRouter)
