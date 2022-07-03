@@ -5,6 +5,7 @@ import summaryRouter from "../routes/summary.router"
 import intructionsRouter from "../routes/instructions.router"
 import booksRouter from "../routes/books.router"
 import authRouter from "../routes/auth.router"
+import linksRouter from "../routes/links.router"
 
 const app = express()
 app.set('port', 3000)
@@ -27,6 +28,7 @@ app.use(fileUpload({
 }));
 app.use('/auth', authRouter)
 app.use('/summary', summaryRouter)
+app.use('/links', linksRouter)
 app.use('/instructions', intructionsRouter)
 app.use('/books', booksRouter)
 
