@@ -3,7 +3,7 @@ import { Links } from '../entity/links.entity'
 export class LinksService {
 
     static async getLinks() {
-        const links = await Links.find({ select: ['id', 'name', 'link'] })
+        const links = await Links.find({ select: ['id', 'name', 'link', 'blob','type'] })
         return links
     }
 
@@ -12,7 +12,7 @@ export class LinksService {
             const link = await Links.findOne({ where: { name } })
             return {
                 type: link?.type,
-                blob: Buffer.from(link?.icon as string, 'base64')
+                blob: Buffer.from(link?.blob as string, 'base64')
             }
         } catch (error) {
             throw new Error('domain error')
@@ -23,7 +23,7 @@ export class LinksService {
     static async createLink(name: string, link: string, data: Buffer, iconname: string) {
         try {
             const type: string = iconname.split('.').pop() as string
-            await Links.upsert({ name, link, type, icon: data.toString('base64') }, { conflictPaths: ['name'] })
+            await Links.upsert({ name, link, type, blob: data.toString('base64') }, { conflictPaths: ['name'] })
             return { status: 'ok' }
         } catch (error) {
             throw new Error('domain error')

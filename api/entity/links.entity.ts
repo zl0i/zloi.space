@@ -16,7 +16,7 @@ export class Links extends BaseEntity {
     name: string
 
     @Column({ unique: true, length: 10000 })
-    icon: string
+    blob: string
 
     @Column({ unique: true })
     link: string
