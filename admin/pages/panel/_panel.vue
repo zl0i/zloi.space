@@ -36,7 +36,7 @@ import About from "~/components/About.vue";
 import Links from "~/components/Links.vue";
 
 @Component({
-  // middleware: ["keyValidate"],
+  middleware: ["keyValidate"],
   components: {
     Summary,
     Books,
