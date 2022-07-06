@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/', async (_req, res) => {
     try {
-        const data = await LinksService.getLinks()
+        const data = await LinksService.get()
         res.json(data)
     } catch (error) {
         console.log(error)
@@ -16,7 +16,7 @@ router.get('/', async (_req, res) => {
 
 router.get('/image/:name', async (req, res) => {
     try {
-        const data = await LinksService.getImageLink(req.params.name)
+        const data = await LinksService.getImage(req.params.name)
         res.setHeader('Content-Type', `image/png`)
         res.end(data.blob)
     } catch (error) {
@@ -25,11 +25,10 @@ router.get('/image/:name', async (req, res) => {
     }
 })
 
-router.post('/:name', [auth()], async (req: express.Request, res: express.Response) => {
+router.post('/', [auth()], async (req: express.Request, res: express.Response) => {
     try {
-        const { name } = req.params
-        const { blob, link } = req.body
-        const data = await LinksService.createLink(name as string, link, blob)
+        const { name, blob, link } = req.body
+        const data = await LinksService.create(name, link, blob)
         res.json(data)
     } catch (error) {
         console.log(error)
@@ -37,11 +36,22 @@ router.post('/:name', [auth()], async (req: express.Request, res: express.Respon
     }
 })
 
-
-router.delete('/:name', [auth()], async (req: express.Request, res: express.Response) => {
+router.patch('/:id', [auth()], async (req: express.Request, res: express.Response) => {
     try {
-        const { name } = req.params
-        const data = await LinksService.deleteLink(name as string)
+        const { id } = req.params
+        const { name, blob, link } = req.body
+        const data = await LinksService.update(Number(id), name, link, blob)
+        res.json(data)
+    } catch (error) {
+        console.log(error)
+        res.status(500).end("internal error")
+    }
+})
+
+router.delete('/:id', [auth()], async (req: express.Request, res: express.Response) => {
+    try {
+        const { id } = req.params
+        const data = await LinksService.delete(Number(id))
         res.json(data)
     } catch (error) {
         console.log(error)
