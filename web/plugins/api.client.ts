@@ -39,12 +39,18 @@ function fromContext({ $axios }: Context) {
             return res.data
         },
         async getSummary(position: string, language: string) {
-            const res = await $axios.get("/summary", {
-                params: {
-                    position, language
-                }
-            })
-            return res.data
+            const res = await Promise.all([
+                await $axios.get('/links'),
+                await $axios.get("/summary", {
+                    params: {
+                        position, language
+                    }
+                })
+            ])
+            const { data: links } = res[0]
+            const { data: summary } = res[1]
+            summary.general = { ...summary.general, links }
+            return summary
         }
     }
     return api

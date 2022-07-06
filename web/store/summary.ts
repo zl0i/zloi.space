@@ -30,8 +30,9 @@ export interface ISkills {
 }
 
 export interface ISocialLink {
+    id: number
     name: string
-    image: string
+    blob: string
     link: string
 }
 
