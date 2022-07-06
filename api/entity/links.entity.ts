@@ -15,12 +15,12 @@ export class Links extends BaseEntity {
     @Column({ unique: true })
     name: string
 
-    @Column({ unique: true, length: 10000 })
+    @Column({ type: "bytea" })
     blob: string
 
     @Column({ unique: true })
     link: string
 
-    @Column()
+    @Column({ default: '' })
     type: string
 }

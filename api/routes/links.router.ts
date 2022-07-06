@@ -1,5 +1,4 @@
 import express, { Router } from 'express'
-import { UploadedFile } from 'express-fileupload'
 import { auth } from '../middleware/auth'
 import { LinksService } from '../services/links.service'
 
@@ -18,7 +17,7 @@ router.get('/', async (_req, res) => {
 router.get('/image/:name', async (req, res) => {
     try {
         const data = await LinksService.getImageLink(req.params.name)
-        res.setHeader('Content-Type', `image/${data.type}`)
+        res.setHeader('Content-Type', `image/png`)
         res.end(data.blob)
     } catch (error) {
         console.log(error)
@@ -29,8 +28,8 @@ router.get('/image/:name', async (req, res) => {
 router.post('/:name', [auth()], async (req: express.Request, res: express.Response) => {
     try {
         const { name } = req.params
-        const file = req.files?.['icon'] as UploadedFile
-        const data = await LinksService.createLink(name as string, req.body.link, file.data, file.name)
+        const { blob, link } = req.body
+        const data = await LinksService.createLink(name as string, link, blob)
         res.json(data)
     } catch (error) {
         console.log(error)
