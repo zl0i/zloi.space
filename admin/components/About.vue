@@ -68,13 +68,9 @@ export default class About extends Vue {
     try {
       this.lang = lang;
       this.loading = true;
-      const res = await this.$axios.get("/summary/about", {
-        params: {
-          language: lang,
-        },
-      });
-      this.titles = JSON.parse(res.data.titles);
-      this.about = String(res.data.about);
+      const data = await this.$api.pullAbout(lang);
+      this.titles = JSON.parse(data.titles);
+      this.about = String(data.about);
     } catch (error) {
       console.log(error);
     } finally {
@@ -83,19 +79,7 @@ export default class About extends Vue {
   }
 
   async save() {
-    const res = await this.$axios.post(
-      "/summary/about",
-      {
-        lang: this.lang,
-        titles: this.titles,
-        about: this.about,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${this.$store.state["adminKey"]}`,
-        },
-      }
-    );
+    await this.$api.pushAbout(this.lang, this.titles, this.about);
   }
 }
 </script>

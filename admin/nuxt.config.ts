@@ -20,7 +20,9 @@ const config: NuxtConfig = {
     ]
   },
   css: [],
-  plugins: [],
+  plugins: [
+    "./plugins/api.ts",
+  ],
   components: false,
   buildModules: [
     '@nuxt/typescript-build',
@@ -35,7 +37,7 @@ const config: NuxtConfig = {
   },
   server: {
     host: isDev ? "localhost" : "0.0.0.0",
-    port: isDev ? 8081: 3000
+    port: isDev ? 8081 : 3000
   },
   build: {
     html: {

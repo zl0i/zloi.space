@@ -76,8 +76,7 @@ interface Link {
 @Component({
   async mounted() {
     try {
-      const res = await this.$axios.get("/links");
-      this.$data.links = res.data;
+      this.$data.links = await this.$api.pullLinks();
     } catch (error) {
       console.log(error);
     }
@@ -115,23 +114,10 @@ export default class Links extends Vue {
         loading: true,
       });
       const link = this.links[index];
-      const res = await this.$axios.post(
-        `/links/`,
-        {
-          name: link.name,
-          blob: link.blob,
-          link: link.link,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${this.$store.state["adminKey"]}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const data = await this.$api.pushLink(link.name, link.link, link.blob);
       Vue.set(this.links, index, {
         ...this.links[index],
-        id: res.data.id,
+        id: data.id,
       });
     } catch (error) {
       console.log(error);
@@ -150,20 +136,7 @@ export default class Links extends Vue {
         loading: true,
       });
       const link = this.links[index];
-      await this.$axios.patch(
-        `/links/${link.id}`,
-        {
-          name: link.name,
-          blob: link.blob,
-          link: link.link,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${this.$store.state["adminKey"]}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await this.$api.patchLink(link.id, link.name, link.link, link.blob);
     } catch (error) {
       console.log(error);
     } finally {
@@ -178,11 +151,7 @@ export default class Links extends Vue {
     try {
       const link = this.links[index];
       if (link.name) {
-        await this.$axios.delete(`/links/${link.name}`, {
-          headers: {
-            Authorization: `Bearer ${this.$store.state["adminKey"]}`,
-          },
-        });
+        await this.$api.deleteLink(link.id);
       }
       this.links.splice(index);
     } catch (error) {
