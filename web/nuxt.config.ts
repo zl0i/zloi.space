@@ -87,8 +87,7 @@ const config: NuxtConfig = {
     port: isDev ? 8080 : 3000
   },
   plugins: [
-    "./plugins/api.server.ts",
-    "./plugins/api.client.ts",
+    "./plugins/api.ts",
   ],
   telemetry: {
     enabled: false
