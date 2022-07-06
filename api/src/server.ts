@@ -17,6 +17,7 @@ app.use(morgan(':date[iso] :remote-addr :method :url :status :response-time ms')
 
 app.use((_req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', "*")
     res.setHeader('Access-Control-Allow-Headers', "*")
     next()
 })
