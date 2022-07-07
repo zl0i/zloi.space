@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col sm="2" class="my-auto">
-        <h2>Summary</h2>
+        <h2>About</h2>
       </v-col>
       <v-col sm="2" class="my-auto">
         <v-combobox
@@ -51,11 +51,7 @@
 <script lang='ts'>
 import { Component, Vue, State } from "nuxt-property-decorator";
 
-@Component({
-  mounted() {
-    console.log(this.$vuetify.breakpoint.name);
-  },
-})
+@Component({})
 export default class About extends Vue {
   @State("langs") langs: string;
 
