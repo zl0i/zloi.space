@@ -71,7 +71,7 @@ deploy:branch:
     on_stop: stop:branch:deploy
   variables:
     HELM_OPTIONS: '--set ingress.hostname=${CI_COMMIT_BRANCH}.zloi.space
-      --set web.adminKey=${ADMIN_KEY}'
+      --set api.adminKey=${ADMIN_KEY}'
 
 
 deploy:production:
@@ -85,7 +85,9 @@ deploy:production:
   variables:
     HELM_OPTIONS: '--set ingress.hostname=zloi.space
       --set autoscaling.enabled=true
-      --set priorityclass.enabled=true'
+      --set priorityclass.enabled=true
+      --set api.adminKey=${ADMIN_KEY}'
+
 
 stop:branch:deploy:
   extends: .helm_uninstall
