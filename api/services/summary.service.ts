@@ -3,23 +3,13 @@ import { AppDataSource } from '../src/db'
 
 export class SummaryService {
 
-    static async get(position: string, lang: string) {
-        const links = await Summary.findOne({ where: { key: "links" } })
-        const titles = await Summary.findOne({ where: { key: 'titles', language: lang } })
-        const about = await Summary.findOne({ where: { key: 'about', language: lang } })
-        const summary = await Summary.find({ where: { position: position, language: lang } }) ?? []
-        const result: any = { summary: {} }
+    static async get(lang: string) {
+        const summary = await Summary.find({ where: { language: lang } }) ?? []
+        const result: any = {}
         for (const item of summary) {
-            result.summary[item.key] = item.value
+            result[item.key] = item.value
         }
-        result.summary.lang = lang
-        result.summary.position = position
-        result.general = {
-            lang: lang,
-            titles: titles?.value,
-            about: about?.value,
-            links: links?.value
-        }
+        result.lang = lang
         return result
     }
 
@@ -33,13 +23,13 @@ export class SummaryService {
     }
 
 
-    static async setKey(key: string, language: string, position: string, value: any) {
-        await Summary.insert({ key, position, language, value })
+    static async setKey(key: string, language: string, value: any) {
+        await Summary.insert({ key, language, value })
         return true
     }
 
-    static async updateKey(key: string, value: string, language: string, position: string) {
-        await Summary.update({ key, position, language }, { value })
+    static async updateKey(key: string, value: string, language: string) {
+        await Summary.update({ key, language }, { value })
         return true
     }
 

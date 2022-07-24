@@ -7,8 +7,8 @@ const router = Router()
 
 router.get('/', async (req, res) => {
   try {
-    const { position, language } = req.query as any
-    const data = await SummaryService.get(position, language)
+    const { language } = req.query as any
+    const data = await SummaryService.get(language)
     res.json(data)
   } catch (error) {
     console.log(error)

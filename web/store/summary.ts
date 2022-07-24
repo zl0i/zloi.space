@@ -65,15 +65,15 @@ export const state = (): SummaryState => ({
 export const mutations: MutationTree<SummaryState> = {
     setSummary(state, data: any) {
         state.lang = data.lang
-        state.titles = JSON.parse(data.general.titles ?? "[\"\"]")
-        state.about = data.general.about
-        state.links = data.general.links
-        state.education = data.summary.education
-        state.courses = data.summary.courses
-        state.experience = data.summary.experience
-        state.skills = data.summary.skills
-        state.tech_stack = data.summary.tech_stack
-        state.achievements = data.summary.achievements
+        state.titles = JSON.parse(data.titles ?? "[\"\"]")
+        state.about = data.about
+        state.links = data.links
+        state.education = data.education
+        state.courses = data.courses
+        state.experience = data.experience
+        state.skills = data.skills
+        state.tech_stack = data.tech_stack
+        state.achievements = data.achievements
     }
 }
 
@@ -89,7 +89,6 @@ export const actions: ActionTree<SummaryState, RootState> = {
         }
         try {
             const data = await this.$api.getSummary("Backend", postfix)
-            data.lang = postfix
             commit("setSummary", data)
         } catch (e) {
             console.log(e)

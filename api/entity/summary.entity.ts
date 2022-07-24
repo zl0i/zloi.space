@@ -10,9 +10,6 @@ export class Summary extends BaseEntity {
     key: string
 
     @PrimaryColumn({ default: "" })
-    position: string
-
-    @PrimaryColumn({ default: "" })
     language: string
 
     @Column({ type: "json" })
