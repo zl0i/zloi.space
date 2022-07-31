@@ -16,6 +16,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.post('/', [auth()], async (req: express.Request, res: express.Response) => {
+  try {
+    const { lang, summary } = req.body as any
+    const data = await SummaryService.update(lang, summary)
+    res.json(data)
+  } catch (error) {
+    console.log(error)
+    res.status(500).end("internal error")
+  }
+})
+
 router.get('/langs', async (_req, res) => {
   try {
     const data = await SummaryService.getLangs()
