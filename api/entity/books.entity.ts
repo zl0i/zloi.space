@@ -19,8 +19,11 @@ export class Books extends BaseEntity {
     icon: string
 
     @Column()
-    status: BookStatus
+    infoLink: string
 
     @Column()
+    status: BookStatus
+
+    @Column({ length: 5000 })
     description: string
 }
