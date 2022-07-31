@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 export enum BookStatus {
     UNREAD = "unread",
     READ = 'read',
-    INPORGRESS = 'inporgress'
+    INPORGRESS = 'inprogress'
 }
 
 @Entity()
