@@ -6,7 +6,7 @@ export class Instructions extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ unique: true })
     name: string
 
     @Column({ length: 50000 })
