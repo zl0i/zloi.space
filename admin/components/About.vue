@@ -65,8 +65,9 @@ export default class About extends Vue {
       this.lang = lang;
       this.loading = true;
       const data = await this.$api.pullAbout(lang);
-      this.titles = JSON.parse(data.titles);
-      this.about = String(data.about);
+      console.log(data);
+      this.titles = data.titles ? JSON.parse(data.titles) : [];
+      this.about = data.about;
     } catch (error) {
       console.log(error);
     } finally {
