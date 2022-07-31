@@ -30,17 +30,6 @@ export class SummaryService {
         return langs.map(l => l.language)
     }
 
-
-    static async setKey(key: string, language: string, value: any) {
-        await Summary.insert({ key, language, value })
-        return true
-    }
-
-    static async updateKey(key: string, value: string, language: string) {
-        await Summary.update({ key, language }, { value })
-        return true
-    }
-
     static async getAbout(lang: string = 'en') {
         const titles = await Summary.findOne({ where: { key: 'titles', language: lang } })
         const about = await Summary.findOne({ where: { key: 'about', language: lang } })
