@@ -3,9 +3,10 @@ import type { MutationTree, ActionTree } from 'vuex'
 export const namespace = 'books'
 
 export interface IBook {
-    id: string
+    id: number
     name: string
     icon: string
+    status: string
     description: string
 }
 

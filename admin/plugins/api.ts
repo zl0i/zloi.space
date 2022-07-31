@@ -12,6 +12,10 @@ interface API {
     pullSummary: (lang: string) => Promise<any>
     pushSummary: (lang: string, summary: Partial<SummaryState>) => Promise<any>
     updateInstructions: () => Promise<any>
+    getBooks: () => Promise<any>
+    addBook: (link: string) => Promise<any>
+    updateBook: (id: number, status: string) => Promise<any>
+    deleteBook: (id: number) => Promise<any>
 }
 
 declare module 'vue/types/vue' {
@@ -138,6 +142,49 @@ function fromContext({ $axios, store }: Context) {
                     headers: {
                         Authorization: `Bearer ${store.state["adminKey"]}`,
                         "Content-Type": "application/json",
+                    },
+                }
+            );
+            return data
+        },
+        async getBooks() {
+            const { data } = await $axios.get("/books");
+            return data
+        },
+        async addBook(link: string) {
+            const { data } = await $axios.post(
+                "/books",
+                {
+                    link
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${store.state["adminKey"]}`,
+                    },
+                }
+            );
+            return data
+        },
+        async updateBook(id: number, status: string) {
+            const { data } = await $axios.patch(
+                `/books/${id}`,
+                {
+                    status
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${store.state["adminKey"]}`,
+                    },
+                }
+            );
+            return data
+        },
+        async deleteBook(id: number) {
+            const { data } = await $axios.delete(
+                `/books/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${store.state["adminKey"]}`,
                     },
                 }
             );
