@@ -55,8 +55,8 @@
     </v-row>
     <v-row>
       <v-btn color="accent" @click="addLink">
-        <v-icon color="white">mdi-plus-circle-outline</v-icon></v-btn
-      >
+        <v-icon color="white">mdi-plus-circle-outline</v-icon>
+      </v-btn>
     </v-row>
     <v-row> </v-row>
   </v-container>
