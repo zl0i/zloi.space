@@ -5,7 +5,7 @@
         <h2>About</h2>
       </v-col>
       <v-col sm="2" class="my-auto">
-        <v-combobox
+        <v-select
           id="langsBox"
           :loading="loading"
           :readonly="loading"
@@ -14,7 +14,7 @@
           auto-select-first
           :items="langs"
           @change="pullAbout"
-        ></v-combobox>
+        ></v-select>
       </v-col>
     </v-row>
     <v-container fluid>
