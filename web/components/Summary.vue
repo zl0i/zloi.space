@@ -2,7 +2,11 @@
   <div class="summary-box">
     <div class="summary-header">
       <p style="margin: 0px">{{ $t("summary.title") }}</p>
-      <a href="https://career.habr.com/zloi07/print.pdf" target="_blank" style="padding-top: 20px">
+      <a
+        href="https://career.habr.com/zloi07/print.pdf"
+        target="_blank"
+        style="padding-top: 20px"
+      >
         <img alt="downloadSummary" src="~/static/img/download.svg" />
       </a>
     </div>
@@ -12,7 +16,14 @@
           <p class="box-naming">{{ `${$t("summary.education")}:` }}</p>
           <ul style="padding: 0">
             <li class="box-list" v-for="item of education" :key="item.title">
-              <p>{{ item.range.from }} - {{ item.range.to }}</p>
+              <p>
+                {{ $d(new Date(item.range.from), "short") }} -
+                {{
+                  item.range.to
+                    ? $d(new Date(item.range.to), "short")
+                    : $t("system.now")
+                }}
+              </p>
               <p>{{ item.title }}</p>
               <p>{{ item.speciality }}</p>
             </li>
@@ -21,7 +32,14 @@
           <p class="box-naming">{{ `${$t("summary.courses")}:` }}</p>
           <ul style="padding: 0">
             <li class="box-list" v-for="item of courses" :key="item.title">
-              <p>{{ item.range.from }} - {{ item.range.to }}</p>
+              <p>
+                {{ $d(new Date(item.range.from), "short") }} -
+                {{
+                  item.range.to
+                    ? $d(new Date(item.range.to), "short")
+                    : $t("system.now")
+                }}
+              </p>
               <p>{{ item.title }}</p>
               <p>{{ item.speciality }}</p>
             </li>
@@ -31,7 +49,13 @@
           <ul style="padding: 0">
             <li class="box-list" v-for="item of experience" :key="item.title">
               <p>
-                {{ item.range.from }} - {{ item.range.to }}
+                {{ $d(new Date(item.range.from), "short") }} -
+                {{
+                  item.range.to
+                    ? $d(new Date(item.range.to), "short")
+                    : $t("system.now")
+                }}
+                ({{ getDuarationRange(item.range.from, item.range.to) }})
                 <a class="org-name" :href="item.link_org">{{ item.org }}</a>
               </p>
               <p class="description">{{ item.position }}</p>
@@ -42,19 +66,8 @@
       </div>
       <div class="right-column">
         <p class="box-naming">{{ `${$t("summary.skills")}:` }}</p>
-        <div class="box-skill" v-for="item of skills" :key="item.name">
-          <p>{{ item.name }}</p>
-          <div class="skill-progress">
-            <div
-              class="skill-fill"
-              :style="{ width: `${item.value * 100}%` }"
-            ></div>
-            <div class="skill-lvl">{{ item.description }}</div>
-          </div>
-        </div>
-        <p class="box-naming">{{ `${$t("summary.tech_stack")}:` }}</p>
         <ul style="padding: 0">
-          <li class="box-list" v-for="item of tech_stack" :key="item">
+          <li class="box-list" v-for="item of skills" :key="item">
             {{ item }}
           </li>
         </ul>
@@ -84,9 +97,39 @@ export default class Summary extends Vue {
   @SummaryStore.State("courses") courses: SummaryState["courses"];
   @SummaryStore.State("experience") experience: SummaryState["experience"];
   @SummaryStore.State("skills") skills: SummaryState["skills"];
-  @SummaryStore.State("tech_stack") tech_stack: SummaryState["tech_stack"];
   @SummaryStore.State("achievements")
   achievements: SummaryState["achievements"];
+
+  getDuarationRange(from: string, to: string) {
+    const start = new Date(from);
+    const end = to ? new Date(to) : new Date();
+    const years = end.getFullYear() - start.getFullYear();
+    const months = end.getMonth() - start.getMonth() + 1;
+
+    let yearStr = "";
+    if (years == 0) {
+      yearStr = "";
+    } else if (years == 1) {
+      yearStr = `1 ${this.$t("system.year")} `;
+    } else if (years < 5) {
+      yearStr = `${years} ${this.$t("system.years")} `;
+    } else if (years >= 5) {
+      yearStr = `${years} ${this.$t("system.yearss")} `;
+    }
+
+    let monthStr = "";
+    if (months == 0) {
+      monthStr = "";
+    } else if (months == 1) {
+      monthStr = `1 ${this.$t("system.month")} `;
+    } else if (months < 5) {
+      monthStr = `${months} ${this.$t("system.months")} `;
+    } else {
+      monthStr = `${months} ${this.$t("system.monthss")}`;
+    }
+
+    return yearStr + monthStr;
+  }
 }
 </script>
 

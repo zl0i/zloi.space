@@ -23,12 +23,6 @@ export interface IExperience {
     duties: string
 }
 
-export interface ISkills {
-    name: string
-    value: number
-    description: string
-}
-
 export interface ISocialLink {
     id: number
     name: string
@@ -44,8 +38,7 @@ export interface SummaryState {
     education: IEducation[]
     courses: IEducation[]
     experience: IExperience[]
-    skills: ISkills[]
-    tech_stack: string[]
+    skills: string[]
     achievements: string[]
 }
 
@@ -58,7 +51,6 @@ export const state = (): SummaryState => ({
     courses: [],
     experience: [],
     skills: [],
-    tech_stack: [],
     achievements: []
 })
 
@@ -71,8 +63,7 @@ export const mutations: MutationTree<SummaryState> = {
         state.education = data.education
         state.courses = data.courses
         state.experience = data.experience
-        state.skills = data.skills
-        state.tech_stack = data.tech_stack
+        state.skills = data.skills        
         state.achievements = data.achievements
     }
 }

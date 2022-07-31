@@ -28,6 +28,26 @@ const config: Options = {
         fallbackLocale: "ru",
         messages: {
             en
+        },
+        dateTimeFormats: {
+            'en': {
+                short: {
+                    year: 'numeric', month: 'long'
+                },
+                long: {
+                    year: 'numeric', month: 'short', day: 'numeric',
+                    weekday: 'short', hour: 'numeric', minute: 'numeric'
+                }
+            },
+            'ru': {
+                short: {
+                    year: 'numeric', month: 'long'
+                },
+                long: {
+                    year: 'numeric', month: 'short', day: 'numeric',
+                    weekday: 'short', hour: 'numeric', minute: 'numeric'
+                }
+            },
         }
     },
     onBeforeLanguageSwitch: (oldLocale, newLocale, _isInitialSetup, { store }) => {
