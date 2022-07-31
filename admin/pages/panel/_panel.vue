@@ -22,6 +22,7 @@
         <About v-if="item == 'about'"> </About>
         <Links v-if="item == 'links'"> </Links>
         <Summary v-if="item == 'summary'"></Summary>
+        <Instructions v-if="item == 'instructions'"> </Instructions>
         <Books v-if="item == 'books'"> </Books>
       </div>
     </v-main>
@@ -34,6 +35,7 @@ import Summary from "~/components/Summary.vue";
 import Books from "~/components/Books.vue";
 import About from "~/components/About.vue";
 import Links from "~/components/Links.vue";
+import Instructions from "~/components/Instructions.vue";
 
 @Component({
   middleware: ["keyValidate"],
@@ -42,6 +44,7 @@ import Links from "~/components/Links.vue";
     Books,
     Links,
     About,
+    Instructions,
   },
   async asyncData({ params, store }) {
     await store.dispatch("requestLangs");
@@ -55,7 +58,8 @@ export default class Index extends Vue {
     { title: "About" },
     { title: "Links" },
     { title: "Summary" },
-    { title: "Books" },
+    { title: "Instructions" },
+    { title: "Books" },    
   ];
   item = "";
   push(title: string) {
