@@ -13,6 +13,14 @@ export class SummaryService {
         return result
     }
 
+    static async update(lang: string, summary: any) {
+        const keys = Object.keys(summary)
+        for (const key of keys) {
+            await Summary.upsert({ language: lang, key: key, value: summary[key] }, { conflictPaths: ['key', 'language'] })
+        }
+        return true
+    }
+
     static async getLangs() {
         const langs = await AppDataSource.createQueryBuilder()
             .select('DISTINCT language')
