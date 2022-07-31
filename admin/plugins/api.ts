@@ -11,6 +11,7 @@ interface API {
     deleteLink: (id: number) => Promise<any>
     pullSummary: (lang: string) => Promise<any>
     pushSummary: (lang: string, summary: Partial<SummaryState>) => Promise<any>
+    updateInstructions: () => Promise<any>
 }
 
 declare module 'vue/types/vue' {
@@ -120,6 +121,19 @@ function fromContext({ $axios, store }: Context) {
                     lang,
                     summary
                 },
+                {
+                    headers: {
+                        Authorization: `Bearer ${store.state["adminKey"]}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            return data
+        },
+        async updateInstructions() {
+            const { data } = await $axios.post(
+                `/instructions`,
+                {},
                 {
                     headers: {
                         Authorization: `Bearer ${store.state["adminKey"]}`,
