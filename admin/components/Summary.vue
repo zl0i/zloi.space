@@ -201,7 +201,7 @@ import TextFiled from "./controls/TextFiled.vue";
 @Component({
   components: {
     TextFiled,
-    MonthPicker
+    MonthPicker,
   },
 })
 export default class Summary extends Vue {
@@ -219,11 +219,11 @@ export default class Summary extends Vue {
       this.lang = lang;
       this.loading = true;
       const data = await this.$api.pullSummary(lang);
-      this.education = data.education;
-      this.courses = data.courses;
-      this.experience = data.experience;
-      this.skills = data.skills;
-      this.achievements = data.achievements;
+      this.education = data.education ?? [];
+      this.courses = data.courses ?? [];
+      this.experience = data.experience ?? [];
+      this.skills = data.skills ?? [];
+      this.achievements = data.achievements ?? [];
     } catch (error) {
       console.log(error);
     } finally {
