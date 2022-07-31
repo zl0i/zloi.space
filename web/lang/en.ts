@@ -1,4 +1,13 @@
 export default {
+    system: {
+        now: 'now',
+        year: 'year',
+        years: 'years',
+        yearss: 'years',
+        month: 'month',
+        months: 'months',
+        monthss: 'months'
+    },
     headers: {
         summary: "Summary",
         knoweledge: "Knoweledge",
