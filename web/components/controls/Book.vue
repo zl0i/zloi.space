@@ -12,7 +12,7 @@
       <img src="~/static/img/read.svg" alt="read" />
       <p>{{ $t("books.read") }}</p>
     </div>
-    <div class="read-div" v-show="status == 'reading'">
+    <div class="read-div" v-show="status == 'inprogress'">
       <img src="~/static/img/reading.svg" alt="read" />
       <p>{{ $t("books.reading") }}</p>
     </div>
