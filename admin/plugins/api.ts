@@ -1,4 +1,5 @@
 import type { Context, Plugin } from '@nuxt/types'
+import { SummaryState } from '~/store/summary'
 
 
 interface API {
@@ -8,6 +9,8 @@ interface API {
     pushLink: (name: string, link: string, blob: string) => Promise<any>
     patchLink: (id: number, name: string, link: string, blob: string) => Promise<any>
     deleteLink: (id: number) => Promise<any>
+    pullSummary: (lang: string) => Promise<any>
+    pushSummary: (lang: string, summary: Partial<SummaryState>) => Promise<any>
 }
 
 declare module 'vue/types/vue' {
@@ -101,6 +104,30 @@ function fromContext({ $axios, store }: Context) {
                     Authorization: `Bearer ${store.state["adminKey"]}`,
                 },
             });
+        },
+        async pullSummary(language: string) {
+            const { data } = await $axios.get("/summary", {
+                params: {
+                    language
+                }
+            });
+            return data
+        },
+        async pushSummary(lang: string, summary: Partial<SummaryState>) {
+            const { data } = await $axios.post(
+                `/summary`,
+                {
+                    lang,
+                    summary
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${store.state["adminKey"]}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            return data
         }
     }
     return api
