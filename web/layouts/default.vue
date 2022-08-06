@@ -16,10 +16,7 @@
         </p>
       </div>
       <button class="button-to-up" @click="goToTop">
-        <img
-            alt="goTop"
-            src="~/static/img/button-to-up.svg"
-          />
+        <img alt="goTop" src="~/static/img/button-to-up.svg" />
       </button>
     </div>
   </div>
@@ -31,7 +28,7 @@ import { Vue, Component } from "nuxt-property-decorator";
 @Component({
   name: "LayoutDefault",
 })
-export default class Footer extends Vue {
+export default class Default extends Vue {
   goToTop() {
     window.scrollTo(0, 0);
   }
