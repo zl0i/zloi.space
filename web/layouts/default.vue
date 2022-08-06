@@ -37,6 +37,7 @@ export default class Default extends Vue {
 
 <style scoped>
 .footer {
+  margin-top: 120px;
   height: 200px;
   background: black;
   display: flex;
@@ -73,5 +74,6 @@ export default class Default extends Vue {
   bottom: 20px;
   background: none;
   cursor: pointer;
+  border: none;
 }
 </style>
