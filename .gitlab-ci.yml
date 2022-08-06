@@ -35,7 +35,7 @@ deploy:branch:
   variables:
     HELM_OPTIONS: '--set ingress.hostname=${CI_COMMIT_BRANCH}.zloi.space'
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_BRANCH != 'master' && $CI_COMMIT_TAG == null
 
 deploy:production:
   extends: .helm_install
@@ -44,7 +44,7 @@ deploy:production:
     url: https://zloi.space
     deployment_tier: production
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_BRANCH == 'master' && $CI_COMMIT_TAG == null
   variables:
     HELM_OPTIONS: '--set ingress.hostname=zloi.space
       --set autoscaling.enabled=true'
@@ -52,7 +52,7 @@ deploy:production:
 stop:branch:deploy:
   extends: .helm_uninstall
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_BRANCH != 'master' && $CI_COMMIT_TAG == null
   environment:
     name: ${CI_COMMIT_BRANCH}
     action: stop
