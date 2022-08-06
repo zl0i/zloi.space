@@ -16,6 +16,9 @@ spec:
       labels:
         {{- include "zloi-space.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.priorityclass.enabled }}
+      priorityClassName:  {{ include "zloi-space.fullname" . }}
+      {{- end }}
       containers:
         - name: web
           image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
