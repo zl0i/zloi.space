@@ -1,9 +1,9 @@
 <template>
   <div>
     <nuxt />
-    <div class="footer-wrapper">
-      <div class="footer">
-        <h1>Dmitri <span class="taviraj">“zloi”</span> Popov</h1>
+    <div class="footer">
+      <div class="footer-content">
+        <h1>Dmitri <span class="taviraj">"zloi"</span> Popov</h1>
         <p>
           Created by <a href="https://zloi.space/">zl0i</a> and
           <a href="https://github.com/gossy4691">GoSSy4691</a> / Powered by
@@ -41,15 +41,11 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: "LayoutDefault",
-};
-</script>
-
-<script lang="ts">
 import { Vue, Component } from "nuxt-property-decorator";
 
-@Component
+@Component({
+  name: "LayoutDefault",
+})
 export default class Footer extends Vue {
   goToTop() {
     window.scrollTo(0, 0);
@@ -58,7 +54,7 @@ export default class Footer extends Vue {
 </script>
 
 <style scoped>
-.footer-wrapper {
+.footer {
   height: 200px;
   background: black;
   display: flex;
@@ -67,7 +63,7 @@ export default class Footer extends Vue {
   justify-content: center;
 }
 
-.footer {
+.footer-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,11 +72,11 @@ export default class Footer extends Vue {
   font-size: 17px;
 }
 
-.footer a {
+.footer-content a {
   color: white;
 }
 
-.footer * {
+.footer-content * {
   margin: 10px 0;
 }
 
