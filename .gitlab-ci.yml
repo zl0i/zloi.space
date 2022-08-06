@@ -46,7 +46,8 @@ deploy:production:
     deployment_tier: production
   variables:
     HELM_OPTIONS: '--set ingress.hostname=zloi.space
-      --set autoscaling.enabled=true'
+      --set autoscaling.enabled=true
+      --set priorityclass.enabled=true'
 
 stop:branch:deploy:
   extends: .helm_uninstall
