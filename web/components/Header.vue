@@ -24,9 +24,8 @@
         <div class="language" :class="isShowMenu && 'mobile-language'">
           <a>Translate</a>
           <img
-            alt="arrow"
+            alt="goTop"
             src="~/static/img/arrow-down.svg"
-            :style="isShowMenu && { display: 'none' }"
           />
           <div
             :class="
