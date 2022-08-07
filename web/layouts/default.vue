@@ -27,7 +27,7 @@ import { Vue, Component } from "nuxt-property-decorator";
 
 @Component({
   name: "LayoutDefault",
-  middleware: 'logs'
+  middleware: "logs",
 })
 export default class Default extends Vue {
   goToTop() {
@@ -45,6 +45,7 @@ export default class Default extends Vue {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .footer-content {
@@ -54,6 +55,7 @@ export default class Default extends Vue {
   justify-content: center;
   font-family: "Roboto";
   font-size: 17px;
+  text-align: center;
 }
 
 .footer-content a {
@@ -76,5 +78,20 @@ export default class Default extends Vue {
   background: none;
   cursor: pointer;
   border: none;
+}
+
+@media (max-device-width: 736px) {
+  .footer-content {
+    font-size: 14px;
+  }
+  .footer h1 {
+    font-size: 25px;
+  }
+  .nickname {
+    font-size: 26px;
+  }
+  .button-to-up {
+    display: none;
+  }
 }
 </style>
