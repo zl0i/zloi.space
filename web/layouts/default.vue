@@ -6,9 +6,11 @@
         <h1>Dmitri <span class="nickname">"zloi"</span> Popov</h1>
         <p>
           Created by <a href="https://zloi.space/">zl0i</a> and
-          <a href="https://github.com/gossy4691">GoSSy4691</a> / Powered by
-          <a href="https://nuxtjs.org/">Nuxt v2</a> / Run on
-          <a href="https://k3s.io/">k3s</a>
+          <a href="https://github.com/gossy4691">GoSSy4691</a> /
+          <br />
+          Powered by <a href="https://nuxtjs.org/">Nuxt v2</a> /
+          <br />
+          Run on <a href="https://k3s.io/">k3s</a>
         </p>
         <p>
           Copyright © 2021 - 2022 /
@@ -66,6 +68,10 @@ export default class Default extends Vue {
   margin: 10px 0;
 }
 
+.footer-content p br {
+  display: none;
+}
+
 .nickname {
   font-family: "Taviraj";
   font-size: 32px;
@@ -92,6 +98,9 @@ export default class Default extends Vue {
   }
   .button-to-up {
     display: none;
+  }
+  .footer-content p br {
+    display: block;
   }
 }
 </style>
