@@ -48,7 +48,7 @@
             <TextFiled label="Speciality" v-model="ed.speciality" />
           </v-col>
           <v-btn class="mr-1 my-auto" icon>
-            <v-icon color="grey" @click="education.splice(i)"
+            <v-icon color="grey" @click="education.splice(i, 1)"
               >mdi-delete</v-icon
             >
           </v-btn>
@@ -87,7 +87,7 @@
             <TextFiled label="Speciality" v-model="cr.speciality" />
           </v-col>
           <v-btn class="my-auto mr-1" icon>
-            <v-icon color="grey" @click="courses.splice(i)">mdi-delete</v-icon>
+            <v-icon color="grey" @click="courses.splice(i, 1)">mdi-delete</v-icon>
           </v-btn>
         </v-row>
       </v-container>
@@ -132,7 +132,7 @@
           <v-col>
             <TextFiled label="Duties" v-model="ex.duties" />
           </v-col>
-          <v-btn class="my-auto mr-2" icon @click="experience.splice(i)">
+          <v-btn class="my-auto mr-2" icon @click="experience.splice(i, 1)">
             <v-icon color="grey">mdi-delete</v-icon>
           </v-btn>
         </v-row>
@@ -152,7 +152,7 @@
             <TextFiled label="Skills" v-model="skills[i]" />
           </v-col>
           <v-col cols="1">
-            <v-btn class="ml-1 my-auto" icon @click="skills.splice(i)">
+            <v-btn class="ml-1 my-auto" icon @click="skills.splice(i, 1)">
               <v-icon color="grey">mdi-delete</v-icon>
             </v-btn>
           </v-col>
@@ -179,7 +179,7 @@
           </v-col>
           <v-col cols="1">
             <v-btn class="ml-1 my-auto" icon>
-              <v-icon color="grey" @click="achievements.splice(i)">
+              <v-icon color="grey" @click="achievements.splice(i, 1)">
                 mdi-delete
               </v-icon>
             </v-btn>
