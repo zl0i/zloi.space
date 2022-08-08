@@ -42,10 +42,10 @@
             <MonthPicker label="End" v-model="ed.range.to" />
           </v-col>
           <v-col cols="3">
-            <TextFiled label="Title" v-model="ed.title" />
+            <TextField label="Title" v-model="ed.title" />
           </v-col>
           <v-col cols="4">
-            <TextFiled label="Speciality" v-model="ed.speciality" />
+            <TextField label="Speciality" v-model="ed.speciality" />
           </v-col>
           <DeleteRowButton @agree="education.splice(i, 1)" />
         </v-row>
@@ -77,10 +77,10 @@
             <MonthPicker label="End" v-model="cr.range.to" />
           </v-col>
           <v-col cols="3">
-            <TextFiled label="Title" v-model="cr.title" />
+            <TextField label="Title" v-model="cr.title" />
           </v-col>
           <v-col cols="4">
-            <TextFiled label="Speciality" v-model="cr.speciality" />
+            <TextField label="Speciality" v-model="cr.speciality" />
           </v-col>
           <DeleteRowButton @agree="courses.splice(i, 1)" />
         </v-row>
@@ -115,16 +115,16 @@
             <MonthPicker label="End" v-model="ex.range.to" />
           </v-col>
           <v-col cols="2">
-            <TextFiled label="Title" v-model="ex.org" />
+            <TextField label="Title" v-model="ex.org" />
           </v-col>
           <v-col cols="2">
-            <TextFiled label="Link" v-model="ex.link_org" />
+            <TextField label="Link" v-model="ex.link_org" />
           </v-col>
           <v-col cols="2" md="2">
-            <TextFiled label="Speciality" v-model="ex.position" />
+            <TextField label="Speciality" v-model="ex.position" />
           </v-col>
           <v-col>
-            <TextFiled label="Duties" v-model="ex.duties" />
+            <TextField label="Duties" v-model="ex.duties" />
           </v-col>
           <DeleteRowButton @agree="experience.splice(i, 1)" />
         </v-row>
@@ -141,7 +141,7 @@
       <v-container fluid class="ml-0" v-for="(sk, i) of skills" :key="i">
         <v-row lg="2">
           <v-col cols="7">
-            <TextFiled label="Skills" v-model="skills[i]" />
+            <TextField label="Skills" v-model="skills[i]" />
           </v-col>
           <v-col cols="1">
             <DeleteRowButton @agree="skills.splice(i, 1)" />
@@ -165,7 +165,7 @@
       >
         <v-row lg="2">
           <v-col cols="7">
-            <TextFiled label="Achievement" v-model="achievements[i]" />
+            <TextField label="Achievement" v-model="achievements[i]" />
           </v-col>
           <v-col cols="1">
             <DeleteRowButton @agree="achievements.splice(i, 1)" />
@@ -182,12 +182,12 @@ import { Component, Vue, State } from "nuxt-property-decorator";
 import { IEducation, IExperience } from "~/store/summary";
 
 import MonthPicker from "./controls/MonthPicker.vue";
-import TextFiled from "./controls/TextFiled.vue";
+import TextField from "./controls/TextField.vue";
 import DeleteRowButton from "./controls/DeleteRowButton.vue";
 
 @Component({
   components: {
-    TextFiled,
+    TextField,
     MonthPicker,
     DeleteRowButton,
   },
