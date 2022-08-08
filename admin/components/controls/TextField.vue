@@ -13,9 +13,8 @@
 import { Component, Vue, Prop, ModelSync } from "nuxt-property-decorator";
 
 @Component
-export default class MothPicker extends Vue {
+export default class TextField extends Vue {
   @Prop() label: string;
-  menu = false;
   @ModelSync("value", "input") valueString: string;
 }
 </script>

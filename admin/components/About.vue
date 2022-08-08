@@ -31,7 +31,7 @@
           <v-container fluid v-for="(t, i) in titles" :key="i">
             <v-row>
               <v-col cols="11">
-                <TextFiled label="Title" v-model="titles[i]" />
+                <TextField label="Title" v-model="titles[i]" />
               </v-col>
               <v-col cols="1">
                 <DeleteRowButton @agree="titles.splice(i, 1)" />
@@ -58,11 +58,11 @@
 <script lang='ts'>
 import { Component, Vue, State } from "nuxt-property-decorator";
 import DeleteRowButton from "./controls/DeleteRowButton.vue";
-import TextFiled from "./controls/TextFiled.vue";
+import TextField from "./controls/TextField.vue";
 
 @Component({
   components: {
-    TextFiled,
+    TextField,
     DeleteRowButton,
   },
 })
