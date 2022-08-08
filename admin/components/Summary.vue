@@ -47,11 +47,7 @@
           <v-col cols="4">
             <TextFiled label="Speciality" v-model="ed.speciality" />
           </v-col>
-          <v-btn class="mr-1 my-auto" icon>
-            <v-icon color="grey" @click="education.splice(i, 1)"
-              >mdi-delete</v-icon
-            >
-          </v-btn>
+          <DeleteRowButton @agree="education.splice(i, 1)" />
         </v-row>
       </v-container>
     </v-row>
@@ -86,9 +82,7 @@
           <v-col cols="4">
             <TextFiled label="Speciality" v-model="cr.speciality" />
           </v-col>
-          <v-btn class="my-auto mr-1" icon>
-            <v-icon color="grey" @click="courses.splice(i, 1)">mdi-delete</v-icon>
-          </v-btn>
+          <DeleteRowButton @agree="courses.splice(i, 1)" />
         </v-row>
       </v-container>
     </v-row>
@@ -132,9 +126,7 @@
           <v-col>
             <TextFiled label="Duties" v-model="ex.duties" />
           </v-col>
-          <v-btn class="my-auto mr-2" icon @click="experience.splice(i, 1)">
-            <v-icon color="grey">mdi-delete</v-icon>
-          </v-btn>
+          <DeleteRowButton @agree="experience.splice(i, 1)" />
         </v-row>
       </v-container>
     </v-row>
@@ -152,9 +144,7 @@
             <TextFiled label="Skills" v-model="skills[i]" />
           </v-col>
           <v-col cols="1">
-            <v-btn class="ml-1 my-auto" icon @click="skills.splice(i, 1)">
-              <v-icon color="grey">mdi-delete</v-icon>
-            </v-btn>
+            <DeleteRowButton @agree="skills.splice(i, 1)" />
           </v-col>
         </v-row>
       </v-container>
@@ -178,11 +168,7 @@
             <TextFiled label="Achievement" v-model="achievements[i]" />
           </v-col>
           <v-col cols="1">
-            <v-btn class="ml-1 my-auto" icon>
-              <v-icon color="grey" @click="achievements.splice(i, 1)">
-                mdi-delete
-              </v-icon>
-            </v-btn>
+            <DeleteRowButton @agree="achievements.splice(i, 1)" />
           </v-col>
         </v-row>
       </v-container>
@@ -197,11 +183,13 @@ import { IEducation, IExperience } from "~/store/summary";
 
 import MonthPicker from "./controls/MonthPicker.vue";
 import TextFiled from "./controls/TextFiled.vue";
+import DeleteRowButton from "./controls/DeleteRowButton.vue";
 
 @Component({
   components: {
     TextFiled,
     MonthPicker,
+    DeleteRowButton,
   },
 })
 export default class Summary extends Vue {

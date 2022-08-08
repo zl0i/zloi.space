@@ -27,23 +27,22 @@
             </v-icon>
           </v-btn>
         </v-row>
-        <v-row v-for="(t, i) in titles" :key="i">
-          <v-col>
-            <v-text-field
-              height="25"
-              :value="t"
-              v-model="titles[i]"
-            ></v-text-field>
-          </v-col>
-          <v-btn class="mr-1 my-auto" icon>
-            <v-icon color="grey" @click="titles.splice(i, 1)">
-              mdi-delete
-            </v-icon>
-          </v-btn>
+        <v-row>
+          <v-container fluid v-for="(t, i) in titles" :key="i">
+            <v-row>
+              <v-col cols="11">
+                <TextFiled label="Title" v-model="titles[i]" />
+              </v-col>
+              <v-col cols="1">
+                <DeleteRowButton @agree="titles.splice(i, 1)" />
+              </v-col>
+            </v-row>
+          </v-container>
         </v-row>
         <v-row>
           <v-textarea
             class="pt-7"
+            outlined
             dense
             label="About"
             :value="about"
@@ -58,8 +57,15 @@
 
 <script lang='ts'>
 import { Component, Vue, State } from "nuxt-property-decorator";
+import DeleteRowButton from "./controls/DeleteRowButton.vue";
+import TextFiled from "./controls/TextFiled.vue";
 
-@Component({})
+@Component({
+  components: {
+    TextFiled,
+    DeleteRowButton,
+  },
+})
 export default class About extends Vue {
   @State("langs") langs: string;
 
