@@ -1,35 +1,25 @@
 <template>
   <v-container fluid class="ml-5">
-    <v-row>
-      <v-col sm="2">
-        <h2>Links</h2>
-      </v-col>
+    <v-row class="mt-2">
+      <h2>Links</h2>
+      <v-btn color="accent" @click="addLink" icon>
+        <v-icon color="black">mdi-plus-circle-outline</v-icon>
+      </v-btn>
     </v-row>
     <v-row v-for="(link, i) of links" :key="link.id">
       <v-col cols="24" lg="1">
-        <v-text-field
-          :value="link.name"
-          v-model="link.name"
-          placeholder="name"
-          counter="10"
-          dense
-        ></v-text-field>
+        <TextField label="Name" v-model="link.name" />
       </v-col>
       <v-col cols="12" lg="3">
-        <v-text-field
-          :value="link.link"
-          v-model="link.link"
-          placeholder="url"
-          counter="255"
-          dense
-          clearable
-        ></v-text-field>
+        <TextField label="Link" v-model="link.link" />
       </v-col>
       <v-col cols="12" lg="2">
         <v-file-input
           accept="image/*"
           label="icon"
           dense
+          outlined
+          hide-details
           show-size
           @change="setFile($event, i)"
         >
@@ -49,21 +39,15 @@
         @click="link.id < 1 ? create(i) : update(i)"
         >{{ link.id < 1 ? "create" : "update" }}</v-btn
       >
-      <v-btn class="ml-5 my-auto" color="pink" @click="remove(i)">
-        <v-icon color="white">mdi-delete</v-icon>
-      </v-btn>
+      <DeleteRowButton @agree="remove(i)" />
     </v-row>
-    <v-row>
-      <v-btn color="accent" @click="addLink">
-        <v-icon color="white">mdi-plus-circle-outline</v-icon>
-      </v-btn>
-    </v-row>
-    <v-row> </v-row>
   </v-container>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from "nuxt-property-decorator";
+import TextField from "./controls/TextField.vue";
+import DeleteRowButton from "./controls/DeleteRowButton.vue";
 
 interface Link {
   id: number;
@@ -74,6 +58,10 @@ interface Link {
 }
 
 @Component({
+  components: {
+    TextField,
+    DeleteRowButton,
+  },
   async mounted() {
     try {
       this.$data.links = await this.$api.pullLinks();
