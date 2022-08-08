@@ -19,19 +19,27 @@
     </v-row>
     <v-container fluid>
       <v-col sm="4">
-        <v-row class="my-auto">
-          <h3>Titles:</h3>
+        <v-row>
+          <h3 class="my-auto">Titles:</h3>
+          <v-btn icon>
+            <v-icon color="black" @click="titles.push('')">
+              mdi-plus-circle-outline
+            </v-icon>
+          </v-btn>
         </v-row>
         <v-row v-for="(t, i) in titles" :key="i">
-          <v-text-field
-            height="25"
-            :value="t"
-            v-model="titles[i]"
-          ></v-text-field>
-        </v-row>
-        <v-row>
-          <v-btn color="accent" @click="titles.push('')">Add</v-btn>
-          <v-btn class="ml-5" color="pink" @click="titles.pop()">Pop</v-btn>
+          <v-col>
+            <v-text-field
+              height="25"
+              :value="t"
+              v-model="titles[i]"
+            ></v-text-field>
+          </v-col>
+          <v-btn class="mr-1 my-auto" icon>
+            <v-icon color="grey" @click="titles.splice(i, 1)">
+              mdi-delete
+            </v-icon>
+          </v-btn>
         </v-row>
         <v-row>
           <v-textarea
