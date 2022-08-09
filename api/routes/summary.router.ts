@@ -51,7 +51,6 @@ router.get('/about', async (req, res) => {
 router.post('/about', [auth()], async (req: express.Request, res: express.Response) => {
   try {
     const { lang, titles, about } = req.body
-    console.log(req.body)
     const status = await SummaryService.updateAbout(lang, titles, about)
     res.json({ status })
   } catch (error) {
