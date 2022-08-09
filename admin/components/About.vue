@@ -1,62 +1,61 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col sm="2" class="my-auto">
-        <h2>About</h2>
-      </v-col>
-      <v-col sm="2" class="my-auto">
+  <v-container fluid class="ml-5 mb-5">
+    <v-row class="mt-1">
+      <h2 class="my-auto">Welcome</h2>
+      <v-col lg="1">
         <v-select
-          id="langsBox"
           :loading="loading"
           :readonly="loading"
           no-filter
+          hide-details
           disable-lookup
+          dense
           auto-select-first
           :items="langs"
           @change="pullAbout"
         ></v-select>
       </v-col>
     </v-row>
-    <v-container fluid>
-      <v-col sm="4">
-        <v-row>
-          <h3 class="my-auto">Titles:</h3>
-          <v-btn icon>
-            <v-icon color="black" @click="titles.push('')">
-              mdi-plus-circle-outline
-            </v-icon>
-          </v-btn>
-        </v-row>
-        <v-row>
-          <v-container fluid v-for="(t, i) in titles" :key="i">
-            <v-row>
-              <v-col cols="11">
-                <TextField label="Title" v-model="titles[i]" />
-              </v-col>
-              <v-col cols="1">
-                <DeleteRowButton @agree="titles.splice(i, 1)" />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-row>
-        <v-row>
-          <v-textarea
-            class="pt-7"
-            outlined
-            dense
-            label="About"
-            :value="about"
-            v-model="about"
-          ></v-textarea>
-        </v-row>
+    <v-row>
+      <h3 class="my-auto">Titles</h3>
+      <v-btn icon>
+        <v-icon color="black" @click="titles.push('')">
+          mdi-plus-circle-outline
+        </v-icon>
+      </v-btn>
+    </v-row>
+    <v-row fluid v-for="(t, i) in titles" :key="i">
+      <v-col cols="6">
+        <TextField label="Title" v-model="titles[i]" />
       </v-col>
-    </v-container>
-    <v-btn color="primary" @click="save">Save</v-btn>
+      <v-col cols="1">
+        <DeleteRowButton @agree="titles.splice(i, 1)" />
+      </v-col>
+    </v-row>
+    <v-row>
+      <h3 class="my-auto">About</h3>
+    </v-row>
+    <v-row>
+      <v-col cols="6">
+        <v-textarea
+          outlined
+          dense
+          hide-details
+          auto-grow
+          label="About"
+          :value="about"
+          v-model="about"
+        ></v-textarea>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-btn color="primary" @click="save">Save</v-btn>
+    </v-row>
   </v-container>
 </template>
 
 <script lang='ts'>
-import { Component, Vue, State } from "nuxt-property-decorator";
+import { Component, Vue, State, Watch } from "nuxt-property-decorator";
 import DeleteRowButton from "./controls/DeleteRowButton.vue";
 import TextField from "./controls/TextField.vue";
 
@@ -64,6 +63,9 @@ import TextField from "./controls/TextField.vue";
   components: {
     TextField,
     DeleteRowButton,
+  },
+  created() {
+    console.log(this);
   },
 })
 export default class About extends Vue {
@@ -73,6 +75,12 @@ export default class About extends Vue {
   about: string = "";
   lang: string = "";
   loading = false;
+
+  @Watch("langs")
+  setFirstLnag() {
+    console.log(this.langs);
+    this.lang = this.langs[0];
+  }
 
   async pullAbout(lang: string) {
     try {
