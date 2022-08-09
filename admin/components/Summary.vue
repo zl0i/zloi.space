@@ -1,12 +1,9 @@
 <template>
-  <v-container fluid>
-    <v-row class="mb-1">
-      <v-col sm="2" class="my-auto">
-        <h2>Summary</h2>
-      </v-col>
-      <v-col sm="2" class="my-auto">
+  <v-container fluid class="ml-3 mb-5">
+    <v-row>
+      <h2 class="my-auto">Summary</h2>
+      <v-col lg="1">
         <v-select
-          id="langsBox"
           :loading="loading"
           :readonly="loading"
           no-filter
@@ -16,8 +13,7 @@
         ></v-select>
       </v-col>
     </v-row>
-
-    <v-row class="ml-1">
+    <v-row>
       <h3 class="my-auto">Education</h3>
       <v-btn
         icon
@@ -52,7 +48,7 @@
       </v-container>
     </v-row>
 
-    <v-row class="ml-1">
+    <v-row>
       <h3 class="my-auto">Courses</h3>
       <v-btn
         icon
@@ -87,7 +83,7 @@
       </v-container>
     </v-row>
 
-    <v-row class="ml-1">
+    <v-row>
       <h3 class="my-auto">Experience</h3>
       <v-btn
         icon
@@ -106,32 +102,44 @@
       </v-btn>
     </v-row>
     <v-row class="mt-3 mb-3">
-      <v-container fluid class="ml-0" v-for="(ex, i) of experience" :key="i">
-        <v-row lg="2">
+      <v-container fluid v-for="(ex, i) of experience" :key="i">
+        <v-row>
           <v-col cols="2">
             <MonthPicker label="Start" v-model="ex.range.from" />
           </v-col>
           <v-col cols="2">
             <MonthPicker label="End" v-model="ex.range.to" />
           </v-col>
-          <v-col cols="2">
+          <v-col cols="3">
             <TextField label="Title" v-model="ex.org" />
           </v-col>
-          <v-col cols="2">
+          <v-col cols="4">
             <TextField label="Link" v-model="ex.link_org" />
           </v-col>
-          <v-col cols="2" md="2">
+          <v-col lg="1">
+            <DeleteRowButton @agree="experience.splice(i, 1)" />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="2" md="2" class="ml-8">
             <TextField label="Speciality" v-model="ex.position" />
           </v-col>
-          <v-col>
-            <TextField label="Duties" v-model="ex.duties" />
+          <v-col lg="8">
+            <v-textarea
+              outlined
+              dense
+              hide-details
+              auto-grow
+              rows="1"
+              label="Duties"
+              v-model="ex.duties"
+            ></v-textarea>
           </v-col>
-          <DeleteRowButton @agree="experience.splice(i, 1)" />
         </v-row>
       </v-container>
     </v-row>
 
-    <v-row class="ml-1">
+    <v-row>
       <h3 class="my-auto">Skills</h3>
       <v-btn icon @click="skills.push(' ')">
         <v-icon color="black">mdi-plus-circle-outline </v-icon>
@@ -150,7 +158,7 @@
       </v-container>
     </v-row>
 
-    <v-row class="ml-1">
+    <v-row>
       <h3 class="my-auto">Achievements</h3>
       <v-btn icon @click="achievements.push('')">
         <v-icon color="black">mdi-plus-circle-outline</v-icon>
@@ -173,7 +181,9 @@
         </v-row>
       </v-container>
     </v-row>
-    <v-btn color="primary" :loading="loading" @click="save">Save</v-btn>
+    <v-row>
+      <v-btn color="primary" :loading="loading" @click="save">Save</v-btn>
+    </v-row>
   </v-container>
 </template>
 
