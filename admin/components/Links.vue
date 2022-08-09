@@ -10,10 +10,10 @@
       <v-col cols="24" lg="1">
         <TextField label="Name" v-model="link.name" />
       </v-col>
-      <v-col cols="12" lg="3">
+      <v-col cols="12" lg="5">
         <TextField label="Link" v-model="link.link" />
       </v-col>
-      <v-col cols="12" lg="2">
+      <v-col cols="12" lg="3">
         <v-file-input
           accept="image/*"
           label="icon"
@@ -21,6 +21,7 @@
           outlined
           hide-details
           show-size
+          truncate-length="20"
           @change="setFile($event, i)"
         >
         </v-file-input>
@@ -37,8 +38,9 @@
         color="accent"
         :loading="link.loading"
         @click="link.id < 1 ? create(i) : update(i)"
-        >{{ link.id < 1 ? "create" : "update" }}</v-btn
       >
+        {{ textButton(link.id) }}
+      </v-btn>
       <DeleteRowButton @agree="remove(i)" />
     </v-row>
   </v-container>
@@ -84,6 +86,10 @@ export default class Links extends Vue {
         });
       };
     }
+  }
+
+  textButton(id: number) {
+    return id < 1 ? "create" : "update";
   }
 
   addLink() {
