@@ -1,10 +1,16 @@
 import axios from 'axios'
 import { Books, BookStatus } from '../entity/books.entity'
+import { AppDataSource } from '../src/db'
 
 export class BooksService {
 
     static async get() {
-        return await Books.find() ?? []
+        const books = await AppDataSource.createQueryBuilder()
+            .select('*')
+            .from(Books, 'books')
+            .orderBy('CASE "status"  when \'read\' then 1 when \'inprogress\' then 2  when \'unread\' then 4 END, name')
+            .getRawMany()
+        return books
     }
 
     static async create(link: string) {
