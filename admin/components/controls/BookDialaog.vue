@@ -103,6 +103,7 @@ export default class BookDialog extends Vue {
     this.showDialog = false;
     this.totalItems = 0;
     this.infiniteScrollProps.items = [];
+    this.searchString = "";
   }
 
   async search() {
