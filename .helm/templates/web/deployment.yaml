@@ -34,7 +34,7 @@ spec:
           - containerPort: 3000
           env:
           - name: API_URL
-            value: http{{ if .Values.ingress.tls }}s{{ end }}://api.{{.Values.ingress.hostname }}
+            value: http{{ if .Values.ingress.tls }}s{{ end }}://api.{{.Values.ingress.basehost }}
           {{- with .Values.web.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
