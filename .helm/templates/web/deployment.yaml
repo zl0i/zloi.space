@@ -27,16 +27,3 @@ spec:
               port: 3000
           ports:
           - containerPort: 3000
-          env:
-          - name: API_URL
-            value: http{{ if .Values.ingress.tls }}s{{ end }}://{{.Values.ingress.hostname }}
-          - name: DB_HOST
-            value: {{ .Release.Name }}-postgresql
-          - name: DB_NAME
-            value: {{ .Values.postgresql.auth.database }}
-          - name: DB_USERNAME
-            value: {{ .Values.postgresql.auth.username }}
-          - name: DB_PASSWORD
-            value: {{ .Values.postgresql.auth.password }}
-          - name: ADMIN_KEY
-            value: {{ .Values.web.adminKey }}
