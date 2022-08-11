@@ -49,9 +49,6 @@ function fromContext({ $axios }: Context) {
                     }
                 })
             ])
-            const { data } = await $axios.get('/links')
-            console.log(data)
-            console.log(await $axios.get('/links'),)
             const { data: links } = res[0]
             const { data: summary } = res[1]
             summary.general = { ...summary.general, links }
