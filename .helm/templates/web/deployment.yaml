@@ -5,7 +5,9 @@ metadata:
   labels:
     {{- include "zloi-web.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  {{- if not .Values.web.autoscaling.enabled }}
+  replicas: {{ .Values.web.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "zloi-web.selectorLabels" . | nindent 6 }}
