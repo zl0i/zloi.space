@@ -35,9 +35,7 @@
         </v-text-field>
       </v-col>
       <v-col cols="1" class="my-auto">
-        <v-btn class="ml-1" icon>
-          <v-icon color="grey" @click="deleteBook(i)"> mdi-delete </v-icon>
-        </v-btn>
+        <DeleteRowButton @agree="deleteBook(i)" />
       </v-col>
     </v-row>
     <v-row class="ma-1 mt-6">
@@ -49,8 +47,9 @@
 
 <script lang='ts'>
 import { Component, Vue } from "nuxt-property-decorator";
-import { IBook } from "~/store/books";
 import BookDialaog from "./controls/BookDialaog.vue";
+import DeleteRowButton from "./controls/DeleteRowButton.vue";
+import { IBook } from "~/store/books";
 
 @Component({
   async mounted() {
@@ -59,19 +58,20 @@ import BookDialaog from "./controls/BookDialaog.vue";
   },
   components: {
     BookDialaog,
+    DeleteRowButton,
   },
 })
 export default class Books extends Vue {
   books: IBook[] = [];
   dialog = false;
 
-  statuses = ["unread", "inprogress", "read"];
+  statuses = ["unread", "inprogress", "read"] as const;
 
   async addBook(link: string) {
     try {
       await this.$api.addBook(link);
       this.books = await this.$api.getBooks();
-      this.dialog = false
+      this.dialog = false;
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +88,7 @@ export default class Books extends Vue {
   async deleteBook(i: number) {
     try {
       await this.$api.deleteBook(this.books[i].id);
-      this.books.splice(i);
+      this.books.splice(i, 1);
     } catch (error) {
       console.log(error);
     }
