@@ -31,26 +31,6 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
-Common labels
-*/}}
-{{- define "zloi-space.labels" -}}
-helm.sh/chart: {{ include "zloi-space.chart" . }}
-{{ include "zloi-space.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end }}
-
-{{/*
-Selector labels
-*/}}
-{{- define "zloi-space.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "zloi-space.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
 Create the name of the service account to use
 */}}
 {{- define "zloi-space.serviceAccountName" -}}

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "zloi-web.fullname" . }}
+  labels:
+    {{- include "zloi-web.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.web.autoscaling.enabled }}
+  replicas: {{ .Values.web.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "zloi-web.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "zloi-web.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.priorityclass.enabled }}
+      priorityClassName:  {{ include "zloi-space.fullname" . }}
+      {{- end }}
+      containers:
+        - name: web
+          image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
+          livenessProbe:
+            httpGet:
+              path: /kubernetes/health-check
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /kubernetes/health-check
+              port: 3000
+          ports:
+          - containerPort: 3000
+          env:
+          - name: API_URL
+            value: http{{ if .Values.ingress.tls }}s{{ end }}://api.{{.Values.ingress.basehost }}
+          {{- with .Values.web.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+

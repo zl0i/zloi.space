@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "zloi-admin.fullname" . }}
+  labels:
+    {{- include "zloi-admin.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "zloi-admin.selectorLabels" . | nindent 4 }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP

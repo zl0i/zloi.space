@@ -1,0 +1,31 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "zloi-web.fullname" . }}
+  labels:
+    {{- include "zloi-web.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: nginx
+{{- if .Values.ingress.tls }}
+  tls:
+    - hosts:
+        -  {{ .Values.ingress.basehost }}
+      secretName: {{ .Values.ingress.basehost }}-tls
+{{- end }}
+  rules:
+    - host: {{ .Values.ingress.basehost }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "zloi-web.fullname" . }}
+                port:
+                  number: 80
+{{- end }}

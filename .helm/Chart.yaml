@@ -1,4 +1,8 @@
 apiVersion: v2
 description: My web site
 name: zloi-space
-version: 1.0.0
+version: 3.0.0
+dependencies:
+  - name: postgresql
+    version: 11.1.28
+    repository: "@bitnami"
