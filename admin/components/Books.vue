@@ -71,7 +71,6 @@ export default class Books extends Vue {
     try {
       await this.$api.addBook(link);
       this.books = await this.$api.getBooks();
-      this.dialog = false;
     } catch (error) {
       console.log(error);
     }
