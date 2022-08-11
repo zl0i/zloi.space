@@ -5,8 +5,8 @@ metadata:
   labels:
     {{- include "zloi-web.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
+  {{- if not .Values.web.autoscaling.enabled }}
+  replicas: {{ .Values.web.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
