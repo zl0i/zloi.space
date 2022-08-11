@@ -31,7 +31,6 @@ import Welcome from "~/components/Welcome.vue";
     BooksView: () => import("~/components/BooksView.vue"),
   },
   async asyncData({ i18n, store }) {
-    console.log("0");
     await store.dispatch("summary/requestSummary", i18n.getLocaleCookie());
     await store.dispatch("instructions/requestInstructions");
     await store.dispatch("books/requestBooks");
