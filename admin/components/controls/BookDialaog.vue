@@ -1,6 +1,10 @@
 <template>
   <div>
-    <v-dialog v-model="showDialog" max-width="500px">
+    <v-dialog
+      v-model="showDialog"
+      max-width="500px"
+      @click:outside="closeDialog"
+    >
       <v-card>
         <v-card-title> Add Book </v-card-title>
         <v-card-text>
@@ -21,25 +25,52 @@
               </v-btn>
             </v-col>
           </v-row>
-          <v-row v-if="totalItems"> Searched items: {{ totalItems }} </v-row>
-          <v-row v-for="(book, i) in books" :key="i">
-            <v-col cols="2">
-              <v-img :lazy-src="book.icon" :src="book.icon" alt="book" />
-            </v-col>
-            <v-col>
-              <div style="color: black">{{ book.name }}</div>
-              <div>{{ book.authors[0] }}</div>
-              <div>{{ book.publishedDate }}</div>
-            </v-col>
-            <v-col cols="2" class="my-auto">
-              <v-btn @click="selected(book.selfLink)">Add</v-btn>
-            </v-col>
+          <v-row v-if="totalItems" class="mt-0">
+            <v-col> Searched items: {{ totalItems }} </v-col>
           </v-row>
+          <v-list>
+            <InfiniteScroll
+              v-bind="infiniteScrollProps"
+              @loadMoreItems="loadItems"
+            >
+              <template v-slot="{ item }">
+                <v-list-item three-line>
+                  <v-row>
+                    <v-col cols="2">
+                      <v-img
+                        :lazy-src="item.icon"
+                        v-if="item.icon"
+                        :src="item.icon"
+                        alt="book"
+                        class="my-auto"
+                      />
+                      <v-img
+                        alt="book"
+                        v-if="!item.icon"
+                        src="/default-image-book.png"
+                        class="my-auto"
+                      />
+                    </v-col>
+                    <v-col>
+                      <div style="color: black">{{ item.name }}</div>
+                      <div>
+                        Authors:
+                        {{ item.authors.length > 0 ? item.authors[0] : "" }}
+                      </div>
+                      <div>{{ item.publishedDate }}</div>
+                    </v-col>
+                    <v-col cols="2" class="my-auto">
+                      <v-btn @click="selected(item.selfLink)">Add</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-list-item>
+                <v-divider></v-divider>
+              </template>
+            </InfiniteScroll>
+          </v-list>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" text @click="showDialog = false">
-            Close
-          </v-btn>
+          <v-btn color="primary" text @click="closeDialog"> Close </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -48,23 +79,44 @@
 
 <script lang="ts">
 import { Component, Vue, ModelSync, Emit } from "nuxt-property-decorator";
-import { IBook } from "~/store/books";
+import InfiniteScroll, { InfiniteScrollProps } from "./InfiniteScroll.vue";
 
-interface IAdvBook extends IBook {
-  selfLink: string;
-  authors: string[];
-  publishedDate: string;
-}
-
-@Component({})
+@Component({
+  components: {
+    InfiniteScroll,
+  },
+})
 export default class BookDialog extends Vue {
-  books: IAdvBook[] = [];
-  searchString = "Чистый код";
+  @ModelSync("dialog", "opened") showDialog: boolean;
+  searchString = "";
   loading = false;
   totalItems = 0;
-  @ModelSync("dialog", "opened") showDialog: boolean;
+
+  infiniteScrollProps: InfiniteScrollProps = {
+    page: 0,
+    pageSize: 20,
+    items: [],
+    lastPage: 0,
+  };
+
+  closeDialog() {
+    this.showDialog = false;
+    this.totalItems = 0;
+    this.infiniteScrollProps.items = [];
+  }
 
   async search() {
+    this.totalItems = 0;
+    this.infiniteScrollProps.page = 0;
+    this.infiniteScrollProps.lastPage = 0;
+    this.infiniteScrollProps.items = [];
+    if (this.searchString.length == 0) {
+      return;
+    }
+    await this.loadItems(0, this.infiniteScrollProps.pageSize);
+  }
+
+  async loadItems(page: number = 0, pageSize: number = 20) {
     try {
       this.loading = true;
       const { data } = await this.$axios.get(
@@ -72,13 +124,13 @@ export default class BookDialog extends Vue {
         {
           params: {
             q: `intitle:${this.searchString}`,
+            maxResults: pageSize,
+            startIndex: pageSize * page,
           },
         }
       );
-      this.totalItems = data.totalItems;
-      this.books = [];
       for (const book of data.items) {
-        this.books.push({
+        this.infiniteScrollProps.items.push({
           id: book.id,
           name: book.volumeInfo?.title,
           icon: book.volumeInfo?.imageLinks?.thumbnail,
@@ -89,6 +141,11 @@ export default class BookDialog extends Vue {
           publishedDate: book.volumeInfo?.publishedDate,
         });
       }
+      this.totalItems = data.totalItems;
+      this.infiniteScrollProps.page = page;
+      this.infiniteScrollProps.lastPage = Math.floor(
+        this.totalItems / pageSize
+      );
     } catch (error) {
       console.log(error);
     } finally {
