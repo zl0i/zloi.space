@@ -26,7 +26,7 @@ If release name contains chart name it will be used as a full name.
 
 
 {{- define "zloi-admin.hostname" -}}
-{{- printf "%s.%s" "admin" .Values.ingress.hostname }}
+{{- printf "%s.%s" "admin" .Values.ingress.basehost }}
 {{- end -}}
 
 {{/*

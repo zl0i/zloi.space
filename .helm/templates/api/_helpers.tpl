@@ -7,7 +7,7 @@ Expand the name of the chart.
 
 
 {{- define "zloi-api.hostname" -}}
-{{- printf "%s.%s" "api" .Values.ingress.hostname }}
+{{- printf "%s.%s" "api" .Values.ingress.basehost }}
 {{- end -}}
 
 {{/*
