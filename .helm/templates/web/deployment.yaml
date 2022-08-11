@@ -35,3 +35,7 @@ spec:
           env:
           - name: API_URL
             value: http{{ if .Values.ingress.tls }}s{{ end }}://api.{{.Values.ingress.hostname }}
+          {{- with .Values.web.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

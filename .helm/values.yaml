@@ -12,15 +12,36 @@ web:
     maxReplicas: 5
     targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 80
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 200m
+    limits:
+      memory: 512Mi
+      cpu: 800m
 
 api:
   nameOverride: 'api'
   replicaCount: 1
   adminKey: ''
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 200m
+    limits:
+      memory: 256Mi
+      cpu: 200m
 
 admin:
   nameOverride: 'admin'
   replicaCount: 1
+  resources:
+    requests:
+      memory: 172Mi
+      cpu: 200m
+    limits:
+      memory: 172Mi
+      cpu: 200m
 
 ingress:
   enabled: true
