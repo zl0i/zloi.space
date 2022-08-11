@@ -18,7 +18,7 @@ export class BooksService {
         const book = new Books()
         book.name = data.volumeInfo.title
         book.infoLink = link
-        book.icon = data.volumeInfo.imageLinks.thumbnail
+        book.icon = data.volumeInfo.imageLinks?.thumbnail
         book.status = BookStatus.UNREAD
         book.description = data.volumeInfo.description
         await book.save()
