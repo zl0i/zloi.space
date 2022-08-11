@@ -16,6 +16,7 @@
                 hide-details
                 label="Book title"
                 v-model="searchString"
+                @keydown.enter="search"
               >
               </v-text-field>
             </v-col>
