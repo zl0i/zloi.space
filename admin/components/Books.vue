@@ -7,7 +7,21 @@
     </v-row>
     <v-row v-for="(book, i) in books" :key="book.id">
       <v-col cols="1">
-        <v-img :lazy-src="book.icon" :src="book.icon" alt="book" max-height="150" max-width="100" />
+        <v-img
+          v-if="book.icon"
+          :lazy-src="book.icon"
+          :src="book.icon"
+          alt="book"
+          max-height="150"
+          max-width="100"
+        />
+        <v-img
+          v-if="!book.icon"
+          src="/default-image-book.png"
+          alt="book"
+          max-height="150"
+          max-width="100"
+        />
       </v-col>
       <v-col cols="3" class="my-auto">
         <v-text-field hide-details dense readonly outlined :value="book.name">
