@@ -15,7 +15,7 @@ export class Books extends BaseEntity {
     @Column({ unique: true })
     name: string
 
-    @Column()
+    @Column({ default: '' })
     icon: string
 
     @Column()
