@@ -103,8 +103,13 @@ export default class Summary extends Vue {
   getDuarationRange(from: string, to: string) {
     const start = new Date(from);
     const end = to ? new Date(to) : new Date();
-    const years = end.getFullYear() - start.getFullYear();
-    const months = end.getMonth() - start.getMonth() + 1;
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth() + 1;
+
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
 
     let yearStr = "";
     if (years == 0) {
@@ -124,7 +129,7 @@ export default class Summary extends Vue {
       monthStr = `1 ${this.$t("system.month")} `;
     } else if (months < 5) {
       monthStr = `${months} ${this.$t("system.months")} `;
-    } else {
+    } else if (months >= 5) {
       monthStr = `${months} ${this.$t("system.monthss")}`;
     }
 
