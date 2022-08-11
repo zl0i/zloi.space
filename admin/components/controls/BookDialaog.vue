@@ -155,7 +155,9 @@ export default class BookDialog extends Vue {
   }
 
   @Emit()
-  selected(link: string) {}
+  selected(link: string) {
+    this.closeDialog()
+  }
 }
 </script>
 
