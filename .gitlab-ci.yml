@@ -81,8 +81,10 @@ deploy:production:
     url: https://zloi.space
     deployment_tier: production
   variables:
-    HELM_OPTIONS: '--set ingress.hostname=zloi.space
-      --set api.adminKey=${ADMIN_KEY}'
+    HELM_OPTIONS: '--set api.adminKey=${ADMIN_KEY}
+      --set ingress.basehost=zloi.space
+      --set web.autoscaling.enabled=true
+      --set priorityclass.enabled=true'
 
 stop:branch:deploy:
   extends: .helm_uninstall
