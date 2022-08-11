@@ -2,8 +2,6 @@ import type { Context } from '@nuxt/types'
 import type { MutationTree, ActionTree } from 'vuex'
 
 export const namespace = 'instructions'
-
-//TODO: export from "types"
 export interface IInstruction {
     id: string;
     name: string;
