@@ -9,11 +9,6 @@ web:
   nameOverride: 'web'
   replicaCount: 1
 
-updater:
-  enabled: false
-  schedule: '0 0 * * *'
-  hook: false
-
 api:
   nameOverride: 'api'
   replicaCount: 1
@@ -42,88 +37,5 @@ postgresql:
     database: zloi-space
   primary:
     persistence:
-       size: 1Gi
-
-books:
-  - name: Чистый код. Создание, анализ и рефракторинг
-    url: https://www.googleapis.com/books/v1/volumes/2zjECwAAQBAJ
-    status: read
-  - name: Идеальный программист. Как стать профессионалом разработки ПО
-    url: https://www.googleapis.com/books/v1/volumes/Ab7DCwAAQBAJ
-    status: read
-  - name: Чистая архитектура. Искусство разработки программного обеспечения
-    url: https://www.googleapis.com/books/v1/volumes/d6JSDwAAQBAJ
-    status: read
-  - name: Чистый Agile. Основы гибкости
-    url: https://www.googleapis.com/books/v1/volumes/0ZnsDwAAQBAJ
-    status: read
-
-summary:
-  - lang: ru
-    position: Backend
-    titles: ['Меня зовут Дима', 'Я пишу код на TypeScript и C++', 'Я backend разработчик']
-    about: 'Привет. Как написано выше, меня зовут Дима. Профессионально работаю программистом с 2018 года. Разрабатывал кроссплатформенные мобильные приложения на Qt, но JS открыл для себя в 2020 году и влюбился в него. Я люблю разрабатывать бэкенд часть и все что с ней связано. У меня есть опыт разработки микросервисов, создания CI/CD с использованием GitLab и работы с облачными провайдерами (GCP и Azure).'
-    links:
-      - name: gitlab
-        image: /img/gitlab.png
-        link: https://gitlab.com/zl0i/
-      - name: github
-        image: /img/github.png
-        link: https://github.com/zl0i/
-      - name: gmail
-        image: /img/gmail.png
-        link: 'mailto: pdmitri07@gmail.com'
-      - name: telegram
-        image: /img/telegram.png
-        link: https://t.me/zzloi
-      - name: habr
-        image: /img/habr.png
-        link: https://habr.com/ru/users/zl0i
-    education:
-      - title: Воронежский государственный технический университет специалист
-        range:
-          from: сентябрь 2014
-          to: февраль 2020
-        speciality: Кафедра радиоэлектронных систем управления и комплексов
-    courses:
-      - title: Слёрм
-        range:
-          from: сентябрь 2021
-          to: декабрь 2021
-        speciality: Вечерняя школа по Kubernetes
-    experience:
-      - org: FusionPOS
-        range:
-          from: март 2019
-          to: настоящее время
-        link_org: https://fusionpos.ru/
-        position: Разработчик
-        duties: Разработка новых и поддержка старых кросплатформенных мобильных приложений на Qt (с использованием Object-C и Java). Проектирование и создание API на Yii2.
-      - org: DecartIT
-        range:
-          from: апрель 2022
-          to: настоящее время
-        link_org: https://dcrt.it/
-        position: DevOps-инженер
-        duties: Поддержка инфраструктуры
-    skills:
-      - name: 'NodeJS/Typescript'
-        value: 0.7
-        description: Знаю нюансы
-      - name: Kubernetes
-        value: 0.5
-        description: Умею развертывать приложения
-    tech_stack:
-      - 'NodeJS (ExpressJS), TypeScript, TypeORM, Jest'
-      - 'K8s, Helm, CI/CD, Docker, GitLab, GitOps'
-      - 'PostgreSQL, Redis, MySQL,  MongoDB'
-      - 'Nuxt, Vue, HTML, CSS'
-      - 'PHP, Yii2'
-      - 'Qt, qml, C++, Andoid (Java), iOS (Object-C)'
-    achievements:
-      - "Поддерживал инфраструктуру 2 команд разработчиков в Azure"
-      - "Внедрил CI/CD для Android приложений"
-      - "Внедрил мониторинг и логирование в backend-часть"
-      - "Внедрил различные сервисы Firebase в мобильное приложение на Qt"
-      - "Умею работать с JNI в Qt"
+      size: 1Gi
 
