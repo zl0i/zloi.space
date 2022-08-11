@@ -35,6 +35,10 @@ ingress:
         add_header Cache-Control "public, max-age=7200";
       }
 
+priorityclass:
+  enabled: false
+  value: 1000000
+
 postgresql:
   auth:
     postgresPassword: postgres
