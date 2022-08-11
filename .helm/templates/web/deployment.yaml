@@ -27,3 +27,6 @@ spec:
               port: 3000
           ports:
           - containerPort: 3000
+          env:
+          - name: API_URL
+            value: http{{ if .Values.ingress.tls }}s{{ end }}://api.{{.Values.ingress.hostname }}
