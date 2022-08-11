@@ -39,8 +39,6 @@ function fromContext({ $axios }: Context) {
             return res.data
         },
         async getSummary(language: string) {
-            console.log("4")
-            console.log($axios.defaults.baseURL)
             const res = await Promise.all([
                 await $axios.get('/links'),
                 await $axios.get("/summary", {
