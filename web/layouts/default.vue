@@ -1,26 +1,6 @@
 <template>
   <div>
     <nuxt />
-    <div class="footer">
-      <div class="footer-content">
-        <h1>Dmitri <span class="nickname">"zloi"</span> Popov</h1>
-        <p>
-          Created by <a href="https://zloi.space/">zl0i</a> and
-          <a href="https://github.com/gossy4691">GoSSy4691</a> /
-          <br />
-          Powered by <a href="https://nuxtjs.org/">Nuxt v2</a> /
-          <br />
-          Run on <a href="https://k3s.io/">k3s</a>
-        </p>
-        <p>
-          Copyright © 2021 - 2022 /
-          <a href="https://gitlab.com/zl0i/zloi-space">Source</a>
-        </p>
-      </div>
-      <button class="button-to-up" @click="goToTop">
-        <img alt="goTop" src="~/static/img/button-to-up.svg" />
-      </button>
-    </div>
   </div>
 </template>
 
