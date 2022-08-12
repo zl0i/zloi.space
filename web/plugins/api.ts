@@ -49,8 +49,7 @@ function fromContext({ $axios }: Context) {
             ])
             const { data: links } = res[0]
             const { data: summary } = res[1]
-            summary.general = { ...summary.general, links }
-            return summary
+            return { ...summary, links }
         }
     }
     return api
