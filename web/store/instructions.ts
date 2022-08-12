@@ -2,8 +2,6 @@ import type { Context } from '@nuxt/types'
 import type { MutationTree, ActionTree } from 'vuex'
 
 export const namespace = 'instructions'
-
-//TODO: export from "types"
 export interface IInstruction {
     id: string;
     name: string;
@@ -32,9 +30,13 @@ export const mutations: MutationTree<InstructionsState> = {
 
 export const actions: ActionTree<InstructionsState, InstructionsState> = {
     async requestInstructions({ commit, state }, _context: string) {
-        if (state.instructions.length == 0) {
-            const res = await this.$axios.get(`/api/knowledgebase`)
-            commit("of", res.data)
+        try {
+            if (state.instructions.length == 0) {
+                const data = await this.$api.getKnoweldge()
+                commit("of", data)
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 }

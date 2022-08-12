@@ -23,15 +23,10 @@ export interface IExperience {
     duties: string
 }
 
-export interface ISkills {
-    name: string
-    value: number
-    description: string
-}
-
 export interface ISocialLink {
+    id: number
     name: string
-    image: string
+    blob: string
     link: string
 }
 
@@ -43,8 +38,7 @@ export interface SummaryState {
     education: IEducation[]
     courses: IEducation[]
     experience: IExperience[]
-    skills: ISkills[]
-    tech_stack: string[]
+    skills: string[]
     achievements: string[]
 }
 
@@ -57,29 +51,27 @@ export const state = (): SummaryState => ({
     courses: [],
     experience: [],
     skills: [],
-    tech_stack: [],
     achievements: []
 })
 
 export const mutations: MutationTree<SummaryState> = {
     setSummary(state, data: any) {
         state.lang = data.lang
-        state.titles = data.titles
+        state.titles = JSON.parse(data.titles ?? "[\"\"]")
         state.about = data.about
         state.links = data.links
-        state.education = data.summary.education
-        state.courses = data.summary.courses
-        state.experience = data.summary.experience
-        state.skills = data.summary.skills
-        state.tech_stack = data.summary.tech_stack
-        state.achievements = data.summary.achievements
+        state.education = data.education
+        state.courses = data.courses
+        state.experience = data.experience
+        state.skills = data.skills
+        state.achievements = data.achievements
     }
 }
 
 
 export const actions: ActionTree<SummaryState, RootState> = {
     async requestSummary({ state, commit }, locale: string) {
-        if (!this.$axios) {
+        if (!this.$api) {
             return
         }
         const postfix = locale ?? this.$i18n.getLocaleCookie() ?? 'en'
@@ -87,8 +79,8 @@ export const actions: ActionTree<SummaryState, RootState> = {
             return
         }
         try {
-            const res = await this.$axios.get(`/summary.${postfix}.json`)
-            commit("setSummary", { lang: postfix, ...res.data })
+            const data = await this.$api.getSummary(postfix)
+            commit("setSummary", data)
         } catch (e) {
             console.log(e)
         }

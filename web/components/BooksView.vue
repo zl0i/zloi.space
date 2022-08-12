@@ -3,7 +3,7 @@
     <template v-slot:default="props">
       <Book
         :name="props.data.name"
-        :image="props.data.image"
+        :image="props.data.icon"
         :status="props.data.status"
       />
     </template>

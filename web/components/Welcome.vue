@@ -6,8 +6,8 @@
     <main class="text-box">
       <p>{{ text }}</p>
       <ul>
-        <li v-for="item in links" :key="item.link">
-          <a class="contacts" :href="item.link"> <img :src="item.image" :alt="item.name" /></a>
+        <li v-for="link in links" :key="link.id">
+          <a class="contacts" :href="link.link"> <img :src="link.blob" :alt="link.name" /></a>
         </li>
       </ul>
     </main>
@@ -29,11 +29,6 @@ import {
 
 const SummaryStore = namespace(summaryStoreNamespace);
 
-export interface ILink {
-  image: string;
-  link: string;
-}
-
 @Component
 export default class Welcome extends Vue {
   private typed: Typed;
@@ -52,7 +47,7 @@ export default class Welcome extends Vue {
     this.startTitles(this.titles);
   }
 
-  startTitles(strings: string[]) {
+  startTitles(strings: string[] = []) {
     this.typed = new Typed(".auto-input", {
       strings: strings,
       typeSpeed: 100,

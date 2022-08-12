@@ -1,13 +1,12 @@
-import type { Context } from '@nuxt/types'
 import type { MutationTree, ActionTree } from 'vuex'
 
 export const namespace = 'books'
 
-//TODO: export from "types"
 export interface IBook {
-    id: string;
-    name: string;
-    html: string;
+    id: string
+    name: string
+    icon: string
+    description: string
 }
 
 export interface BooksState {
@@ -28,9 +27,14 @@ export const mutations: MutationTree<BooksState> = {
 
 export const actions: ActionTree<BooksState, BooksState> = {
     async requestBooks({ commit, state }, _context: string) {
-        if (state.books.length == 0) {
-            const res = await this.$axios.get(`/api/reads`)
-            commit("of", res.data)
+        try {
+            if (state.books.length == 0) {
+                const data = await this.$api.getReads()
+                commit("of", data)
+            }
+        } catch (error) {
+            console.log(error)
         }
+
     }
 }

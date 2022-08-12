@@ -1,9 +1,7 @@
-module.exports = { 
+module.exports = {
   settings: {
-    "vetur.useWorkspaceDependencies": true,
-    "vetur.experimental.templateInterpolationService": true,
+    'vetur.useWorkspaceDependencies': true,
+    'vetur.experimental.templateInterpolationService': true,
   },
-  projects: [
-    "./web", 
-  ],
+  projects: ['./admin', './web'],
 };
