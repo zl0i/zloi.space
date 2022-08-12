@@ -81,6 +81,7 @@ deploy:production:
     url: https://zloi.space
     deployment_tier: production
   variables:
+    IMAGE_TAG: $CI_COMMIT_TAG
     HELM_OPTIONS: '--set api.adminKey=${ADMIN_KEY}
       --set ingress.basehost=zloi.space
       --set web.autoscaling.enabled=true

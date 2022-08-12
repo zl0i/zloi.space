@@ -13,9 +13,6 @@
             .replace('.md', '')}`"
           prefetch
         >
-          <!-- <p :id="props.data.id" :name="props.data.name">
-            {{ props.data.name }}
-          </p> -->
           <Instruction
             :id="props.data.id"
             :name="props.data.name"
@@ -32,7 +29,10 @@
 import { Vue, Component, namespace } from "nuxt-property-decorator";
 import ListView from "./ListView.vue";
 import Instruction from "./controls/Instruction.vue";
-import { namespace as instructionStoreNamespace, InstructionsState } from "../store/instructions";
+import {
+  namespace as instructionStoreNamespace,
+  InstructionsState,
+} from "../store/instructions";
 
 const InstrictionsStore = namespace(instructionStoreNamespace);
 
@@ -43,7 +43,8 @@ const InstrictionsStore = namespace(instructionStoreNamespace);
   },
 })
 export default class KnoweledgeView extends Vue {
-  @InstrictionsStore.State("instructions") instructions: InstructionsState["instructions"];
+  @InstrictionsStore.State("instructions")
+  instructions: InstructionsState["instructions"];
 
   openInstruction(id: string) {
     this.$store.commit("instructions/setCurrentId", id);
