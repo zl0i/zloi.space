@@ -13,12 +13,18 @@ include:
   - template: 'Verify/Accessibility.gitlab-ci.yml'
   - template: Security/Container-Scanning.gitlab-ci.yml
 
-stages:  
+stages:
   - build
   - test
   - release
   - deploy
   - accessibility
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
+      variables:
+        SAST_DISABLED: 'true'
 
 code_quality:
   rules:
@@ -29,10 +35,6 @@ container_scanning:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
   variables:
     SECURE_LOG_LEVEL: 'debug'
-
-.sast-analyzer:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
 
 build:web:
   extends: .kaniko
