@@ -12,8 +12,7 @@ export class InstructionsService {
 
     static async update() {
         const contents = await axios.get("https://api.github.com/repos/zl0i/KnowledgeBase/contents")
-        for (let i = 0; i < contents.data.length; i++) {
-            const file = contents.data[i]
+        for (const file of contents.data) {
             if (!file.name.includes(".md")) {
                 continue
             }
