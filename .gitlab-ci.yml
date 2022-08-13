@@ -21,6 +21,8 @@ stages:
   - accessibility
 
 workflow:
+  variables:
+    SCAN_KUBERNETES_MANIFESTS: 'true'
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
     - if: $CI_COMMIT_TAG || $CI_COMMIT_BRANCH
@@ -36,6 +38,7 @@ container_scanning:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
   variables:
     SECURE_LOG_LEVEL: 'debug'
+    DOCKER_IMAGE: $CI_REGISTRY_IMAGE/zloi-web:$CI_COMMIT_SHORT_SHA
 
 build:web:
   extends: .kaniko
