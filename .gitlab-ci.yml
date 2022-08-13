@@ -9,6 +9,8 @@ include:
     ref: main
     file: 'release.template.yaml'
   - template: Code-Quality.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+  
 
 stages:
   - test
