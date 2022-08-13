@@ -41,6 +41,9 @@ import { Component } from "nuxt-property-decorator";
       html: current.html,
     };
   },
+  mounted() {
+    document.body.style.position = "fixed"
+  }
 })
 export default class Instruction extends Index {
   name: string = "";
@@ -55,14 +58,14 @@ export default class Instruction extends Index {
   }
 
   closeDialog() {
+    document.body.style.position = "static"
     this.$router.back();
   }
 }
 </script>
 
-<style>
+<style scoped>
 .fixed {
-  position: fixed;
   overflow: hidden;
 }
 </style>
