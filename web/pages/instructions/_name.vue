@@ -42,8 +42,15 @@ import { Component } from "nuxt-property-decorator";
     };
   },
   mounted() {
-    document.body.style.position = "fixed"
-  }
+    document.body.style.position = "fixed";
+
+    this.$nuxt.$router.beforeEach((to, from, next) => {
+      if (from.name == "instructions-name") {
+        document.body.style.position = "static";
+      }
+      next();
+    });
+  },
 })
 export default class Instruction extends Index {
   name: string = "";
@@ -58,8 +65,8 @@ export default class Instruction extends Index {
   }
 
   closeDialog() {
-    document.body.style.position = "static"
-    this.$router.back();
+    document.body.style.position = "static";
+    this.$router.push("/");
   }
 }
 </script>
