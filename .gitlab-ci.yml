@@ -1,100 +1,103 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+
+# container_scanning:
+#   variables:
+#     DOCKER_IMAGE: ...
+#     DOCKER_USER: ...
+#     DOCKER_PASSWORD: ...
 include:
-  - project: 'zl0i/gitlab-ci-template'
-    ref: main
-    file: 'build.template.yaml'
-  - project: 'zl0i/gitlab-ci-template'
-    ref: main
-    file: 'deploy.template.yaml'
-  - project: 'zl0i/gitlab-ci-template'
-    ref: main
-    file: 'release.template.yaml'
-  - template: Code-Quality.gitlab-ci.yml
-  - template: Security/SAST.gitlab-ci.yml
-  
-
+- project: zl0i/gitlab-ci-template
+  ref: main
+  file: build.template.yaml
+- project: zl0i/gitlab-ci-template
+  ref: main
+  file: deploy.template.yaml
+- project: zl0i/gitlab-ci-template
+  ref: main
+  file: release.template.yaml
+- template: Code-Quality.gitlab-ci.yml
+- template: Security/SAST.gitlab-ci.yml
+- template: Security/Container-Scanning.gitlab-ci.yml
 stages:
-  - test
-  - build
-  - release
-  - deploy
-
+- test
+- build
+- release
+- deploy
 build:web:
-  extends: .kaniko
+  extends: ".kaniko"
   rules:
-    - if: $CI_COMMIT_TAG
-      variables:
-        BUILD_ARGS: '--build-arg API_URL=https://api.zloi.space'
-        IMAGE_TAG: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH
-      variables:
-        BUILD_ARGS: '--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space'
+  - if: "$CI_COMMIT_TAG"
+    variables:
+      BUILD_ARGS: "--build-arg API_URL=https://api.zloi.space"
+      IMAGE_TAG: "$CI_COMMIT_TAG"
+  - if: "$CI_COMMIT_BRANCH"
+    variables:
+      BUILD_ARGS: "--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space"
   variables:
-    BUILD_DIR: './web'
+    BUILD_DIR: "./web"
     IMAGE_NAME: zloi-web
-
 build:admin:
-  extends: .kaniko
+  extends: ".kaniko"
   rules:
-    - if: $CI_COMMIT_TAG
-      variables:
-        BUILD_ARGS: '--build-arg API_URL=https://api.zloi.space'
-        IMAGE_TAG: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH
-      variables:
-        BUILD_ARGS: '--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space'
+  - if: "$CI_COMMIT_TAG"
+    variables:
+      BUILD_ARGS: "--build-arg API_URL=https://api.zloi.space"
+      IMAGE_TAG: "$CI_COMMIT_TAG"
+  - if: "$CI_COMMIT_BRANCH"
+    variables:
+      BUILD_ARGS: "--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space"
   variables:
-    BUILD_DIR: './admin'
+    BUILD_DIR: "./admin"
     IMAGE_NAME: zloi-admin
-
 build:api:
-  extends: .kaniko
+  extends: ".kaniko"
   rules:
-    - if: $CI_COMMIT_TAG
-      variables:
-        IMAGE_TAG: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH
+  - if: "$CI_COMMIT_TAG"
+    variables:
+      IMAGE_TAG: "$CI_COMMIT_TAG"
+  - if: "$CI_COMMIT_BRANCH"
   variables:
-    BUILD_DIR: './api'
+    BUILD_DIR: "./api"
     IMAGE_NAME: zloi-api
-
 code_quality:
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
-
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+      == "dev"
 deploy:branch:
-  extends: .helm_install
+  extends: ".helm_install"
   rules:
-    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != 'master'
+  - if: "$CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != 'master'"
   environment:
-    name: ${CI_COMMIT_BRANCH}
+    name: "${CI_COMMIT_BRANCH}"
     url: https://${CI_COMMIT_BRANCH}.zloi.space
     deployment_tier: development
     on_stop: stop:branch:deploy
   variables:
-    HELM_OPTIONS: '--set ingress.basehost=${CI_COMMIT_BRANCH}.zloi.space
-      --set api.adminKey=${ADMIN_KEY}'
-
+    HELM_OPTIONS: "--set ingress.basehost=${CI_COMMIT_BRANCH}.zloi.space --set api.adminKey=${ADMIN_KEY}"
 deploy:production:
-  extends: .helm_install
+  extends: ".helm_install"
   rules:
-    - if: $CI_COMMIT_TAG
+  - if: "$CI_COMMIT_TAG"
   environment:
     name: production
     url: https://zloi.space
     deployment_tier: production
   variables:
-    IMAGE_TAG: $CI_COMMIT_TAG
-    HELM_OPTIONS: '--set api.adminKey=${ADMIN_KEY}
-      --set ingress.basehost=zloi.space
-      --set web.autoscaling.enabled=true
-      --set priorityclass.enabled=true'
-
+    IMAGE_TAG: "$CI_COMMIT_TAG"
+    HELM_OPTIONS: "--set api.adminKey=${ADMIN_KEY} --set ingress.basehost=zloi.space
+      --set web.autoscaling.enabled=true --set priorityclass.enabled=true"
 stop:branch:deploy:
-  extends: .helm_uninstall
+  extends: ".helm_uninstall"
   rules:
-    - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != 'master'
+  - if: "$CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != 'master'"
   environment:
-    name: ${CI_COMMIT_BRANCH}
+    name: "${CI_COMMIT_BRANCH}"
     action: stop
   variables:
     DELETE_NAMESPACE: 'true'
