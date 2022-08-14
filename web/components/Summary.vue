@@ -15,7 +15,7 @@
         <div>
           <p class="box-naming">{{ `${$t("summary.education")}:` }}</p>
           <ul style="padding: 0">
-            <li class="box-list" v-for="item of education" :key="item.title">
+            <li class="box-list" v-for="(item, i) of education" :key="i">
               <p>
                 {{ $d(new Date(item.range.from), "short") }} -
                 {{
@@ -31,7 +31,7 @@
 
           <p class="box-naming">{{ `${$t("summary.courses")}:` }}</p>
           <ul style="padding: 0">
-            <li class="box-list" v-for="item of courses" :key="item.title">
+            <li class="box-list" v-for="(item, i) of courses" :key="i">
               <p>
                 {{ $d(new Date(item.range.from), "short") }} -
                 {{
@@ -47,7 +47,7 @@
 
           <p class="box-naming">{{ `${$t("summary.experience")}:` }}</p>
           <ul style="padding: 0">
-            <li class="box-list" v-for="item of experience" :key="item.title">
+            <li class="box-list" v-for="(item, i) of experience" :key="i">
               <p>
                 {{ $d(new Date(item.range.from), "short") }} -
                 {{
@@ -67,13 +67,13 @@
       <div class="right-column">
         <p class="box-naming">{{ `${$t("summary.skills")}:` }}</p>
         <ul style="padding: 0">
-          <li class="box-list" v-for="item of skills" :key="item">
+          <li class="box-list" v-for="(item, i) of skills" :key="i">
             {{ item }}
           </li>
         </ul>
         <p class="box-naming">{{ `${$t("summary.achievements")}:` }}</p>
         <ul style="padding: 0">
-          <li class="box-list" v-for="item of achievements" :key="item">
+          <li class="box-list" v-for="(item, i) of achievements" :key="i">
             {{ item }}
           </li>
         </ul>
