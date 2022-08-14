@@ -99,12 +99,13 @@ deploy:review:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
   environment:
-    name: review/${CI_ENVIRONMENT_SLUG}
+    name: review/${CI_COMMIT_REF_SLUG}
     url: https://${CI_ENVIRONMENT_SLUG}.zloi.space
     deployment_tier: testing
     on_stop: stop:review:deploy
     auto_stop_in: 1 week
   variables:
+    APP_NAMESPACE: ${CI_PROJECT_NAME}-review
     HELM_OPTIONS: '--set ingress.basehost=${CI_ENVIRONMENT_SLUG}.zloi.space
       --set api.adminKey=${ADMIN_KEY}'
 
