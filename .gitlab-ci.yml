@@ -27,7 +27,6 @@ workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
       variables:
-        SAST_DISABLED: 'false'
         CI_COMMIT_BRANCH: merge_request_event
     - if: $CI_COMMIT_BRANCH == "dev"
       variables:
