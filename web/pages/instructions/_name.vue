@@ -5,7 +5,7 @@
     <Summary id="summary"></Summary>
     <KnoweledgeView id="knowledge"></KnoweledgeView>
     <BooksView id="reads"></BooksView>
-    <InstructionDialog @close="closeDialog" :name="name" :html="html" />
+    <InstructionDialog @close="$router.back()" :name="name" :html="html" />
   </div>
 </template>
 
@@ -62,11 +62,6 @@ export default class Instruction extends Index {
       },
       title: this.name,
     };
-  }
-
-  closeDialog() {
-    document.body.style.position = "static";
-    this.$router.push("/");
   }
 }
 </script>
