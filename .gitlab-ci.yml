@@ -11,10 +11,11 @@ include:
   - template: Code-Quality.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
   - template: 'Verify/Accessibility.gitlab-ci.yml'
+  - template: Security/Container-Scanning.gitlab-ci.yml
 
 stages:
-  - test
   - build
+  - test
   - release
   - deploy
   - accessibility
@@ -77,10 +78,6 @@ build:api:
   variables:
     BUILD_DIR: './api'
     IMAGE_NAME: zloi-api
-
-code_quality:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
 
 deploy:branch:
   extends: .helm_install
