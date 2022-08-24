@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --legacy-watch --watch \"./**\" --ext \"ts,json\" --ignore \"./**/*.spec.ts\" --exec \"npx cross-env ADMIN_KEY=1111111111111111 ts-node main.ts\"",
+    "dev": "nodemon --legacy-watch --watch \"./**\" --ext \"ts,json\" --ignore \"./**/*.spec.ts\" --exec \"npx ts-node main.ts\"",
     "build": "tsc",
     "start": "node main.js"
   },

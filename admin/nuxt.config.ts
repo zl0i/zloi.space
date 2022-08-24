@@ -36,7 +36,7 @@ const config: NuxtConfig = {
     https: isDev ? false : true,
   },
   server: {
-    host: isDev ? "localhost" : "0.0.0.0",
+    host: "0.0.0.0",
     port: isDev ? 8081 : 3000
   },
   build: {
