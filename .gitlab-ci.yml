@@ -101,7 +101,6 @@ deploy:dev:
     name: ${CI_COMMIT_BRANCH}
     url: https://${CI_COMMIT_BRANCH}.zloi.space
     deployment_tier: development
-    on_stop: stop:branch:deploy
   variables:
     HELM_OPTIONS: '--set ingress.basehost=${CI_COMMIT_BRANCH}.zloi.space
       --set api.adminKey=${ADMIN_KEY}'
