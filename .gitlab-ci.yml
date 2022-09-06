@@ -90,9 +90,6 @@ build:manifests:
       --set web.autoscaling.enabled=true
       --set priorityclass.enabled=true'
 
-sast:kubesec:
-  extends: .kubesec
-
 deploy:dev:
   extends: .helm_install
   rules:
