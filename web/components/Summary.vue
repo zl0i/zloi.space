@@ -56,7 +56,16 @@
                     : $t("system.now")
                 }}
                 ({{ getDuarationRange(item.range.from, item.range.to) }})
-                <a class="org-name" :href="item.link_org">{{ item.org }}</a>
+                <a
+                  class="org-name"
+                  :href="item.link_org"
+                  :style="{
+                    'pointer-events': item.link_org ? 'auto' : 'none',
+                    'text-decoration': item.link_org ? 'underline' : 'none',
+                  }"
+                >
+                  {{ item.org }}
+                </a>
               </p>
               <p class="description">{{ item.position }}</p>
               <p class="description">{{ item.duties }}</p>
