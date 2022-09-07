@@ -1,13 +1,11 @@
 <template>
   <v-snackbar v-model="isShow" :timeout="6000" top dark>
     {{ text }}
-
     <template v-slot:action="{ attrs }">
       <v-btn color="pink" text v-bind="attrs" @click="isShow = false">
         Close
       </v-btn>
     </template>
-    <!-- <v-btn color="pink" text @click="isShow = false">Close</v-btn> -->
   </v-snackbar>
 </template>
 
