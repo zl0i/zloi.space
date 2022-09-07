@@ -21,6 +21,7 @@ export default class Instructions extends Vue {
       await this.$api.updateInstructions();
     } catch (error) {
       console.log(error);
+      throw new Error("Error update instructions")
     } finally {
       this.loading = false;
     }

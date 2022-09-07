@@ -69,6 +69,7 @@ interface Link {
       this.$data.links = await this.$api.pullLinks();
     } catch (error) {
       console.log(error);
+      throw new Error("Error get links");
     }
   },
 })
@@ -115,6 +116,7 @@ export default class Links extends Vue {
       });
     } catch (error) {
       console.log(error);
+      throw new Error("Error create links");
     } finally {
       Vue.set(this.links, index, {
         ...this.links[index],
@@ -133,6 +135,7 @@ export default class Links extends Vue {
       await this.$api.patchLink(link.id, link.name, link.link, link.blob);
     } catch (error) {
       console.log(error);
+      throw new Error("Error update links");
     } finally {
       Vue.set(this.links, index, {
         ...this.links[index],
@@ -142,15 +145,11 @@ export default class Links extends Vue {
   }
 
   async remove(index: number) {
-    try {
-      const link = this.links[index];
-      if (link.name) {
-        await this.$api.deleteLink(link.id);
-      }
-      this.links.splice(index);
-    } catch (error) {
-      console.log(error);
+    const link = this.links[index];
+    if (link.name) {
+      await this.$api.deleteLink(link.id);
     }
+    this.links.splice(index);
   }
 }
 </script>

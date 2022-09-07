@@ -82,29 +82,17 @@ export default class Books extends Vue {
   statuses = ["unread", "inprogress", "read"] as const;
 
   async addBook(link: string) {
-    try {
-      await this.$api.addBook(link);
-      this.books = await this.$api.getBooks();
-    } catch (error) {
-      console.log(error);
-    }
+    await this.$api.addBook(link);
+    this.books = await this.$api.getBooks();
   }
 
   async updateBook(id: number, status: string) {
-    try {
-      await this.$api.updateBook(id, status);
-    } catch (error) {
-      console.log(error);
-    }
+    await this.$api.updateBook(id, status);
   }
 
   async deleteBook(i: number) {
-    try {
-      await this.$api.deleteBook(this.books[i].id);
-      this.books.splice(i, 1);
-    } catch (error) {
-      console.log(error);
-    }
+    await this.$api.deleteBook(this.books[i].id);
+    this.books.splice(i, 1);
   }
 }
 </script>

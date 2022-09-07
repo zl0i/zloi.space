@@ -92,6 +92,7 @@ export default class About extends Vue {
       this.about = data.about;
     } catch (error) {
       console.log(error);
+      throw new Error("Error update about")
     } finally {
       this.loading = false;
     }
