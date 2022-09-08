@@ -29,7 +29,10 @@
         <TextField label="Title" v-model="titles[i]" />
       </v-col>
       <v-col cols="1">
-        <DeleteRowButton @agree="titles.splice(i, 1)" />
+        <DeleteRowButton
+          @agree="titles.splice(i, 1)"
+          :openCondition="[titles[i]]"
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -92,7 +95,7 @@ export default class About extends Vue {
       this.about = data.about;
     } catch (error) {
       console.log(error);
-      throw new Error("Error update about")
+      throw new Error("Error update about");
     } finally {
       this.loading = false;
     }

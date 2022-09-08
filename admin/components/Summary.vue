@@ -43,7 +43,7 @@
           <v-col cols="4">
             <TextField label="Speciality" v-model="ed.speciality" />
           </v-col>
-          <DeleteRowButton @agree="education.splice(i, 1)" />
+          <DeleteRowButton @agree="education.splice(i, 1)" :openCondition="[ed.title, ed.speciality]"/>
         </v-row>
       </v-container>
     </v-row>
@@ -78,7 +78,7 @@
           <v-col cols="4">
             <TextField label="Speciality" v-model="cr.speciality" />
           </v-col>
-          <DeleteRowButton @agree="courses.splice(i, 1)" />
+          <DeleteRowButton @agree="courses.splice(i, 1)" :openCondition="[cr.title, cr.speciality]" />
         </v-row>
       </v-container>
     </v-row>
@@ -117,7 +117,7 @@
             <TextField label="Link" v-model="ex.link_org" />
           </v-col>
           <v-col lg="1">
-            <DeleteRowButton @agree="experience.splice(i, 1)" />
+            <DeleteRowButton @agree="experience.splice(i, 1)" :openCondition="[ex.title, ex.duties, ex.org, ex.position]" />
           </v-col>
         </v-row>
         <v-row>
@@ -141,7 +141,7 @@
 
     <v-row>
       <h3 class="my-auto">Skills</h3>
-      <v-btn icon @click="skills.push(' ')">
+      <v-btn icon @click="skills.push('')">
         <v-icon color="black">mdi-plus-circle-outline </v-icon>
       </v-btn>
     </v-row>
@@ -152,7 +152,7 @@
             <TextField label="Skills" v-model="skills[i]" />
           </v-col>
           <v-col cols="1">
-            <DeleteRowButton @agree="skills.splice(i, 1)" />
+            <DeleteRowButton @agree="skills.splice(i, 1)" :openCondition="[skills[i]]"/>
           </v-col>
         </v-row>
       </v-container>
@@ -176,7 +176,7 @@
             <TextField label="Achievement" v-model="achievements[i]" />
           </v-col>
           <v-col cols="1">
-            <DeleteRowButton @agree="achievements.splice(i, 1)" />
+            <DeleteRowButton @agree="achievements.splice(i, 1)" :openCondition="[achievements[i]]" />
           </v-col>
         </v-row>
       </v-container>

@@ -41,7 +41,7 @@
       >
         {{ textButton(link.id) }}
       </v-btn>
-      <DeleteRowButton @agree="remove(i)" />
+      <DeleteRowButton @agree="remove(i)" :openCondition="[link.name, link.link, link.blob]" />
     </v-row>
   </v-container>
 </template>

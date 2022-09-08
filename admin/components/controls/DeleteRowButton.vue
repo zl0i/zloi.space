@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="290">
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn class="my-auto" icon v-bind="attrs" v-on="on">
+    <template v-slot:activator="{ attrs }">
+      <v-btn class="my-auto" icon v-bind="attrs" @click="resolveCondition">
         <v-icon color="grey"> mdi-delete </v-icon>
       </v-btn>
     </template>
@@ -33,11 +33,23 @@ export default class DeleteRowButton extends Vue {
   @Prop({ default: "Yes" }) yesButton: string;
   @Prop({ default: "No" }) noButton: string;
   @Prop({ default: true }) showNoButton: boolean;
+  @Prop({ default: () => [] }) openCondition: string[];
   dialog = false;
 
   @Emit()
   agree() {
     this.dialog = false;
+  }
+
+  resolveCondition() {
+    const result = this.openCondition.every((value) => {
+      return value.length > 0;
+    });
+    if (result) {
+      this.dialog = true;
+    } else {
+      this.$emit("agree");
+    }
   }
 }
 </script>
