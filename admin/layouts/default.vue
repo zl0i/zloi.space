@@ -6,25 +6,23 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import ErrorItem from "~/components/controls/ErrorItem.vue";
+import { Component, Vue } from "nuxt-property-decorator";
 
-export default {
+@Component({
   name: "default",
   components: {
     ErrorItem,
   },
-  data: function () {
-    return {
-      showError: false,
-      errorMessage: "",
-    };
-  },
   errorCaptured: function (error: Error, _vm: Vue, _info: string) {
     console.log(error);
-    this.errorMessage = error.message;
-    this.showError = true;
+    this.$data.errorMessage = error.message;
+    this.$data.showError = true;
     return false;
   },
-};
+})
+export default class DefaultLayout extends Vue {
+  showError = false;
+  errorMessage = "";
+}
 </script>
