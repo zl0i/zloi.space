@@ -31,6 +31,8 @@ spec:
           ports:
           - containerPort: 3000
           env:
+          - name: DEPLOY_TIER
+            value: {{ .Values.tier }}
           - name: DB_HOST
             value: {{ .Release.Name }}-postgresql
           - name: DB_NAME

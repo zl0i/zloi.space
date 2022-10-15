@@ -1,6 +1,8 @@
 import { Summary } from '../entity/summary.entity'
 import { AppDataSource } from '../src/db'
+import objectStorage from "../src/storage"
 
+const DEPLOY_TIER = process.env['DEPLOY_TIER'] ?? 'dev'
 export class SummaryService {
 
     static async get(lang: string) {
@@ -54,5 +56,9 @@ export class SummaryService {
             await Summary.insert({ language: lang, key: 'about', value: about })
         }
         return true
+    }
+
+    static async getPDF(lang: string = 'ru') {
+        return await objectStorage.streamObject(`zloi-web-${DEPLOY_TIER}`, `zloi-${lang}.pdf`)
     }
 }

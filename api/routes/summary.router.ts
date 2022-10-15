@@ -59,5 +59,25 @@ router.post('/about', [auth()], async (req: express.Request, res: express.Respon
   }
 })
 
+router.get('/pdf', async (req: express.Request, res: express.Response) => {
+  try {
+    const { language } = req.query as any
+    const stream = await SummaryService.getPDF(language)
+    stream.on('data', chunk => {
+      res.write(chunk)
+    })
+    stream.on('end', () => {
+      res.end()
+    })
+    stream.on('error', err => {
+      console.log(err)
+      res.status(500).end()
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).end("internal error")
+  }
+})
+
 export default router
 

@@ -79,11 +79,11 @@ const config: NuxtConfig = {
   i18n: i18nConfig,
   firebase: firebaseConfig,
   axios: {
-    baseURL: isDev ? "http://api:3000" : `https://${API_URL}`,
+    baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
     https: isDev ? false : true,
   },
   server: {
-    host: "0.0.0.0",
+    host: isDev ? 'localhost' :"0.0.0.0",
     port: isDev ? 8080 : 3000
   },
   plugins: [

@@ -2,11 +2,7 @@
   <div class="summary-box">
     <div class="summary-header">
       <p style="margin: 0px">{{ $t("summary.title") }}</p>
-      <a
-        href="https://career.habr.com/zloi07/print.pdf"
-        target="_blank"
-        style="padding-top: 20px"
-      >
+      <a :href="pdfLink()" target="_blank" style="padding-top: 20px">
         <img alt="downloadSummary" src="~/static/img/download.svg" />
       </a>
     </div>
@@ -108,6 +104,12 @@ export default class Summary extends Vue {
   @SummaryStore.State("skills") skills: SummaryState["skills"];
   @SummaryStore.State("achievements")
   achievements: SummaryState["achievements"];
+
+  pdfLink() {
+    const lang = this.$store.state.summary["lang"];
+    const apiUrl = this.$axios.defaults.baseURL;
+    return `${apiUrl}/summary/pdf?language=${lang}`;
+  }
 
   getDuarationRange(from: string, to: string) {
     const start = new Date(from);

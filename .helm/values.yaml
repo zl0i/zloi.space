@@ -1,3 +1,5 @@
+tier: dev
+
 image:
   repository: registry.gitlab.com/zl0i/zloi-space
   tag: v1.0

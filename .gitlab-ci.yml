@@ -120,7 +120,8 @@ deploy:production:
     HELM_OPTIONS: '--set api.adminKey=${ADMIN_KEY}
       --set ingress.basehost=zloi.space
       --set web.autoscaling.enabled=true
-      --set priorityclass.enabled=true'
+      --set priorityclass.enabled=true
+      --set tier=prod'
 
 a11y:
   rules:
