@@ -104,7 +104,8 @@ deploy:dev:
       --set api.adminKey=${ADMIN_KEY}
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
       --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
-      --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}'
+      --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
+      --set api.env.GITHUB_SECRET_WEBHOOK=${GITHUB_SECRET_WEBHOOK}'
 
 # load_performance:
 #   when: manualy
@@ -128,6 +129,7 @@ deploy:production:
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
       --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
       --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
+      --set api.env.GITHUB_SECRET_WEBHOOK=${GITHUB_SECRET_WEBHOOK}
       --set tier=prod'
 
 a11y:
