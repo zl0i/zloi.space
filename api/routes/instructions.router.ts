@@ -32,18 +32,13 @@ router.post('/github', async (req: express.Request, res: express.Response) => {
   try {
     const hmac = Crypto.createHmac('sha256', GITHUB_SECRET_WEBHOOK)
     hmac.update(JSON.stringify(req.body));
-    const calculatedSignature = 'sha256=' + hmac.digest('hex');
-    
-    console.log(req.body)
-    console.log(calculatedSignature, req.headers['x-hub-signature-256'])
-
-    if (req.headers['x-hub-signature-256'] === calculatedSignature) {
-      console.log('all good');
+    const signature = 'sha256=' + hmac.digest('hex');
+    if (req.headers['x-hub-signature-256'] === signature) {
       await InstructionsService.update()
+      res.end()
     } else {
-      console.log('not good');
+      res.status(401).end()
     }
-    res.end()
   } catch (error) {
     console.log(error)
     res.status(500).end("internal error")
