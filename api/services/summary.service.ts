@@ -9,6 +9,9 @@ export class SummaryService {
         const summary = await Summary.find({ where: { language: lang } }) ?? []
         const result: any = {}
         for (const item of summary) {
+            if (['education', 'courses', 'experience'].includes(item.key)) {
+                item.value = this.sortPeriods(item.value)
+            }
             result[item.key] = item.value
         }
         result.lang = lang
@@ -60,5 +63,14 @@ export class SummaryService {
 
     static async getPDF(lang: string = 'ru') {
         return await objectStorage.streamObject(`zloi-web-${DEPLOY_TIER}`, `zloi-${lang}.pdf`)
+    }
+
+    private static sortPeriods(value: any): unknown {
+        const sorted = Array.from(value).sort((a: any, b: any) => {
+            const start1 = new Date(a.range.from).getTime()
+            const start2 = new Date(b.range.from).getTime()
+            return start1 - start2
+        })
+        return sorted
     }
 }
