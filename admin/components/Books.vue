@@ -1,9 +1,10 @@
 <template>
-  <v-container fluid>
-    <v-row class="mb-1">
-      <v-col sm="2" class="my-auto">
-        <h2>Books</h2>
-      </v-col>
+  <v-container fluid class="ml-5">
+    <v-row class="mt-2">
+      <h2>Books</h2>
+      <v-btn color="accent" @click="dialog = true" icon>
+        <v-icon color="black">mdi-plus-circle-outline</v-icon>
+      </v-btn>
     </v-row>
     <v-row v-for="(book, i) in books" :key="book.id">
       <v-col cols="1">
@@ -52,10 +53,7 @@
         <DeleteRowButton @agree="deleteBook(i)" />
       </v-col>
     </v-row>
-    <v-row class="ma-1 mt-6">
-      <BookDialaog v-model="dialog" @selected="addBook" />
-      <v-btn color="primary" @click="dialog = true">New</v-btn>
-    </v-row>
+    <BookDialaog v-model="dialog" @selected="addBook" />
   </v-container>
 </template>
 
