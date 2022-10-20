@@ -5,7 +5,7 @@
       max-width="500px"
       @click:outside="closeDialog"
     >
-      <v-card>
+      <v-card tile="false">
         <v-card-title> Add Book </v-card-title>
         <v-card-text>
           <v-row>
@@ -157,8 +157,31 @@ export default class BookDialog extends Vue {
 
   @Emit()
   selected(link: string) {
-    this.closeDialog()
+    this.closeDialog();
   }
 }
 </script>
+
+<style>
+.v-dialog.v-dialog--active::-webkit-scrollbar {
+  width: 9px;
+  padding-right: 5px;
+}
+
+.v-dialog.v-dialog--active::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 150px;
+  background-color: gray;
+  background-clip: content-box;
+}
+
+.v-dialog.v-dialog--active::-webkit-scrollbar-track {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.v-dialog.v-dialog--active::-webkit-scrollbar-track {
+  background: white;
+}
+</style>
 
