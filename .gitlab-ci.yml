@@ -101,7 +101,7 @@ deploy:dev:
   variables:
     HELM_OPTIONS: '
       --set ingress.basehost=${CI_COMMIT_BRANCH}.zloi.space
-      --set api.adminKey=${ADMIN_KEY}
+      --set api.ADMIN_KEY=${ADMIN_KEY}
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
       --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
       --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
@@ -122,10 +122,10 @@ deploy:production:
     deployment_tier: production
   variables:
     IMAGE_TAG: $CI_COMMIT_TAG
-    HELM_OPTIONS: '--set api.adminKey=${ADMIN_KEY}
-      --set ingress.basehost=zloi.space
+    HELM_OPTIONS: '--set ingress.basehost=zloi.space
       --set web.autoscaling.enabled=true
       --set priorityclass.enabled=true
+      --set api.ADMIN_KEY=${ADMIN_KEY}
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
       --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
       --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
