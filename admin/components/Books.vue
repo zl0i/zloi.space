@@ -67,7 +67,7 @@ import { IBook } from "~/store/books";
 
 @Component({
   async mounted() {
-    const books = await this.$api.getBooks();
+    const books = await this.$api.books.get();
     this.$data.books = books;
   },
   components: {
@@ -82,16 +82,16 @@ export default class Books extends Vue {
   statuses = ["unread", "inprogress", "read"] as const;
 
   async addBook(link: string) {
-    await this.$api.addBook(link);
-    this.books = await this.$api.getBooks();
+    await this.$api.books.add(link);
+    this.books = await this.$api.books.get();
   }
 
   async updateBook(id: number, status: string) {
-    await this.$api.updateBook(id, status);
+    await this.$api.books.update(id, status);
   }
 
   async deleteBook(i: number) {
-    await this.$api.deleteBook(this.books[i].id);
+    await this.$api.books.delete(this.books[i].id);
     this.books.splice(i, 1);
   }
 }

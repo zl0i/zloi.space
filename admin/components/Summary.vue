@@ -216,7 +216,7 @@ export default class Summary extends Vue {
     try {
       this.lang = lang;
       this.loading = true;
-      const data = await this.$api.pullSummary(lang);
+      const data = await this.$api.summary.pull(lang);
       this.education = data.education ?? [];
       this.courses = data.courses ?? [];
       this.experience = data.experience ?? [];
@@ -239,7 +239,7 @@ export default class Summary extends Vue {
         skills: this.skills,
         achievements: this.achievements,
       };
-      await this.$api.pushSummary(this.lang, summary);
+      await this.$api.summary.push(this.lang, summary);
     } catch (error) {
       console.log(error);
     } finally {

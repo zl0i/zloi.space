@@ -89,7 +89,7 @@ export default class About extends Vue {
     try {
       this.lang = lang;
       this.loading = true;
-      const data = await this.$api.pullAbout(lang);
+      const data = await this.$api.summary.pullAbout(lang);
       console.log(data);
       this.titles = data.titles ? JSON.parse(data.titles) : [];
       this.about = data.about;
@@ -102,7 +102,7 @@ export default class About extends Vue {
   }
 
   async save() {
-    await this.$api.pushAbout(this.lang, this.titles, this.about);
+    await this.$api.summary.pushAbout(this.lang, this.titles, this.about);
   }
 }
 </script>

@@ -56,16 +56,8 @@ export default class Index extends Vue {
     try {
       const form = this.$refs.form as any;
       if (form.validate()) {
-        const { status } = await this.$axios.post(
-          "/auth/validate",
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${this.key}`,
-            },
-          }
-        );
-        if (status == 200) {
+        const valid = await this.$api.authValidate(this.key);
+        if (valid) {
           this.$store.dispatch("setAdminKey", this.key);
           this.$router.push("/panel/about");
         }

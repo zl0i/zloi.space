@@ -41,7 +41,10 @@
       >
         {{ textButton(link.id) }}
       </v-btn>
-      <DeleteRowButton @agree="remove(i)" :openCondition="[link.name, link.link, link.blob]" />
+      <DeleteRowButton
+        @agree="remove(i)"
+        :openCondition="[link.name, link.link, link.blob]"
+      />
     </v-row>
   </v-container>
 </template>
@@ -66,7 +69,7 @@ interface Link {
   },
   async mounted() {
     try {
-      this.$data.links = await this.$api.pullLinks();
+      this.$data.links = await this.$api.links.pull();
     } catch (error) {
       console.log(error);
       throw new Error("Error get links");
@@ -109,7 +112,7 @@ export default class Links extends Vue {
         loading: true,
       });
       const link = this.links[index];
-      const data = await this.$api.pushLink(link.name, link.link, link.blob);
+      const data = await this.$api.links.push(link.name, link.link, link.blob);
       Vue.set(this.links, index, {
         ...this.links[index],
         id: data.id,
@@ -132,7 +135,7 @@ export default class Links extends Vue {
         loading: true,
       });
       const link = this.links[index];
-      await this.$api.patchLink(link.id, link.name, link.link, link.blob);
+      await this.$api.links.patch(link.id, link.name, link.link, link.blob);
     } catch (error) {
       console.log(error);
       throw new Error("Error update links");
@@ -147,7 +150,7 @@ export default class Links extends Vue {
   async remove(index: number) {
     const link = this.links[index];
     if (link.name) {
-      await this.$api.deleteLink(link.id);
+      await this.$api.links.delete(link.id);
     }
     this.links.splice(index);
   }

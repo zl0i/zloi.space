@@ -18,10 +18,10 @@ export default class Instructions extends Vue {
   async update() {
     try {
       this.loading = true;
-      await this.$api.updateInstructions();
+      await this.$api.instructions.updateAll();
     } catch (error) {
       console.log(error);
-      throw new Error("Error update instructions")
+      throw new Error("Error update instructions");
     } finally {
       this.loading = false;
     }
