@@ -8,13 +8,40 @@ include:
   - project: 'zl0i/gitlab-ci-template'
     ref: main
     file: 'release.template.yaml'
-  - template: Code-Quality.gitlab-ci.yml
+  - project: 'zl0i/gitlab-ci-template'
+    ref: main
+    file: 'security/k8s.template.yaml'
+
+  - template: Code-Quality.gitlab-ci.yml #+
+  - template: Security/SAST.gitlab-ci.yml
+  - template: DAST.gitlab-ci.yml
+  - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: Verify/Accessibility.gitlab-ci.yml #+
+  - template: Verify/Browser-Performance.gitlab-ci.yml
+  # - template: Verify/Load-Performance-Testing.gitlab-ci.yml #TODO: add k6 files
 
 stages:
-  - test
   - build
+  - test
+  - dast
   - release
   - deploy
+  - accessibility
+  - performance
+
+variables:
+  SCAN_KUBERNETES_MANIFESTS: 'true'
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev"
+    - if: $CI_COMMIT_TAG
+      variables:
+        SAST_DISABLED: 'true'
+
+container_scanning:
+  variables:
+    DOCKER_IMAGE: $CI_REGISTRY_IMAGE/zloi-web:$CI_COMMIT_SHORT_SHA
 
 build:web:
   extends: .kaniko
@@ -50,16 +77,20 @@ build:api:
     - if: $CI_COMMIT_TAG
       variables:
         IMAGE_TAG: $CI_COMMIT_TAG
-    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_BRANCH == 'dev'
   variables:
     BUILD_DIR: './api'
     IMAGE_NAME: zloi-api
 
-code_quality:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev"
+build:manifests:
+  extends: .helm_template
+  variables:
+    HELM_OPTIONS: '--set api.adminKey=key
+      --set ingress.basehost=zloi.space
+      --set web.autoscaling.enabled=true
+      --set priorityclass.enabled=true'
 
-deploy:branch:
+deploy:dev:
   extends: .helm_install
   rules:
     - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != 'master'
@@ -67,10 +98,19 @@ deploy:branch:
     name: ${CI_COMMIT_BRANCH}
     url: https://${CI_COMMIT_BRANCH}.zloi.space
     deployment_tier: development
-    on_stop: stop:branch:deploy
   variables:
-    HELM_OPTIONS: '--set ingress.basehost=${CI_COMMIT_BRANCH}.zloi.space
-      --set api.adminKey=${ADMIN_KEY}'
+    HELM_OPTIONS: '
+      --set ingress.basehost=${CI_COMMIT_BRANCH}.zloi.space
+      --set api.env.ADMIN_KEY=${ADMIN_KEY}
+      --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
+      --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
+      --set api.env.GITHUB_SECRET_WEBHOOK=${GITHUB_SECRET_WEBHOOK}'
+
+# load_performance:
+#   when: manualy
+#   variables:
+#     K6_TEST_FILE: <PATH TO K6 TEST FILE IN PROJECT> #TODO: add k6 files
 
 deploy:production:
   extends: .helm_install
@@ -82,18 +122,30 @@ deploy:production:
     deployment_tier: production
   variables:
     IMAGE_TAG: $CI_COMMIT_TAG
-    HELM_OPTIONS: '--set api.adminKey=${ADMIN_KEY}
-      --set ingress.basehost=zloi.space
+    HELM_OPTIONS: '--set ingress.basehost=zloi.space
       --set web.autoscaling.enabled=true
-      --set priorityclass.enabled=true'
+      --set priorityclass.enabled=true
+      --set api.env.ADMIN_KEY=${ADMIN_KEY}
+      --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
+      --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
+      --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
+      --set api.env.GITHUB_SECRET_WEBHOOK=${GITHUB_SECRET_WEBHOOK}
+      --set tier=prod'
 
-stop:branch:deploy:
-  extends: .helm_uninstall
+a11y:
   rules:
+    - if: $CI_COMMIT_TAG
+      variables:
+        a11y_urls: 'https://zloi.space'
     - if: $CI_COMMIT_BRANCH && $CI_COMMIT_BRANCH != 'master'
-  environment:
-    name: ${CI_COMMIT_BRANCH}
-    action: stop
-  variables:
-    DELETE_NAMESPACE: 'true'
-  when: manual
+      variables:
+        a11y_urls: 'https://${CI_COMMIT_BRANCH}.zloi.space'
+
+browser_performance:
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'dev'
+      variables:
+        URL: https://${CI_COMMIT_BRANCH}.zloi.space
+    - if: $CI_COMMIT_TAG
+      variables:
+        URL: https://zloi.space

@@ -21,7 +21,7 @@ spec:
       {{- end }}
       containers:
         - name: web
-          image: "{{.Values.image.repository }}/{{.Values.image.name}}:{{.Values.image.tag}}"
+          image: "{{.Values.image.repository }}/zloi-web:{{.Values.image.tag}}"
           livenessProbe:
             httpGet:
               path: /kubernetes/health-check

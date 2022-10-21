@@ -14,5 +14,5 @@ export class Summary extends BaseEntity {
     language: string
 
     @Column({ type: "json" })
-    value: string
+    value: unknown
 }

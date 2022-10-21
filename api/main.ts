@@ -1,17 +1,30 @@
 import { AppDataSource } from "./src/db"
+import objectStorage from './src/storage'
 import app from "./src/server"
 
-AppDataSource.initialize()
-    .then(() => {
-        console.log('[OK] DB is connected');
-    })
-    .catch((err) => {
-        console.error('[ERROR] DB isn\'t connected');
-        console.error(err.message);
-        process.exit(1);
-    })
+const DEPLOY_TIER = process.env['DEPLOY_TIER'] ?? 'dev'
 
-app.listen(3000, () => {
-    console.log(`[OK] Server is started om ${app.get('port')} port!`)
-})
+
+async function run() {
+    try {
+        await AppDataSource.initialize()
+        console.log('[OK] DB is connected');
+        const exist = await objectStorage.bucketExists(`zloi-web-${DEPLOY_TIER}`)
+        if (!exist) {
+            await objectStorage.makeBucket(`zloi-web-${DEPLOY_TIER}`)
+        }
+        console.log('[OK] Object Storage is connected');
+        //TODO: Check exist pdf summary
+        app.listen(3000, () => {
+            console.log(`[OK] Server is started om ${app.get('port')} port!`)
+        })
+
+    } catch (error) {
+        console.error(error);
+        process.exit(1);
+    }
+}
+
+run()
+
 

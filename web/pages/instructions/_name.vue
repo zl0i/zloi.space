@@ -5,7 +5,7 @@
     <Summary id="summary"></Summary>
     <KnoweledgeView id="knowledge"></KnoweledgeView>
     <BooksView id="reads"></BooksView>
-    <InstructionDialog @close="closeDialog" :name="name" :html="html" />
+    <InstructionDialog @close="$router.back()" :name="name" :html="html" />
   </div>
 </template>
 
@@ -41,6 +41,16 @@ import { Component } from "nuxt-property-decorator";
       html: current.html,
     };
   },
+  mounted() {
+    document.body.style.position = "fixed";
+
+    this.$nuxt.$router.beforeEach((to, from, next) => {
+      if (from.name == "instructions-name") {
+        document.body.style.position = "static";
+      }
+      next();
+    });
+  },
 })
 export default class Instruction extends Index {
   name: string = "";
@@ -53,16 +63,11 @@ export default class Instruction extends Index {
       title: this.name,
     };
   }
-
-  closeDialog() {
-    this.$router.back();
-  }
 }
 </script>
 
-<style>
+<style scoped>
 .fixed {
-  position: fixed;
   overflow: hidden;
 }
 </style>

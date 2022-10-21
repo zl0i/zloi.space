@@ -15,6 +15,35 @@ services:
     ports:
       - 5432:5432
 
+  api:
+    image: node:16.17-alpine
+    container_name: api
+    working_dir: /opt/server/
+    restart: always
+    volumes:
+      - ./api:/opt/server/
+    entrypoint: npm run dev
+    env_file:
+      - ./api/.env
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+  # admin:
+  #   image: node:16.13.2-alpine
+  #   container_name: admin
+  #   working_dir: /opt/server/
+  #   restart: always
+  #   volumes:
+  #     - ./admin:/opt/server/
+  #   entrypoint: npm run dev
+  #   environment:
+  #     - NODE_ENV=dev
+  #   ports:
+  #     - 8081:8081
+  #   expose:
+  #     - 8081
+
   # web:
   #   image: node:16.13.2-alpine
   #   container_name: web
@@ -23,14 +52,9 @@ services:
   #   volumes:
   #     - ./web:/opt/server/
   #   entrypoint: npm run dev
-  #   #env_file: ./.env
   #   environment:
   #     - NODE_ENV=dev
-  #     - DB_HOST=db
-  #     - DB_NAME=zloi
-  #     - DB_USERNAME=postgres
-  #     - DB_PASSWORD=admin
   #   ports:
-  #     - 3000:3000
+  #     - 8080:8080
   #   expose:
-  #     - 3000
+  #     - 8080

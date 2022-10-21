@@ -29,7 +29,10 @@
         <TextField label="Title" v-model="titles[i]" />
       </v-col>
       <v-col cols="1">
-        <DeleteRowButton @agree="titles.splice(i, 1)" />
+        <DeleteRowButton
+          @agree="titles.splice(i, 1)"
+          :openCondition="[titles[i]]"
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -86,19 +89,20 @@ export default class About extends Vue {
     try {
       this.lang = lang;
       this.loading = true;
-      const data = await this.$api.pullAbout(lang);
+      const data = await this.$api.summary.pullAbout(lang);
       console.log(data);
       this.titles = data.titles ? JSON.parse(data.titles) : [];
       this.about = data.about;
     } catch (error) {
       console.log(error);
+      throw new Error("Error update about");
     } finally {
       this.loading = false;
     }
   }
 
   async save() {
-    await this.$api.pushAbout(this.lang, this.titles, this.about);
+    await this.$api.summary.pushAbout(this.lang, this.titles, this.about);
   }
 }
 </script>

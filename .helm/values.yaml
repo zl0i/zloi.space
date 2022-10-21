@@ -1,6 +1,7 @@
+tier: dev
+
 image:
   repository: registry.gitlab.com/zl0i/zloi-space
-  name: zloi-web
   tag: v1.0
 
 web:
@@ -23,7 +24,11 @@ web:
 api:
   nameOverride: 'api'
   replicaCount: 1
-  adminKey: ''
+  env:
+    ADMIN_KEY: ''
+    MINIO_ENDPOINT: ''
+    MINIO_ACCESSKEY: ''
+    MINIO_SECRETKEY: ''
   resources:
     requests:
       memory: 128Mi
