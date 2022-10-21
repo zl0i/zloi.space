@@ -22,7 +22,6 @@ export class BooksApi extends BaseAPI {
     }
 
     async update(id: number, status: string) {
-        console.log(status, this.state)
         const { data } = await this.$axios.patch(
             `/books/${id}`,
             {
