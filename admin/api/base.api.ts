@@ -2,11 +2,11 @@ import { NuxtAxiosInstance } from "@nuxtjs/axios";
 
 export abstract class BaseAPI {
     protected $axios: NuxtAxiosInstance;
-    protected adminKey: string
+    protected state: any
 
-    constructor(axios: NuxtAxiosInstance, adminKey: string) {
+    constructor(axios: NuxtAxiosInstance, state: any) {
         this.$axios = axios
-        this.adminKey = adminKey
+        this.state = state
     }
 }
 

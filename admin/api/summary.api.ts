@@ -21,7 +21,7 @@ export class SummaryAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                 },
             }
         );
@@ -46,7 +46,7 @@ export class SummaryAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                     "Content-Type": "application/json",
                 },
             }

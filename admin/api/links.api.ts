@@ -16,7 +16,7 @@ export class LinksAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                     "Content-Type": "application/json",
                 },
             }
@@ -33,7 +33,7 @@ export class LinksAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                     "Content-Type": "application/json",
                 },
             }
@@ -43,7 +43,7 @@ export class LinksAPI extends BaseAPI {
     async delete(id: number) {
         await this.$axios.delete(`/links/${id}`, {
             headers: {
-                Authorization: `Bearer ${this.adminKey}`,
+                Authorization: `Bearer ${this.state.adminKey}`,
             },
         });
     }

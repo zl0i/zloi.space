@@ -14,7 +14,7 @@ export class BooksApi extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                 },
             }
         );
@@ -22,6 +22,7 @@ export class BooksApi extends BaseAPI {
     }
 
     async update(id: number, status: string) {
+        console.log(status, this.state)
         const { data } = await this.$axios.patch(
             `/books/${id}`,
             {
@@ -29,7 +30,7 @@ export class BooksApi extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                 },
             }
         );
@@ -41,7 +42,7 @@ export class BooksApi extends BaseAPI {
             `/books/${id}`,
             {
                 headers: {
-                    Authorization: `Bearer ${this.adminKey}`,
+                    Authorization: `Bearer ${this.state.adminKey}`,
                 },
             }
         );

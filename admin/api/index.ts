@@ -14,12 +14,12 @@ export interface API {
     books: BooksApi
 }
 
-export function getAPI($axios: NuxtAxiosInstance, adminKey: string) {
-    const linksAPI = new LinksAPI($axios, adminKey)
-    const summaryAPI = new SummaryAPI($axios, adminKey)
-    const instructionsApi = new InstructionsAPI($axios, adminKey)
-    const booksApi = new BooksApi($axios, adminKey)
 
+export function getAPI($axios: NuxtAxiosInstance, state: any) {
+    const linksAPI = new LinksAPI($axios, state)
+    const summaryAPI = new SummaryAPI($axios, state)
+    const instructionsApi = new InstructionsAPI($axios, state)
+    const booksApi = new BooksApi($axios, state)
     const API: API = {
         authValidate: authValidate($axios),
         summary: summaryAPI,
