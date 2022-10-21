@@ -7,7 +7,7 @@
       </v-btn>
     </v-row>
     <v-row v-for="(book, i) in books" :key="book.id">
-      <v-col cols="1">
+      <v-col cols="1" class="my-auto">
         <v-img
           v-if="book.icon"
           :lazy-src="book.icon"
@@ -25,32 +25,42 @@
         />
       </v-col>
       <v-col cols="3" class="my-auto">
-        <v-text-field hide-details dense readonly outlined :value="book.name">
-        </v-text-field>
+        <v-row>
+          <v-text-field
+            hide-details
+            dense
+            readonly
+            outlined
+            :value="book.name"
+            class="mb-5"
+          >
+          </v-text-field>
+        </v-row>
+        <v-row>
+          <v-col class="pl-0">
+            <v-select
+              hide-details
+              dense
+              outlined
+              :items="statuses"
+              v-model="book.status"
+              @change="updateBook(book.id, book.status)"
+            >
+            </v-select>
+          </v-col>
+          <v-col cols="2"><DeleteRowButton @agree="deleteBook(i)" /></v-col>
+        </v-row>
       </v-col>
-      <v-col cols="2" class="my-auto">
-        <v-select
-          hide-details
-          dense
-          outlined
-          :items="statuses"
-          v-model="book.status"
-          @change="updateBook(book.id, book.status)"
-        >
-        </v-select>
-      </v-col>
-      <v-col class="my-auto">
-        <v-text-field
+      <v-col class="my-auto mr-5">
+        <v-textarea
           hide-details
           dense
           readonly
           outlined
+          height="150"
           :value="book.description"
         >
-        </v-text-field>
-      </v-col>
-      <v-col cols="1" class="my-auto">
-        <DeleteRowButton @agree="deleteBook(i)" />
+        </v-textarea>
       </v-col>
     </v-row>
     <BookDialaog v-model="dialog" @selected="addBook" />
