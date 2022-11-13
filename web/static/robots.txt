@@ -1,2 +1,3 @@
 User-Agent: *
 Allow: /
+sitemap: https://zloi.space/sitemap.xml
