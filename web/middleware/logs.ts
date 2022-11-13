@@ -2,7 +2,7 @@ import { Middleware } from '@nuxt/types'
 
 const LogsMiddleware: Middleware = ({ req, res }) => {
     try {
-        if (req.url?.includes('kubernetes/health-check')) {
+        if (req?.url?.includes('kubernetes/health-check')) {
             return
         }
         const anyReq: any = req

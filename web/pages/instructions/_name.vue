@@ -18,6 +18,14 @@ import { Component } from "nuxt-property-decorator";
   components: {
     InstructionDialog,
   },
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.$i18n.locale,
+      },
+      title: this.$data.name,
+    };
+  },
   async asyncData({ store, params, i18n }) {
     const name = params.name.replace(/_/g, " ") + ".md";
 
@@ -55,14 +63,6 @@ import { Component } from "nuxt-property-decorator";
 export default class Instruction extends Index {
   name: string = "";
   html: string = "";
-  head() {
-    return {
-      htmlAttrs: {
-        lang: this.$i18n.locale,
-      },
-      title: this.name,
-    };
-  }
 }
 </script>
 
