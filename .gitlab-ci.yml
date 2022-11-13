@@ -124,6 +124,7 @@ deploy:production:
     IMAGE_TAG: $CI_COMMIT_TAG
     HELM_OPTIONS: '--set ingress.basehost=zloi.space
       --set web.autoscaling.enabled=true
+      --set api.autoscaling.enabled=true
       --set priorityclass.enabled=true
       --set api.env.ADMIN_KEY=${ADMIN_KEY}
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}

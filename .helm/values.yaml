@@ -24,6 +24,12 @@ web:
 api:
   nameOverride: 'api'
   replicaCount: 1
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
   env:
     ADMIN_KEY: ''
     MINIO_ENDPOINT: ''
