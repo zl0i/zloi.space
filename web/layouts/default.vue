@@ -13,7 +13,7 @@
           Run on <a href="https://k3s.io/">k3s</a>
         </p>
         <p>
-          Copyright © 2021 - 2022 /
+          Copyright © 2021 - {{ new Date().getFullYear() }} /
           <a href="https://gitlab.com/zl0i/zloi-space">Source</a>
         </p>
       </div>
