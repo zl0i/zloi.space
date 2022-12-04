@@ -23,7 +23,7 @@ import { Component } from "nuxt-property-decorator";
       htmlAttrs: {
         lang: this.$i18n.locale,
       },
-      title: this.$data.name,
+      title: this.$data.name.length > 1 ? this.$data.name : "Instruction",
     };
   },
   async asyncData({ store, params, i18n }) {
