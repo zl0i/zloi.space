@@ -1,4 +1,5 @@
 import type { NuxtConfig } from '@nuxt/types'
+import auth from './configs/auth'
 
 const isDev = process.env['NODE_ENV'] != 'production'
 const API_URL = process.env['API_URL'] ?? "localhost"
@@ -30,11 +31,13 @@ const config: NuxtConfig = {
   ],
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
   axios: {
     baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
     https: isDev ? false : true,
   },
+  auth: auth,
   server: {
     host: isDev ? 'localhost' : "0.0.0.0",
     port: isDev ? 8081 : 3000

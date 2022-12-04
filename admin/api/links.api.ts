@@ -3,11 +3,11 @@ import { BaseAPI } from "./base.api";
 
 export class LinksAPI extends BaseAPI {
     async pull() {
-        const { data } = await this.$axios.get("/links");
+        const { data } = await this.context.$axios.get("/links");
         return data
     }
     async push(name: string, link: string, blob: string) {
-        const { data } = await this.$axios.post(
+        const { data } = await this.context.$axios.post(
             `/links/`,
             {
                 name: name,
@@ -16,7 +16,7 @@ export class LinksAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
                     "Content-Type": "application/json",
                 },
             }
@@ -24,7 +24,7 @@ export class LinksAPI extends BaseAPI {
         return data
     }
     async patch(id: number, name: string, link: string, blob: string) {
-        const { data } = await this.$axios.patch(
+        const { data } = await this.context.$axios.patch(
             `/links/${id}`,
             {
                 name: name,
@@ -33,7 +33,7 @@ export class LinksAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
                     "Content-Type": "application/json",
                 },
             }
@@ -41,9 +41,9 @@ export class LinksAPI extends BaseAPI {
         return data
     }
     async delete(id: number) {
-        await this.$axios.delete(`/links/${id}`, {
+        await this.context.$axios.delete(`/links/${id}`, {
             headers: {
-                Authorization: `Bearer ${this.state.adminKey}`,
+                Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
             },
         });
     }

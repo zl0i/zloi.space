@@ -2,30 +2,34 @@
   <v-main>
     <v-container fluid>
       <v-layout justify-center align-center>
-        <v-card min-width="400" class="mt-12 pa-3" elevation="3">
+        <v-card
+          min-width="400"
+          class="mx-auto my-12 justify-center"
+          elevation="3"
+          :loading="loading"
+          :disabled="loading"
+        >
+          <template slot="progress">
+            <v-progress-linear
+              color="primary"
+              height="3"
+              indeterminate
+              bottom
+            ></v-progress-linear>
+          </template>
           <v-card-title>
+            <v-spacer />
             <h1>Admin zloi</h1>
+            <v-spacer />
           </v-card-title>
-          <v-card-text>
-            <v-form ref="form" lazy-validation>
-              <v-text-field
-                :counter="16"
-                label="Введите ключ"
-                :rules="keyRules"
-                required
-                v-model="key"
-              >
-              </v-text-field>
-              <v-btn
-                :disabled="!isValid"
-                color="primary"
-                @click="login"
-                class="align-left"
-              >
-                Login
-              </v-btn>
-            </v-form>
-          </v-card-text>
+          <v-card-text> </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn color="primary" @click="loginKeycloak">
+              Login by Keycloak
+            </v-btn>
+            <v-spacer />
+          </v-card-actions>
         </v-card>
       </v-layout>
     </v-container>
@@ -36,39 +40,17 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 @Component({
-  mounted() {
-    const { message } = this.$route.query;
-    if (message === "keyUndefined") {
-      throw new Error("Вы не авторизованы");
+  created() {
+    const { code } = this.$route.query;
+    if (code) {
+      this.$data.loading = true;
     }
   },
 })
 export default class Index extends Vue {
-  isValid = true;
-  key = "";
-
-  keyRules = [
-    (v: string) => !!v || "Введите ключ",
-    (v: string) => (v && v.length == 16) || "Ключ должен быть 16 символов",
-  ];
-
-  async login() {
-    try {
-      const form = this.$refs.form as any;
-      if (form.validate()) {
-        const valid = await this.$api.authValidate(this.key);
-        if (valid) {
-          this.$store.dispatch("setAdminKey", this.key);
-          this.$router.push("/panel/about");
-        }
-      }
-    } catch (error) {
-      if (error.response.status == 401) {
-        throw new Error("Key is not correct");
-      } else {
-        throw new Error("Internal error");
-      }
-    }
+  loading = false;
+  async loginKeycloak() {
+    this.$auth.loginWith("keycloak");
   }
 }
 </script>

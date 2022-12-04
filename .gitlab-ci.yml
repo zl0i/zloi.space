@@ -62,11 +62,11 @@ build:admin:
   rules:
     - if: $CI_COMMIT_TAG
       variables:
-        BUILD_ARGS: '--build-arg API_URL=https://api.zloi.space'
+        BUILD_ARGS: '--build-arg API_URL=https://api.zloi.space --build-arg KEYCLOAK_REALM=zloi --build-arg KEYCLOAK_URL=https://auth.zloi.space' 
         IMAGE_TAG: $CI_COMMIT_TAG
     - if: $CI_COMMIT_BRANCH
       variables:
-        BUILD_ARGS: '--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space'
+        BUILD_ARGS: '--build-arg API_URL=https://api.${CI_COMMIT_BRANCH}.zloi.space --build-arg KEYCLOAK_REALM=zloi-dev --build-arg KEYCLOAK_URL=https://auth.zloi.space'
   variables:
     BUILD_DIR: './admin'
     IMAGE_NAME: zloi-admin

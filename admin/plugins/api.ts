@@ -25,7 +25,7 @@ declare module 'vuex/types/index' {
 
 
 const apiPlugin: Plugin = (context, inject) => {
-    inject('api', getAPI(context.$axios, context.store.state))
+    inject('api', getAPI(context))
 }
 
 export default apiPlugin

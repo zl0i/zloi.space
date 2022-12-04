@@ -1,26 +1,9 @@
-import { NuxtAxiosInstance } from "@nuxtjs/axios";
+import { Context } from "@nuxt/types";
 
 export abstract class BaseAPI {
-    protected $axios: NuxtAxiosInstance;
-    protected state: any
+    protected context: Context;
 
-    constructor(axios: NuxtAxiosInstance, state: any) {
-        this.$axios = axios
-        this.state = state
-    }
-}
-
-export function authValidate($axios: NuxtAxiosInstance) {
-    return async function (key: string) {
-        const { status } = await $axios.post(
-            "/auth/validate",
-            {},
-            {
-                headers: {
-                    Authorization: `Bearer ${key}`,
-                },
-            }
-        );
-        return status == 200
+    constructor(context: Context) {
+        this.context = context
     }
 }

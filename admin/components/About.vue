@@ -67,9 +67,6 @@ import TextField from "./controls/TextField.vue";
     TextField,
     DeleteRowButton,
   },
-  created() {
-    console.log(this);
-  },
 })
 export default class About extends Vue {
   @State("langs") langs: string;
@@ -81,7 +78,6 @@ export default class About extends Vue {
 
   @Watch("langs")
   setFirstLnag() {
-    console.log(this.langs);
     this.lang = this.langs[0];
   }
 
@@ -90,7 +86,6 @@ export default class About extends Vue {
       this.lang = lang;
       this.loading = true;
       const data = await this.$api.summary.pullAbout(lang);
-      console.log(data);
       this.titles = data.titles ? JSON.parse(data.titles) : [];
       this.about = data.about;
     } catch (error) {

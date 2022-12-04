@@ -38,7 +38,7 @@ import Links from "~/components/Links.vue";
 import Instructions from "~/components/Instructions.vue";
 
 @Component({
-  middleware: ["keyValidate"],
+  middleware: ["auth"],
   components: {
     Summary,
     Books,

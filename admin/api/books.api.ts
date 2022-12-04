@@ -2,19 +2,19 @@ import { BaseAPI } from "./base.api";
 
 export class BooksApi extends BaseAPI {
     async get() {
-        const { data } = await this.$axios.get("/books");
+        const { data } = await this.context.$axios.get("/books");
         return data
     }
 
     async add(link: string) {
-        const { data } = await this.$axios.post(
+        const { data } = await this.context.$axios.post(
             "/books",
             {
                 link
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
                 },
             }
         );
@@ -22,14 +22,14 @@ export class BooksApi extends BaseAPI {
     }
 
     async update(id: number, status: string) {
-        const { data } = await this.$axios.patch(
+        const { data } = await this.context.$axios.patch(
             `/books/${id}`,
             {
                 status
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization: (<any>this.context.$auth.strategies['keycloak']).token.get(), //TODO: Property 'token' does not exist on type 'Scheme<SchemeOptions>
                 },
             }
         );
@@ -37,11 +37,11 @@ export class BooksApi extends BaseAPI {
     }
 
     async delete(id: number) {
-        const { data } = await this.$axios.delete(
+        const { data } = await this.context.$axios.delete(
             `/books/${id}`,
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
                 },
             }
         );

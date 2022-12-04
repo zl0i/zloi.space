@@ -1,5 +1,4 @@
-import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { authValidate } from './base.api'
+import { Context } from '@nuxt/types'
 import { BooksApi } from './books.api'
 import { InstructionsAPI } from './instructions.api'
 import { LinksAPI } from './links.api'
@@ -7,7 +6,6 @@ import { SummaryAPI } from './summary.api'
 
 
 export interface API {
-    authValidate: (key: string) => Promise<boolean>,
     links: LinksAPI,
     summary: SummaryAPI,
     instructions: InstructionsAPI,
@@ -15,13 +13,12 @@ export interface API {
 }
 
 
-export function getAPI($axios: NuxtAxiosInstance, state: any) {
-    const linksAPI = new LinksAPI($axios, state)
-    const summaryAPI = new SummaryAPI($axios, state)
-    const instructionsApi = new InstructionsAPI($axios, state)
-    const booksApi = new BooksApi($axios, state)
+export function getAPI(context: Context) {
+    const linksAPI = new LinksAPI(context)
+    const summaryAPI = new SummaryAPI(context)
+    const instructionsApi = new InstructionsAPI(context)
+    const booksApi = new BooksApi(context)
     const API: API = {
-        authValidate: authValidate($axios),
         summary: summaryAPI,
         links: linksAPI,
         instructions: instructionsApi,

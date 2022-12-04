@@ -3,7 +3,7 @@ import { BaseAPI } from "./base.api";
 
 export class SummaryAPI extends BaseAPI {
     async pullAbout(lang: string) {
-        const { data } = await this.$axios.get("/summary/about", {
+        const { data } = await this.context.$axios.get("/summary/about", {
             params: {
                 language: lang,
             },
@@ -12,7 +12,7 @@ export class SummaryAPI extends BaseAPI {
     }
 
     async pushAbout(lang: string, titles: string[], about: string) {
-        const { data } = await this.$axios.post(
+        const { data } = await this.context.$axios.post(
             "/summary/about",
             {
                 lang: lang,
@@ -21,7 +21,7 @@ export class SummaryAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization: (<any>this.context.$auth.strategies['keycloak']).token.get(),
                 },
             }
         );
@@ -29,7 +29,7 @@ export class SummaryAPI extends BaseAPI {
     }
 
     async pull(language: string) {
-        const { data } = await this.$axios.get("/summary", {
+        const { data } = await this.context.$axios.get("/summary", {
             params: {
                 language
             }
@@ -38,7 +38,7 @@ export class SummaryAPI extends BaseAPI {
     }
 
     async push(lang: string, summary: Partial<SummaryState>) {
-        const { data } = await this.$axios.post(
+        const { data } = await this.context.$axios.post(
             `/summary`,
             {
                 lang,
@@ -46,7 +46,7 @@ export class SummaryAPI extends BaseAPI {
             },
             {
                 headers: {
-                    Authorization: `Bearer ${this.state.adminKey}`,
+                    Authorization: (<any>this.context.$auth.strategies['keycloak']).token.get(),
                     "Content-Type": "application/json",
                 },
             }
