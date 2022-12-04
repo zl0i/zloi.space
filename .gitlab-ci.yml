@@ -105,6 +105,8 @@ deploy:dev:
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
       --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
       --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
+      --set api.env.KEYCLOAK_URL=https://auth.zloi.space
+      --set api.env.KEYCLOAK_REALM=zloi-dev
       --set api.env.GITHUB_SECRET_WEBHOOK=${GITHUB_SECRET_WEBHOOK}'
 
 # load_performance:
@@ -130,6 +132,8 @@ deploy:production:
       --set api.env.MINIO_ENDPOINT=${MINIO_ENDPOINT}
       --set api.env.MINIO_ACCESSKEY=${MINIO_ACCESSKEY}
       --set api.env.MINIO_SECRETKEY=${MINIO_SECRETKEY}
+      --set api.env.KEYCLOAK_URL=https://auth.zloi.space
+      --set api.env.KEYCLOAK_REALM=zloi
       --set api.env.GITHUB_SECRET_WEBHOOK=${GITHUB_SECRET_WEBHOOK}
       --set tier=prod'
 

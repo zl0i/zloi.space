@@ -31,10 +31,11 @@ api:
     targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 80
   env:
-    ADMIN_KEY: ''
     MINIO_ENDPOINT: ''
     MINIO_ACCESSKEY: ''
     MINIO_SECRETKEY: ''
+    KEYCLOAK_URL: ''
+    KEYCLOAK_REALM: ''
   resources:
     requests:
       memory: 128Mi

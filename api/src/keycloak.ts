@@ -3,6 +3,11 @@ import Keycloak from 'keycloak-connect';
 import session from 'express-session';
 import createMemoryStore from 'memorystore'
 
+
+const KEYCLOAK_URL = process.env['KEYCLOAK_URL'] || 'https://auth.zloi.space'
+const KEYCLOAK_REALM = process.env['KEYCLOAK_REALM'] || 'zloi-dev'
+const KEYCLOAK_CLIENTID = process.env['KEYCLOAK_CLIENTID'] || 'web-admin'
+
 const MemoryStore = createMemoryStore(session)
 const memoryStore = new MemoryStore({
     checkPeriod: 86400000 // prune expired entries every 24h
@@ -17,10 +22,10 @@ const sessionMiddleware = session({
 })
 
 const keycloakConfig: Keycloak.KeycloakConfig = {
-    "realm": "test",
-    "auth-server-url": "http://localhost:8080/",
+    "realm": KEYCLOAK_REALM,
+    "auth-server-url": KEYCLOAK_URL,
     "ssl-required": "external",
-    "resource": "testclient",
+    "resource": KEYCLOAK_CLIENTID,
     "confidential-port": 0,
     'bearer-only': true
 };
