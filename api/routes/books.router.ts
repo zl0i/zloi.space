@@ -20,8 +20,8 @@ router.post('/', keycloak.protect(), async (req: express.Request, res: express.R
     const { link } = req.body
     const books = await BooksService.create(link)
     res.json(books)
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    console.log(error.message)
     res.status(500).end("internal error")
   }
 })

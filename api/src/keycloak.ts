@@ -4,7 +4,7 @@ import session from 'express-session';
 import createMemoryStore from 'memorystore'
 
 
-const KEYCLOAK_URL = process.env['KEYCLOAK_URL'] || 'https://auth.zloi.space'
+const KEYCLOAK_URL = process.env['KEYCLOAK_URL'] || 'http://localhost:8080'
 const KEYCLOAK_REALM = process.env['KEYCLOAK_REALM'] || 'zloi-dev'
 const KEYCLOAK_CLIENTID = process.env['KEYCLOAK_CLIENTID'] || 'web-admin'
 

@@ -18,12 +18,7 @@ export class SummaryAPI extends BaseAPI {
                 lang: lang,
                 titles: titles,
                 about: about,
-            },
-            {
-                headers: {
-                    Authorization: (<any>this.context.$auth.strategies['keycloak']).token.get(),
-                },
-            }
+            },            
         );
         return data
     }
@@ -43,12 +38,6 @@ export class SummaryAPI extends BaseAPI {
             {
                 lang,
                 summary
-            },
-            {
-                headers: {
-                    Authorization: (<any>this.context.$auth.strategies['keycloak']).token.get(),
-                    "Content-Type": "application/json",
-                },
             }
         );
         return data

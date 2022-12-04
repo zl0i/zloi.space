@@ -13,12 +13,6 @@ export class LinksAPI extends BaseAPI {
                 name: name,
                 blob: blob,
                 link: link,
-            },
-            {
-                headers: {
-                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
-                    "Content-Type": "application/json",
-                },
             }
         );
         return data
@@ -30,21 +24,11 @@ export class LinksAPI extends BaseAPI {
                 name: name,
                 blob: blob,
                 link: link,
-            },
-            {
-                headers: {
-                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
-                    "Content-Type": "application/json",
-                },
             }
         );
         return data
     }
     async delete(id: number) {
-        await this.context.$axios.delete(`/links/${id}`, {
-            headers: {
-                Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
-            },
-        });
+        await this.context.$axios.delete(`/links/${id}`);
     }
 }

@@ -121,7 +121,8 @@ export default class BookDialog extends Vue {
   async loadItems(page: number = 0, pageSize: number = 20) {
     try {
       this.loading = true;
-      const { data } = await this.$axios.get(
+      const custom = this.$axios.create({ headers: { Authorization: "" } });
+      const { data } = await custom.get(
         "https://www.googleapis.com/books/v1/volumes",
         {
           params: {

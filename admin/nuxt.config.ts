@@ -36,6 +36,14 @@ const config: NuxtConfig = {
   axios: {
     baseURL: isDev ? "http://localhost:3000" : `https://${API_URL}`,
     https: isDev ? false : true,
+    headers: {
+      post: {
+        "Content-Type": "application/json"
+      },
+      patch: {
+        "Content-Type": "application/json"
+      }
+    }
   },
   auth: auth,
   server: {

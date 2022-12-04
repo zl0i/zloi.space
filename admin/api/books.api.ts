@@ -12,11 +12,6 @@ export class BooksApi extends BaseAPI {
             {
                 link
             },
-            {
-                headers: {
-                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
-                },
-            }
         );
         return data
     }
@@ -26,11 +21,6 @@ export class BooksApi extends BaseAPI {
             `/books/${id}`,
             {
                 status
-            },
-            {
-                headers: {
-                    Authorization: (<any>this.context.$auth.strategies['keycloak']).token.get(), //TODO: Property 'token' does not exist on type 'Scheme<SchemeOptions>
-                },
             }
         );
         return data
@@ -39,11 +29,6 @@ export class BooksApi extends BaseAPI {
     async delete(id: number) {
         const { data } = await this.context.$axios.delete(
             `/books/${id}`,
-            {
-                headers: {
-                    Authorization:  (<any>this.context.$auth.strategies['keycloak']).token.get(),
-                },
-            }
         );
         return data
     }
