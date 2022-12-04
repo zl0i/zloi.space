@@ -1,7 +1,7 @@
 import Crypto from 'crypto'
 import express, { Router } from 'express'
-import { auth } from '../middleware/auth'
 import { InstructionsService } from '../services/instruction.service'
+import { keycloak } from '../src/keycloak'
 
 
 const GITHUB_SECRET_WEBHOOK = process.env['GITHUB_SECRET_WEBHOOK'] ?? ''
@@ -18,7 +18,7 @@ router.get('/', async (_req, res) => {
   }
 })
 
-router.post('/', [auth()], async (_req: express.Request, res: express.Response) => {
+router.post('/', keycloak.protect(), async (_req: express.Request, res: express.Response) => {
   try {
     const inst = await InstructionsService.update()
     res.json(inst)

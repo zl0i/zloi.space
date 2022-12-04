@@ -1,5 +1,6 @@
 import express from "express"
 import morgan from 'morgan';
+import { authMiddleware } from "./keycloak";
 import summaryRouter from "../routes/summary.router"
 import intructionsRouter from "../routes/instructions.router"
 import booksRouter from "../routes/books.router"
@@ -23,6 +24,7 @@ app.use((_req, res, next) => {
 })
 
 app.use(express.json());
+app.use(authMiddleware())
 app.use('/auth', authRouter)
 app.use('/summary', summaryRouter)
 app.use('/links', linksRouter)

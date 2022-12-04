@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
-import { auth } from '../middleware/auth'
 import { LinksService } from '../services/links.service'
+import { keycloak } from '../src/keycloak'
 
 const router = Router()
 
@@ -25,7 +25,7 @@ router.get('/image/:name', async (req, res) => {
     }
 })
 
-router.post('/', [auth()], async (req: express.Request, res: express.Response) => {
+router.post('/', keycloak.protect(), async (req: express.Request, res: express.Response) => {
     try {
         const { name, blob, link } = req.body
         const data = await LinksService.create(name, link, blob)
@@ -36,7 +36,7 @@ router.post('/', [auth()], async (req: express.Request, res: express.Response) =
     }
 })
 
-router.patch('/:id', [auth()], async (req: express.Request, res: express.Response) => {
+router.patch('/:id', keycloak.protect(), async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params
         const { name, blob, link } = req.body
@@ -48,7 +48,7 @@ router.patch('/:id', [auth()], async (req: express.Request, res: express.Respons
     }
 })
 
-router.delete('/:id', [auth()], async (req: express.Request, res: express.Response) => {
+router.delete('/:id', keycloak.protect(), async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params
         const data = await LinksService.delete(Number(id))

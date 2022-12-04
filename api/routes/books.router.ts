@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
-import { auth } from '../middleware/auth'
 import { BooksService } from '../services/books.service'
+import { keycloak } from '../src/keycloak'
 
 const router = Router()
 
@@ -15,7 +15,7 @@ router.get('/', async (_req, res) => {
   }
 })
 
-router.post('/', [auth()], async (req: express.Request, res: express.Response) => {
+router.post('/', keycloak.protect(), async (req: express.Request, res: express.Response) => {
   try {
     const { link } = req.body
     const books = await BooksService.create(link)
@@ -26,7 +26,7 @@ router.post('/', [auth()], async (req: express.Request, res: express.Response) =
   }
 })
 
-router.patch('/:id', [auth()], async (req: express.Request, res: express.Response) => {
+router.patch('/:id', keycloak.protect(), async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params
     const { status } = req.body
@@ -38,7 +38,7 @@ router.patch('/:id', [auth()], async (req: express.Request, res: express.Respons
   }
 })
 
-router.delete('/:id', [auth()], async (req: express.Request, res: express.Response) => {
+router.delete('/:id', keycloak.protect(), async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params
     const books = await BooksService.delete(Number(id))

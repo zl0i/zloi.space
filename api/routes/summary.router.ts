@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
-import { auth } from '../middleware/auth'
 import { SummaryService } from '../services/summary.service'
+import { keycloak } from '../src/keycloak'
 
 const router = Router()
 
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/', [auth()], async (req: express.Request, res: express.Response) => {
+router.post('/', keycloak.protect(), async (req: express.Request, res: express.Response) => {
   try {
     const { lang, summary } = req.body as any
     const data = await SummaryService.update(lang, summary)
@@ -48,7 +48,7 @@ router.get('/about', async (req, res) => {
   }
 })
 
-router.post('/about', [auth()], async (req: express.Request, res: express.Response) => {
+router.post('/about', keycloak.protect(), async (req: express.Request, res: express.Response) => {
   try {
     const { lang, titles, about } = req.body
     const status = await SummaryService.updateAbout(lang, titles, about)
